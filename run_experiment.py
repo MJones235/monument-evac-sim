@@ -17,6 +17,12 @@ from pathlib import Path
 # Allow running from the repo root without pip install
 sys.path.insert(0, str(Path(__file__).parent))
 
+# Load .env from the monument-evacuation repo root before any other imports
+# (load_dotenv() inside llm_setup searches from CWD which may not be reliable
+# when called as an installed package)
+from dotenv import load_dotenv  # noqa: E402
+load_dotenv(Path(__file__).parent / ".env")
+
 from evacusim.config.config_loader import ConfigLoader
 from evacusim.metrics.results_writer import ResultsWriter
 from evacusim.setup.agent_manager import AgentManager
