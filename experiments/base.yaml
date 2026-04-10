@@ -1,0 +1,132 @@
+# Base configuration shared by all Monument Station experiments (E1–E5).
+# Each experiment config file overrides only the keys that differ.
+
+simulation:
+  dt: 0.05
+  max_iterations: 3000          # 150 seconds of simulated time
+  decision_interval: 15.0
+  spawn_interval: 2.0
+  network_path: "geometry/monument/network"
+  multi_level: true
+  levels: ["0", "-1"]
+  escalator_belt_speed: 0.5
+
+agents:
+  count: 50
+
+  personalities:
+    ISTJ: 13.0
+    ISFJ: 12.0
+    INFJ: 2.0
+    INTJ: 3.0
+    ISTP: 6.0
+    ISFP: 9.0
+    INFP: 4.0
+    INTP: 3.0
+    ESTP: 6.0
+    ESFP: 9.0
+    ENFP: 8.0
+    ENTP: 3.0
+    ESTJ: 11.0
+    ESFJ: 12.0
+    ENFJ: 3.0
+    ENTJ: 2.0
+
+  risk_tolerance:
+    low: 30.0
+    moderate: 50.0
+    high: 20.0
+
+  age:
+    min: 18
+    max: 75
+
+  spawn_zones:
+    - concourse
+    - platform_abc
+    - platform_def
+
+  knowledge_profiles:
+    novice: 30.0
+    commuter: 70.0
+
+  roles:
+    heading_to_platform:
+      spawn_zones: ["concourse"]
+      weight: 1.0
+      goal: "Catch your train from Platform {target}."
+      memories:
+        - "I am at the station today because I need to catch a train from Platform {target}."
+        - "My reason for travelling is {purpose}."
+      target: [1, 2, 3, 4]
+    waiting_for_train:
+      spawn_zones: ["platform_abc", "platform_def"]
+      weight: 0.5
+      goal: "Wait on Platform {target} and board your train when it arrives."
+      memories:
+        - "I am standing on the platform waiting to board my train from Platform {target}."
+        - "I am travelling for {purpose}."
+      target: [1, 2, 3, 4]
+    just_arrived:
+      spawn_zones: ["platform_abc", "platform_def"]
+      weight: 0.5
+      goal: "Leave the station and continue with your day (next destination: {purpose})."
+      memories:
+        - "I have just got off my train and stepped onto the platform."
+        - "Now that I have arrived I intend to leave the station and get on with my day — I am heading to {purpose}."
+      target: []
+
+  purposes:
+    - "work"
+    - "school"
+    - "a shopping trip in the city centre"
+    - "a medical appointment"
+    - "a visit to family"
+    - "a university lecture"
+    - "a day out in the city"
+    - "a job interview"
+    - "a meeting in the city centre"
+
+monitoring:
+  interval_seconds: 60
+  zones:
+    - name: left_station
+      description: "Agents who have left the station"
+      type: exited
+    - name: concourse
+      description: "Agents on the concourse (level 0)"
+      level: "0"
+    - name: escalator_bottom
+      description: "Agents at the bottom of escalators (level -1, escalator zones)"
+      level: "-1"
+      area_patterns:
+        - "L-1_esc"
+    - name: platform
+      description: "Agents on a platform (level -1)"
+      level: "-1"
+      exclude_area_patterns:
+        - "L-1_esc"
+
+test_scenarios:
+  blocked_exit:
+    enabled: false
+  help_behavior:
+    enabled: false
+
+llm:
+  temperature: 0.7
+  max_retries: 3
+  max_completion_tokens: 8000
+  embedder: "sentence-transformers/all-mpnet-base-v2"
+
+output:
+  directory: "results"
+  agent_decisions: "agent_decisions.json"
+  events: "events.json"
+  statistics: "statistics.json"
+
+station:
+  zone_labels:
+    level_-1: "the underground platform level"
+    level_-2: "the lower underground level"
+    level_1:  "the upper concourse level"

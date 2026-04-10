@@ -1,0 +1,15 @@
+extends: ../base.yaml
+
+# E3 — Public address system used to tell people to evacuate
+# A PA announcement is broadcast to all agents shortly after the alarm.
+# No staff are present.
+
+events:
+  - time: 15.0
+    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+  - time: 20.0
+    type: pa_announcement
+    message: >
+      Attention please. This is an emergency announcement.
+      Please evacuate the station immediately via the nearest exit.
+      Do not use the lifts. Follow the emergency signs.

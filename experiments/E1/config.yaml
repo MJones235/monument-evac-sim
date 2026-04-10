@@ -1,0 +1,9 @@
+extends: ../base.yaml
+
+# E1 — Fire alarm only
+# No staff intervention, no PA announcement beyond the alarm itself.
+# Agents must decide what to do based solely on hearing the fire alarm.
+
+events:
+  - time: 15.0
+    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."

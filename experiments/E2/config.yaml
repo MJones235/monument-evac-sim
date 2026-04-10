@@ -1,0 +1,23 @@
+extends: ../base.yaml
+
+# E2 — Station staff direct the evacuation
+# Staff agents are added to the simulation. They do not use the LLM;
+# they are rule-based directors who move toward congested areas and
+# issue directive messages to nearby passengers.
+
+events:
+  - time: 15.0
+    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+
+systems:
+  staff:
+    enabled: true
+    count: 4                        # Number of staff agents
+    directive_radius: 12.0          # metres — range at which staff address passengers
+    directive_interval: 10.0        # seconds between repeated directives
+    message: "Please leave the station immediately via the nearest exit. Follow the emergency signs."
+    spawn_positions:
+      - zone: concourse             # Staff start at key positions on the concourse
+      - zone: concourse
+      - zone: platform_abc          # One staff member on each platform
+      - zone: platform_def

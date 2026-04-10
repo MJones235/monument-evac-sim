@@ -1,0 +1,29 @@
+extends: ../base.yaml
+
+# E4 — Staff assist the evacuation + PA instructs passengers to board trains to evacuate
+# Staff are present and directing passengers. The PA announces that trains are being
+# used as part of the evacuation and passengers should board.
+
+events:
+  - time: 15.0
+    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+  - time: 20.0
+    type: pa_announcement
+    message: >
+      Attention please. This is an emergency announcement.
+      For your safety, evacuation trains are being dispatched from all platforms.
+      Please make your way to the nearest platform and board the next available train.
+      Station staff are on hand to assist you.
+
+systems:
+  staff:
+    enabled: true
+    count: 4
+    directive_radius: 12.0
+    directive_interval: 10.0
+    message: "Please make your way to the nearest platform — evacuation trains are departing now. Follow the emergency signs."
+    spawn_positions:
+      - zone: concourse
+      - zone: concourse
+      - zone: platform_abc
+      - zone: platform_def
