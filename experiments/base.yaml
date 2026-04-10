@@ -1,19 +1,25 @@
-# Base configuration shared by all Monument Station experiments (E1–E5).
-# Each experiment config file overrides only the keys that differ.
+# Configuration for Monument Station evacuation simulation (multi-level)
 
+# Simulation parameters
 simulation:
-  dt: 0.05
-  max_iterations: 3000          # 150 seconds of simulated time
-  decision_interval: 15.0
-  spawn_interval: 2.0
-  network_path: "geometry/monument/network"
+  dt: 0.05  # JuPedSim timestep (seconds)
+  max_iterations: 3000  # Maximum simulation steps (3000 * 0.05 = 150 seconds)
+  decision_interval: 15.0  # Time between Concordia decisions (seconds)
+  spawn_interval: 2.0  # Time between agent spawns (seconds)
+  network_path: "geometry/monument/network"  # Monument geometry
+
+  # Multi-level simulation (Monument Station has 2 levels: concourse and platforms)
   multi_level: true
-  levels: ["0", "-1"]
+  levels: ["0", "-1"]  # Level 0 = concourse, Level -1 = platforms
+  # Escalator belt speed in m/s.  Agents on an escalator will never move slower
+  # than this relative to the surrounding floor (standard commercial escalator ~0.5 m/s).
   escalator_belt_speed: 0.5
 
+# Agent configuration
 agents:
-  count: 50
+  count: 50  # Agents distributed across both levels
 
+  # Personality distribution (percentage)
   personalities:
     ISTJ: 13.0
     ISFJ: 12.0
@@ -32,24 +38,36 @@ agents:
     ENFJ: 3.0
     ENTJ: 2.0
 
+  # Risk tolerance distribution (affects evacuation speed)
   risk_tolerance:
     low: 30.0
     moderate: 50.0
     high: 20.0
 
+  # Age distribution
   age:
     min: 18
     max: 75
 
+  # Spawn zones - agents distributed across concourse/entrances and platforms
+  # Concourse/entrance agents: heading to a platform to catch a train
+  # Platform agents: 50% waiting to board, 50% just arrived and leaving
   spawn_zones:
     - concourse
     - platform_abc
     - platform_def
 
+  # Distribution of static-knowledge profiles for agents
   knowledge_profiles:
     novice: 30.0
     commuter: 70.0
 
+  # Agent roles define behaviour, goal text, and initial memories.
+  # spawn_zones: which zones assign this role (matched after coordinate-based zone detection).
+  # weight:      tie-break probability when multiple roles share the same spawn zone.
+  # goal:        template for the Concordia goal component.  Placeholders: {target}, {purpose}.
+  # memories:    template strings added to starting memory.  Same placeholders.
+  # target:      list of values to sample for the {target} placeholder (omit if unused).
   roles:
     heading_to_platform:
       spawn_zones: ["concourse"]
@@ -76,6 +94,7 @@ agents:
         - "Now that I have arrived I intend to leave the station and get on with my day — I am heading to {purpose}."
       target: []
 
+  # Purposes sampled for the {purpose} placeholder in role templates.
   purposes:
     - "work"
     - "school"
@@ -87,38 +106,61 @@ agents:
     - "a job interview"
     - "a meeting in the city centre"
 
+# Event configuration
+  # A single global event: the fire alarm is sounding
+
+# Population monitoring configuration
+# Snapshots are recorded every interval_seconds of simulation time.
+# Each zone entry supports:
+#   name                   - identifier used in output files
+#   description            - human-readable label for tables/charts
+#   type: exited           - cumulative count of fully evacuated agents
+#   type: level (default)  - active agents, filtered by level and/or area
+#   level                  - JuPedSim level ID to filter on ("0" = concourse, "-1" = platforms)
+#   area_patterns          - list of name prefixes: count only agents inside matching polygons
+#   exclude_area_patterns  - list of name prefixes: exclude agents inside matching polygons
 monitoring:
   interval_seconds: 60
   zones:
     - name: left_station
       description: "Agents who have left the station"
       type: exited
+
     - name: concourse
       description: "Agents on the concourse (level 0)"
       level: "0"
+
     - name: escalator_bottom
       description: "Agents at the bottom of escalators (level -1, escalator zones)"
       level: "-1"
       area_patterns:
-        - "L-1_esc"
+        - "L-1_esc"   # matches L-1_esc_* exit boxes and L-1_esc_corridor_* polygons
+
     - name: platform
       description: "Agents on a platform (level -1)"
       level: "-1"
       exclude_area_patterns:
         - "L-1_esc"
 
+# Test scenarios - disabled
 test_scenarios:
   blocked_exit:
     enabled: false
+    description: "Disabled"
+
   help_behavior:
     enabled: false
+    description: "Disabled"
 
+# LLM configuration
+# Note: Credentials are loaded from .env file
 llm:
   temperature: 0.7
   max_retries: 3
   max_completion_tokens: 8000
   embedder: "sentence-transformers/all-mpnet-base-v2"
 
+# Output configuration
 output:
   directory: "results"
   agent_decisions: "agent_decisions.json"
@@ -126,7 +168,183 @@ output:
   statistics: "statistics.json"
 
 station:
+  # Human-readable labels for zone/level IDs — used in agent observations and memories.
+  # These labels should clearly identify where the agent is AND what exits are nearby,
+  # so the agent can connect its goal (e.g. "Platform 2") to its current location.
   zone_labels:
     level_-1: "the underground platform level"
     level_-2: "the lower underground level"
     level_1:  "the upper concourse level"
+    platform_1: "Platform 1 (Escalators E and F go up to the concourse)"
+    platform_2: "Platform 2 (Escalators E and F go up to the concourse)"
+    platform_3: "Platform 3 (Escalators B and C go up to the concourse)"
+    platform_4: "Platform 4 (Escalators B and C go up to the concourse)"
+    concourse:  "the concourse (upper level — exits to Blackett Street, Grey Street and Eldon Square)"
+
+  # Exits that arrive INTO each zone from elsewhere (not valid departure choices).
+  # Prevents agents being offered an escalator that brings them here as a way to leave.
+  # Scenario-agnostic — populated per-zone, not per-level.
+  arrival_exits_by_zone:
+    concourse:   [escalator_b_up, escalator_c_up, escalator_e_up, escalator_f_up]
+    platform_1:  []
+    platform_2:  []
+    platform_3:  []
+    platform_4:  []
+
+  # Exits each knowledge profile can recall from memory, organised by zone.
+  # Commuters know the specific exits for the zone they are in.
+  # Novices rely on what they can see; they only know major signed exits as a fallback.
+  zone_known_exits_by_profile:
+    platform_1:
+      commuter: [escalator_e_up, escalator_f_up]
+      novice:   []
+    platform_2:
+      commuter: [escalator_e_up, escalator_f_up]
+      novice:   []
+    platform_3:
+      commuter: [escalator_b_up, escalator_c_up]
+      novice:   []
+    platform_4:
+      commuter: [escalator_b_up, escalator_c_up]
+      novice:   []
+    concourse:
+      commuter: [blackett_street, grey_street, eldon_square, L0_esc_a_down, L0_esc_d_down]
+      novice:   [blackett_street, grey_street, eldon_square]
+
+  # Zone names hidden from the intermediate-navigation zones list when the agent is in a
+  # given zone.  Prevents offering destinations that cannot be reached without first
+  # using an exit (e.g. platform zones are not directly walkable from the concourse).
+  zones_hidden_for_zone:
+    concourse: [platform_1, platform_2, platform_3, platform_4]
+
+  # Substrings that indicate an agent's goal refers to a particular zone.
+  # Used to detect when an agent has already reached their goal destination.
+  zone_goal_keywords:
+    platform_1: ["Platform 1"]
+    platform_2: ["Platform 2"]
+    platform_3: ["Platform 3"]
+    platform_4: ["Platform 4"]
+    concourse:  []
+
+  # UP escalators reachable from each platform zone (used for commuter valid-exits prompt).
+  platform_up_exits:
+    platform_abc:
+      - escalator_b_up
+      - escalator_c_up
+    platform_def:
+      - escalator_e_up
+      - escalator_f_up
+
+  # DOWN escalator zones on level 0 that lead to each platform zone.
+  # Values are L0_esc_* walkable area names that trigger level transfer when entered.
+  # platform_abc (Platforms 3 & 4) is reached via Escalator A (going down).
+  # platform_def (Platforms 1 & 2) is reached via Escalator D (going down).
+  platform_down_exits:
+    platform_abc:
+      - L0_esc_a_down
+    platform_def:
+      - L0_esc_d_down
+    platform_1:
+      - L0_esc_d_down
+    platform_2:
+      - L0_esc_d_down
+    platform_3:
+      - L0_esc_a_down
+    platform_4:
+      - L0_esc_a_down
+
+  # Street-level exits on level 0 (used for commuter valid-exits prompt on concourse).
+  street_exits:
+    - blackett_street
+    - grey_street
+    - eldon_square
+
+  # Fallback zone when an agent's zone cannot be determined from spawn position.
+  default_platform_zone: "platform_def"
+
+  # Rules for assigning initial_zone from spawn coordinates.
+  zone_boundaries:
+    "-1":
+      platform_abc:
+        x_lt: -15
+        y_gt: 30
+      platform_def:
+        default: true
+    "0":
+      concourse:
+        default: true
+
+  knowledge:
+    base_memories:
+      - "I am inside Monument station in central Newcastle."
+      - "This station has multiple levels connected by escalators and stairs."
+      - "To reach street level from platforms, I need to go up to the concourse first."
+      - "Wayfinding signs and nearby crowd behavior can help me navigate."
+
+    profiles:
+      novice:
+        - "I am unfamiliar with this layout and may need to orient myself at decision points."
+        - "I prefer following clear directional signs and nearby crowd cues."
+        - "If routes conflict, I prioritize the route that appears better marked."
+      commuter:
+        - "I know the general layout of this station from regular travel."
+        - "I know that UP escalators on my platform lead to the concourse, but I always use the nearest one visible to me."
+        - "I navigate by what I can see around me, using my general knowledge to help interpret signs and exits."
+
+    location_memories:
+      - when:
+          profiles: ["commuter"]
+          level_ids: ["-1"]
+          zones: ["platform_abc"]
+        memories:
+          - "On this platform, Escalator B (going up) and Escalator C (going up) lead to the concourse and street exits."
+          - "Escalator A goes down and does not lead toward the street exits."
+      - when:
+          profiles: ["commuter"]
+          level_ids: ["-1"]
+          zones: ["platform_def"]
+        memories:
+          - "On this platform, Escalator E (going up) and Escalator F (going up) lead to the concourse and street exits."
+          - "Escalator D goes down and does not lead toward the street exits."
+      - when:
+          profiles: ["novice"]
+          level_ids: ["-1"]
+          zones: ["platform_abc", "platform_def"]
+        memories:
+          - "From platform level, I should follow signs to an UP escalator in my immediate surroundings to reach the concourse exits."
+      - when:
+          level_ids: ["0"]
+          zones: ["concourse"]
+        memories:
+          - "I am on the concourse level. From here, street exits are: Blackett Street, Grey Street, and Eldon Square."
+          - "From the concourse, these street exits are the final routes out of the station to street level."
+          - "To reach Platforms 3 and 4, I use 'Escalator A (down to Platforms 3 & 4)'."
+          - "To reach Platforms 1 and 2, I use 'Escalator D (down to Platforms 1 & 2)'."
+
+# Video generation configuration
+video:
+  enabled: true
+  fps: 20
+  speedup: 1.0
+  dpi: 100
+  html_log: "simulation_log.html"
+
+# Performance optimization
+performance:
+  batch_processing: true
+  agent_cooldown: 10.0
+  decision_caching: true
+  max_parallel_agents: 10
+
+# Future: Spawning schedule (disabled for now)
+# agents:
+#   spawn_mode: "scheduled"
+#   spawn_schedule:
+#     - time: 0.0
+#       count: 20
+#       zones: ["concourse"]
+#       label: "initial_occupancy"
+#     - time: 15.0
+#       count: 15
+#       zones: ["concourse"]
+#       label: "additional_arrival"
