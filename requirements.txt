@@ -1,0 +1,29 @@
+# monument-evacuation study dependencies
+# Install with: pip install -r requirements.txt
+
+# Simulation framework (install from local clone or GitHub)
+# Option A — local editable install (recommended during development):
+#   pip install -e /home/michael/evacusim
+# Option B — once published to GitHub:
+#   pip install git+https://github.com/your-org/evacusim.git
+
+# Inherited from evacusim (listed here so `pip install -r requirements.txt`
+# works standalone without first installing evacusim separately)
+jupedsim>=1.3.1
+numpy>=1.24.0
+shapely>=2.0.0
+gdm-concordia>=2.2.0
+sentence-transformers>=2.2.0
+torch>=2.0.0
+azure-ai-inference>=1.0.0b9
+azure-core>=1.29.0
+aiohttp>=3.9.0
+requests>=2.31.0
+PyYAML>=6.0
+python-dotenv>=1.0.0
+rich>=13.0.0
+
+# Analysis and notebooks (monument-evacuation specific)
+pandas>=2.0.0
+matplotlib>=3.7.0
+jupyter>=1.0.0
