@@ -1,29 +1,121 @@
 extends: ../base.yaml
 
-# E4 — Staff assist the evacuation + PA instructs passengers to board trains to evacuate
-# Staff are present and directing passengers. The PA announces that trains are being
-# used as part of the evacuation and passengers should board.
+# E4 — Two RCIs + Station Controller PA
+#
+# Same RCI behaviour as E2 (phase-based: run to concourse, then split).
+# In addition, the Station Controller issues a directive PA 5 seconds after
+# the alarm (simulating the radio exchange with the Control Room):
+#   - Platform passengers: board the evacuation train
+#   - Concourse passengers: leave via the street exits
+#
+# The RCI concourse PA (modelled as a timed event at t=40 s) is retained.
 
 events:
   - time: 15.0
-    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+    message: "The fire alarm is sounding throughout the station. You cannot see
+any evidence of a fire."
   - time: 20.0
     type: pa_announcement
-    message: >
-      Attention please. This is an emergency announcement.
-      For your safety, evacuation trains are being dispatched from all platforms.
-      Please make your way to the nearest platform and board the next available train.
-      Station staff are on hand to assist you.
+    sender_label: "Station PA"
+    message: >-
+      Attention please. This is an emergency announcement. Please follow the
+      instructions of station staff.
+    zone_messages:
+      platform_1: >-
+        Attention please. An evacuation train is being dispatched from this
+        platform. Please board the train immediately. Do not go up to the
+        concourse.
+      platform_2: >-
+        Attention please. An evacuation train is being dispatched from this
+        platform. Please board the train immediately. Do not go up to the
+        concourse.
+      platform_3: >-
+        Attention please. An evacuation train is being dispatched from this
+        platform. Please board the train immediately. Do not go up to the
+        concourse.
+      platform_4: >-
+        Attention please. An evacuation train is being dispatched from this
+        platform. Please board the train immediately. Do not go up to the
+        concourse.
+      concourse: >-
+        Attention please. Please leave the station immediately via the nearest
+        street exit. Blackett Street, Grey Street and Eldon Square exits are
+        all open.
+  - time: 40.0
+    type: pa_announcement
+    sender_label: "Station PA"
+    message: >-
+      Attention please. This is an emergency announcement. Please evacuate the
+      station immediately via the nearest street exit. Do not wait inside the
+      station.
 
 systems:
-  staff:
+  rci_concourse:
     enabled: true
-    count: 4
-    directive_radius: 12.0
-    directive_interval: 10.0
-    message: "Please make your way to the nearest platform — evacuation trains are departing now. Follow the emergency signs."
+    role_label: "Revenue Control Inspector"
+    walking_speed: 1.6
     spawn_positions:
-      - zone: concourse
-      - zone: concourse
-      - zone: platform_abc
-      - zone: platform_def
+      - zone: platform_3
+        level_id: "-1"
+    phases:
+      # Phase 1: alarm fires → run to concourse
+      - trigger: on_event
+        movement: zone_patrol
+        patrol_zones:
+          - zone: concourse
+            level_id: "0"
+        patrol_dwell_time: 5.0
+        directive_radius: 12.0
+        directive_interval: 10.0
+        message: "Please follow the PA instructions and evacuate via the nearest exit!"
+      # Phase 2: once at concourse → hold at concourse centre and prevent entry
+      - trigger: on_reach_zone
+        trigger_zone: concourse
+        trigger_level_id: "0"
+        movement: hold
+        hold_zone: concourse
+        directive_radius: 15.0
+        directive_interval: 10.0
+        message: >-
+          Please leave the station immediately via the nearest street exit.
+          Do not enter or wait inside the station.
+
+  rci_platforms:
+    enabled: true
+    role_label: "Revenue Control Inspector"
+    walking_speed: 1.6
+    spawn_positions:
+      - zone: platform_1
+        level_id: "-1"
+    phases:
+      # Phase 1: alarm fires → run to concourse (to check the board)
+      - trigger: on_event
+        movement: zone_patrol
+        patrol_zones:
+          - zone: concourse
+            level_id: "0"
+        patrol_dwell_time: 15.0
+        directive_radius: 12.0
+        directive_interval: 10.0
+        message: "Please follow the PA instructions and evacuate via the nearest exit!"
+      # Phase 2: once at concourse → return to platforms and direct passengers
+      - trigger: on_reach_zone
+        trigger_zone: concourse
+        trigger_level_id: "0"
+        movement: zone_patrol
+        patrol_zones:
+          - zone: platform_1
+            level_id: "-1"
+          - zone: platform_3
+            level_id: "-1"
+        patrol_dwell_time: 30.0
+        directive_radius: 12.0
+        directive_interval: 10.0
+        message: >-
+          Please board the evacuation train now. Do not go up to the concourse.
+        messages_by_zone:
+          platform_1: "Please board the evacuation train on this platform now."
+          platform_2: "Please board the evacuation train on this platform now."
+          platform_3: "Please board the evacuation train on this platform now."
+          platform_4: "Please board the evacuation train on this platform now."
+          concourse: "Please leave the station via the nearest exit."

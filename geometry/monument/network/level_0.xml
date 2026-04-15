@@ -29,6 +29,21 @@
     <poly id="jps.escalator_4" name="L0_esc_corridor_e" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="53.060,16.650 54.234,16.254 57.444,25.769 56.269,26.165"/>
     <poly id="jps.escalator_5" name="L0_esc_corridor_f" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="55.127,16.004 56.583,15.513 59.792,25.028 58.336,25.519"/>
 
+    <!-- Exit threshold markers: corridor-mouth positions used for distance/visibility.
+         Placed where each street-exit corridor opens into the main concourse floor.
+         Agents see and measure distance to these points rather than to the far
+         green entrance polygon, making observations reliable from any open-concourse
+         position rather than only when aligned with the narrow corridor. -->
+    <poly id="jps.exit_threshold_0" name="blackett_street" type="jupedsim.exit_threshold"
+          color="0,200,100" fill="0" layer="1.50"
+          shape="78.0,37.6 80.0,37.6 80.0,39.6 78.0,39.6 78.0,37.6"/>
+    <poly id="jps.exit_threshold_1" name="grey_street" type="jupedsim.exit_threshold"
+          color="0,200,100" fill="0" layer="1.50"
+          shape="80.0,4.5 82.0,4.5 82.0,6.5 80.0,6.5 80.0,4.5"/>
+    <poly id="jps.exit_threshold_2" name="eldon_square" type="jupedsim.exit_threshold"
+          color="0,200,100" fill="0" layer="1.50"
+          shape="33.5,16.5 35.5,16.5 35.5,18.5 33.5,18.5 33.5,16.5"/>
+
     <!-- Obstacles -->
     <poly id="jps.obstacle_0" type="jupedsim.obstacle" color="255,204,204" fill="1" layer="2.00" shape="68.277369,22.824496 72.305203,22.704262 74.649764,21.381690 76.152687,19.337714 76.934207,17.173505 76.994324,14.468243 76.152687,12.484384 74.349179,10.680876 71.704034,9.238070 68.277369,9.358304 65.692341,10.861227 64.249535,12.664735 63.407898,15.550348 63.287664,17.654440 64.490002,20.179351 67.075030,22.463795 68.337486,22.884613 68.277369,22.824496"/>
     <poly id="jps.obstacle_1" type="jupedsim.obstacle" color="255,204,204" fill="1" layer="2.00" shape="39.510000,17.490000 39.490000,16.840000 42.140000,16.890000 42.150000,16.410000 43.390000,16.390000 43.390000,16.880000 44.490000,16.880000 44.490000,17.590000 39.510000,17.490000 39.510000,17.490000"/>

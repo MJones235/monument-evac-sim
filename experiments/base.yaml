@@ -15,6 +15,13 @@ simulation:
   # than this relative to the surrounding floor (standard commercial escalator ~0.5 m/s).
   escalator_belt_speed: 0.5
 
+  # Waypoints assigned to agents immediately after a level transfer, used to
+  # walk them clear of the escalator exit before the next LLM decision fires.
+  # Keyed by level_id (string).  Omit a level to fall back to the walkable-area
+  # representative_point() heuristic.
+  level_arrival_waypoints:
+    "0": [70.0, 35.0]   # Open concourse, near Blackett Street corridor mouth
+
 # Agent configuration
 agents:
   count: 50  # Agents distributed across both levels
@@ -208,7 +215,7 @@ station:
       commuter: [escalator_b_up, escalator_c_up]
       novice:   []
     concourse:
-      commuter: [blackett_street, grey_street, eldon_square, L0_esc_a_down, L0_esc_d_down]
+      commuter: [blackett_street, grey_street, eldon_square, escalator_a_down, escalator_d_down]
       novice:   [blackett_street, grey_street, eldon_square]
 
   # Zone names hidden from the intermediate-navigation zones list when the agent is in a
@@ -236,28 +243,36 @@ station:
       - escalator_f_up
 
   # DOWN escalator zones on level 0 that lead to each platform zone.
-  # Values are L0_esc_* walkable area names that trigger level transfer when entered.
+  # Values are canonical escalator IDs (as used in the exit registry).
   # platform_abc (Platforms 3 & 4) is reached via Escalator A (going down).
   # platform_def (Platforms 1 & 2) is reached via Escalator D (going down).
   platform_down_exits:
     platform_abc:
-      - L0_esc_a_down
+      - escalator_a_down
     platform_def:
-      - L0_esc_d_down
+      - escalator_d_down
     platform_1:
-      - L0_esc_d_down
+      - escalator_d_down
     platform_2:
-      - L0_esc_d_down
+      - escalator_d_down
     platform_3:
-      - L0_esc_a_down
+      - escalator_a_down
     platform_4:
-      - L0_esc_a_down
+      - escalator_a_down
 
   # Street-level exits on level 0 (used for commuter valid-exits prompt on concourse).
   street_exits:
     - blackett_street
     - grey_street
     - eldon_square
+
+  # Override the auto-generated display names for exits shown to agents.
+  # The default for escalator_a_down is "Escalator A (going down)", which is
+  # ambiguous — the LLM may interpret "going down" as descending toward street
+  # level rather than toward the underground platforms.
+  custom_exit_display_names:
+    escalator_a_down: "Escalator A (down to platforms)"
+    escalator_d_down: "Escalator D (down to platforms)"
 
   # Fallback zone when an agent's zone cannot be determined from spawn position.
   default_platform_zone: "platform_def"
@@ -318,8 +333,8 @@ station:
         memories:
           - "I am on the concourse level. From here, street exits are: Blackett Street, Grey Street, and Eldon Square."
           - "From the concourse, these street exits are the final routes out of the station to street level."
-          - "To reach Platforms 3 and 4, I use 'Escalator A (down to Platforms 3 & 4)'."
-          - "To reach Platforms 1 and 2, I use 'Escalator D (down to Platforms 1 & 2)'."
+          - "To reach Platforms 3 and 4, I use 'Escalator A (down to Platform 3 & Platform 4)'."
+          - "To reach Platforms 1 and 2, I use 'Escalator D (down to Platform 1 & Platform 2)'."
 
 # Video generation configuration
 video:

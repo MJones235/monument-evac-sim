@@ -1,23 +1,99 @@
 extends: ../base.yaml
 
-# E2 — Station staff direct the evacuation
-# Staff agents are added to the simulation. They do not use the LLM;
-# they are rule-based directors who move toward congested areas and
-# issue directive messages to nearby passengers.
+# E2 — Two Revenue Control Inspectors (RCIs) direct the evacuation
+#
+# Based on the real drill report:
+#   - Both RCIs are on the platforms when the alarm sounds.
+#   - They run upstairs to the concourse to check the electronic notice board.
+#   - RCI 1 (concourse) remains at the concourse, gives a PA, and prevents
+#     people from entering or waiting — clearing the concourse ~3 min post-alarm.
+#   - RCI 2 (platforms) returns to the lower levels and patrols between
+#     platforms, directing remaining passengers to evacuate via the concourse.
+#     Lower levels cleared ~5 min post-alarm.
+#
+# Phase-based behaviour:
+#   Phase 1 (on_event):     both RCIs patrol platform → concourse
+#   Phase 2 (on_reach_zone: concourse):
+#     rci_concourse → hold at concourse ("do not enter / please leave")
+#     rci_platforms → zone_patrol between platforms ("evacuate via concourse")
+#
+# The PA given by RCI 1 upon reaching the concourse is modelled as a timed
+# event (t=40 s, approximately 25 s after the alarm — time to reach concourse).
 
 events:
   - time: 15.0
-    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+    message: "The fire alarm is sounding throughout the station. You cannot see
+any evidence of a fire."
+  - time: 40.0
+    type: pa_announcement
+    sender_label: "Station PA"
+    message: >-
+      Attention please. This is an emergency announcement. Please evacuate the
+      station immediately via the nearest street exit. Do not wait inside the
+      station.
 
 systems:
-  staff:
+  rci_concourse:
     enabled: true
-    count: 4                        # Number of staff agents
-    directive_radius: 12.0          # metres — range at which staff address passengers
-    directive_interval: 10.0        # seconds between repeated directives
-    message: "Please leave the station immediately via the nearest exit. Follow the emergency signs."
+    role_label: "Revenue Control Inspector"
+    walking_speed: 1.6
     spawn_positions:
-      - zone: concourse             # Staff start at key positions on the concourse
-      - zone: concourse
-      - zone: platform_abc          # One staff member on each platform
-      - zone: platform_def
+      - zone: platform_3
+        level_id: "-1"
+    phases:
+      # Phase 1: alarm fires → run to concourse
+      - trigger: on_event
+        movement: zone_patrol
+        patrol_zones:
+          - zone: concourse
+            level_id: "0"
+        patrol_dwell_time: 15.0
+        directive_radius: 12.0
+        directive_interval: 10.0
+        message: "Please evacuate the station immediately via the nearest exit!"
+      # Phase 2: once at concourse → hold at concourse centre and prevent entry
+      - trigger: on_reach_zone
+        trigger_zone: concourse
+        trigger_level_id: "0"
+        movement: hold
+        hold_zone: concourse
+        directive_radius: 15.0
+        directive_interval: 10.0
+        message: >-
+          Please leave the station immediately. Do not enter or wait inside
+          the station.
+
+  rci_platforms:
+    enabled: true
+    role_label: "Revenue Control Inspector"
+    walking_speed: 1.6
+    spawn_positions:
+      - zone: platform_1
+        level_id: "-1"
+    phases:
+      # Phase 1: alarm fires → run to concourse (to check the board)
+      - trigger: on_event
+        movement: zone_patrol
+        patrol_zones:
+          - zone: concourse
+            level_id: "0"
+        patrol_dwell_time: 15.0
+        directive_radius: 12.0
+        directive_interval: 10.0
+        message: "Please evacuate the station immediately via the nearest exit!"
+      # Phase 2: once at concourse → return to platforms and patrol
+      - trigger: on_reach_zone
+        trigger_zone: concourse
+        trigger_level_id: "0"
+        movement: zone_patrol
+        patrol_zones:
+          - zone: platform_1
+            level_id: "-1"
+          - zone: platform_3
+            level_id: "-1"
+        patrol_dwell_time: 30.0
+        directive_radius: 12.0
+        directive_interval: 10.0
+        message: >-
+          Please evacuate the platform immediately! Use the escalators to reach
+          the concourse and leave via the nearest street exit.

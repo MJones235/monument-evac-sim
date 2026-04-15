@@ -1,28 +1,43 @@
-# E4 — Staff assist + PA instructs passengers to board trains to evacuate
+# E4 — Two RCIs + Station Controller PA (evacuation train)
 
 ## Scenario
 
-The fire alarm sounds at t=15s. At t=20s a PA announces that evacuation trains are being
-dispatched and asks passengers to board them. Four staff members are present and direct
-passengers toward platforms, consistent with the PA message.
+Same RCI phase-based behaviour as E2, plus a Station Controller PA issued 5
+seconds after the alarm (simulating the radio exchange with the Control Room).
+
+**Events:**
+- t=15s — Fire alarm
+- t=20s — Station Controller PA (zone-differentiated):
+  - Platform passengers: board the evacuation train, do not go to the concourse
+  - Concourse passengers: leave via the nearest street exit
+- t=40s — RCI concourse PA: general evacuation announcement
+
+**RCI phases** (identical structure to E2):
+- `rci_concourse`: alarm → run to concourse → hold + "leave the station" directive
+- `rci_platforms`: alarm → run to concourse → return to platforms + "board the
+  train" directive (consistent with PA instructions)
+
+This scenario tests a non-standard evacuation flow where platform passengers are
+directed *onto* trains rather than upstairs, while the concourse RCI prevents
+additional passengers from descending to the platforms.
 
 ## Hypothesis
 
-This scenario reverses the typical evacuation flow (away from platforms) and instead
-directs passengers *onto* trains. This tests whether:
-- Agents comply with a non-standard instruction that conflicts with their initial instinct
-  to leave the building
-- Staff reinforcing the PA message increases compliance
-- Agents already heading for surface exits are redirected to platforms
+The combination of an authoritative PA (differentiating instructions by zone)
+and an RCI physically reinforcing the platform message will increase compliance
+with the train-boarding instruction compared to E3 (PA only). The split RCI
+roles prevent conflicting signals reaching the same passengers.
 
 ## Key metrics
 
-- Proportion of agents who move toward platforms (vs. surface exits) after t=20s
-- Time for 50% / 90% / 100% of agents to exit (noting "exit" may be via train)
-- Comparison of compliance rates with E2 (staff only) and E3 (PA only)
-- Decision text analysis: do agents reason about the train option explicitly?
+- Proportion of platform agents who board the train vs. use escalators
+- Proportion of concourse agents redirected toward trains after the PA
+- Time for 50% / 90% / 100% of agents to exit (via any route)
+- Comparison of compliance with E2 (staff only) and E3 (PA only)
+- Decision text analysis: do agents reason explicitly about the train option?
 
 ## Notes
 
-This scenario requires the simulation to handle "evacuation by train" as an exit type.
-Platform exits may need to be configured differently from surface exits in the geometry.
+RCIs are two `DirectorSystem` instances (`rci_concourse`, `rci_platforms`) using
+`phases:` config with `trigger: on_reach_zone` transitions. Phase 2 messages for
+`rci_platforms` are zone-differentiated via `messages_by_zone` to match the PA.
