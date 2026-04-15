@@ -1,15 +1,29 @@
 extends: ../base.yaml
 
 # E3 — Public address system used to tell people to evacuate
-# A PA announcement is broadcast to all agents shortly after the alarm.
-# No staff are present.
+#
+# Based on the real drill report:
+#   - Train 124 arrives at the platforms before the alarm sounds.
+#   - Five seconds after the train arrives the Control Room broadcasts a
+#     minimal, non-directive PA: "Please, evacuate the station immediately."
+#     (repeated at 20-second intervals).
+#   - No staff members are present.
+#
+# The train_arrival event (t=10 s) activates train boarding exits so agents
+# can board as a legitimate evacuation means; the PA does not direct them to
+# do so (it is intentionally non-directive).
 
 events:
+  - time: 10.0
+    type: train_arrival
+    platforms: [1, 2, 3, 4]
+    dwell_seconds: 30
+    message: "A train is waiting at each platform."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
   - time: 20.0
     type: pa_announcement
-    message: >
-      Attention please. This is an emergency announcement.
-      Please evacuate the station immediately via the nearest exit.
-      Do not use the lifts. Follow the emergency signs.
+    repeat_interval: 20.0
+    message: >-
+      Please, evacuate the station immediately.
+      Please, evacuate the station immediately.

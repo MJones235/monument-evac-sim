@@ -39,4 +39,32 @@
     <poly id="jps.obstacle_7" type="jupedsim.obstacle" color="255,204,204" fill="1" layer="2.00" shape="-8.424315,23.605188 -8.461643,20.730940 -0.921410,20.954908 -0.921410,23.754499 -8.424315,23.717171 -8.424315,23.605188" />
     <poly id="jps.obstacle_8" type="jupedsim.obstacle" color="255,204,204" fill="1" layer="2.00" shape="-19.268148,18.819409 -19.587651,-3.652262 -13.197602,-3.865264 -13.197602,0.714271 -7.553059,17.434898 -2.973524,15.837386 -8.298565,-1.096243 -9.576575,-1.415745 -9.470074,-4.078265 -3.399528,-4.078265 -1.163011,19.032410 -19.268148,18.712908 -19.268148,18.819409" />
     <poly id="jps.obstacle_9" type="jupedsim.obstacle" color="255,204,204" fill="1" layer="2.00" shape="-19.657885,-5.836622 -19.724014,-7.622095 -13.177280,-7.754352 -12.978894,-5.770494 -19.724014,-5.770494 -19.657885,-5.836622" />
+    <!-- ============================================================
+         Train boarding exit zones — jupedsim.train_entrance
+         These small polygons sit at the track end of each platform.
+         They are registered as JuPedSim exit stages at simulation
+         start but are hidden from agent observations until the
+         corresponding train_arrival event fires in EventManager.
+         ============================================================ -->
+
+    <!-- Platform 1 train (southern tip, around x=-5 to -4.5, y=-37 to -38) -->
+    <poly id="jps.train_entrance_0" name="train_platform_1"
+          type="jupedsim.train_entrance" color="0,180,0" fill="1" layer="3.00"
+          shape="-6.0,-37.2 -4.6,-37.2 -4.5,-37.9 -5.9,-37.9" />
+
+    <!-- Platform 2 train (southern tip, around x=-22 to -20, y=-32 to -33) -->
+    <poly id="jps.train_entrance_1" name="train_platform_2"
+          type="jupedsim.train_entrance" color="0,180,0" fill="1" layer="3.00"
+          shape="-21.6,-32.5 -20.2,-32.5 -20.2,-33.0 -21.6,-33.0" />
+
+    <!-- Platform 3 train (western end, around x=-65 to -64, y=44.8 to 46.6) -->
+    <poly id="jps.train_entrance_2" name="train_platform_3"
+          type="jupedsim.train_entrance" color="0,180,0" fill="1" layer="3.00"
+          shape="-65.3,44.8 -63.9,44.8 -63.9,46.6 -65.3,46.6" />
+
+    <!-- Platform 4 train (western end, around x=-68 to -67, y=35.6 to 37.2) -->
+    <poly id="jps.train_entrance_3" name="train_platform_4"
+          type="jupedsim.train_entrance" color="0,180,0" fill="1" layer="3.00"
+          shape="-68.3,35.6 -67.0,35.6 -67.0,37.2 -68.3,37.2" />
+
 </additional>

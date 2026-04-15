@@ -1,20 +1,32 @@
 extends: ../base.yaml
 
-# E5 — PA gives detailed information: fire location and specific actions required
-# A rich PA announcement names the location of the fire and gives clear,
-# differentiated instructions based on where passengers are in the station.
-# No staff are present.
+# E5 — Control Room PA with fire location and differential instructions; no staff
+#
+# Based on the real drill report:
+#   - Trains are waiting at all platforms when the alarm sounds.
+#   - The Control Room broadcasts a rich, directive PA (repeated) that:
+#       • identifies the suspected fire location (North/South escalators,
+#         between the concourse and Platforms 1 & 2)
+#       • tells platform passengers to board the first available train
+#       • tells concourse passengers to leave via the nearest exit
+#       • explicitly says not to use the lift
+#   - No staff members are present.
+#
+# This is the verbatim wording from the real study (Galea et al., 2008).
 
 events:
+  - time: 10.0
+    type: train_arrival
+    platforms: [1, 2, 3, 4]
+    dwell_seconds: 30
+    message: "A train is waiting at each platform."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
   - time: 20.0
     type: pa_announcement
-    message: >
-      Attention please. This is an emergency announcement.
-      A fire has been reported in the station concourse near the main entrance on Monument Street.
-      Passengers on the platforms: do not attempt to use the escalators to the concourse.
-      Please remain on the platform and await further instructions — staff will assist you shortly.
-      Passengers on the concourse: please move immediately to the Grey Street or Grainger Street exits,
-      away from the Monument Street entrance.
-      Do not use the lifts. Do not re-enter the station.
+    repeat_interval: 20.0
+    message: >-
+      To all passengers. There is a suspected fire on the North/South escalators
+      between the concourse and Platforms 1 and 2. Passengers on all platforms
+      should board the first available train. Passengers at concourse level
+      should leave by the nearest exit. Do not use the lift.

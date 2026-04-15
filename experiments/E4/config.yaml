@@ -11,9 +11,13 @@ extends: ../base.yaml
 # The RCI concourse PA (modelled as a timed event at t=40 s) is retained.
 
 events:
+  - time: 10.0
+    type: train_arrival
+    platforms: [1, 2, 3, 4]
+    dwell_seconds: 30
+    message: "A train is waiting at each platform."
   - time: 15.0
-    message: "The fire alarm is sounding throughout the station. You cannot see
-any evidence of a fire."
+    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
   - time: 20.0
     type: pa_announcement
     sender_label: "Station PA"

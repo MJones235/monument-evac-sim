@@ -3,7 +3,7 @@
 # Simulation parameters
 simulation:
   dt: 0.05  # JuPedSim timestep (seconds)
-  max_iterations: 3000  # Maximum simulation steps (3000 * 0.05 = 150 seconds)
+  max_iterations: 6000  # Maximum simulation steps (6000 * 0.05 = 300 seconds)
   decision_interval: 15.0  # Time between Concordia decisions (seconds)
   spawn_interval: 2.0  # Time between agent spawns (seconds)
   network_path: "geometry/monument/network"  # Monument geometry
@@ -273,6 +273,10 @@ station:
   custom_exit_display_names:
     escalator_a_down: "Escalator A (down to platforms)"
     escalator_d_down: "Escalator D (down to platforms)"
+    train_platform_1: "Train at Platform 1 (board to evacuate)"
+    train_platform_2: "Train at Platform 2 (board to evacuate)"
+    train_platform_3: "Train at Platform 3 (board to evacuate)"
+    train_platform_4: "Train at Platform 4 (board to evacuate)"
 
   # Fallback zone when an agent's zone cannot be determined from spawn position.
   default_platform_zone: "platform_def"
