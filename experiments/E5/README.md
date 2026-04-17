@@ -1,33 +1,39 @@
-# E5 — PA with detailed fire location and differential instructions
+# E5 — PA with fire location and differential platform/concourse instructions
 
 ## Scenario
 
-The fire alarm sounds at t=15s. At t=20s a PA announcement gives specific information:
-- The fire is located near the Monument Street entrance on the concourse
-- Platform passengers are told NOT to use the escalators and to await further instructions
-- Concourse passengers are directed to alternative exits (Grey Street / Grainger Street)
+The fire alarm sounds at t=15 s. At t=20 s a repeated PA announcement gives specific,
+directive information about both the incident and the appropriate response:
 
-No staff are present.
+- **Incident**: "There is a suspected fire on the **North/South escalators** between
+  the concourse and Platforms 1 and 2."
+- **Platform passengers**: board the first available train.
+- **Concourse passengers**: leave by the nearest street exit; do not use the lift.
+
+No staff members are present. The N/S escalators are blocked at alarm time by fire
+marshals (as in all five evacuations).
+
+This is the verbatim PA wording from the real drill (Galea et al., 2008 / Proulx 1991).
 
 ## Hypothesis
 
-Detailed, actionable information will produce the most differentiated behaviour between
-platform and concourse agents. Platform agents given "stay put" instructions represent a
-real tension: following the PA conflicts with the general instinct to evacuate. This tests
-whether LLM agents can reason about differential instructions and act appropriately.
+Specific, location-aware PA instructions produce the fastest and safest evacuation:
 
-Expected outcomes:
-- Concourse agents avoid the Monument Street exit and use alternatives
-- Platform agents show higher rates of hesitation / compliance with "stay" instruction
-- Overall evacuation time may be longer than E3 (less clear single instruction)
-  but safety-optimal behaviour (avoiding the fire) is higher
+- Concourse agents immediately move to street exits (understanding the fire is on the N/S
+  escalators, which are already the blocked route for them).
+- Platform agents board trains (the PA explicitly tells them to do so), clearing the
+  platforms quickly compared to E3 where platform agents were left without guidance.
+- Overall clearance should be faster than E1–E3 and competitive with E4.
 
 ## Key metrics
 
-- Proportion of concourse agents who use Grey St / Grainger St exits (vs. Monument St)
-- Proportion of platform agents who remain on platforms after t=30s, t=60s
-- Decision text analysis: do agents reference the fire location and differential instructions?
-- Comparison of exit choice distributions across E1–E5
+- Time for first concourse agents to start moving toward a street exit (compare to
+  `time_to_move_concourse_s = 90 s` from Proulx Table 1).
+- Time for first platform agents to start moving (compare to
+  `time_to_move_escalator_s = 60 s`).
+- Station clearance time (compare to `station_clear_s = 345 s`).
+- Proportion of platform agents who board trains vs. use escalators.
+- Comparison of exit choice distributions across E1–E5.
 
 ## Notes
 

@@ -22,6 +22,11 @@ events:
     message: "A train is waiting at each platform."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+  # Fire marshals power off and block the N/S escalators (D/E/F bank) at alarm time.
+  - time: 15.0
+    type: block_exit
+    exits: [escalator_d_down, escalator_e_up, escalator_f_up]
+
   - time: 20.0
     type: pa_announcement
     repeat_interval: 20.0

@@ -135,11 +135,15 @@ def main():
     logger.info("=" * 60)
 
     try:
+        # Default output directory is results/<experiment_id>/ so that each
+        # experiment's runs are grouped together for cross-experiment analysis.
+        output_dir = args.output_dir or f"results/{experiment_id}"
+
         config = ConfigLoader.load_and_validate(
             config_path=str(args.config),
             agents=args.agents,
             max_steps=args.max_steps,
-            output_dir=args.output_dir,
+            output_dir=output_dir,
         )
 
         model, embedder = LLMSetup.setup_language_model(config)

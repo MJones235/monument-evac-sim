@@ -3,7 +3,7 @@
 # Simulation parameters
 simulation:
   dt: 0.05  # JuPedSim timestep (seconds)
-  max_iterations: 6000  # Maximum simulation steps (6000 * 0.05 = 300 seconds)
+  max_iterations: 18000  # Maximum simulation steps (18000 * 0.05 = 900 seconds)
   decision_interval: 15.0  # Time between Concordia decisions (seconds)
   spawn_interval: 2.0  # Time between agent spawns (seconds)
   network_path: "geometry/monument/network"  # Monument geometry
@@ -127,7 +127,7 @@ agents:
 #   area_patterns          - list of name prefixes: count only agents inside matching polygons
 #   exclude_area_patterns  - list of name prefixes: exclude agents inside matching polygons
 monitoring:
-  interval_seconds: 60
+  interval_seconds: 15
   zones:
     - name: left_station
       description: "Agents who have left the station"
@@ -347,6 +347,94 @@ video:
   speedup: 1.0
   dpi: 100
   html_log: "simulation_log.html"
+
+# Fire marshal systems — present in ALL five Proulx (1991) drills.
+#
+# Setup: 4 uniformed fire fighters emerged from the staff room the moment
+# the alarm sounded.  They split 2/2 between the TOP and BOTTOM of the N/S
+# escalators (the D/E/F bank, serving Platforms 1 and 2).  They powered off
+# the escalators and physically blocked passage.  Their only verbal response
+# to passenger queries was "Please evacuate the station."
+#
+# ~4–5 minutes post-alarm the fully operational Fire Brigade arrived, checked
+# the fire location on the electronic board, and directed remaining passengers
+# to evacuate (issuing the "All Clear" once the station was empty).
+#
+# Experiment configs that add their own systems: (E2, E4) will have those
+# staff merged with these fire marshals via the extends deep-merge.
+systems:
+
+  # Two fire marshals at the TOP of the N/S escalators (concourse level 0).
+  # Positioned between escalators D and E (one) and at escalator F (other).
+  # Positions are derived at runtime from the corridor geometry
+  # (zone: "escalator_X_entrance" → midpoint of corridor's concourse-side edge + 1.5 m outward).
+  firefighter_top:
+    enabled: true
+    role_label: "Fire Marshal"
+    walking_speed: 1.5
+    spawn_positions:
+      - zone: "escalator_d_entrance_L0"   # just outside top of escalator D corridor
+        level_id: "0"
+      - zone: "escalator_f_entrance_L0"   # just outside top of escalator F corridor
+        level_id: "0"
+    phases:
+      - trigger: on_event          # activate when fire alarm fires
+        movement: hold
+        directive_radius: 10.0
+        directive_interval: 15.0
+        message: "Please evacuate the station. Escalator D (down to platforms), Escalator E (going up) and Escalator F (going up) are closed — use Escalator B or Escalator C to reach the concourse."
+
+  # Two fire marshals at the BOTTOM of the N/S escalators (platform level -1).
+  # Positioned in front of escalator D (one) and escalator F (other).
+  # Positions are derived at runtime from the corridor geometry.
+  firefighter_bottom:
+    enabled: true
+    role_label: "Fire Marshal"
+    walking_speed: 1.5
+    spawn_positions:
+      - zone: "escalator_d_entrance_L-1"   # just outside bottom of escalator D corridor
+        level_id: "-1"
+      - zone: "escalator_f_entrance_L-1"   # just outside bottom of escalator F corridor
+        level_id: "-1"
+    phases:
+      - trigger: on_event
+        movement: hold
+        directive_radius: 10.0
+        directive_interval: 15.0
+        message: "Please evacuate the station. Escalator D (down to platforms), Escalator E (going up) and Escalator F (going up) are closed — use Escalator B or Escalator C to reach the concourse."
+
+  # The fully operational Fire Brigade arrives ~4–5 minutes post-alarm.
+  # Modelled as a single officer who patrols the concourse and escalator
+  # area giving stronger directives after the first responders.
+  firefighter_brigade:
+    enabled: true
+    role_label: "Fire Brigade Officer"
+    walking_speed: 1.6
+    spawn_positions:
+      - position: [87.0, 0.0]   # far end of concourse near Blackett Street — out of the way until brigade arrives
+        level_id: "0"
+    phases:
+      # Phase 0: dormant at the Blackett Street end until brigade arrives (~4.5 min).
+      - trigger: on_event
+        movement: hold
+        directive_radius: 0.0
+        directive_interval: 9999.0
+        message: ""
+      # Phase 1: 4.5 min post-alarm (~t=285 s) patrol and direct firmly.
+      - trigger: after_seconds
+        trigger_after_seconds: 270
+        movement: zone_patrol
+        patrol_zones:
+          - zone: concourse
+            level_id: "0"
+          - zone: platform_1
+            level_id: "-1"
+        patrol_dwell_time: 45.0
+        directive_radius: 15.0
+        directive_interval: 10.0
+        message: >-
+          This is the Fire Brigade. You must leave the station immediately.
+          Please use the nearest street exit now.
 
 # Performance optimization
 performance:
