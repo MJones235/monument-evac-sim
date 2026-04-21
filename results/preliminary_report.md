@@ -320,16 +320,66 @@ The simulation correctly captures the *direction* of the Proulx (1991) hierarchy
 
 ---
 
-## 9. Recommended Next Steps
+## 9. Next Steps
 
-1. **Full-length runs (≥15 min simulation time, 3 runs per condition)** to obtain T50/T90/T100 for proper comparison with Proulx Table 1.
-2. **Initial-hesitation tuning:** Increase the probability that agents choose `wait` at the first 1–2 post-alarm decision steps, particularly in E1. This is the primary mechanism driving the reference's long first-move times.
-3. **Content filter prompt mitigation:** Rephrase "fire" references in E5's PA announcement to reduce false-positive filter hits (e.g. "emergency" instead of "suspected fire").
-4. **Agent count increase:** Raise agent count to ~110 and add timed train-arrival spawn events to better match the real-study population dynamics.
-5. **Multi-run averaging:** Implement the planned `--all-runs` averaging in `compare_experiments.py` to report mean ± SD across replications once full runs are available.
+1. **Decision interval testing:** Run E1–E5 at several decision intervals (e.g. 5 s, 15 s, 30 s, 60 s) to measure the effect on first-move times and evacuation rates. This directly addresses the timing compression identified in §7.2 and will determine the best trade-off between behavioural realism and LLM call cost.
+2. **Simulation optimisation and speed-up:** Profile and reduce wall-clock time per run so that the parameter sweeps in step 1 are practical. Candidates include prompt caching, batching LLM calls across agents, and reducing token count per prompt.
+3. **Full-length runs (≥15 min simulation time, 3 runs per condition)** to obtain T50/T90/T100 for proper comparison with Proulx Table 1.
+4. **Initial-hesitation tuning:** Increase the probability that agents choose `wait` at the first 1–2 post-alarm decision steps, particularly in E1. This is the primary mechanism driving the reference's long first-move times.
+5. **Content filter prompt mitigation:** Rephrase "fire" references in E5's PA announcement to reduce false-positive filter hits (e.g. "emergency" instead of "suspected fire").
+6. **Agent count increase:** Raise agent count to ~110 and add timed train-arrival spawn events to better match the real-study population dynamics.
+7. **Multi-run averaging:** Implement the planned `--all-runs` averaging in `compare_experiments.py` to report mean ± SD across replications once full runs are available.
 
 ---
 
 *Run data: `results/{E1–E5}/run_202604*/`*  
 *Videos: `results/{E1–E5}/run_202604*/*_video.mp4`*  
 *Analysis script: `python analysis/compare_experiments.py`*
+
+---
+
+## 10. Actions from last meeting
+
+### 10.1 Prime the model with agent behaviour statistics — ✓ Done
+
+The LLM system message now contains explicit population-level priors for fire-alarm response, grounded in the Proulx data. Every agent decision call includes the following system prompt verbatim:
+
+```
+You are a simulation engine for everyday station scenarios.
+Generate realistic behavioral responses for simulated agents based on their
+personality profiles, situational context, and normal station routines.
+When a fire alarm is sounding with no clear visible fire or additional
+instructions from authorities, use this empirical prior for initial behavior:
+about 10% evacuate immediately, about 15% decide to leave but delay, and
+about 75% initially hesitate, wait for others, or ignore at first.
+Use this as a population-level prior while still adapting each individual
+response to local observations, social cues, and personal goals.
+```
+
+**Impact on E1:** E1 evacuation rates have decreased relative to earlier un-primed pilot runs, consistent with Proulx's finding that the alarm alone failed to produce self-initiated evacuation. At t = +60 s post-alarm, 85% of agents remain inside; at t = +120 s, 75% remain inside (Section 3). The 10%/75% immediate-vs-hesitate split is directly reproduced in the E1 trace.
+
+### 10.2 Line-of-sight exit routing — ✓ Done
+
+Agents are now shown only the exits they can physically see from their current position. The `SpatialAnalyzer.get_visible_exits()` method tests each candidate exit with two geometry checks:
+
+1. **Walkable-boundary check** — the ray from agent to exit must lie entirely within the walkable-area footprint. This prevents false visibility across concave concourse boundaries (e.g. the Eldon Square corridor mouth is not visible from behind the ABC escalator bank).
+2. **Obstacle check** — the ray must not cross any explicit obstacle polygon (escalator shaft walls, support pillars).
+
+Exits appear in the prompt labelled by distance category: *very close* (< 10 m), *nearby* (< 20 m), or *visible in distance* (≥ 20 m). Because Blackett Street is the shortest straight-line exit from the central concourse, with no intervening geometry, it now appears prominently in concourse-level agent observations and is more frequently selected — particularly in E1 where the N/S escalators are blocked and agents look for the nearest clear route (see `results/E1/run_20260420_134755/route_changes.txt`).
+
+### 10.3 Fix escalator modelling — ✓ Done
+
+Each JuPedSim level runs its own simulation instance. Escalators are modelled as a two-layer structure:
+
+- **Exit boxes** — small terminal zones at the escalator railing entrance. When an agent enters an exit box, JuPedSim removes the agent from that level and `LevelTransferManager` spawns it on the opposite level. While inside the box, the agent's desired speed is raised to at least the configured belt speed (0.5 m/s, matching a standard commercial escalator) so it cannot appear stationary at the escalator mouth.
+- **Corridor zones** — full-length polygons covering the navigable width of each escalator flight. Speed enforcement (≥ 0.5 m/s) applies throughout, and agents are routed to the matching departure exit for their corridor letter and direction. Arrival-only zones (the landing at the top or bottom on the opposite level) detect any wrongly-directed agent and redirect it to the nearest valid departure exit, subject to a 5-second cooldown to prevent oscillation.
+
+After a level transfer, the agent is assigned a short-term waypoint into the open concourse so it continues moving until the next LLM decision cycle fires.
+
+### 10.4 Get raw data — ✓ Done
+
+Proulx's (1991) empirical data are recorded in Section 2 of this report, covering crowd sizes (§2.2), Table 1 timing (§2.3), zone clearance times (§2.4), alarm credibility questionnaire data (§2.5–§2.6), qualitative findings per condition (§2.7), and the post-study regulatory outcome (§2.8).
+
+### 10.5 Decision interval calibration — ✗ Not yet done
+
+The LLM decision interval remains at **15 seconds** (one decision call per agent per 15 s of simulation time). 
