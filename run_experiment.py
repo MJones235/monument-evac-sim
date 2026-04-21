@@ -5,7 +5,8 @@ Run a single Monument Station evacuation experiment.
 Usage:
     python run_experiment.py experiments/E1/config.yaml
     python run_experiment.py experiments/E2/config.yaml --agents 100
-    python run_experiment.py experiments/E5/config.yaml --no-viewer --generate-video
+    python run_experiment.py experiments/E5/config.yaml --no-viewer
+    python run_experiment.py experiments/E5/config.yaml --no-viewer --no-video
 """
 
 import argparse
@@ -46,7 +47,7 @@ def parse_args():
     parser.add_argument("--output-dir", type=str, default=None, help="Override output directory")
     parser.add_argument("--no-viewer", action="store_true", help="Disable live GUI viewer")
     parser.add_argument("--no-spatial-viewer", action="store_true", help="Disable spatial matplotlib viewer")
-    parser.add_argument("--generate-video", action="store_true", help="Generate MP4 after simulation (requires ffmpeg)")
+    parser.add_argument("--no-video", action="store_true", help="Skip MP4 rendering after simulation")
     parser.add_argument("--video-fps", type=int, default=20)
     parser.add_argument("--video-speedup", type=float, default=1.0)
     return parser.parse_args()
@@ -155,7 +156,7 @@ def main():
             launch_spatial=not args.no_spatial_viewer,
         )
 
-        if args.generate_video:
+        if not args.no_video:
             network_path = Path(config.get("simulation", {}).get("network_path", "geometry/monument/network"))
             VideoGenerationHelper.generate_simulation_video(
                 decisions_file=decisions_file,

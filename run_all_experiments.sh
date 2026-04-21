@@ -47,7 +47,7 @@ for exp in $EXPERIMENTS; do
         echo "  ▶  $exp  run $i / $RUNS  —  $(date '+%H:%M:%S')"
         run_start=$(date +%s)
 
-        if python run_experiment.py "$config" --no-viewer --no-spatial-viewer; then
+        if python run_experiment.py "$config" --no-viewer --no-spatial-viewer; then  # video on by default
             run_end=$(date +%s)
             elapsed=$(( run_end - run_start ))
             echo "  ✔  $exp  run $i  completed in ${elapsed}s"

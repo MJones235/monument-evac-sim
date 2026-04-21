@@ -9,5 +9,4 @@ build/
 .ruff_cache/
 .mypy_cache/
 .pytest_cache/
-results/
 !results/.gitkeep

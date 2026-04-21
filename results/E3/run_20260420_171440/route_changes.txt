@@ -1,0 +1,92 @@
+=== ROUTE CHANGE ANALYTICS ===
+
+Total route changes: 43
+Agents who changed routes: 30
+
+Route Changes:
+  - agent_16 at t=40.0s: escalator_f_up → escalator_b_up
+    Reason: PA requires evacuation. I will join others heading toward an exit to evacuate efficiently and coordinate with Person 17 at Escalator B.
+  - agent_8 at t=15.0s: escalator_c_up → escalator_b_up
+    Reason: Goal: leave the station for my university lecture. Alarm is sounding with no visible fire, so I head toward the closest exit to regain progress and continue my day.
+  - agent_8 at t=40.0s: escalator_d_down → blackett_street
+    Reason: Evacuation is ordered and the closest safe egress on this level is Blackett Street, so I move toward it to exit quickly.
+  - agent_13 at t=60.0s: escalator_c_up → escalator_b_up
+    Reason: PA directive requires evacuation; moving toward an up escalator offers the quickest exit given crowd heading that way and proximity.
+  - agent_11 at t=15.0s: escalator_f_up → escalator_b_up
+    Reason: My goal is to leave the station. The alarms are sounding but there is no fire visible, and Escalator B is available to reach the upper level quickly, so I’ll move toward that exit to evacuate.
+  - agent_6 at t=40.0s: escalator_e_up → escalator_b_up
+    Reason: The train has departed and evacuation is directed. As an ESTJ, I take charge and head toward Escalator B to exit quickly given crowded conditions and blocked stairs.
+  - agent_5 at t=10.0s: escalator_f_up → escalator_b_up
+    Reason: My goal is to leave the station and continue to my interview. With people moving toward escalators and trains waiting on all platforms, I will take Escalator B to reach the concourse and exit.
+  - agent_12 at t=15.0s: escalator_f_up → escalator_b_up
+    Reason: The alarm is sounding, and while no fire is visible I should evacuate. Escalator B is available and not blocked, providing a quick route to the surface.
+  - agent_14 at t=20.0s: escalator_e_up → escalator_b_up
+    Reason: PA instructs evacuation; escalators F/E/D are blocked, leaving B and C open. To evacuate quickly through an available exit, move toward Escalator B to exit.
+  - agent_14 at t=100.0s: blackett_street → escalator_a_down
+    Reason: Evacuation is ordered, but Escalator A down to the platforms is available. To reach Platform 2 and still pursue boarding, I move toward Escalator A now.
+  - agent_26 at t=60.0s: escalator_f_up → escalator_b_up
+    Reason: Escalators F and E are blocked; to evacuate promptly, use the nearest up-escalator (Escalator B) and move toward the exit while helping others if safe.
+  - agent_10 at t=60.0s: escalator_e_up → escalator_c_up
+    Reason: Escalators E and F are blocked, and the PA urges evacuation. To progress, head to the nearest usable exit—Escalator C—to reach the concourse.
+  - agent_10 at t=80.0s: escalator_c_up → escalator_b_up
+    Reason: Escalator E is blocked and the PA urges evacuation. With B and C available and people heading toward escalators, Escalator B is the quickest path to evacuate.
+  - agent_30 at t=15.0s: escalator_d_down → escalator_a_down
+    Reason: Goal is to catch the train from Platform 2. Escalators F, E (up) and D (down) are blocked, so descend to the platforms via Escalator A to reach Platform 2 quickly.
+  - agent_30 at t=40.0s: escalator_a_down → blackett_street
+    Reason: The PA demands evacuation and escalators are blocked. I head toward the visible Blackett Street exit to evacuate efficiently.
+  - agent_4 at t=20.0s: escalator_f_up → escalator_e_up
+    Reason: The PA instructs evacuation and up-going escalators provide surface access; as a cautious, empathetic person, I will evacuate toward the closest up escalator to reach the surface.
+  - agent_4 at t=40.0s: escalator_e_up → escalator_b_up
+    Reason: Evacuation is instructed and people are moving toward Escalator B; to prioritize safety and stay with others, evacuate via Escalator B to the surface.
+  - agent_1 at t=10.0s: escalator_e_up → escalator_f_up
+    Reason: My goal is to leave the station. With trains at multiple platforms and crowds moving toward the escalators, heading toward the closest upward exit should get me to the surface and toward work.
+  - agent_1 at t=20.0s: escalator_f_up → escalator_b_up
+    Reason: Goal is to leave the station. Escalator B is accessible and not blocked, and it leads up to safety, so I’ll move toward it.
+  - agent_24 at t=20.0s: escalator_e_up → escalator_f_up
+    Reason: PA orders evacuation and Escalator F is a close, up-facing exit; I’ll start moving toward the nearest exit to ensure I leave the station and reach my appointment.
+  - agent_24 at t=40.0s: escalator_f_up → escalator_b_up
+    Reason: The goal is to evacuate. Escalator F is obstructed and people are moving toward the escalators; Escalator B is the closest functioning route with others heading there, so I’ll move to Escalator B to evacuate together.
+  - agent_25 at t=15.0s: escalator_b_up → escalator_c_up
+    Reason: Goal is to leave the station; alarm is sounding but no fire observed. Proceeding toward an exit to evacuate via Escalator C (up) to surface.
+  - agent_25 at t=20.0s: escalator_c_up → escalator_b_up
+    Reason: PA system orders immediate evacuation and Escalator B is the closest safe exit; I will move briskly toward it to exit the station and continue toward my appointment.
+  - agent_27 at t=10.0s: escalator_a_down → escalator_d_down
+    Reason: Trains are waiting at each platform; to reach Platform 3 quickly, proceed down Escalator D toward the platforms where trains are.
+  - agent_27 at t=15.0s: escalator_d_down → escalator_a_down
+    Reason: Escalators D/E are blocked and a fire alarm is sounding; to reach Platform 3 efficiently, take Escalator A down to the platforms now, since it's the viable route in this crowded concourse.
+  - agent_17 at t=20.0s: escalator_f_up → escalator_e_up
+    Reason: The PA demands evacuation and there is no visible fire; as an ESTP with low risk tolerance, evacuating promptly via the nearest up-escalator aligns with safety and quick action while others move toward exits.
+  - agent_17 at t=35.0s: escalator_e_up → escalator_b_up
+    Reason: Escalator B is unobstructed and leads upward; evacuating via the nearest up-escalator aligns with the current goal and observed guidance from others.
+  - agent_29 at t=20.0s: escalator_d_down → blackett_street
+    Reason: The PA orders evacuation and the escalators to platforms are blocked, so there’s no safe route to Platform 1 right now. I’ll move toward the Blackett Street exit to evacuate with others.
+  - agent_34 at t=20.0s: escalator_a_down → blackett_street
+    Reason: The PA is demanding evacuation and safety is priority for a 75-year-old, risk-averse ESTJ. I will move briskly to an immediate exit to evacuate.
+  - agent_28 at t=35.0s: escalator_d_down → blackett_street
+    Reason: Evacuation is mandated; with escalators to platforms blocked, I’ll head to the Blackett Street exit to evacuate efficiently and regroup.
+  - agent_22 at t=60.0s: escalator_e_up → escalator_b_up
+    Reason: PA orders evacuation; open exits are Escalator B and Escalator C. With obstructed alternatives, proceed toward Escalator B to evacuate promptly while observing others.
+  - agent_23 at t=20.0s: train_platform_3 → escalator_e_up
+    Reason: PA demands evacuation and I need to prioritize safety over waiting. I’ll move with the crowd toward the concourse via an upward escalator to evacuate quickly.
+  - agent_23 at t=40.0s: escalator_e_up → escalator_b_up
+    Reason: Train has departed and evacuation is ordered; as an ESFJ I will shift from boarding to assisting others while moving toward an available exit.
+  - agent_39 at t=15.0s: escalator_d_down → escalator_a_down
+    Reason: Goal is to catch a train from Platform 3. With the fire alarm and no visible fire, I’ll move toward Escalator A to reach the platforms quickly, leveraging the direct route despite crowding.
+  - agent_44 at t=10.0s: escalator_a_down → escalator_d_down
+    Reason: Goal: catch my Platform 1 train. With trains waiting at each platform and crowds moving toward escalators, I’ll head down to a platform quickly via the closest escalator.
+  - agent_44 at t=15.0s: escalator_d_down → escalator_a_down
+    Reason: Goal is to catch the train from Platform 1. With the D/E/F escalators blocked and alarm ongoing, going down to the platforms via Escalator A aligns with the crowd and available routes.
+  - agent_40 at t=20.0s: escalator_d_down → blackett_street
+    Reason: PA system orders evacuation; with escalators obstructed and Blackett Street as the visible exit, I prioritize leaving the station while staying aware of my goal to catch a train.
+  - agent_46 at t=15.0s: escalator_d_down → escalator_a_down
+    Reason: Goal remains to catch the train on Platform 2. With escalators F/E/D blocked and no visible fire, descending via Escalator A to the platforms offers quickest access toward Platform 2 while staying with the crowd.
+  - agent_46 at t=20.0s: escalator_a_down → blackett_street
+    Reason: PA instructs evacuation; escalator routes to platforms are blocked, and Blackett Street exit is visible and closest. I will move toward Blackett Street to evacuate safely.
+  - agent_41 at t=40.0s: escalator_d_down → blackett_street
+    Reason: The PA urges evacuation and Blackett Street exit is visible; escalators are blocked, so I will head toward the available exit to vacate.
+  - agent_37 at t=40.0s: escalator_d_down → blackett_street
+    Reason: Train has departed and PA directs evacuation. Escalators are obstructed, so I will move toward the Blackett Street exit to evacuate quickly and help others if needed.
+  - agent_36 at t=35.0s: escalator_d_down → blackett_street
+    Reason: Fire alarm is sounding with no visible fire; crowds are moving toward Blackett Street exit, so heading to that exit supports evacuation and follows social cues while still keeping an eye on catching Platform 1 later.
+  - agent_43 at t=20.0s: escalator_d_down → escalator_a_down
+    Reason: I aim to catch my train on Platform 3. With escalators F/E/D blocked and the PA urging evacuation, proceeding via Escalator A down to the platforms is the clearest path toward Platform 3 while maintaining calm around others.

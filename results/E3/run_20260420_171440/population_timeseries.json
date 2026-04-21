@@ -1,0 +1,83 @@
+{
+  "description": {
+    "left_station": "Agents who have left the station",
+    "concourse": "Agents on the concourse (level 0)",
+    "escalator_bottom": "Agents at the bottom of escalators (level -1, escalator zones)",
+    "platform": "Agents on a platform (level -1)"
+  },
+  "interval_seconds": 15,
+  "snapshots": [
+    {
+      "sim_time_s": 0.0,
+      "sim_time_min": 0.0,
+      "left_station": 0,
+      "concourse": 24,
+      "escalator_bottom": 0,
+      "platform": 29
+    },
+    {
+      "sim_time_s": 15.0,
+      "sim_time_min": 0.25,
+      "left_station": 2,
+      "concourse": 22,
+      "escalator_bottom": 1,
+      "platform": 28
+    },
+    {
+      "sim_time_s": 30.0,
+      "sim_time_min": 0.5,
+      "left_station": 4,
+      "concourse": 23,
+      "escalator_bottom": 1,
+      "platform": 25
+    },
+    {
+      "sim_time_s": 45.0,
+      "sim_time_min": 0.75,
+      "left_station": 6,
+      "concourse": 22,
+      "escalator_bottom": 3,
+      "platform": 22
+    },
+    {
+      "sim_time_s": 60.0,
+      "sim_time_min": 1.0,
+      "left_station": 12,
+      "concourse": 17,
+      "escalator_bottom": 0,
+      "platform": 24
+    },
+    {
+      "sim_time_s": 75.0,
+      "sim_time_min": 1.25,
+      "left_station": 18,
+      "concourse": 15,
+      "escalator_bottom": 2,
+      "platform": 18
+    },
+    {
+      "sim_time_s": 90.0,
+      "sim_time_min": 1.5,
+      "left_station": 21,
+      "concourse": 16,
+      "escalator_bottom": 2,
+      "platform": 14
+    },
+    {
+      "sim_time_s": 105.0,
+      "sim_time_min": 1.75,
+      "left_station": 26,
+      "concourse": 14,
+      "escalator_bottom": 2,
+      "platform": 11
+    },
+    {
+      "sim_time_s": 119.95,
+      "sim_time_min": 1.999,
+      "left_station": 27,
+      "concourse": 17,
+      "escalator_bottom": 0,
+      "platform": 9
+    }
+  ]
+}

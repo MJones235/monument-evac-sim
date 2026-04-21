@@ -3,7 +3,7 @@
 # Simulation parameters
 simulation:
   dt: 0.05  # JuPedSim timestep (seconds)
-  max_iterations: 18000  # Maximum simulation steps (18000 * 0.05 = 900 seconds)
+  max_iterations: 2400  # Maximum simulation steps (2400 * 0.05 = 120 seconds)
   decision_interval: 15.0  # Time between Concordia decisions (seconds)
   spawn_interval: 2.0  # Time between agent spawns (seconds)
   network_path: "geometry/monument/network"  # Monument geometry

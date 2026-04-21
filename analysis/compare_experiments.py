@@ -17,8 +17,10 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
+import statistics
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
@@ -59,6 +61,15 @@ class SimMetrics:
     remaining_at_end: int
     sim_end_time_s: float
 
+    # Time-to-first-move (post-alarm seconds) by starting zone.
+    # Median of the first post-alarm decision timestep where action_type='move',
+    # split into concourse-starting and platform-starting agents.
+    # None if no agents of that type moved during the simulation.
+    tfm_concourse_median_s: Optional[float] = None
+    tfm_platform_median_s: Optional[float] = None
+    tfm_concourse_n: int = 0   # number of concourse agents that moved
+    tfm_platform_n: int = 0    # number of platform agents that moved
+
 
 # ---------------------------------------------------------------------------
 # Loading helpers
@@ -96,6 +107,67 @@ def load_timeseries(run_dir: Path) -> list[dict]:
         return list(csv.DictReader(f))
 
 
+def _extract_first_move(
+    run_dir: Path,
+    alarm_t: float,
+) -> tuple[Optional[float], Optional[float], int, int]:
+    """
+    Parse agent_decisions.json and return:
+      (concourse_median_s, platform_median_s, concourse_n_moved, platform_n_moved)
+
+    Concourse agents: starting zone contains 'concourse'.
+    Platform agents: everything else (Platform 1–4, underground platform level).
+    First move: first post-alarm decision where action_type == 'move'.
+    Times are seconds post-alarm.
+    """
+    json_path = run_dir / "agent_decisions.json"
+    if not json_path.exists():
+        return None, None, 0, 0
+
+    with json_path.open() as f:
+        data = json.load(f)
+
+    decisions_map: dict = data.get("agent_decisions", data) if isinstance(data, dict) else {}
+    if not decisions_map:
+        return None, None, 0, 0
+
+    concourse_times: list[float] = []
+    platform_times: list[float] = []
+
+    for agent_id, adata in decisions_map.items():
+        decs = adata.get("decisions", [])
+        if not decs:
+            continue
+
+        # Determine starting zone from first observation's "You are in" line.
+        start_zone = ""
+        for line in decs[0].get("observation", "").split("\n"):
+            if "You are in" in line:
+                start_zone = line.strip().lower()
+                break
+        is_concourse = "concourse" in start_zone
+
+        # Find first post-alarm decision where action_type == 'move'.
+        first_move_t: Optional[float] = None
+        for dec in decs:
+            if dec["time"] <= alarm_t:
+                continue
+            action = dec.get("translated", {}).get("action_type", "")
+            if action == "move":
+                first_move_t = dec["time"] - alarm_t
+                break
+
+        if first_move_t is not None:
+            if is_concourse:
+                concourse_times.append(first_move_t)
+            else:
+                platform_times.append(first_move_t)
+
+    concourse_med = statistics.median(concourse_times) if concourse_times else None
+    platform_med = statistics.median(platform_times) if platform_times else None
+    return concourse_med, platform_med, len(concourse_times), len(platform_times)
+
+
 def extract_metrics(experiment_id: str, run_dir: Path) -> Optional[SimMetrics]:
     """Compute SimMetrics from a run directory. Returns None if data is missing."""
     rows = load_timeseries(run_dir)
@@ -125,6 +197,8 @@ def extract_metrics(experiment_id: str, run_dir: Path) -> Optional[SimMetrics]:
         nearest = min(range(len(times)), key=lambda i: abs(times[i] - sim_t))
         return (agent_count - left[nearest]) / agent_count if agent_count else None
 
+    tfm_c, tfm_p, tfm_cn, tfm_pn = _extract_first_move(run_dir, ALARM_T)
+
     return SimMetrics(
         experiment_id=experiment_id,
         run_dir=run_dir,
@@ -137,6 +211,10 @@ def extract_metrics(experiment_id: str, run_dir: Path) -> Optional[SimMetrics]:
         frac_remaining_180s=frac_remaining_at(ALARM_T + 180),
         remaining_at_end=remaining_at_end,
         sim_end_time_s=sim_end,
+        tfm_concourse_median_s=tfm_c,
+        tfm_platform_median_s=tfm_p,
+        tfm_concourse_n=tfm_cn,
+        tfm_platform_n=tfm_pn,
     )
 
 
@@ -288,6 +366,35 @@ def main():
         r120 = _fmt_pct(m.frac_remaining_120s) if m else "—"
         r180 = _fmt_pct(m.frac_remaining_180s) if m else "—"
         print(f"  {exp_id:<4}  {r60:>8}  {r120:>8}  {r180:>8}")
+
+    # Time-to-first-move vs Proulx Table 1
+    print("\n--- Time-to-first-move vs Proulx (1991) Table 1 ---")
+    print("    (median post-alarm time of first 'move' decision per starting zone)")
+    hdr = f"  {'':4}  {'Sim concourse':>18}  {'Ref concourse':>15}  {'Sim platform':>18}  {'Ref escalator':>15}"
+    print(hdr)
+    print("-" * len(hdr))
+    for exp_id in EXPERIMENTS:
+        m = metrics_by_exp[exp_id]
+        ref = REFERENCE[exp_id]
+        if m is None:
+            print(f"  {exp_id:<4}  {'-- no results --':>18}")
+            continue
+
+        def _fmt_tfm(t: Optional[float], n: int) -> str:
+            if t is None:
+                return "— (none moved)"
+            return f"{t:>4.0f}s ({t/60:.1f}min) n={n}"
+
+        def _fmt_ref(t: Optional[float]) -> str:
+            return f"~{t:.0f}s ({t/60:.1f}min)" if t is not None else "—"
+
+        print(
+            f"  {exp_id:<4}"
+            f"  {_fmt_tfm(m.tfm_concourse_median_s, m.tfm_concourse_n):>18}"
+            f"  {_fmt_ref(ref.time_to_move_concourse_s):>15}"
+            f"  {_fmt_tfm(m.tfm_platform_median_s, m.tfm_platform_n):>18}"
+            f"  {_fmt_ref(ref.time_to_move_escalator_s):>15}"
+        )
 
     # Validation checks
     check_qualitative_ordering(metrics_by_exp)

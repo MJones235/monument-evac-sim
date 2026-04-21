@@ -1,0 +1,36 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 10
+Agents who sent messages: 10
+Total message deliveries: 69
+Average recipients per message: 6.9
+
+Messages by sender:
+  agent_28: 1 messages
+  agent_16: 1 messages
+  agent_8: 1 messages
+  agent_11: 1 messages
+  agent_40: 1 messages
+  agent_29: 1 messages
+  agent_44: 1 messages
+  agent_14: 1 messages
+  agent_26: 1 messages
+  agent_24: 1 messages
+
+Messages by type:
+  directed: 10 messages (100.0%)
+
+Targeted messages: 0 (0.0%)
+Broadcast messages: 10 (100.0%)
+
+All Messages:
+  - t=0.0s: agent_28 [directed] to 5 people: "Heading down to Platform 2."
+  - t=15.0s: agent_16 [directed] to 3 people: "Let's head to Escalator F and move calmly together."
+  - t=15.0s: agent_8 [directed] to 2 people: "Head toward Escalator B to exit."
+  - t=15.0s: agent_11 [directed] to 7 people: "Head to Escalator B and exit."
+  - t=15.0s: agent_40 [directed] to 11 people: "Let's pause and assess the situation."
+  - t=15.0s: agent_29 [directed] to 12 people: "Let's head to Blackett Street exit."
+  - t=15.0s: agent_44 [directed] to 3 people: "Headed down to Platform 1."
+  - t=60.0s: agent_14 [directed] to 9 people: "Moving to Escalator E."
+  - t=75.0s: agent_26 [directed] to 7 people: "Let's move to Escalator E for safety."
+  - t=90.0s: agent_24 [directed] to 10 people: "Heading to Escalator B to exit."

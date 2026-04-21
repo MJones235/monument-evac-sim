@@ -1,0 +1,53 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 22
+Agents who sent messages: 15
+Total message deliveries: 114
+Average recipients per message: 5.2
+
+Messages by sender:
+  agent_27: 2 messages
+  agent_16: 2 messages
+  agent_36: 2 messages
+  agent_29: 2 messages
+  agent_41: 2 messages
+  agent_12: 2 messages
+  agent_3: 2 messages
+  agent_40: 1 messages
+  agent_7: 1 messages
+  agent_46: 1 messages
+  agent_21: 1 messages
+  agent_25: 1 messages
+  agent_1: 1 messages
+  agent_0: 1 messages
+  agent_15: 1 messages
+
+Messages by type:
+  directed: 22 messages (100.0%)
+
+Targeted messages: 1 (4.5%)
+Broadcast messages: 21 (95.5%)
+
+All Messages:
+  - t=0.0s: agent_27 [directed] to 3 people: "Heading to Escalator A (down to platforms) to reach the platforms."
+  - t=0.0s: agent_40 [directed] to 5 people: "Heading down to Platform 4."
+  - t=10.0s: agent_7 [directed] to 2 people: "I'm waiting on Platform 4 for my train."
+  - t=10.0s: agent_46 [directed] to 11 people: "Heading to Platform 2 via Escalator D."
+  - t=15.0s: agent_27 [directed] to 12 people: "Heading to Platform 3 via Escalator A."
+  - t=20.0s: agent_16 [directed] to 10 people: "Heading to Escalator B to exit together."
+  - t=20.0s: agent_36 [directed] to 11 people: "Head to the Blackett Street exit."
+  - t=20.0s: agent_29 → agent_27 [directed] to 1 people: "Heading to Platform 3 via Escalator A to catch the first available train."
+  - t=20.0s: agent_41 [directed] to 11 people: "Heading to the Blackett Street exit."
+  - t=40.0s: agent_21 [directed] to 3 people: "Heading to the Blackett Street exit."
+  - t=40.0s: agent_29 [directed] to 9 people: "Heading to Blackett Street exit to evacuate."
+  - t=40.0s: agent_12 [directed] to 7 people: "Heading to Escalator B to exit."
+  - t=40.0s: agent_25 [directed] to 1 people: "Moving to the nearest exit via escalator."
+  - t=40.0s: agent_36 [directed] to 3 people: "Heading to Blackett Street exit."
+  - t=40.0s: agent_1 [directed] to 8 people: "Heading toward Escalator B to exit."
+  - t=40.0s: agent_3 [directed] to 1 people: "This way to Escalator B."
+  - t=40.0s: agent_41 [directed] to 3 people: "This way to Blackett Street exit."
+  - t=60.0s: agent_0 [directed] to 1 people: "Heading to Blackett Street exit."
+  - t=100.0s: agent_15 [directed] to 1 people: "Moving to Escalator B to exit."
+  - t=100.0s: agent_3 [directed] to 5 people: "Heading to Blackett Street exit."
+  - t=100.0s: agent_16 [directed] to 4 people: "Let's head to Blackett Street exit now."
+  - t=115.0s: agent_12 [directed] to 2 people: "Heading to Blackett Street exit."

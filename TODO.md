@@ -50,13 +50,14 @@ to better reflect the dynamic population used in the real study.
 
 ## Metrics
 
-### [TODO] Time-to-first-move metric
-Post-process `agent_decisions.json` to extract the first decision timestep where each
-agent's `action_type == "move"` and `target_type == "exit"` (post-alarm).
-Report per-experiment: median and mean `time_to_first_move` for:
-  - Concourse-starting agents (compare to `time_to_move_concourse_s` in reference)
-  - Platform-starting agents (compare to `time_to_move_escalator_s` in reference)
-Add this to `analysis/compare_experiments.py`.
+### [DONE] Time-to-first-move metric
+`analysis/compare_experiments.py` post-processes `agent_decisions.json` to find
+the first post-alarm decision where `action_type == "move"` for each agent.
+Reports per-experiment median (post-alarm) split by starting zone:
+  - Concourse-starting agents → compared to `time_to_move_concourse_s` in reference
+  - Platform-starting agents  → compared to `time_to_move_escalator_s` in reference
+New fields on `SimMetrics`: `tfm_concourse_median_s`, `tfm_platform_median_s`,
+`tfm_concourse_n`, `tfm_platform_n`. Output appears as a dedicated table section.
 
 ### [TODO] Multi-run averaging in compare_experiments.py
 Currently `--all-runs` outputs per-run tables.
