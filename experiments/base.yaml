@@ -164,7 +164,20 @@ test_scenarios:
 llm:
   temperature: 0.7
   max_retries: 3
-  max_completion_tokens: 8000
+  # gpt-5-nano is a reasoning model: it generates hidden chain-of-thought tokens
+  # counted toward max_completion_tokens before producing visible output.
+  # Previously set to 8000, which caused ~1651 reasoning tokens per call (avg)
+  # and response latencies of 2–88 s each.  Capping at 1500 limits reasoning
+  # to ~1360 tokens while still leaving ~140 tokens for the JSON response.
+  # Pair with reasoning_effort: "low" for the best latency reduction.
+  max_completion_tokens: 1500
+  # Ask the model to use minimal internal reasoning.  Supported by o-series and
+  # gpt-5-nano on Azure OpenAI.  Remove or set to null to use model default.
+  reasoning_effort: "low"
+  # Constrain the model to output valid JSON (gpt-5-nano "customs" structured
+  # output path).  Eliminates prefix-stripping hacks and parse retries.
+  # Set to null to disable (e.g. when switching to a non-JSON-capable model).
+  response_format: "json_object"
   embedder: "sentence-transformers/all-mpnet-base-v2"
 
 # Output configuration

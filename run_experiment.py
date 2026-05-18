@@ -79,6 +79,7 @@ def run_simulation(config: dict, model, embedder, experiment_id: str,
         embedder=embedder,
         decisions_file=decisions_file,
         config=config,
+        pace_to_realtime=(launch_viewer or launch_spatial),
     )
 
     def signal_handler(signum, frame):
