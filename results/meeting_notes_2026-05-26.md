@@ -1,15 +1,14 @@
 # Monument evacuation model: meeting notes (26 May 2026)
 
-## 1) What we are doing
+## 1) Overall goal
 
+- Overall goal: demonstrate an adaptive evacuation model where behavior changes realistically when scenario inputs change (alarm/staff/PA, blocked routes, train availability, etc.).
+- Planning goal: allow evacuation strategies to be tested under new conditions without reprogramming agents for each new scenario. Allow user to easily alter crowd size and composition (for example, event-day surges or demographic shifts).
 - Build an LLM-agent evacuation model of Monument station.
 - Reproduce the five Proulx (1991) drill conditions (E1-E5).
 - Calibrate first to E1 (alarm-only), then validate on E2-E5.
-- Overall goal: demonstrate an adaptive evacuation model where behavior changes realistically when scenario inputs change (alarm/staff/PA, blocked routes, train availability, etc.).
-- Planning goal: allow evacuation strategies to be tested under new conditions without reprogramming agents for each new scenario.
-- Population goal: handle changing crowd size and composition (for example, event-day surges or demographic shifts) and estimate how those changes affect outcomes such as first-move times and clearance.
 
-## 2) What has been achieved so far
+## 2) Done so far
 
 - E1-E5 scenario configs are implemented and aligned to the study conditions.
 - Key infrastructure is in place: multi-level geometry, blocked N/S escalators, staff/director systems, event system, run outputs, and comparison scripts.
@@ -17,7 +16,7 @@
 - Multiple longer E1 runs completed (May 2026), including runs with behavior-prior prompting.
 - Comparison tooling exists (`analysis/compare_experiments.py`) to extract T50/T90/T100, fraction remaining, and first-move metrics.
 
-## 3) The five experiments (scenario + people)
+## 3) The five experiments
 
 - E1: Alarm only, no staff, no PA.
 - E2: Two RCIs direct evacuation.
@@ -58,20 +57,12 @@ Second experiment: behavioural priors (long E1 runs)
 - This is clearly closer to E1 targets (495s / 540s), but not a perfect match.
 - A perfect single-run match is not expected; this should be tested across multiple runs with varying population structure.
 
-## 5) Key methodological concern
+## 5) Next steps
 
-- Current prompt-based behavioral priors help numerically, but this risks "telling the model what to do" rather than getting behavior from situation reasoning.
-- We likely need a stronger person/decision model so hesitation emerges from cues and beliefs, not mainly from top-down percentages.
-
-## 6) Next steps (short list)
-
-- Define agent attributes explicitly from literature (e.g., age, mobility, familiarity, risk perception, social influence, trust in alarms/messages).
-- Formalize decision mechanism using a protective-action style framework (environmental cue -> interpretation -> action selection), including explicit false-alarm belief handling.
+- Define agent attributes explicitly from literature (e.g., age, mobility, familiarity, risk perception, social influence, trust in alarms/messages). Which of these are known to impact evacuation behaviour?
+- Formalize decision mechanism using a protective-action style framework (environmental cue -> interpretation -> action selection).
+- Capture whether agents believe it is a false alarm.
+- Test impact of altering LLM decision interval
 - Run E1 sensitivity sweeps over plausible person-mix assumptions and show whether observed E1 metrics fall within the modeled range.
-- Then run full-length validation for E2-E5 (>= 3 replications each) and compare against Proulx timings.
+- Then run full-length validation for E2-E5 and compare against Proulx timings.
 - Test multiple LLMs with the same scenario/config to quantify model dependence.
-- Fix result-pipeline hygiene (ensure all runs write full timeseries; add multi-run averaging + uncertainty reporting).
-
-## 7) Suggested line to use in the meeting
-
-- "We have a working experimental platform and can reproduce directional differences between scenarios, but we are not yet calibrated on absolute timings. E1 calibration is the immediate priority, then full-length validation on E2-E5 with replications and sensitivity analysis."
