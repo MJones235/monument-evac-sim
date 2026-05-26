@@ -1,0 +1,19 @@
+
+=== PERFORMANCE PROFILE (Wall-Clock Time) ===
+    parallel_agent_processing   :  912.142s total |  114.018s avg |     8 calls | 123.9%
+agent_decisions_total       :  713.798s total |  101.971s avg |     7 calls |  96.9%
+  decision_processing         :  713.533s total |  101.933s avg |     7 calls |  96.9%
+    agent_act_llm               :  217.748s total |    1.244s avg |   175 calls |  29.6% [parallel]
+jupedsim_step               :   20.617s total |    0.009s avg |  2400 calls |   2.8%
+event_checking              :    1.737s total |    0.001s avg |  2400 calls |   0.2%
+  generate_observations       :    0.265s total |    0.038s avg |     7 calls |   0.0%
+file_io                     :    0.238s total |    0.001s avg |   252 calls |   0.0%
+    agent_observe               :    0.230s total |    0.001s avg |   175 calls |   0.0% [parallel]
+    apply_to_jupedsim           :    0.004s total |    0.000s avg |   175 calls |   0.0% [parallel]
+    translate_action            :    0.000s total |    0.000s avg |   175 calls |   0.0% [parallel]
+    message_delivery            :    0.000s total |    0.000s avg |   175 calls |   0.0% [parallel]
+    parse_json_response         :    0.000s total |    0.000s avg |   175 calls |   0.0% [parallel]
+    decision_storage            :    0.000s total |    0.000s avg |   175 calls |   0.0% [parallel]
+
+TOTAL (wall-clock)            :  736.390s
+================================================================================

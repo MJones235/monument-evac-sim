@@ -3,6 +3,9 @@ extends: ../base.yaml
 # E2 — Two Revenue Control Inspectors (RCIs) direct the evacuation
 #
 # Based on the real drill report:
+#   - ~83 passengers present (30 on concourse, 53 at bottom of escalators).
+#   - Train 124 arrives at Platform 1 as the alarm sounds (as in all five drills).
+#     It departs on its standard 30 s schedule.
 #   - Both RCIs are on the platforms when the alarm sounds.
 #   - They run upstairs to the concourse to check the electronic notice board.
 #   - RCI 1 (concourse) remains at the concourse, gives a PA, and prevents
@@ -10,6 +13,14 @@ extends: ../base.yaml
 #   - RCI 2 (platforms) returns to the lower levels and patrols between
 #     platforms, directing remaining passengers to evacuate via the concourse.
 #     Lower levels cleared ~5 min post-alarm.
+#   - Whole station cleared at 8:00 min post-alarm.
+#
+# SAFETY NOTE: In the real drill, the RCIs directed Platform 1 & 2 passengers
+# back up via the N/S (E/F) escalators — the very route affected by the
+# suspected fire.  In this simulation the N/S escalators are hard-blocked so
+# agents are naturally routed to B/C escalators instead.  This is a necessary
+# simplification: the simulation cannot replicate the "unsafe routing" of the
+# real drill but still captures the key variable (staff directives vs no staff).
 #
 # Phase-based behaviour:
 #   Phase 1 (on_event):     both RCIs patrol platform → concourse
@@ -20,7 +31,20 @@ extends: ../base.yaml
 # The PA given by RCI 1 upon reaching the concourse is modelled as a timed
 # event (t=40 s, approximately 25 s after the alarm — time to reach concourse).
 
+simulation:
+  max_iterations: 12000  # 12 000 × 0.05 s = 600 s = 10 min (station cleared at 8:00 min)
+
+agents:
+  count: 65  # Real study: ~83; 65 is a computationally feasible approximation
+
 events:
+  # Train 124 arrives at Platform 1 as the alarm is triggered.
+  # Departs on its standard 30 s schedule (not an evacuation train).
+  - time: 10.0
+    type: train_arrival
+    platforms: [1]
+    dwell_seconds: 30
+    message: "A train has arrived at Platform 1."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see
 any evidence of a fire."

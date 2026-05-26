@@ -1,0 +1,19 @@
+
+=== PERFORMANCE PROFILE (Wall-Clock Time) ===
+    agent_act_llm               :  1040 calls | min  3.278s  avg  8.408s  max 23.884s | CPU total 8744.701s | max   2.8% wall [parallel]
+    parallel_agent_processing   :  777.446s total |   18.511s avg |    42 calls |  92.7%
+agent_decisions_total       :  744.922s total |   18.169s avg |    41 calls |  88.8%
+  decision_processing         :  743.145s total |   18.125s avg |    41 calls |  88.6%
+    agent_observe               :  1040 calls | min  0.001s  avg  0.092s  max  0.237s | CPU total  95.359s | max   0.0% wall [parallel]
+jupedsim_step               :   89.554s total |    0.007s avg | 12000 calls |  10.7%
+event_checking              :    3.365s total |    0.000s avg | 12000 calls |   0.4%
+  generate_observations       :    1.776s total |    0.043s avg |    41 calls |   0.2%
+file_io                     :    0.765s total |    0.001s avg |  1260 calls |   0.1%
+    apply_to_jupedsim           :  1192 calls | min  0.000s  avg  0.000s  max  0.003s | CPU total   0.472s | max   0.0% wall [parallel]
+    translate_action            :  1192 calls | min  0.000s  avg  0.000s  max  0.000s | CPU total   0.021s | max   0.0% wall [parallel]
+    parse_json_response         :  1192 calls | min  0.000s  avg  0.000s  max  0.000s | CPU total   0.020s | max   0.0% wall [parallel]
+    message_delivery            :  1192 calls | min  0.000s  avg  0.000s  max  0.001s | CPU total   0.014s | max   0.0% wall [parallel]
+    decision_storage            :  1192 calls | min  0.000s  avg  0.000s  max  0.000s | CPU total   0.007s | max   0.0% wall [parallel]
+
+TOTAL (wall-clock)            :  838.606s
+================================================================================

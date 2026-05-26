@@ -2,19 +2,37 @@ extends: ../base.yaml
 
 # E4 — Two RCIs + Station Controller PA
 #
-# Same RCI behaviour as E2 (phase-based: run to concourse, then split).
-# In addition, the Station Controller issues a directive PA 5 seconds after
-# the alarm (simulating the radio exchange with the Control Room):
-#   - Platform passengers: board the evacuation train
-#   - Concourse passengers: leave via the street exits
+# Based on the real drill report:
+#   - ~35 passengers already in the station (20 on concourse, 15 at escalator
+#     bottom) plus ~61 passengers who had just disembarked the arriving train.
+#   - An evacuation train is dispatched to all platforms.  Platform passengers
+#     are directed to board it; concourse passengers use street exits.
+#   - Same RCI behaviour as E2 (phase-based: run to concourse, then split).
+#   - In addition, the Station Controller issues a directive zone-specific PA
+#     5 seconds after the alarm (simulating the radio exchange with the Control
+#     Room):
+#       • Platform passengers: board the evacuation train
+#       • Concourse passengers: leave via the street exits
+#   - Result: station cleared at 6:45 min post-alarm.
+#     44 of the 61 disembarking passengers re-boarded the evacuation train.
 #
-# The RCI concourse PA (modelled as a timed event at t=40 s) is retained.
+# TRAIN DWELL: The evacuation train waits 600 s (10 min) at every platform.
+# This models the real drill where the train waited for all passengers to board
+# before departing.  With the zone-specific PA at t=20 s directing platform
+# passengers to board immediately, and the RCI reinforcing this directive, the
+# long dwell ensures no passenger is stranded before the station clears.
+
+simulation:
+  max_iterations: 10000  # 10 000 × 0.05 s = 500 s = ~8:20 (cleared at 6:45 min)
+
+agents:
+  count: 70  # Real study: ~35 at station + 61 from train ≈ 96; 70 is a feasible approximation
 
 events:
   - time: 10.0
     type: train_arrival
     platforms: [1, 2, 3, 4]
-    dwell_seconds: 30
+    dwell_seconds: 600  # Evacuation train waits for all passengers to board (station clears at 6:45 min)
     message: "A train is waiting at each platform."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."

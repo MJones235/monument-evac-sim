@@ -3,21 +3,37 @@ extends: ../base.yaml
 # E3 — Public address system used to tell people to evacuate
 #
 # Based on the real drill report:
+#   - ~61 passengers present (13 on concourse, 48 at bottom of N/S escalators).
 #   - Train 124 arrives at the platforms before the alarm sounds.
-#   - Five seconds after the train arrives the Control Room broadcasts a
+#     Five seconds after the train arrives the Control Room broadcasts a
 #     minimal, non-directive PA: "Please, evacuate the station immediately."
 #     (repeated at 20-second intervals).
 #   - No staff members are present.
+#   - Result: concourse crowd (13 people) responded at 1:15 min (good).
+#     Escalator-bottom crowd (48 people) did NOT self-evacuate — they waited
+#     at the bottom of the blocked N/S escalators for 7:40 min until the Fire
+#     Brigade physically arrived and dispersed them.
+#   - Station cleared at 10:30 min post-alarm (with Fire Brigade assistance).
 #
-# The train_arrival event (t=10 s) activates train boarding exits so agents
-# can board as a legitimate evacuation means; the PA does not direct them to
-# do so (it is intentionally non-directive).
+# Fire Brigade physical arrival (modelled via firefighter_brigade override below):
+#   In E3 the Fire Brigade arrived specifically at the bottom of the N/S
+#   escalators (~7:40 min post-alarm) to disperse the 48-person stuck crowd.
+#   trigger_after_seconds: 445 → brigade onset 7:25 min, physically present
+#   at the platform_def / escalator-bottom area by ~7:40 min.
+#
+# The train_arrival dwell is set to 60 s (a realistic metro dwell time that
+# gives agents sufficient time to decide whether to board before the train
+# departs).  The minimal PA does NOT mention the train, so boarding is
+# a passenger-initiated choice, not a directed evacuation route.
+
+simulation:
+  max_iterations: 14400  # 14 400 × 0.05 s = 720 s = 12 min (cleared at 10:30 min)
 
 events:
   - time: 10.0
     type: train_arrival
     platforms: [1, 2, 3, 4]
-    dwell_seconds: 30
+    dwell_seconds: 60  # Realistic metro dwell; PA fires at t=20 so agents have 30 s to respond
     message: "A train is waiting at each platform."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
@@ -32,3 +48,32 @@ events:
     message: >-
       Please, evacuate the station immediately.
       Please, evacuate the station immediately.
+
+# Override firefighter_brigade arrival time to match E3 observations:
+# The Fire Brigade physically arrived at the bottom of the N/S escalators at
+# ~7:40 min post-alarm and dispersed the 48-person stuck crowd.
+# patrol_zones: platform_def first (Platforms 1 & 2 / bottom of N/S escalators
+# — where the stuck crowd was), then the concourse.
+systems:
+  firefighter_brigade:
+    phases:
+      - trigger: on_event
+        movement: hold
+        directive_radius: 0.0
+        directive_interval: 9999.0
+        message: ""
+      - trigger: after_seconds
+        trigger_after_seconds: 445  # 7:25 min onset → physically present at escalator bottom by ~7:40 min
+        movement: zone_patrol
+        patrol_zones:
+          - zone: platform_def   # Bottom of N/S escalators (Platforms 1 & 2) — 48-person stuck crowd
+            level_id: "-1"
+          - zone: concourse
+            level_id: "0"
+        patrol_dwell_time: 45.0
+        directive_radius: 15.0
+        directive_interval: 10.0
+        message: >-
+          This is the Fire Brigade. You must evacuate now. Escalators D, E and F
+          are closed. Please use Escalator B or Escalator C to reach the concourse
+          and leave the station immediately.

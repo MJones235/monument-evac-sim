@@ -1,0 +1,46 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 16
+Agents who sent messages: 14
+Total message deliveries: 90
+Average recipients per message: 5.6
+
+Messages by sender:
+  agent_16: 2 messages
+  agent_45: 2 messages
+  agent_21: 1 messages
+  agent_12: 1 messages
+  agent_6: 1 messages
+  agent_8: 1 messages
+  agent_29: 1 messages
+  agent_9: 1 messages
+  agent_34: 1 messages
+  agent_36: 1 messages
+  agent_4: 1 messages
+  agent_26: 1 messages
+  agent_37: 1 messages
+  agent_40: 1 messages
+
+Messages by type:
+  directed: 16 messages (100.0%)
+
+Targeted messages: 0 (0.0%)
+Broadcast messages: 16 (100.0%)
+
+All Messages:
+  - t=15.0s: agent_16 [directed] to 8 people: "Head to Escalator F."
+  - t=15.0s: agent_21 [directed] to 1 people: "Moving toward Escalator C."
+  - t=15.0s: agent_12 [directed] to 11 people: "Heading toward Escalator C to exit."
+  - t=15.0s: agent_6 [directed] to 4 people: "Moving to Escalator E to evacuate."
+  - t=15.0s: agent_45 [directed] to 4 people: "Heading to Escalator D to reach Platform 2."
+  - t=30.0s: agent_8 [directed] to 6 people: "Heading to Blackett Street exit."
+  - t=30.0s: agent_45 [directed] to 2 people: "Heading to Escalator D."
+  - t=30.0s: agent_29 [directed] to 8 people: "Let's head to Blackett Street for safety."
+  - t=45.0s: agent_16 [directed] to 11 people: "Follow me to Escalator C; we'll exit together."
+  - t=45.0s: agent_9 [directed] to 9 people: "Heading to Blackett Street exit."
+  - t=60.0s: agent_34 [directed] to 5 people: "Proceeding to Escalator B to exit."
+  - t=60.0s: agent_36 [directed] to 7 people: "Heading to Blackett Street exit with the crowd."
+  - t=75.0s: agent_4 [directed] to 2 people: "Let's move to the concourse for safety."
+  - t=75.0s: agent_26 [directed] to 3 people: "Heading to the concourse via Escalator E."
+  - t=75.0s: agent_37 [directed] to 2 people: "Let's head to Blackett Street with the crowd."
+  - t=90.0s: agent_40 [directed] to 7 people: "Heading to Escalator C."

@@ -1,0 +1,38 @@
+=== ROUTE CHANGE ANALYTICS ===
+
+Total route changes: 16
+Agents who changed routes: 16
+
+Route Changes:
+  - agent_5 at t=75.0s: escalator_d_down → blackett_street
+    Reason: Fire alarm active; escalators blocked. To continue toward my day after leaving, I head toward the visible exit on Blackett Street.
+  - agent_11 at t=15.0s: escalator_f_up → escalator_b_up
+    Reason: Goal is to leave for the day; with alarm sounding and blocked escalators nearby, I head toward an unobstructed exit to surface crowds.
+  - agent_16 at t=45.0s: escalator_f_up → escalator_b_up
+    Reason: Goal to leave the station and continue my day; Escalator B is an available exit and nearby amid crowds, with blocked others, so I move toward it to begin evacuation and potentially help coordinate others.
+  - agent_17 at t=105.0s: escalator_f_up → escalator_b_up
+    Reason: Emergency alarm with no visible fire; risk of danger increases if I stay. Move toward an escalator to reach a safer level while crowds begin evacuating.
+  - agent_6 at t=15.0s: escalator_e_up → escalator_b_up
+    Reason: Fire alarm is sounding and escalators near me are blocked; as a decisive agent with a goal to proceed to safety, I should move toward the closest available exit to maintain progress and coordinate with others.
+  - agent_34 at t=15.0s: grey_street → escalator_a_down
+    Reason: Goal is to reach Platform 1; with a sounding alarm and crowds moving toward Grey Street, descending via an escalator brings me closer to platforms while preserving my orderly approach.
+  - agent_29 at t=15.0s: escalator_d_down → blackett_street
+    Reason: Fire alarm with blocked escalators; safety priority to evacuate via visible exit while coordinating with others to maintain harmony.
+  - agent_30 at t=15.0s: escalator_d_down → blackett_street
+    Reason: Alarm active with no fire visible; escalators blocked, so moving toward a safe exit while maintaining awareness of train goal.
+  - agent_36 at t=15.0s: escalator_d_down → blackett_street
+    Reason: Fire alarm is sounding; exits are limited. Proceeding toward the visible Blackett Street exit keeps options open to relocate while the crowd moves.
+  - agent_37 at t=75.0s: escalator_d_down → blackett_street
+    Reason: The alarm requires evacuation; to prioritize safety and align with others moving toward exits, I will head toward the closest safe exit (Blackett Street) to evacuate.
+  - agent_44 at t=105.0s: blackett_street → escalator_a_down
+    Reason: To reach Platform 1 quickly, I’ll head down the escalator to the platforms with the crowd moving toward the exits that lead there.
+  - agent_41 at t=15.0s: escalator_d_down → blackett_street
+    Reason: Fire alarm is active but no fire seen; exits toward Blackett Street are visible and escalators are blocked, so moving toward a clear exit while maintaining pace aligns with catching the train and staying safe.
+  - agent_46 at t=15.0s: escalator_d_down → blackett_street
+    Reason: Fire alarm sounding with no visible fire; escalators are blocked. I will move toward the closest clear exit (Blackett Street) to evacuate safely and reassess the situation.
+  - agent_40 at t=45.0s: escalator_d_down → blackett_street
+    Reason: Escalators are blocked and the fire alarm is sounding; with goal to catch a train, head toward a safe exit to reassess options and avoid congestion.
+  - agent_43 at t=15.0s: escalator_d_down → blackett_street
+    Reason: The fire alarm demands a calm but expedient move toward safety; with escalators blocked and the goal of catching a train, taking the Blackett Street exit provides a clear egress route away from the crowded concourse.
+  - agent_28 at t=15.0s: escalator_d_down → blackett_street
+    Reason: With the alarm and blocked escalators, I should move toward a safe exit to preserve efficiency and maintain situational control while heading toward Platform 2 later if possible.

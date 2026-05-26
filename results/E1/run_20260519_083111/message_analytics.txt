@@ -1,0 +1,27 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 7
+Agents who sent messages: 4
+Total message deliveries: 49
+Average recipients per message: 7.0
+
+Messages by sender:
+  agent_16: 3 messages
+  agent_17: 2 messages
+  agent_15: 1 messages
+  agent_29: 1 messages
+
+Messages by type:
+  directed: 7 messages (100.0%)
+
+Targeted messages: 0 (0.0%)
+Broadcast messages: 7 (100.0%)
+
+All Messages:
+  - t=10.0s: agent_17 [directed] to 5 people: "Let’s move toward the escalator to surface."
+  - t=10.0s: agent_16 [directed] to 9 people: "Follow me to Escalator F; we’ll exit together."
+  - t=15.0s: agent_15 [directed] to 11 people: "I'm staying on Platform 3 and watching."
+  - t=15.0s: agent_16 [directed] to 9 people: "Follow me toward the concourse."
+  - t=15.0s: agent_17 [directed] to 5 people: "Heading to Escalator B to exit."
+  - t=15.0s: agent_29 [directed] to 2 people: "Let's stay calm and wait for official directions."
+  - t=40.0s: agent_16 [directed] to 8 people: "Follow me to Escalator F; we exit together."

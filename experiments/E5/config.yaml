@@ -3,22 +3,39 @@ extends: ../base.yaml
 # E5 — Control Room PA with fire location and differential instructions; no staff
 #
 # Based on the real drill report:
+#   - ~35 passengers already in the station (19 on concourse, 16 at escalator
+#     bottom) plus ~68 passengers who had just disembarked the arriving trains.
 #   - Trains are waiting at all platforms when the alarm sounds.
-#   - The Control Room broadcasts a rich, directive PA (repeated) that:
+#   - The Control Room broadcasts a rich, directive PA (repeated every 20 s) that:
 #       • identifies the suspected fire location (North/South escalators,
 #         between the concourse and Platforms 1 & 2)
 #       • tells platform passengers to board the first available train
 #       • tells concourse passengers to leave via the nearest exit
 #       • explicitly says not to use the lift
 #   - No staff members are present.
+#   - Result: fastest overall evacuation.  Station cleared at 5:45 min post-alarm
+#     for the main crowd; two groups with prams/pushchairs evacuated by train at
+#     7:00 and 10:15 min.
+#   - 57% of passengers believed it was a real emergency (first majority across
+#     all five trials) — the specific fire location was the key trigger.
 #
-# This is the verbatim wording from the real study (Galea et al., 2008).
+# TRAIN DWELL: The evacuation trains wait 600 s (10 min) at all platforms.
+# This models the real drill where a train was still available at 10:15 min for
+# the pram groups.  All 68 disembarking passengers re-boarded as instructed.
+#
+# This is the verbatim PA wording from the real study (Galea et al., 2008).
+
+simulation:
+  max_iterations: 14400  # 14 400 × 0.05 s = 720 s = 12 min (last pram group at 10:15 min)
+
+agents:
+  count: 70  # Real study: ~35 at station + 68 from trains ≈ 103; 70 is a feasible approximation
 
 events:
   - time: 10.0
     type: train_arrival
     platforms: [1, 2, 3, 4]
-    dwell_seconds: 30
+    dwell_seconds: 600  # Evacuation trains wait; last group boards at 10:15 min (prams/pushchairs)
     message: "A train is waiting at each platform."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."

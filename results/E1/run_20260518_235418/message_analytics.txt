@@ -1,0 +1,25 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 5
+Agents who sent messages: 3
+Total message deliveries: 62
+Average recipients per message: 12.4
+
+Messages by sender:
+  agent_72: 3 messages
+  agent_54: 1 messages
+  agent_58: 1 messages
+
+Messages by type:
+  directed: 4 messages (80.0%)
+  broadcast: 1 messages (20.0%)
+
+Targeted messages: 1 (20.0%)
+Broadcast messages: 4 (80.0%)
+
+All Messages:
+  - t=280.0s: agent_72  to 8 people: "I'll wait and observe for now."
+  - t=325.0s: agent_72 [directed] to 14 people: "Let's move to Escalator B and head to the concourse."
+  - t=475.0s: agent_54 [directed] to 21 people: "Heading to Escalator D to the platforms."
+  - t=490.0s: agent_58 → agent_54 [directed] to 1 people: "Heading to Escalator D to the platforms."
+  - t=550.0s: agent_72 [directed] to 18 people: "Let's move to Escalator B and head to the concourse."

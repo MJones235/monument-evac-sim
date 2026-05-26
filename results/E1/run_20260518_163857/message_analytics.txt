@@ -1,0 +1,76 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 34
+Agents who sent messages: 25
+Total message deliveries: 185
+Average recipients per message: 5.4
+
+Messages by sender:
+  agent_16: 4 messages
+  agent_8: 3 messages
+  agent_27: 2 messages
+  agent_38: 2 messages
+  agent_40: 2 messages
+  agent_22: 2 messages
+  agent_46: 1 messages
+  agent_74: 1 messages
+  agent_4: 1 messages
+  agent_1: 1 messages
+  agent_21: 1 messages
+  agent_17: 1 messages
+  agent_34: 1 messages
+  agent_67: 1 messages
+  agent_61: 1 messages
+  agent_19: 1 messages
+  agent_13: 1 messages
+  agent_30: 1 messages
+  agent_58: 1 messages
+  agent_71: 1 messages
+  agent_12: 1 messages
+  agent_23: 1 messages
+  agent_2: 1 messages
+  agent_45: 1 messages
+  agent_6: 1 messages
+
+Messages by type:
+  directed: 32 messages (94.1%)
+  shout: 2 messages (5.9%)
+
+Targeted messages: 1 (2.9%)
+Broadcast messages: 33 (97.1%)
+
+All Messages:
+  - t=10.0s: agent_16 [directed] to 8 people: "Excuse me, coming through."
+  - t=10.0s: agent_27 [directed] to 8 people: "Heading to the concourse via Escalator F."
+  - t=10.0s: agent_46 [directed] to 3 people: "Heading to Escalator D to Platform level."
+  - t=15.0s: agent_8 [directed] to 8 people: "Escalator B—let's go."
+  - t=15.0s: agent_16 → agent_27 [directed] to 1 people: "This way to the concourse."
+  - t=30.0s: agent_74 [directed] to 4 people: "I'll wait and observe for now."
+  - t=40.0s: agent_8 [directed] to 2 people: "Heading to Blackett Street."
+  - t=40.0s: agent_4 [directed] to 7 people: "Let’s head to the escalator and move to the concourse."
+  - t=40.0s: agent_1 [directed] to 7 people: "Heading to the concourse via Escalator E."
+  - t=40.0s: agent_21 [directed] to 12 people: "Heading to Escalator C to exit."
+  - t=40.0s: agent_17 [directed] to 6 people: "Heading to the Blackett Street exit."
+  - t=40.0s: agent_38 [directed] to 7 people: "Moving to the concourse."
+  - t=55.0s: agent_34 [directed] to 3 people: "Head to Escalator C for the concourse."
+  - t=55.0s: agent_67 [directed] to 4 people: "Heading to Escalator A to reach Platform 4."
+  - t=55.0s: agent_61 [directed] to 4 people: "Heading to Blackett Street exit."
+  - t=70.0s: agent_19 [directed] to 8 people: "Heading to Blackett Street exit."
+  - t=70.0s: agent_16 [directed] to 9 people: "Follow me to Escalator C."
+  - t=70.0s: agent_27 [directed] to 7 people: "Heading to Escalator C."
+  - t=70.0s: agent_13 [directed] to 3 people: "Heading to Escalator C to exit."
+  - t=70.0s: agent_40 [directed] to 5 people: "Evacuating via Escalator C."
+  - t=85.0s: agent_30 [directed] to 8 people: "Following you to Escalator C."
+  - t=85.0s: agent_8 [directed] to 1 people: "Head to Blackett Street."
+  - t=85.0s: agent_58 [shout] to 15 people: "Everyone, exit via Blackett Street."
+  - t=85.0s: agent_71 [shout] to 11 people: "Evacuating via Eldon Square exits; follow me if you can."
+  - t=100.0s: agent_12 [directed] to 3 people: "Let's move to Escalator C."
+  - t=100.0s: agent_23 [directed] to 5 people: "Moving to Blackett Street exit."
+  - t=130.0s: agent_22 [directed] to 1 people: "Heading to escalator E for safety."
+  - t=175.0s: agent_2 [directed] to 2 people: "Heading to Escalator C to exit."
+  - t=190.0s: agent_45 [directed] to 1 people: "Evacuating via Escalator B to the concourse."
+  - t=205.0s: agent_16 [directed] to 7 people: "This way to Blackett Street; stay together and move."
+  - t=205.0s: agent_40 [directed] to 3 people: "Let's head to Blackett Street."
+  - t=205.0s: agent_6 [directed] to 7 people: "Heading to Blackett Street exit."
+  - t=220.0s: agent_22 [directed] to 4 people: "Evacuating via Escalator C; stay together and move away from the platform."
+  - t=325.0s: agent_38 [directed] to 1 people: "Let's head to Blackett Street for safety."

@@ -1,0 +1,20 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 2
+Agents who sent messages: 1
+Total message deliveries: 9
+Average recipients per message: 4.5
+
+Messages by sender:
+  agent_4: 2 messages
+
+Messages by type:
+  broadcast: 1 messages (50.0%)
+  directed: 1 messages (50.0%)
+
+Targeted messages: 0 (0.0%)
+Broadcast messages: 2 (100.0%)
+
+All Messages:
+  - t=0.0s: agent_4  to 5 people: "I’ll wait here and stay aware of my surroundings."
+  - t=75.0s: agent_4 [directed] to 4 people: "Let’s head toward Escalator F together."

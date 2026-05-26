@@ -25,6 +25,7 @@ from dotenv import load_dotenv  # noqa: E402
 load_dotenv(Path(__file__).parent / ".env")
 
 from evacusim.config.config_loader import ConfigLoader
+from evacusim.coordination.hybrid_simulation import HybridSimulationRunner
 from evacusim.metrics.results_writer import ResultsWriter
 from evacusim.setup.agent_manager import AgentManager
 from evacusim.setup.jupedsim_setup import JuPedSimSetup
@@ -60,6 +61,17 @@ def run_simulation(config: dict, model, embedder, experiment_id: str,
 
     jps_sim = JuPedSimSetup.create_simulation(config)
     station_layout = StationLayoutBuilder.build_layout(jps_sim, config)
+
+    # Pre-spawn director agents (fire marshals, RCI staff, etc.) into JuPedSim
+    # BEFORE random passengers are spawned.  JuPedSim then enforces minimum
+    # separation around their positions so no passenger can land on top of a
+    # fire-marshal spawn point (fixes spawn-collision RuntimeError).
+    pre_built_systems, pre_built_agent_roles = (
+        HybridSimulationRunner.build_systems_for_pre_spawn(
+            config.get("systems", {}), jps_sim, station_layout
+        )
+    )
+
     agents_config = AgentManager.create_and_populate_agents(jps_sim, config)
     run_id, output_dir, decisions_file = OutputManager.setup_output_directory(config)
 
@@ -80,6 +92,8 @@ def run_simulation(config: dict, model, embedder, experiment_id: str,
         decisions_file=decisions_file,
         config=config,
         pace_to_realtime=(launch_viewer or launch_spatial),
+        pre_built_systems=pre_built_systems,
+        pre_built_agent_roles=pre_built_agent_roles,
     )
 
     def signal_handler(signum, frame):

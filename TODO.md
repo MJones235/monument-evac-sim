@@ -33,16 +33,19 @@ The fully operational Fire Brigade arriving ~4–5 min post-alarm is modelled as
 `firefighter_brigade` director that activates via an `after_seconds: 270` phase trigger
 (t ≈ 285 s) with the stronger message: "You must leave the station now."
 
-### [TODO] Agent count calibration
-Real study: ~66 passengers on the concourse + ~45 waiting at bottom of N/S escalators
-+ continuous train arrivals ≈ 110+ agents over the exercise window.
-Simulation: 50 static agents, no ongoing arrivals.
-Document this as a calibration limitation in the README and/or compare_experiments output.
-This may partly explain differences in absolute clearance times vs. reference values.
+### [DONE] Agent count calibration per experiment
+Agent counts updated per experiment to better reflect Proulx Table 1 crowd sizes:
+  - E1: 80 agents  (real study: ~111)
+  - E2: 65 agents  (real study: ~83)
+  - E3: 50 agents  (real study: ~61)
+  - E4: 70 agents  (real study: ~35 station + 61 disembarking train ≈ 96)
+  - E5: 70 agents  (real study: ~35 station + 68 disembarking trains ≈ 103)
+These are computationally feasible approximations; social-proof effects in E1 will
+remain weaker than the real study due to lower agent density.
 
 ### [TODO] Continuous train arrivals
 In the real drills passengers arrived continuously on trains throughout the exercise.
-The simulation currently has a fixed 50-agent spawn with no subsequent arrivals.
+The simulation currently has a fixed spawn at t=0 with no ongoing arrivals.
 Consider adding timed `train_arrival` events that spawn additional agents mid-simulation
 to better reflect the dynamic population used in the real study.
 
@@ -68,9 +71,40 @@ experiment (with standard deviation) to reduce stochastic noise in results.
 
 ## Configuration
 
-### [DONE] Monitoring interval reduced to 15 s
-Changed from 60 s → 15 s in `experiments/base.yaml` to give sufficient resolution
-for the 75–495 s timing values from Proulx Table 1.
+### [DONE] Simulation duration calibrated per experiment
+max_iterations set per experiment to cover the full real-study exercise window:
+  - E1: 18 000 steps (900 s = 15 min) — exercise ran to 14:47, station never cleared
+  - E2: 12 000 steps (600 s = 10 min) — station cleared at 8:00 min
+  - E3: 14 400 steps (720 s = 12 min) — station cleared at 10:30 min
+  - E4: 10 000 steps (500 s ≈ 8:20)  — station cleared at 6:45 min
+  - E5: 14 400 steps (720 s = 12 min) — last pram group at 10:15 min
+Previously all experiments used the base default of 2 400 steps (120 s), which was far too
+short to observe any clearance events or meaningful comparison with Proulx Table 1.
+
+### [DONE] Train 124 added to E1 and E2
+All five real drills were triggered by train 124 arriving at Monument Platform 1.
+E1 and E2 configs now include a train_arrival event at t=10 s, platforms=[1],
+dwell_seconds=30 (normal departure schedule; not an evacuation train).
+
+### [DONE] Evacuation train dwell time corrected for E4 and E5
+In the real drills, the evacuation train waited at all platforms until passengers
+boarded (44/61 re-boarded in E4; 68/68 in E5).  dwell_seconds changed from 30 s
+to 600 s in both E4 and E5 so the train is still available throughout the
+evacuation window.
+
+### [DONE] Fire Brigade physical arrival timing per experiment
+firefighter_brigade trigger_after_seconds overridden in E1 and E3 to match
+observed physical arrival times from Proulx Table 1 / Article 3:
+  - E1: trigger_after_seconds=480 (8 min) — FB directed concourse crowd at 8:15 min
+  - E3: trigger_after_seconds=445 (7:25 min onset → on-scene by ~7:40 min)
+    • Also: patrol_zones changed to platform_def first (bottom of N/S escalators
+      where the 48-person stuck crowd was in E3), then concourse.
+Base default of 270 s (4.5 min notification call) retained for E2, E4, E5
+where the station is clear before FB physical arrival matters.
+
+### [DONE] E3 train dwell extended
+dwell_seconds changed from 30 s to 60 s in E3 to allow agents a realistic time
+window to choose whether to board before the train departs.
 
 ---
 

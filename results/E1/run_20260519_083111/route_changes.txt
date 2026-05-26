@@ -1,0 +1,10 @@
+=== ROUTE CHANGE ANALYTICS ===
+
+Total route changes: 2
+Agents who changed routes: 2
+
+Route Changes:
+  - agent_7 at t=10.0s: escalator_b_up → escalator_c_up
+    Reason: To leave the station and head to school, I’ll move toward the concourse via Escalator C since people are moving and the escalator up is readily accessible.
+  - agent_6 at t=10.0s: escalator_e_up → escalator_f_up
+    Reason: A train is at Platform 1, but my goal is Platform 4. The crowd is moving toward escalators, so I should reposition toward Platform 4 to be ready to board.

@@ -1,0 +1,90 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 47
+Agents who sent messages: 26
+Total message deliveries: 302
+Average recipients per message: 6.4
+
+Messages by sender:
+  agent_23: 5 messages
+  agent_40: 4 messages
+  agent_29: 4 messages
+  agent_7: 3 messages
+  agent_4: 3 messages
+  agent_55: 2 messages
+  agent_48: 2 messages
+  agent_58: 2 messages
+  agent_16: 2 messages
+  agent_39: 2 messages
+  agent_71: 2 messages
+  agent_22: 2 messages
+  agent_44: 1 messages
+  agent_17: 1 messages
+  agent_54: 1 messages
+  agent_8: 1 messages
+  agent_41: 1 messages
+  agent_49: 1 messages
+  agent_19: 1 messages
+  agent_46: 1 messages
+  agent_5: 1 messages
+  agent_10: 1 messages
+  agent_33: 1 messages
+  agent_13: 1 messages
+  agent_36: 1 messages
+  agent_6: 1 messages
+
+Messages by type:
+  directed: 45 messages (95.7%)
+  broadcast: 2 messages (4.3%)
+
+Targeted messages: 4 (8.5%)
+Broadcast messages: 43 (91.5%)
+
+All Messages:
+  - t=0.0s: agent_44 [directed] to 8 people: "Heading to Escalator D to reach Platform 1."
+  - t=0.0s: agent_55 [directed] to 6 people: "Heading to Escalator D to reach Platform 4."
+  - t=10.0s: agent_17 [directed] to 3 people: "Heading to Escalator C to exit."
+  - t=10.0s: agent_48  to 3 people: "Heading to Escalator A."
+  - t=10.0s: agent_55 [directed] to 5 people: "I'll take Escalator D down to the platforms."
+  - t=15.0s: agent_54 [directed] to 4 people: "Everyone, let's stay calm and move together toward a safe exit when it's clear."
+  - t=30.0s: agent_8 [directed] to 5 people: "Heading to Escalator B to exit now."
+  - t=30.0s: agent_58 [directed] to 4 people: "Heading to Escalator A down to Platform 1."
+  - t=40.0s: agent_7 [directed] to 3 people: "Heading to Escalator C to exit."
+  - t=40.0s: agent_16 [directed] to 15 people: "Let’s head to Escalator C and out."
+  - t=40.0s: agent_4 [directed] to 7 people: "Let's head to the concourse and help others."
+  - t=40.0s: agent_41  to 4 people: "Excuse me, heading to the concourse."
+  - t=40.0s: agent_40 [directed] to 4 people: "Let's head up."
+  - t=40.0s: agent_49 [directed] to 2 people: "Heading to Grey Street exit to evacuate and assist others."
+  - t=40.0s: agent_39 [directed] to 5 people: "Heading to Escalator E to exit toward the concourse."
+  - t=55.0s: agent_29 [directed] to 7 people: "Let’s move calmly to the concourse via Escalator F."
+  - t=55.0s: agent_23 [directed] to 5 people: "Let's head up together."
+  - t=55.0s: agent_7 [directed] to 7 people: "Head to Escalator B to exit."
+  - t=55.0s: agent_4 [directed] to 16 people: "Let's head to Escalator C and out."
+  - t=70.0s: agent_19 [directed] to 6 people: "Let's head to Escalator D."
+  - t=70.0s: agent_40 [directed] to 13 people: "Let's head up together via Escalator E."
+  - t=70.0s: agent_71 [directed] to 4 people: "Let’s head to Escalator C."
+  - t=85.0s: agent_39 [directed] to 13 people: "Heading to Escalator C."
+  - t=85.0s: agent_22 [directed] to 13 people: "Escalator E blocked; I'll take Escalator B."
+  - t=100.0s: agent_23 → agent_39 [directed] to 1 people: "Let's move up together to Escalator C."
+  - t=100.0s: agent_29 [directed] to 12 people: "Let's move together to Escalator B."
+  - t=100.0s: agent_4 [directed] to 1 people: "Heading to Escalator C to reach the concourse and help others."
+  - t=115.0s: agent_40 → agent_29 [directed] to 1 people: "Let's head to Escalator B together."
+  - t=115.0s: agent_46 [directed] to 10 people: "Heading to Escalator A down to platforms."
+  - t=130.0s: agent_22 [directed] to 11 people: "Heading to Escalator B to exit toward the concourse."
+  - t=130.0s: agent_48 [directed] to 2 people: "Heading to Escalator C to evacuate."
+  - t=130.0s: agent_71 [directed] to 9 people: "Let's head to Blackett Street exit and stay with the flow."
+  - t=130.0s: agent_5 [directed] to 7 people: "Moving to Escalator D to exit."
+  - t=145.0s: agent_23 [directed] to 6 people: "Let's move to Escalator B."
+  - t=145.0s: agent_7 [directed] to 12 people: "Let's head to Blackett Street exit."
+  - t=145.0s: agent_29 → agent_22 [directed] to 1 people: "Let's go to Escalator B together."
+  - t=160.0s: agent_16 [directed] to 8 people: "Let's head to Blackett Street exit."
+  - t=160.0s: agent_10 [directed] to 5 people: "Heading to Escalator C to exit."
+  - t=175.0s: agent_33 [directed] to 10 people: "Heading to Escalator D to exit."
+  - t=175.0s: agent_58 [directed] to 6 people: "Let's head up and out together."
+  - t=190.0s: agent_23 [directed] to 9 people: "Let's head to Escalator B together."
+  - t=190.0s: agent_29 [directed] to 8 people: "Let’s move to Escalator B together."
+  - t=205.0s: agent_40 [directed] to 4 people: "Let's head to Escalator B together."
+  - t=205.0s: agent_13 → agent_23 [directed] to 1 people: "Let's head to Escalator B."
+  - t=220.0s: agent_36 [directed] to 7 people: "Moving to Blackett Street exit."
+  - t=280.0s: agent_23 [directed] to 6 people: "Follow me to Blackett Street exit."
+  - t=340.0s: agent_6 [directed] to 3 people: "Heading to Escalator B to evacuate."

@@ -1,0 +1,1919 @@
+{
+  "agent_decisions": {
+    "agent_0": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up), Escalator C (going up), Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.\nNearby people: Person 7 (agent_7), Person 19 (agent_19), Person 31 (agent_31), Person 32 (agent_32), Person 34 (agent_34).",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator B (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 0 {\n  \"reasoning\": \"Goal remains to wait on Platform 3 for the train; current position matches the objective and there are no new directives to relocate.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Waiting for train; no updated instructions or need to relocate.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal remains to wait on Platform 3 for the train; current position matches the objective and there are no new directives to relocate.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -65.18229036765268,
+              44.940927692834954
+            ],
+            "confidence": 0.9,
+            "reasoning": "Goal remains to wait on Platform 3 for the train; current position matches the objective and there are no new directives to relocate.",
+            "wait_reason": "Waiting for train; no updated instructions or need to relocate.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_19": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up), Escalator C (going up), Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator B (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 19 {\n  \"reasoning\": \"I'm already on Platform 3 waiting for my train. The area is crowded but there are no fires or new instructions, so continuing to wait aligns with my goal and avoids unnecessary risk.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"still waiting for train arrival and no new information\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I'm already on Platform 3 waiting for my train. The area is crowded but there are no fires or new instructions, so continuing to wait aligns with my goal and avoids unnecessary risk.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -53.874851358457235,
+              46.19478395397146
+            ],
+            "confidence": 0.9,
+            "reasoning": "I'm already on Platform 3 waiting for my train. The area is crowded but there are no fires or new instructions, so continuing to wait aligns with my goal and avoids unnecessary risk.",
+            "wait_reason": "still waiting for train arrival and no new information",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_7": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: school).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator B (going up), Escalator C (going up), Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.\nNearby people: Person 0 (agent_0), Person 19 (agent_19), Person 31 (agent_31), Person 32 (agent_32), Person 34 (agent_34).",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 7 {\n  \"reasoning\": \"I aim to leave the station and head to school. Exits are visible and crowds are moving, so I\u2019ll move toward an escalator to exit.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I aim to leave the station and head to school. Exits are visible and crowds are moving, so I\u2019ll move toward an escalator to exit.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "I aim to leave the station and head to school. Exits are visible and crowds are moving, so I\u2019ll move toward an escalator to exit.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_2": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms) (very close); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 2 {\n  \"reasoning\": \"Goal remains to wait on Platform 3 for the train; current area is crowded but no new information or instructions, so I will stay in place and await boarding.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Awaiting train arrival as planned; maintain orderly position in crowd.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal remains to wait on Platform 3 for the train; current area is crowded but no new information or instructions, so I will stay in place and await boarding.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -10.715905352280743,
+              -6.844562044325176
+            ],
+            "confidence": 0.9,
+            "reasoning": "Goal remains to wait on Platform 3 for the train; current area is crowded but no new information or instructions, so I will stay in place and await boarding.",
+            "wait_reason": "Awaiting train arrival as planned; maintain orderly position in crowd.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_3": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a day out in the city).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator B (going up), Escalator C (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 3 {\n  \"reasoning\": \"I'm aiming to leave the station; with exits up and a moderate crowd, taking Escalator B upward should get me to street level efficiently.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator B (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I'm aiming to leave the station; with exits up and a moderate crowd, taking Escalator B upward should get me to street level efficiently.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.86840215721545,
+              39.148125251164124
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator B (going up)",
+            "resolved_exit_id": "escalator_b_up",
+            "confidence": 0.95,
+            "reasoning": "I'm aiming to leave the station; with exits up and a moderate crowd, taking Escalator B upward should get me to street level efficiently.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_4": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: school).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 1 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 4 {\n  \"reasoning\": \"Goal is to leave the station and continue my day; Escalator F leads up to the concourse where exits are, so I\u2019ll move up slowly to join the flow.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"slow_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to leave the station and continue my day; Escalator F leads up to the concourse where exits are, so I\u2019ll move up slowly to join the flow.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to leave the station and continue my day; Escalator F leads up to the concourse where exits are, so I\u2019ll move up slowly to join the flow.",
+            "speed": "slow_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_6": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a university lecture).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 6 {\n  \"reasoning\": \"Goal is to leave the station; with the alarm and crowd, I take charge and move toward Escalator E to reach safety and proceed to my lecture.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator E (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to leave the station; with the alarm and crowd, I take charge and move toward Escalator E to reach safety and proceed to my lecture.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -10.484078691619661,
+              0.9427227319841531
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator E (going up)",
+            "resolved_exit_id": "escalator_e_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to leave the station; with the alarm and crowd, I take charge and move toward Escalator E to reach safety and proceed to my lecture.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_9": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up), Escalator C (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator B (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 9 {\n  \"reasoning\": \"I'm already on Platform 3 and waiting for the train; I'll stay here and be ready to board when it arrives, while quietly observing for cues from others.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"At Platform 3 waiting for the train; no new information.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I'm already on Platform 3 and waiting for the train; I'll stay here and be ready to board when it arrives, while quietly observing for cues from others.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -39.28353126834982,
+              46.49495725478078
+            ],
+            "confidence": 0.9,
+            "reasoning": "I'm already on Platform 3 and waiting for the train; I'll stay here and be ready to board when it arrives, while quietly observing for cues from others.",
+            "wait_reason": "At Platform 3 waiting for the train; no new information.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_8": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator B (going up), Escalator C (going up) (very close); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 8 {\n  \"reasoning\": \"Goal is to wait for Platform 3 train; current observations show a moderate crowd and no new information. Staying at the current position keeps readiness for boarding when the train arrives.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Awaiting train on Platform 3; maintain readiness and observe crowd flow.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to wait for Platform 3 train; current observations show a moderate crowd and no new information. Staying at the current position keeps readiness for boarding when the train arrives.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -18.046346600702982,
+              40.41287121578167
+            ],
+            "confidence": 0.9,
+            "reasoning": "Goal is to wait for Platform 3 train; current observations show a moderate crowd and no new information. Staying at the current position keeps readiness for boarding when the train arrives.",
+            "wait_reason": "Awaiting train on Platform 3; maintain readiness and observe crowd flow.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_18": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator B (going up), Escalator C (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 18 {\n  \"reasoning\": \"My goal remains to wait on Platform 2 and board the train when it arrives; current observations show no new information requiring relocation, and crowd movement doesn't indicate an imminent need to move.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Awaiting Platform 2 train arrival.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "My goal remains to wait on Platform 2 and board the train when it arrives; current observations show no new information requiring relocation, and crowd movement doesn't indicate an imminent need to move.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -39.56611261170195,
+              41.221325035961065
+            ],
+            "confidence": 0.9,
+            "reasoning": "My goal remains to wait on Platform 2 and board the train when it arrives; current observations show no new information requiring relocation, and crowd movement doesn't indicate an imminent need to move.",
+            "wait_reason": "Awaiting Platform 2 train arrival.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_1": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms) (very close); Escalator E (going up), Escalator F (going up) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 1 {\n  \"reasoning\": \"Goal remains to wait on Platform 2 for the train; the area is crowded but there is no new information or instruction to move, so I\u2019ll stay near my intended location and await boarding.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Still waiting for the train; no new information or clear reason to move, staying near the platform and in the crowd.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal remains to wait on Platform 2 for the train; the area is crowded but there is no new information or instruction to move, so I\u2019ll stay near my intended location and await boarding.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -21.022022855942367,
+              0.44919200608583765
+            ],
+            "confidence": 0.9,
+            "reasoning": "Goal remains to wait on Platform 2 for the train; the area is crowded but there is no new information or instruction to move, so I\u2019ll stay near my intended location and await boarding.",
+            "wait_reason": "Still waiting for the train; no new information or clear reason to move, staying near the platform and in the crowd.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_10": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 4 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator C (going up), Escalator B (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 10 {\n  \"reasoning\": \"Platform 2 requires going up to the concourse to reach Platform 4; moving via Escalator E should bring me closer to the target while the train approaches.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator E (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Platform 2 requires going up to the concourse to reach Platform 4; moving via Escalator E should bring me closer to the target while the train approaches.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -10.484078691619661,
+              0.9427227319841531
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator E (going up)",
+            "resolved_exit_id": "escalator_e_up",
+            "confidence": 0.95,
+            "reasoning": "Platform 2 requires going up to the concourse to reach Platform 4; moving via Escalator E should bring me closer to the target while the train approaches.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_13": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a day out in the city).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator C (going up), Escalator D (down to platforms), Escalator E (going up), Escalator B (going up), Escalator F (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 13 {\n  \"reasoning\": \"Goal is to reach street level for a day in the city; with upward exits available, I\u2019ll head toward Escalator C to exit efficiently.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator C (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to reach street level for a day in the city; with upward exits available, I\u2019ll head toward Escalator C to exit efficiently.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.82691325231859,
+              37.68493104400516
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator C (going up)",
+            "resolved_exit_id": "escalator_c_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to reach street level for a day in the city; with upward exits available, I\u2019ll head toward Escalator C to exit efficiently.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_17": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a visit to family).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator B (going up), Escalator C (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 17 {\n  \"reasoning\": \"The alarm requires quick action to exit; goal is to leave the station and continue to family. Observing multiple upward escalators, I choose to move toward Escalator B to reach street level quickly.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator B\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "The alarm requires quick action to exit; goal is to leave the station and continue to family. Observing multiple upward escalators, I choose to move toward Escalator B to reach street level quickly.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.86840215721545,
+              39.148125251164124
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator B",
+            "resolved_exit_id": "escalator_b_up",
+            "confidence": 0.95,
+            "reasoning": "The alarm requires quick action to exit; goal is to leave the station and continue to family. Observing multiple upward escalators, I choose to move toward Escalator B to reach street level quickly.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_11": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a day out in the city).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator F (going up) (very close); Escalator E (going up), Escalator D (down to platforms) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 11 {\n  \"reasoning\": \"My goal is to leave the station and continue my day, and Escalator F is the closest exit going up, so I\u2019ll head toward it despite the crowd.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "My goal is to leave the station and continue my day, and Escalator F is the closest exit going up, so I\u2019ll head toward it despite the crowd.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F (going up)",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "My goal is to leave the station and continue my day, and Escalator F is the closest exit going up, so I\u2019ll head toward it despite the crowd.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_16": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: work).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 1 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms), Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.\nNearby people: Person 22 (agent_22), Person 27 (agent_27), Person 28 (agent_28), Person 39 (agent_39).",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 16 {\n  \"reasoning\": \"Two up escalators to the concourse are visible; to exit efficiently and keep flow with others, I\u2019ll take Escalator F.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Two up escalators to the concourse are visible; to exit efficiently and keep flow with others, I\u2019ll take Escalator F.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "Two up escalators to the concourse are visible; to exit efficiently and keep flow with others, I\u2019ll take Escalator F.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_12": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a job interview).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms) (very close); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 12 {\n  \"reasoning\": \"My goal is to leave the station, but with the alarm sounding and no clear instructions I\u2019m assessing crowd flow and safety cues before moving.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"observing others and the situation to decide the safest exit path\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "My goal is to leave the station, but with the alarm sounding and no clear instructions I\u2019m assessing crowd flow and safety cues before moving.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -11.15359497352891,
+              -6.5439483927435305
+            ],
+            "confidence": 0.9,
+            "reasoning": "My goal is to leave the station, but with the alarm sounding and no clear instructions I\u2019m assessing crowd flow and safety cues before moving.",
+            "wait_reason": "observing others and the situation to decide the safest exit path",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_14": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 1 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator F (going up), Escalator E (going up) (very close); Escalator D (down to platforms) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 14 {\n  \"reasoning\": \"Goal is to wait on Platform 2 for the train; current observation shows Platform 1 crowded and no information to move toward Platform 2, so I will pause and monitor for cues.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Waiting for train arrival on Platform 2; no new information to justify moving now.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to wait on Platform 2 for the train; current observation shows Platform 1 crowded and no information to move toward Platform 2, so I will pause and monitor for cues.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -2.6761492521347208,
+              -4.277789924806271
+            ],
+            "confidence": 0.9,
+            "reasoning": "Goal is to wait on Platform 2 for the train; current observation shows Platform 1 crowded and no information to move toward Platform 2, so I will pause and monitor for cues.",
+            "wait_reason": "Waiting for train arrival on Platform 2; no new information to justify moving now.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_21": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 21 {\n  \"reasoning\": \"You're on Platform 2 and plan to wait for your train; the crowded, moving crowd suggests staying put to avoid missteps and board when the train arrives.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Waiting for the train to arrive and board as planned.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "You're on Platform 2 and plan to wait for your train; the crowded, moving crowd suggests staying put to avoid missteps and board when the train arrives.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -20.02862329142617,
+              8.840055298944009
+            ],
+            "confidence": 0.9,
+            "reasoning": "You're on Platform 2 and plan to wait for your train; the crowded, moving crowd suggests staying put to avoid missteps and board when the train arrives.",
+            "wait_reason": "Waiting for the train to arrive and board as planned.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_5": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a job interview).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up), Escalator C (going up), Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 5 {\n  \"reasoning\": \"I need to leave for my job interview; the concourse is up via Escalator B, and the area is moderately crowded but moving, so I'll head toward Escalator B to reach the concourse quickly.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator B (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I need to leave for my job interview; the concourse is up via Escalator B, and the area is moderately crowded but moving, so I'll head toward Escalator B to reach the concourse quickly.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.86840215721545,
+              39.148125251164124
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator B (going up)",
+            "resolved_exit_id": "escalator_b_up",
+            "confidence": 0.95,
+            "reasoning": "I need to leave for my job interview; the concourse is up via Escalator B, and the area is moderately crowded but moving, so I'll head toward Escalator B to reach the concourse quickly.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_26": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator C (going up), Escalator B (going up) (very close); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 26 {\n  \"reasoning\": \"My goal is to wait on Platform 2 and board the train when it arrives; current observations show a moderate crowd and no new instruction or hazard, so staying in place minimizes disruption.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "My goal is to wait on Platform 2 and board the train when it arrives; current observations show a moderate crowd and no new instruction or hazard, so staying in place minimizes disruption.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -15.442937549499653,
+              38.63361270447883
+            ],
+            "confidence": 0.9,
+            "reasoning": "My goal is to wait on Platform 2 and board the train when it arrives; current observations show a moderate crowd and no new instruction or hazard, so staying in place minimizes disruption.",
+            "wait_reason": null,
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_15": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: school).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms) (very close); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 15 {\n  \"reasoning\": \"My goal is to leave the station. Escalator E (going up) is among the up escalators closest to the crowd, helping me reach street level quickly.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator E (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "My goal is to leave the station. Escalator E (going up) is among the up escalators closest to the crowd, helping me reach street level quickly.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -10.484078691619661,
+              0.9427227319841531
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator E (going up)",
+            "resolved_exit_id": "escalator_e_up",
+            "confidence": 0.95,
+            "reasoning": "My goal is to leave the station. Escalator E (going up) is among the up escalators closest to the crowd, helping me reach street level quickly.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_28": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a medical appointment).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 1 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms), Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.\nNearby people: Person 16 (agent_16), Person 22 (agent_22), Person 27 (agent_27), Person 39 (agent_39).",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 28 {\n  \"reasoning\": \"Goal is to exit quickly toward my medical appointment; Escalator F is a clear, up-facing exit nearby, so I\u2019ll move briskly toward it.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to exit quickly toward my medical appointment; Escalator F is a clear, up-facing exit nearby, so I\u2019ll move briskly toward it.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F (going up)",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to exit quickly toward my medical appointment; Escalator F is a clear, up-facing exit nearby, so I\u2019ll move briskly toward it.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_23": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a visit to family).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator C (going up), Escalator E (going up), Escalator D (down to platforms), Escalator F (going up), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 23 {\n  \"reasoning\": \"My goal is to exit the station and continue to family. Escalator F is an upward route that aligns with surface exit, and the crowd is moving, so I can blend in and head upward.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "My goal is to exit the station and continue to family. Escalator F is an upward route that aligns with surface exit, and the crowd is moving, so I can blend in and head upward.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "My goal is to exit the station and continue to family. Escalator F is an upward route that aligns with surface exit, and the crowd is moving, so I can blend in and head upward.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_22": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms), Escalator E (going up), Escalator F (going up), Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 22 {\n  \"reasoning\": \"Goal is to wait on Platform 3 and board the train; since Platform 2 provides escalator up to the concourse, I\u2019ll start moving upward via Escalator E to approach Platform 3 while staying cautious in the crowd.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator E (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"slow_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to wait on Platform 3 and board the train; since Platform 2 provides escalator up to the concourse, I\u2019ll start moving upward via Escalator E to approach Platform 3 while staying cautious in the crowd.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -10.484078691619661,
+              0.9427227319841531
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator E (going up)",
+            "resolved_exit_id": "escalator_e_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to wait on Platform 3 and board the train; since Platform 2 provides escalator up to the concourse, I\u2019ll start moving upward via Escalator E to approach Platform 3 while staying cautious in the crowd.",
+            "speed": "slow_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_24": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 4 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up), Escalator C (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator B (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 24 {\n  \"reasoning\": \"To reach Platform 4 where my train will board, I'll ascend via Escalator B (going up) to the concourse; it's the closest option and the crowd is moving, reducing delay.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator B (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "To reach Platform 4 where my train will board, I'll ascend via Escalator B (going up) to the concourse; it's the closest option and the crowd is moving, reducing delay.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.86840215721545,
+              39.148125251164124
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator B (going up)",
+            "resolved_exit_id": "escalator_b_up",
+            "confidence": 0.95,
+            "reasoning": "To reach Platform 4 where my train will board, I'll ascend via Escalator B (going up) to the concourse; it's the closest option and the crowd is moving, reducing delay.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_25": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 1 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the underground platform level.\nExits visible right now: Escalator B (going up), Escalator C (going up) (very close); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 25 {\n  \"reasoning\": \"Goal remains to wait on Platform 1 and board the train when it arrives. No new information suggests a change; I will stay in place.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"waiting for train as planned.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal remains to wait on Platform 1 and board the train when it arrives. No new information suggests a change; I will stay in place.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -18.945418194879366,
+              40.24640559808453
+            ],
+            "confidence": 0.9,
+            "reasoning": "Goal remains to wait on Platform 1 and board the train when it arrives. No new information suggests a change; I will stay in place.",
+            "wait_reason": "waiting for train as planned.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_31": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a day out in the city).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up), Escalator C (going up), Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 31 {\n  \"reasoning\": \"Goal is to leave the station for the city; the nearest up escalator (Escalator B) leads to the concourse, so I\u2019ll move toward it.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator B\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to leave the station for the city; the nearest up escalator (Escalator B) leads to the concourse, so I\u2019ll move toward it.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.86840215721545,
+              39.148125251164124
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator B",
+            "resolved_exit_id": "escalator_b_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to leave the station for the city; the nearest up escalator (Escalator B) leads to the concourse, so I\u2019ll move toward it.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_33": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a day out in the city).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up) (very close); Escalator C (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator B (going up)\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 33 {\n  \"reasoning\": \"Goal: leave the station and continue with my day. Escalator B is the closest exit to the concourse and currently up and accessible amid moderate crowds, so I will head there.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator B (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal: leave the station and continue with my day. Escalator B is the closest exit to the concourse and currently up and accessible amid moderate crowds, so I will head there.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.86840215721545,
+              39.148125251164124
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator B (going up)",
+            "resolved_exit_id": "escalator_b_up",
+            "confidence": 0.95,
+            "reasoning": "Goal: leave the station and continue with my day. Escalator B is the closest exit to the concourse and currently up and accessible amid moderate crowds, so I will head there.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_30": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 1 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator F (going up) (very close); Escalator E (going up), Escalator D (down to platforms) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator E (going up)\n\n",
+          "action": "Agent 30 {\n  \"reasoning\": \"Goal is to be ready on Platform 2 to board the train; since Escalator F leads directly toward the concourse and is the closest upward route, proceed there to reposition.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to be ready on Platform 2 to board the train; since Escalator F leads directly toward the concourse and is the closest upward route, proceed there to reposition.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F (going up)",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to be ready on Platform 2 to board the train; since Escalator F leads directly toward the concourse and is the closest upward route, proceed there to reposition.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_35": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 4 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 4 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator C (going up), Escalator B (going up) (very close); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator B (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 35 {\n  \"reasoning\": \"I'm already on Platform 4 and ready to board when the train arrives. The platform is crowded but there's no visible hazard, so I should wait for the train.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"at destination; awaiting train arrival\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I'm already on Platform 4 and ready to board when the train arrives. The platform is crowded but there's no visible hazard, so I should wait for the train.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -28.360056966959682,
+              34.78674841709914
+            ],
+            "confidence": 0.9,
+            "reasoning": "I'm already on Platform 4 and ready to board when the train arrives. The platform is crowded but there's no visible hazard, so I should wait for the train.",
+            "wait_reason": "at destination; awaiting train arrival",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_29": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 1 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 1 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator C (going up), Escalator D (down to platforms), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 29 {\n  \"reasoning\": \"I will wait at Platform 1 to board the train when it arrives. With no new information and a moderate crowd, staying put helps maintain calm and supports others who may need guidance.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Waiting for train arrival and to help keep others calm and coordinated.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I will wait at Platform 1 to board the train when it arrives. With no new information and a moderate crowd, staying put helps maintain calm and supports others who may need guidance.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -0.20403334125078398,
+              26.123510376183525
+            ],
+            "confidence": 0.9,
+            "reasoning": "I will wait at Platform 1 to board the train when it arrives. With no new information and a moderate crowd, staying put helps maintain calm and supports others who may need guidance.",
+            "wait_reason": "Waiting for train arrival and to help keep others calm and coordinated.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_41": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\nGoal status: You are currently at your goal destination.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms), Escalator E (going up) (very close); Escalator F (going up) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 41 {\n  \"reasoning\": \"I am already on Platform 2 waiting for the train, and there is no new information to change my plan. I will stay here and observe for the train's arrival, maintaining calm and readiness.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"Continuing to wait for train arrival while monitoring crowd.\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I am already on Platform 2 waiting for the train, and there is no new information to change my plan. I will stay here and observe for the train's arrival, maintaining calm and readiness.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -20.168189131110886,
+              -1.3634962839575344
+            ],
+            "confidence": 0.9,
+            "reasoning": "I am already on Platform 2 waiting for the train, and there is no new information to change my plan. I will stay here and observe for the train's arrival, maintaining calm and readiness.",
+            "wait_reason": "Continuing to wait for train arrival while monitoring crowd.",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_20": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 1 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 20 {\n  \"reasoning\": \"Goal is to wait for the Platform 2 train. Observing two up escalators on Platform 1, taking Escalator F moves me toward the concourse/Platform 2 area to board when it arrives.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator F (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to wait for the Platform 2 train. Observing two up escalators on Platform 1, taking Escalator F moves me toward the concourse/Platform 2 area to board when it arrives.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -8.601318932072457,
+              0.2596366303826738
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator F (going up)",
+            "resolved_exit_id": "escalator_f_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to wait for the Platform 2 train. Observing two up escalators on Platform 1, taking Escalator F moves me toward the concourse/Platform 2 area to board when it arrives.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_38": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 4 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms) (very close); Escalator E (going up), Escalator F (going up) (nearby); Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator F (going up)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 38 {\n  \"reasoning\": \"My goal is to wait on Platform 4, but my current location (Platform 2) is crowded with no clear path to Platform 4. Given safety and comfort, I will wait here and reassess as the crowd moves.\",\n  \"action_type\": \"wait\",\n  \"target_type\": \"current_position\",\n  \"target_agent\": null,\n  \"exit_name\": null,\n  \"zone_name\": null,\n  \"wait_reason\": \"crowded platform; no clear path to Platform 4; will reassess after crowd dynamics change\",\n  \"speed\": null,\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "My goal is to wait on Platform 4, but my current location (Platform 2) is crowded with no clear path to Platform 4. Given safety and comfort, I will wait here and reassess as the crowd moves.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "wait",
+            "target": [
+              -20.294063490011048,
+              2.9759999729323
+            ],
+            "confidence": 0.9,
+            "reasoning": "My goal is to wait on Platform 4, but my current location (Platform 2) is crowded with no clear path to Platform 4. Given safety and comfort, I will wait here and reassess as the crowd moves.",
+            "wait_reason": "crowded platform; no clear path to Platform 4; will reassess after crowd dynamics change",
+            "speed": null,
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_37": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms), Escalator E (going up), Escalator F (going up), Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 37 {\n  \"reasoning\": \"To reach Platform 3 where the train will arrive, I should move via an upward escalator from Platform 2; current crowd is moderate and there\u2019s no new information suggesting staying would be better.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator E (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "To reach Platform 3 where the train will arrive, I should move via an upward escalator from Platform 2; current crowd is moderate and there\u2019s no new information suggesting staying would be better.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -10.484078691619661,
+              0.9427227319841531
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator E (going up)",
+            "resolved_exit_id": "escalator_e_up",
+            "confidence": 0.95,
+            "reasoning": "To reach Platform 3 where the train will arrive, I should move via an upward escalator from Platform 2; current crowd is moderate and there\u2019s no new information suggesting staying would be better.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_47": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 2.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Grey Street (nearby).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Grey Street\n\n",
+          "action": "Agent 47 {\n  \"reasoning\": \"To reach Platform 2 quickly, I should move toward the closest visible exit (Grey Street) to descend toward the platform area.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Grey Street\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "To reach Platform 2 quickly, I should move toward the closest visible exit (Grey Street) to descend toward the platform area.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              81.0,
+              5.5
+            ],
+            "target_type": "exit",
+            "exit_name": "Grey Street",
+            "resolved_exit_id": "grey_street",
+            "confidence": 0.95,
+            "reasoning": "To reach Platform 2 quickly, I should move toward the closest visible exit (Grey Street) to descend toward the platform area.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_43": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 3.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Grey Street (nearby).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Grey Street\n  \u2022 Blackett Street\n  \u2022 Eldon Square\n  \u2022 Escalator A (down to platforms)\n  \u2022 Escalator D (down to platforms)\n\n",
+          "action": "Agent 43 {\n  \"reasoning\": \"I want to reach Platform 3, so I\u2019ll head toward an escalator down to the platforms to move closer to trains, choosing Escalator A since it looks like a direct path from the concourse. The crowd is dense, so I\u2019ll proceed calmly and avoid bottlenecks.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator A (down to platforms)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I want to reach Platform 3, so I\u2019ll head toward an escalator down to the platforms to move closer to trains, choosing Escalator A since it looks like a direct path from the concourse. The crowd is dense, so I\u2019ll proceed calmly and avoid bottlenecks.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              29.253394499999995,
+              40.281616
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator A (down to platforms)",
+            "resolved_exit_id": "escalator_a_down",
+            "confidence": 0.95,
+            "reasoning": "I want to reach Platform 3, so I\u2019ll head toward an escalator down to the platforms to move closer to trains, choosing Escalator A since it looks like a direct path from the concourse. The crowd is dense, so I\u2019ll proceed calmly and avoid bottlenecks.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_32": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 2 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 3 (Escalators B and C go up to the concourse).\nExits visible right now: Escalator B (going up), Escalator C (going up), Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Escalator F (going up)\n  \u2022 Escalator D (down to platforms)\n  \u2022 Escalator B (going up)\n  \u2022 Escalator E (going up)\n  \u2022 Escalator C (going up)\n\n",
+          "action": "Agent 32 {\n  \"reasoning\": \"Goal: wait on Platform 2 for the train. From Platform 3, the quickest next step to reach Platform 2 is to reach the concourse via Escalator B and then navigate to Platform 2.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator B (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": \"Heading to the concourse via Escalator B.\",\n  \"message_type\": \"directed\",\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal: wait on Platform 2 for the train. From Platform 3, the quickest next step to reach Platform 2 is to reach the concourse via Escalator B and then navigate to Platform 2.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -24.86840215721545,
+              39.148125251164124
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator B (going up)",
+            "resolved_exit_id": "escalator_b_up",
+            "confidence": 0.95,
+            "reasoning": "Goal: wait on Platform 2 for the train. From Platform 3, the quickest next step to reach Platform 2 is to reach the concourse via Escalator B and then navigate to Platform 2.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_46": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 2.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Escalator F (going up), Escalator E (going up), Escalator D (down to platforms) (very close); Blackett Street (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Blackett Street\n  \u2022 Grey Street\n  \u2022 Eldon Square\n  \u2022 Escalator A (down to platforms)\n  \u2022 Escalator D (down to platforms)\n\n",
+          "action": "Agent 46 {\n  \"reasoning\": \"Goal: catch train from Platform 2. Escalator D is down to platforms and very close; moving briskly toward it should put me on the correct platform quickly given the crowded concourse.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator D (down to platforms)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal: catch train from Platform 2. Escalator D is down to platforms and very close; moving briskly toward it should put me on the correct platform quickly given the crowded concourse.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              55.24831739915932,
+              28.078856686712783
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator D (down to platforms)",
+            "resolved_exit_id": "escalator_d_down",
+            "confidence": 0.95,
+            "reasoning": "Goal: catch train from Platform 2. Escalator D is down to platforms and very close; moving briskly toward it should put me on the correct platform quickly given the crowded concourse.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_48": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 1.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Grey Street (very close).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Grey Street\n  \u2022 Blackett Street\n  \u2022 Eldon Square\n  \u2022 Escalator A (down to platforms)\n  \u2022 Escalator D (down to platforms)\n\n",
+          "action": "Agent 48 {\n  \"reasoning\": \"Goal is to catch Platform 1; to get there quickly I'll take the escalator down. Escalator A (down to platforms) is the direct route.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator A (down to platforms)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to catch Platform 1; to get there quickly I'll take the escalator down. Escalator A (down to platforms) is the direct route.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              29.253394499999995,
+              40.281616
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator A (down to platforms)",
+            "resolved_exit_id": "escalator_a_down",
+            "confidence": 0.95,
+            "reasoning": "Goal is to catch Platform 1; to get there quickly I'll take the escalator down. Escalator A (down to platforms) is the direct route.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_44": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 1.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Escalator D (down to platforms) (very close); Escalator E (going up), Escalator F (going up) (nearby); Blackett Street (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator D (down to platforms)\n  \u2022 Blackett Street\n  \u2022 Grey Street\n  \u2022 Eldon Square\n  \u2022 Escalator A (down to platforms)\n\n",
+          "action": "Agent 44 {\n  \"reasoning\": \"Need to reach Platform 1 quickly; Escalator D is the closest route down to platforms and the concourse is crowded, so moving with the flow should help. I'll take Escalator D and descend to the platforms at a brisk pace.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator D (down to platforms)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Need to reach Platform 1 quickly; Escalator D is the closest route down to platforms and the concourse is crowded, so moving with the flow should help. I'll take Escalator D and descend to the platforms at a brisk pace.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              55.24831739915932,
+              28.078856686712783
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator D (down to platforms)",
+            "resolved_exit_id": "escalator_d_down",
+            "confidence": 0.95,
+            "reasoning": "Need to reach Platform 1 quickly; Escalator D is the closest route down to platforms and the concourse is crowded, so moving with the flow should help. I'll take Escalator D and descend to the platforms at a brisk pace.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_39": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Wait on Platform 3 and board your train when it arrives.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator D (down to platforms), Escalator E (going up), Escalator F (going up), Escalator C (going up), Escalator B (going up) (visible in distance).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 39 {\n  \"reasoning\": \"To progress toward Platform 3, take Escalator E up to the concourse where Platform 3 is accessible. The crowd is moderate, so a normal walk is reasonable.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator E (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"normal_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "To progress toward Platform 3, take Escalator E up to the concourse where Platform 3 is accessible. The crowd is moderate, so a normal walk is reasonable.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -10.484078691619661,
+              0.9427227319841531
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator E (going up)",
+            "resolved_exit_id": "escalator_e_up",
+            "confidence": 0.95,
+            "reasoning": "To progress toward Platform 3, take Escalator E up to the concourse where Platform 3 is accessible. The crowd is moderate, so a normal walk is reasonable.",
+            "speed": "normal_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_49": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 2.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Grey Street (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Grey Street\n\n",
+          "action": "Agent 49 {\n  \"reasoning\": \"I want to reach Platform 2. The Grey Street exit is visible ahead, and the crowd is moving, so I\u2019ll take a brisk walk toward it to reach the platform quickly.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Grey Street\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I want to reach Platform 2. The Grey Street exit is visible ahead, and the crowd is moving, so I\u2019ll take a brisk walk toward it to reach the platform quickly.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              81.0,
+              5.5
+            ],
+            "target_type": "exit",
+            "exit_name": "Grey Street",
+            "resolved_exit_id": "grey_street",
+            "confidence": 0.95,
+            "reasoning": "I want to reach Platform 2. The Grey Street exit is visible ahead, and the crowd is moving, so I\u2019ll take a brisk walk toward it to reach the platform quickly.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_40": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Leave the station and continue with your day (next destination: a university lecture).\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in Platform 2 (Escalators E and F go up to the concourse).\nExits visible right now: Escalator C (going up), Escalator B (going up) (nearby); Escalator D (down to platforms), Escalator E (going up), Escalator F (going up) (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Escalator E (going up)\n  \u2022 Escalator F (going up)\n\n",
+          "action": "Agent 40 {\n  \"reasoning\": \"Goal is to leave; the platform is crowded with upward exits visible, so I\u2019ll start moving toward the nearest upward exit to reach the concourse and outside.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator E (going up)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": \"Let's head to Escalator E and out to the concourse.\",\n  \"message_type\": \"directed\",\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "Goal is to leave; the platform is crowded with upward exits visible, so I\u2019ll start moving toward the nearest upward exit to reach the concourse and outside.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              -10.484078691619661,
+              0.9427227319841531
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator E (going up)",
+            "resolved_exit_id": "escalator_e_up",
+            "confidence": 0.95,
+            "reasoning": "Goal is to leave; the platform is crowded with upward exits visible, so I\u2019ll start moving toward the nearest upward exit to reach the concourse and outside.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_50": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 3.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Grey Street (very close).\nThe area is moderate crowd nearby.\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nVisible exits right now:\n  \u2022 Grey Street\n\n",
+          "action": "Agent 50 {\n  \"reasoning\": \"I'm moving toward the nearest exit (Grey Street) to stay on track for Platform 3 as the crowd is moving; it\u2019s prudent to gain space while maintaining orientation.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Grey Street\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "I'm moving toward the nearest exit (Grey Street) to stay on track for Platform 3 as the crowd is moving; it\u2019s prudent to gain space while maintaining orientation.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              81.0,
+              5.5
+            ],
+            "target_type": "exit",
+            "exit_name": "Grey Street",
+            "resolved_exit_id": "grey_street",
+            "confidence": 0.95,
+            "reasoning": "I'm moving toward the nearest exit (Grey Street) to stay on track for Platform 3 as the crowd is moving; it\u2019s prudent to gain space while maintaining orientation.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    },
+    "agent_45": {
+      "decisions": [
+        {
+          "time": 0.0,
+          "observation": "Your current goal: Catch your train from Platform 2.\n\nWhat is NEW since your last decision:\nNo significant new information.\nYou are in the concourse (upper level \u2014 exits to Blackett Street, Grey Street and Eldon Square).\nExits visible right now: Escalator D (down to platforms), Escalator E (going up) (nearby); Escalator F (going up), Blackett Street (visible in distance).\nThe area is crowded (many people nearby).\nMost people nearby are moving.",
+          "prompt": "Decision task: choose your next action now. Respond with ONLY this JSON:\n{\n  \"reasoning\": \"1-2 sentences grounded in goal + current observations\",\n  \"action_type\": \"wait\" or \"move\",\n  \"target_type\": ONE OF: \"current_position\", \"exit\", \"agent\",\n  \"target_agent\": null (or agent_id like \"agent_5\"),\n  \"exit_name\": null (or the exit name EXACTLY as listed in visible/valid exits),\n  \"zone_name\": null,\n  \"wait_reason\": null (or reason if waiting),\n  \"speed\": null (or \"slow_walk\", \"normal_walk\", \"brisk_walk\", \"jog\", \"run\"),\n  \"message\": null (or your spoken words),\n  \"message_type\": null (or \"directed\", \"shout\"),\n  \"goal_update\": null (or revised plain-text goal if your fundamental objective has changed),\n}\n\nHard constraints:\n- If action_type='wait', target_type MUST be 'current_position'.\n- If target_type='exit', exit_name is required and must match an allowed exit name exactly.\n- If target_type='agent', target_agent is required.\n- Keep spoken message short and natural; no narration.\n- goal_update: null unless your fundamental objective has genuinely changed.\n\nDecision policy:\n1. If helping someone, stay coordinated with that person.\n2. To progress toward your goal, choose target_type='exit' or target_type='agent'.\n3. If uncertain or waiting, choose target_type='current_position'.\n\n\nAllowed exits now:\n  \u2022 Blackett Street\n  \u2022 Grey Street\n  \u2022 Eldon Square\n  \u2022 Escalator A (down to platforms)\n  \u2022 Escalator D (down to platforms)\n\n",
+          "action": "Agent 45 {\n  \"reasoning\": \"To reach Platform 2 quickly, descend via the nearby escalator down to platforms since it's the direct route and the concourse is crowded.\",\n  \"action_type\": \"move\",\n  \"target_type\": \"exit\",\n  \"target_agent\": null,\n  \"exit_name\": \"Escalator D (down to platforms)\",\n  \"zone_name\": null,\n  \"wait_reason\": null,\n  \"speed\": \"brisk_walk\",\n  \"message\": null,\n  \"message_type\": null,\n  \"goal_update\": null\n}",
+          "reasoning": {
+            "situation": "",
+            "risk_level": "",
+            "risk_assessment": "",
+            "social_context": "",
+            "reasoning": "To reach Platform 2 quickly, descend via the nearby escalator down to platforms since it's the direct route and the concourse is crowded.",
+            "goal_update": null
+          },
+          "translated": {
+            "action_type": "move",
+            "target": [
+              55.24831739915932,
+              28.078856686712783
+            ],
+            "target_type": "exit",
+            "exit_name": "Escalator D (down to platforms)",
+            "resolved_exit_id": "escalator_d_down",
+            "confidence": 0.95,
+            "reasoning": "To reach Platform 2 quickly, descend via the nearby escalator down to platforms since it's the direct route and the concourse is crowded.",
+            "speed": "brisk_walk",
+            "time": 0.0
+          }
+        }
+      ]
+    }
+  },
+  "agent_positions": {
+    "agent_43": [
+      75.69392543261131,
+      21.489891906108056
+    ],
+    "agent_44": [
+      56.379685166426846,
+      37.49007489358464
+    ],
+    "agent_45": [
+      55.70056914294239,
+      46.85837054651679
+    ],
+    "agent_46": [
+      59.94831891832641,
+      29.355242343082132
+    ],
+    "agent_47": [
+      80.72613624676517,
+      15.424077476258368
+    ],
+    "agent_48": [
+      80.03172812485029,
+      12.746040253506123
+    ],
+    "agent_49": [
+      76.04659703358847,
+      31.44833693799258
+    ],
+    "agent_50": [
+      85.00429219423522,
+      5.870821206249658
+    ],
+    "agent_51": [
+      75.02664415957229,
+      6.601072208748693
+    ],
+    "agent_52": [
+      70.67025392580695,
+      47.55274177500548
+    ],
+    "agent_53": [
+      90.33492742696227,
+      42.60561132965683
+    ],
+    "agent_54": [
+      35.63976857470424,
+      18.260796269653664
+    ],
+    "agent_55": [
+      67.68143496859223,
+      40.18999563706177
+    ],
+    "agent_56": [
+      59.14325898221893,
+      30.907615121953196
+    ],
+    "agent_57": [
+      69.92630865204005,
+      33.02959144870959
+    ],
+    "agent_58": [
+      34.09743563491193,
+      16.053281635745574
+    ],
+    "agent_59": [
+      60.155722854586806,
+      31.890986110351342
+    ],
+    "agent_60": [
+      72.91567193512665,
+      29.488410744655333
+    ],
+    "agent_61": [
+      43.33455700633699,
+      37.112981094141624
+    ],
+    "agent_62": [
+      67.2980019464026,
+      39.3169704726369
+    ],
+    "agent_63": [
+      77.61888421864197,
+      9.975948898256041
+    ],
+    "agent_64": [
+      69.42884985213306,
+      30.151433328367492
+    ],
+    "agent_65": [
+      65.10943578670768,
+      42.735976144767726
+    ],
+    "agent_66": [
+      57.536188288237554,
+      38.62484982584682
+    ],
+    "agent_67": [
+      59.39452388927565,
+      26.576337462495758
+    ],
+    "agent_68": [
+      33.29004225976395,
+      15.433888148324417
+    ],
+    "agent_69": [
+      86.11454146940196,
+      42.18220737814642
+    ],
+    "agent_70": [
+      69.90397425940729,
+      36.4347325257248
+    ],
+    "agent_71": [
+      59.55189580304959,
+      46.33764478994843
+    ],
+    "agent_72": [
+      35.8566146877032,
+      12.829690876919933
+    ],
+    "agent_73": [
+      78.51876051867615,
+      14.074263845752958
+    ],
+    "agent_74": [
+      63.2219632323458,
+      37.792434307866166
+    ],
+    "agent_75": [
+      34.88755794903422,
+      9.680279429523907
+    ],
+    "agent_76": [
+      59.228408939628494,
+      47.34057361622394
+    ],
+    "agent_77": [
+      39.90263637343978,
+      18.19411902302819
+    ],
+    "firefighter_brigade_0": [
+      87.0,
+      0.0
+    ],
+    "agent_0": [
+      -65.18647931619498,
+      45.00771069965438
+    ],
+    "agent_1": [
+      -21.04754392759741,
+      0.5031959329766377
+    ],
+    "agent_2": [
+      -10.663044655810076,
+      -6.880867787527129
+    ],
+    "agent_3": [
+      -12.3256474999662,
+      40.33028996252524
+    ],
+    "agent_4": [
+      -2.5805443548164284,
+      -9.744354308197211
+    ],
+    "agent_5": [
+      -43.83748824805573,
+      46.93611812204401
+    ],
+    "agent_6": [
+      -20.493276321914536,
+      -4.221368248165071
+    ],
+    "agent_7": [
+      -63.16962827384994,
+      40.3650489134889
+    ],
+    "agent_8": [
+      -17.967212701331672,
+      40.42752300006287
+    ],
+    "agent_9": [
+      -39.329533447390894,
+      46.49273249125547
+    ],
+    "agent_10": [
+      -20.115342306591213,
+      23.337832932254333
+    ],
+    "agent_11": [
+      -6.39113787956941,
+      -8.477474954176676
+    ],
+    "agent_12": [
+      -11.182043985127939,
+      -6.524409064311926
+    ],
+    "agent_13": [
+      -10.203508991096943,
+      22.902823392117977
+    ],
+    "agent_14": [
+      -2.667797714738076,
+      -4.2242288364250085
+    ],
+    "agent_15": [
+      -8.665213122778253,
+      -0.4754126024960534
+    ],
+    "agent_16": [
+      -5.244061617952489,
+      -29.990725384950167
+    ],
+    "agent_17": [
+      -38.24288930783027,
+      39.58733835574021
+    ],
+    "agent_18": [
+      -39.63019273450639,
+      41.22648607229077
+    ],
+    "agent_19": [
+      -53.959580804755774,
+      46.23119103099425
+    ],
+    "agent_20": [
+      -0.7006919158783648,
+      7.659382922787313
+    ],
+    "agent_21": [
+      -20.1337996850379,
+      8.84155070056715
+    ],
+    "agent_22": [
+      -20.983942231866155,
+      -23.800597810567677
+    ],
+    "agent_23": [
+      -2.132460662878743,
+      25.411697345499
+    ],
+    "agent_24": [
+      -37.06402293962917,
+      47.61541363485396
+    ],
+    "agent_25": [
+      -19.01625481335465,
+      40.233290000251166
+    ],
+    "agent_26": [
+      -15.442937549499653,
+      38.69005067868896
+    ],
+    "agent_27": [
+      -3.486327798403458,
+      -11.575595923551836
+    ],
+    "agent_28": [
+      -5.298471163876865,
+      -31.38279390453239
+    ],
+    "agent_29": [
+      -0.13510086312917208,
+      26.134066170844378
+    ],
+    "agent_30": [
+      -3.0196561467240968,
+      -6.16872931589961
+    ],
+    "agent_31": [
+      -61.256692124430536,
+      45.76389673475505
+    ],
+    "agent_32": [
+      -52.482263139479926,
+      45.61912214888771
+    ],
+    "agent_33": [
+      -22.75632118982789,
+      47.89437766113515
+    ],
+    "agent_34": [
+      -68.7249678063241,
+      37.09769494746651
+    ],
+    "agent_35": [
+      -28.36168365794259,
+      34.699809905588374
+    ],
+    "agent_36": [
+      -41.01060441171547,
+      34.93763232293799
+    ],
+    "agent_37": [
+      -21.519700158081932,
+      -17.338985836720674
+    ],
+    "agent_38": [
+      -20.27625159296069,
+      3.037888030940868
+    ],
+    "agent_39": [
+      -20.734923735733013,
+      -19.695245233723323
+    ],
+    "agent_40": [
+      -19.9708732507864,
+      24.01351210023948
+    ],
+    "agent_41": [
+      -20.15560977969488,
+      -1.390587883326377
+    ],
+    "agent_42": [
+      -21.065415383086012,
+      18.048451051104795
+    ]
+  },
+  "current_time": 0.0,
+  "events": [],
+  "blocked_exits": [],
+  "messages": [
+    {
+      "time": 0.0,
+      "sender": "agent_32",
+      "position": [
+        -52.53269871214893,
+        45.6180794326375
+      ],
+      "text": "Heading to the concourse via Escalator B.",
+      "message_type": "directed",
+      "target_agent": null,
+      "recipients": [
+        "agent_5",
+        "agent_19",
+        "agent_31"
+      ],
+      "num_recipients": 3
+    },
+    {
+      "time": 0.0,
+      "sender": "agent_40",
+      "position": [
+        -20.01039714959643,
+        23.961357860005393
+      ],
+      "text": "Let's head to Escalator E and out to the concourse.",
+      "message_type": "directed",
+      "target_agent": null,
+      "recipients": [
+        "agent_10",
+        "agent_13",
+        "agent_42"
+      ],
+      "num_recipients": 3
+    }
+  ],
+  "config": {
+    "decision_interval": 15.0,
+    "max_steps": 18000,
+    "num_agents": 78
+  },
+  "agent_levels": {
+    "agent_0": "-1",
+    "agent_1": "-1",
+    "agent_2": "-1",
+    "agent_3": "-1",
+    "agent_4": "-1",
+    "agent_5": "-1",
+    "agent_6": "-1",
+    "agent_7": "-1",
+    "agent_8": "-1",
+    "agent_9": "-1",
+    "agent_10": "-1",
+    "agent_11": "-1",
+    "agent_12": "-1",
+    "agent_13": "-1",
+    "agent_14": "-1",
+    "agent_15": "-1",
+    "agent_16": "-1",
+    "agent_17": "-1",
+    "agent_18": "-1",
+    "agent_19": "-1",
+    "agent_20": "-1",
+    "agent_21": "-1",
+    "agent_22": "-1",
+    "agent_23": "-1",
+    "agent_24": "-1",
+    "agent_25": "-1",
+    "agent_26": "-1",
+    "agent_27": "-1",
+    "agent_28": "-1",
+    "agent_29": "-1",
+    "agent_30": "-1",
+    "agent_31": "-1",
+    "agent_32": "-1",
+    "agent_33": "-1",
+    "agent_34": "-1",
+    "agent_35": "-1",
+    "agent_36": "-1",
+    "agent_37": "-1",
+    "agent_38": "-1",
+    "agent_39": "-1",
+    "agent_40": "-1",
+    "agent_41": "-1",
+    "agent_42": "-1",
+    "agent_43": "0",
+    "agent_44": "0",
+    "agent_45": "0",
+    "agent_46": "0",
+    "agent_47": "0",
+    "agent_48": "0",
+    "agent_49": "0",
+    "agent_50": "0",
+    "agent_51": "0",
+    "agent_52": "0",
+    "agent_53": "0",
+    "agent_54": "0",
+    "agent_55": "0",
+    "agent_56": "0",
+    "agent_57": "0",
+    "agent_58": "0",
+    "agent_59": "0",
+    "agent_60": "0",
+    "agent_61": "0",
+    "agent_62": "0",
+    "agent_63": "0",
+    "agent_64": "0",
+    "agent_65": "0",
+    "agent_66": "0",
+    "agent_67": "0",
+    "agent_68": "0",
+    "agent_69": "0",
+    "agent_70": "0",
+    "agent_71": "0",
+    "agent_72": "0",
+    "agent_73": "0",
+    "agent_74": "0",
+    "agent_75": "0",
+    "agent_76": "0",
+    "agent_77": "0",
+    "firefighter_brigade_0": "0"
+  }
+}

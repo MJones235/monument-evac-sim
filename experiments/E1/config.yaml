@@ -3,11 +3,92 @@ extends: ../base.yaml
 # E1 — Fire alarm only
 # No staff intervention, no PA announcement beyond the alarm itself.
 # Agents must decide what to do based solely on hearing the fire alarm.
+#
+# Real study details (Proulx 1991, Table 1 / Article 3, pp. 139–142):
+#   - ~111 passengers present (66 on concourse, 45 at bottom of N/S escalators).
+#   - Train 124 arrives at Platform 1 as the alarm sounds (standard trigger for
+#     all five drills).  It departs on its normal schedule (~30 s dwell).
+#   - No PA, no staff directing evacuation.
+#   - Result: complete failure.  Concourse crowd waited 8:15 min before the
+#     Fire Brigade physically moved them; escalator crowd at 9:00 min.
+#   - Exercise terminated at 14:47 min with the station still occupied.
+#
+# Fire Brigade physical arrival (modelled via firefighter_brigade override below):
+#   The fully operational Fire Brigade arrived on-scene at approximately 7:40 min
+#   and began physically directing the 66-person concourse crowd at 8:15 min,
+#   then the 45-person escalator-bottom crowd at 9:00 min.  This is later than
+#   the base-config default of 4.5 min (which represents the notification call,
+#   not their physical arrival).
+
+simulation:
+  max_iterations: 18000  # 18 000 × 0.05 s = 900 s = 15 min (exercise ran to 14:47)
+
+agents:
+  count: 80  # Real study: ~111; 80 is a computationally feasible approximation
+  roles:
+    heading_to_platform:
+      memories:
+        - "I am at the station today because I need to catch a train from Platform {target}."
+        - "My reason for travelling is {purpose}."
+        - "I need to get to {purpose} and cannot afford to miss this train."
+    waiting_for_train:
+      weight: 0.8
+      memories:
+        - "I am standing on the platform waiting to board my train from Platform {target}."
+        - "I am travelling for {purpose}."
+        - "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+    just_arrived:
+      weight: 0.2
+
+station:
+  knowledge:
+    base_memories:
+      - "I am inside Monument station in central Newcastle."
+      - "This station has multiple levels connected by escalators and stairs."
+      - "To reach street level from platforms, I need to go up to the concourse first."
+      - "Wayfinding signs and nearby crowd behavior can help me navigate."
+      - "Station alarms often turn out to be false alarms, tests, or minor incidents."
+      - "When alarms sound, I try to assess whether the emergency appears real using visible evidence, staff guidance, and crowd behavior."
 
 events:
+  # Train 124 arrives at Platform 1 as the alarm is triggered (normal trigger
+  # for all five Proulx drills).  Departs on its standard 30 s schedule.
+  - time: 10.0
+    type: train_arrival
+    platforms: [1]
+    dwell_seconds: 30
+    sender_label: "Station display board"
+    message: "A train has arrived at Platform 1."
+    departure_announce: false
   - time: 15.0
-    message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+    message: "An alarm bell is ringing throughout the station. You cannot see any smoke, fire, or sign of emergency."
   # Fire marshals power off and block the N/S escalators (D/E/F bank) at alarm time.
   - time: 15.0
     type: block_exit
     exits: [escalator_d_down, escalator_e_up, escalator_f_up]
+
+# Override firefighter_brigade arrival time to match Table 1 for E1:
+# concourse crowd moved at 8:15 min, escalator crowd at 9:00 min post-alarm.
+# trigger_after_seconds is measured from when the alarm fires (the on_event trigger).
+systems:
+  firefighter_brigade:
+    phases:
+      - trigger: on_event
+        movement: hold
+        directive_radius: 0.0
+        directive_interval: 9999.0
+        message: ""
+      - trigger: after_seconds
+        trigger_after_seconds: 480  # 8 min post-alarm — physically arrives on concourse; directs crowd at 8:15 min
+        movement: zone_patrol
+        patrol_zones:
+          - zone: concourse
+            level_id: "0"
+          - zone: platform_1
+            level_id: "-1"
+        patrol_dwell_time: 45.0
+        directive_radius: 15.0
+        directive_interval: 10.0
+        message: >-
+          This is the Fire Brigade. You must leave the station immediately.
+          Please use the nearest street exit now.

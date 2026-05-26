@@ -1,0 +1,499 @@
+{
+  "description": {
+    "left_station": "Agents who have left the station",
+    "concourse": "Agents on the concourse (level 0)",
+    "escalator_bottom": "Agents at the bottom of escalators (level -1, escalator zones)",
+    "platform": "Agents on a platform (level -1)"
+  },
+  "interval_seconds": 15,
+  "snapshots": [
+    {
+      "sim_time_s": 0.0,
+      "sim_time_min": 0.0,
+      "left_station": 0,
+      "concourse": 37,
+      "escalator_bottom": 0,
+      "platform": 45
+    },
+    {
+      "sim_time_s": 15.0,
+      "sim_time_min": 0.25,
+      "left_station": 3,
+      "concourse": 37,
+      "escalator_bottom": 0,
+      "platform": 42
+    },
+    {
+      "sim_time_s": 30.0,
+      "sim_time_min": 0.5,
+      "left_station": 9,
+      "concourse": 32,
+      "escalator_bottom": 0,
+      "platform": 41
+    },
+    {
+      "sim_time_s": 45.0,
+      "sim_time_min": 0.75,
+      "left_station": 12,
+      "concourse": 27,
+      "escalator_bottom": 2,
+      "platform": 41
+    },
+    {
+      "sim_time_s": 60.0,
+      "sim_time_min": 1.0,
+      "left_station": 16,
+      "concourse": 27,
+      "escalator_bottom": 3,
+      "platform": 36
+    },
+    {
+      "sim_time_s": 75.0,
+      "sim_time_min": 1.25,
+      "left_station": 20,
+      "concourse": 26,
+      "escalator_bottom": 3,
+      "platform": 33
+    },
+    {
+      "sim_time_s": 90.0,
+      "sim_time_min": 1.5,
+      "left_station": 22,
+      "concourse": 25,
+      "escalator_bottom": 2,
+      "platform": 33
+    },
+    {
+      "sim_time_s": 105.0,
+      "sim_time_min": 1.75,
+      "left_station": 22,
+      "concourse": 30,
+      "escalator_bottom": 1,
+      "platform": 29
+    },
+    {
+      "sim_time_s": 120.0,
+      "sim_time_min": 2.0,
+      "left_station": 24,
+      "concourse": 29,
+      "escalator_bottom": 4,
+      "platform": 25
+    },
+    {
+      "sim_time_s": 135.0,
+      "sim_time_min": 2.25,
+      "left_station": 28,
+      "concourse": 29,
+      "escalator_bottom": 2,
+      "platform": 23
+    },
+    {
+      "sim_time_s": 150.0,
+      "sim_time_min": 2.5,
+      "left_station": 29,
+      "concourse": 29,
+      "escalator_bottom": 0,
+      "platform": 24
+    },
+    {
+      "sim_time_s": 165.0,
+      "sim_time_min": 2.75,
+      "left_station": 31,
+      "concourse": 26,
+      "escalator_bottom": 2,
+      "platform": 23
+    },
+    {
+      "sim_time_s": 180.0,
+      "sim_time_min": 3.0,
+      "left_station": 37,
+      "concourse": 27,
+      "escalator_bottom": 1,
+      "platform": 17
+    },
+    {
+      "sim_time_s": 195.0,
+      "sim_time_min": 3.25,
+      "left_station": 41,
+      "concourse": 25,
+      "escalator_bottom": 1,
+      "platform": 15
+    },
+    {
+      "sim_time_s": 210.0,
+      "sim_time_min": 3.5,
+      "left_station": 43,
+      "concourse": 25,
+      "escalator_bottom": 1,
+      "platform": 13
+    },
+    {
+      "sim_time_s": 225.0,
+      "sim_time_min": 3.75,
+      "left_station": 46,
+      "concourse": 25,
+      "escalator_bottom": 0,
+      "platform": 11
+    },
+    {
+      "sim_time_s": 240.0,
+      "sim_time_min": 4.0,
+      "left_station": 49,
+      "concourse": 22,
+      "escalator_bottom": 3,
+      "platform": 8
+    },
+    {
+      "sim_time_s": 255.0,
+      "sim_time_min": 4.25,
+      "left_station": 52,
+      "concourse": 25,
+      "escalator_bottom": 0,
+      "platform": 5
+    },
+    {
+      "sim_time_s": 270.0,
+      "sim_time_min": 4.5,
+      "left_station": 55,
+      "concourse": 24,
+      "escalator_bottom": 1,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 285.0,
+      "sim_time_min": 4.75,
+      "left_station": 56,
+      "concourse": 20,
+      "escalator_bottom": 1,
+      "platform": 5
+    },
+    {
+      "sim_time_s": 300.0,
+      "sim_time_min": 5.0,
+      "left_station": 60,
+      "concourse": 15,
+      "escalator_bottom": 1,
+      "platform": 6
+    },
+    {
+      "sim_time_s": 315.0,
+      "sim_time_min": 5.25,
+      "left_station": 62,
+      "concourse": 13,
+      "escalator_bottom": 1,
+      "platform": 6
+    },
+    {
+      "sim_time_s": 330.0,
+      "sim_time_min": 5.5,
+      "left_station": 63,
+      "concourse": 13,
+      "escalator_bottom": 0,
+      "platform": 6
+    },
+    {
+      "sim_time_s": 345.0,
+      "sim_time_min": 5.75,
+      "left_station": 64,
+      "concourse": 12,
+      "escalator_bottom": 0,
+      "platform": 6
+    },
+    {
+      "sim_time_s": 360.0,
+      "sim_time_min": 6.0,
+      "left_station": 65,
+      "concourse": 11,
+      "escalator_bottom": 2,
+      "platform": 4
+    },
+    {
+      "sim_time_s": 375.0,
+      "sim_time_min": 6.25,
+      "left_station": 65,
+      "concourse": 13,
+      "escalator_bottom": 1,
+      "platform": 3
+    },
+    {
+      "sim_time_s": 390.0,
+      "sim_time_min": 6.5,
+      "left_station": 68,
+      "concourse": 11,
+      "escalator_bottom": 0,
+      "platform": 3
+    },
+    {
+      "sim_time_s": 405.0,
+      "sim_time_min": 6.75,
+      "left_station": 68,
+      "concourse": 9,
+      "escalator_bottom": 1,
+      "platform": 4
+    },
+    {
+      "sim_time_s": 420.0,
+      "sim_time_min": 7.0,
+      "left_station": 69,
+      "concourse": 8,
+      "escalator_bottom": 0,
+      "platform": 5
+    },
+    {
+      "sim_time_s": 435.0,
+      "sim_time_min": 7.25,
+      "left_station": 70,
+      "concourse": 6,
+      "escalator_bottom": 2,
+      "platform": 4
+    },
+    {
+      "sim_time_s": 450.0,
+      "sim_time_min": 7.5,
+      "left_station": 72,
+      "concourse": 6,
+      "escalator_bottom": 0,
+      "platform": 4
+    },
+    {
+      "sim_time_s": 465.0,
+      "sim_time_min": 7.75,
+      "left_station": 72,
+      "concourse": 7,
+      "escalator_bottom": 0,
+      "platform": 3
+    },
+    {
+      "sim_time_s": 480.0,
+      "sim_time_min": 8.0,
+      "left_station": 72,
+      "concourse": 7,
+      "escalator_bottom": 0,
+      "platform": 3
+    },
+    {
+      "sim_time_s": 495.0,
+      "sim_time_min": 8.25,
+      "left_station": 73,
+      "concourse": 6,
+      "escalator_bottom": 1,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 510.0,
+      "sim_time_min": 8.5,
+      "left_station": 73,
+      "concourse": 6,
+      "escalator_bottom": 0,
+      "platform": 3
+    },
+    {
+      "sim_time_s": 525.0,
+      "sim_time_min": 8.75,
+      "left_station": 73,
+      "concourse": 7,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 540.0,
+      "sim_time_min": 9.0,
+      "left_station": 73,
+      "concourse": 7,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 555.0,
+      "sim_time_min": 9.25,
+      "left_station": 74,
+      "concourse": 6,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 570.0,
+      "sim_time_min": 9.5,
+      "left_station": 76,
+      "concourse": 4,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 585.0,
+      "sim_time_min": 9.75,
+      "left_station": 76,
+      "concourse": 4,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 600.0,
+      "sim_time_min": 10.0,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 615.0,
+      "sim_time_min": 10.25,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 630.0,
+      "sim_time_min": 10.5,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 645.0,
+      "sim_time_min": 10.75,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 660.0,
+      "sim_time_min": 11.0,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 675.0,
+      "sim_time_min": 11.25,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 690.0,
+      "sim_time_min": 11.5,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 705.0,
+      "sim_time_min": 11.75,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 720.0,
+      "sim_time_min": 12.0,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 735.0,
+      "sim_time_min": 12.25,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 750.0,
+      "sim_time_min": 12.5,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 765.0,
+      "sim_time_min": 12.75,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 780.0,
+      "sim_time_min": 13.0,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 795.0,
+      "sim_time_min": 13.25,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 810.0,
+      "sim_time_min": 13.5,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 825.0,
+      "sim_time_min": 13.75,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 840.0,
+      "sim_time_min": 14.0,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 855.0,
+      "sim_time_min": 14.25,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 870.0,
+      "sim_time_min": 14.5,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 885.0,
+      "sim_time_min": 14.75,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    },
+    {
+      "sim_time_s": 899.95,
+      "sim_time_min": 14.999,
+      "left_station": 77,
+      "concourse": 3,
+      "escalator_bottom": 0,
+      "platform": 2
+    }
+  ]
+}

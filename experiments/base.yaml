@@ -164,20 +164,7 @@ test_scenarios:
 llm:
   temperature: 0.7
   max_retries: 3
-  # gpt-5-nano is a reasoning model: it generates hidden chain-of-thought tokens
-  # counted toward max_completion_tokens before producing visible output.
-  # Previously set to 8000, which caused ~1651 reasoning tokens per call (avg)
-  # and response latencies of 2–88 s each.  Capping at 1500 limits reasoning
-  # to ~1360 tokens while still leaving ~140 tokens for the JSON response.
-  # Pair with reasoning_effort: "low" for the best latency reduction.
-  max_completion_tokens: 1500
-  # Ask the model to use minimal internal reasoning.  Supported by o-series and
-  # gpt-5-nano on Azure OpenAI.  Remove or set to null to use model default.
-  reasoning_effort: "low"
-  # Constrain the model to output valid JSON (gpt-5-nano "customs" structured
-  # output path).  Eliminates prefix-stripping hacks and parse retries.
-  # Set to null to disable (e.g. when switching to a non-JSON-capable model).
-  response_format: "json_object"
+  max_completion_tokens: 8000
   embedder: "sentence-transformers/all-mpnet-base-v2"
 
 # Output configuration
@@ -395,7 +382,7 @@ systems:
         movement: hold
         directive_radius: 10.0
         directive_interval: 15.0
-        message: "Please evacuate the station. Escalator D (down to platforms), Escalator E (going up) and Escalator F (going up) are closed — use Escalator B or Escalator C to reach the concourse."
+        message: "Please evacuate the station."
 
   # Two fire marshals at the BOTTOM of the N/S escalators (platform level -1).
   # Positioned in front of escalator D (one) and escalator F (other).
@@ -414,7 +401,7 @@ systems:
         movement: hold
         directive_radius: 10.0
         directive_interval: 15.0
-        message: "Please evacuate the station. Escalator D (down to platforms), Escalator E (going up) and Escalator F (going up) are closed — use Escalator B or Escalator C to reach the concourse."
+        message: "Please evacuate the station."
 
   # The fully operational Fire Brigade arrives ~4–5 minutes post-alarm.
   # Modelled as a single officer who patrols the concourse and escalator
@@ -455,6 +442,8 @@ performance:
   agent_cooldown: 10.0
   decision_caching: true
   max_parallel_agents: 10
+  decision_timeout_seconds: 45.0
+  wait_nudge_enabled: false
 
 # Future: Spawning schedule (disabled for now)
 # agents:
