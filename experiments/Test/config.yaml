@@ -1,0 +1,50 @@
+extends: ../base.yaml
+
+simulation:
+  max_iterations: 1200  # 18 000 × 0.05 s = 900 s = 15 min (exercise ran to 14:47)
+  # Keep transferred agents clearing escalator landings before resuming full autonomy.
+  transfer_discharge_enabled: true
+  transfer_discharge_min_distance_m: 4.0
+  transfer_discharge_max_seconds: 8.0
+  transfer_discharge_target_refresh_seconds: 0.5
+  transfer_discharge_debug_trace: true
+  transfer_discharge_debug_interval_seconds: 0.5
+
+
+agents:
+  count: 80  # Real study: ~111; 80 is a computationally feasible approximation
+  # snapshot_save_path: snapshots/monument_80.json
+  snapshot_load_path: snapshots/monument_80.json
+  roles:
+    heading_to_platform:
+      memories:
+        - "I am at the station today because I need to catch a train from Platform {target}."
+        - "My reason for travelling is {purpose}."
+        - "I need to get to {purpose} and cannot afford to miss this train."
+    waiting_for_train:
+      weight: 0.8
+      memories:
+        - "I am standing on the platform waiting to board my train from Platform {target}."
+        - "I am travelling for {purpose}."
+        - "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+    just_arrived:
+      weight: 0.2
+
+station:
+  knowledge:
+    base_memories:
+      - "I am inside Monument station in central Newcastle."
+      - "This station has multiple levels connected by escalators and stairs."
+      - "To reach street level from platforms, I need to go up to the concourse first."
+
+events:
+  - time: 15.0
+    message: "An alarm bell is ringing throughout the station. You cannot see any smoke, fire, or sign of emergency."
+
+# Clear inherited rule-based systems (firefighters/marshals) from base config.
+systems: {}
+
+# Test-specific performance overrides
+performance:
+  immediate_redecision_on_transfer: true
+  min_redecision_interval_seconds: 15.0

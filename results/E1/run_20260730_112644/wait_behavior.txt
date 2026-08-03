@@ -1,0 +1,47 @@
+=== WAITING BEHAVIOR ANALYTICS ===
+
+Total wait events: 77
+Agents who waited: 77
+
+Wait events by reason:
+  unspecified: 77 waits (100.0%)
+
+Wait events by personality:
+  ISTJ: 7 waits (9.1%)
+  INFP: 7 waits (9.1%)
+  INFJ: 7 waits (9.1%)
+  ISFJ: 6 waits (7.8%)
+  ESTP: 6 waits (7.8%)
+  INTP: 6 waits (7.8%)
+  ISTP: 5 waits (6.5%)
+  ENFP: 5 waits (6.5%)
+  ESFP: 5 waits (6.5%)
+  INTJ: 5 waits (6.5%)
+  ENFJ: 4 waits (5.2%)
+  ESFJ: 4 waits (5.2%)
+  ESTJ: 3 waits (3.9%)
+  ISFP: 3 waits (3.9%)
+  ENTP: 2 waits (2.6%)
+  ENTJ: 2 waits (2.6%)
+
+Recent Wait Events (last 20):
+  - t=0.0s: agent_53 (ISFP) waited (unspecified)
+  - t=0.0s: agent_57 (INFJ) waited (unspecified)
+  - t=0.0s: agent_62 (INTJ) waited (unspecified)
+  - t=0.0s: agent_61 (INFP) waited (unspecified)
+  - t=0.0s: agent_63 (ESFP) waited (unspecified)
+  - t=0.0s: agent_58 (ENFP) waited (unspecified)
+  - t=0.0s: agent_59 (ESFJ) waited (unspecified)
+  - t=0.0s: agent_64 (ISFP) waited (unspecified)
+  - t=0.0s: agent_67 (ENFP) waited (unspecified)
+  - t=0.0s: agent_69 (INFP) waited (unspecified)
+  - t=0.0s: agent_65 (INFP) waited (unspecified)
+  - t=0.0s: agent_71 (ENFJ) waited (unspecified)
+  - t=0.0s: agent_72 (ENFP) waited (unspecified)
+  - t=0.0s: agent_66 (ENTJ) waited (unspecified)
+  - t=0.0s: agent_70 (ISTJ) waited (unspecified)
+  - t=0.0s: agent_68 (ISTP) waited (unspecified)
+  - t=0.0s: agent_75 (INFJ) waited (unspecified)
+  - t=0.0s: agent_73 (ENFJ) waited (unspecified)
+  - t=0.0s: agent_76 (INFJ) waited (unspecified)
+  - t=0.0s: agent_74 (INTP) waited (unspecified)

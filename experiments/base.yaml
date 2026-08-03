@@ -85,7 +85,7 @@ agents:
         - "My reason for travelling is {purpose}."
       target: [1, 2, 3, 4]
     waiting_for_train:
-      spawn_zones: ["platform_abc", "platform_def"]
+      spawn_zones: ["platform_1", "platform_2", "platform_3", "platform_4"]
       weight: 0.5
       goal: "Wait on Platform {target} and board your train when it arrives."
       memories:
@@ -93,7 +93,7 @@ agents:
         - "I am travelling for {purpose}."
       target: [1, 2, 3, 4]
     just_arrived:
-      spawn_zones: ["platform_abc", "platform_def"]
+      spawn_zones: ["platform_1", "platform_2", "platform_3", "platform_4"]
       weight: 0.5
       goal: "Leave the station and continue with your day (next destination: {purpose})."
       memories:
@@ -235,12 +235,18 @@ station:
 
   # UP escalators reachable from each platform zone (used for commuter valid-exits prompt).
   platform_up_exits:
-    platform_abc:
-      - escalator_b_up
-      - escalator_c_up
-    platform_def:
+    platform_1:
       - escalator_e_up
       - escalator_f_up
+    platform_2:
+      - escalator_e_up
+      - escalator_f_up
+    platform_3:
+      - escalator_b_up
+      - escalator_c_up
+    platform_4:
+      - escalator_b_up
+      - escalator_c_up
 
   # DOWN escalator zones on level 0 that lead to each platform zone.
   # Values are canonical escalator IDs (as used in the exit registry).
@@ -278,6 +284,41 @@ station:
     train_platform_3: "Train at Platform 3 (board to evacuate)"
     train_platform_4: "Train at Platform 4 (board to evacuate)"
 
+  # Optional semantic tags used by evacusim's prompt-side routing guidance.
+  # This keeps goal/exit reasoning geometry-agnostic and config-driven.
+  exit_semantic_tags:
+    blackett_street: [to_street, outside_station]
+    grey_street: [to_street, outside_station]
+    eldon_square: [to_street, outside_station]
+
+    escalator_a_down: [to_platform, vertical_connector]
+    escalator_d_down: [to_platform, vertical_connector]
+
+    escalator_b_up: [to_concourse, vertical_connector]
+    escalator_c_up: [to_concourse, vertical_connector]
+    escalator_e_up: [to_concourse, vertical_connector]
+    escalator_f_up: [to_concourse, vertical_connector]
+
+    train_platform_1: [to_train]
+    train_platform_2: [to_train]
+    train_platform_3: [to_train]
+    train_platform_4: [to_train]
+
+  # Optional prompt-routing policies that map goal intent to exit semantics.
+  # Rules are evaluated in order; first match wins.
+  goal_semantic_policies:
+    - when_goal_contains_any: ["platform", "catch your train", "board your train"]
+      applies_in_zones: [concourse, level_0, level_1]
+      prefer_exit_tags: [to_platform]
+      avoid_exit_tags: [to_street]
+      instruction: "Escalators to platforms move you toward platform/train goals; street exits leave the station."
+
+    - when_goal_contains_any: ["leave the station", "continue with your day", "leave via"]
+      applies_in_zones: [platform_abc, platform_def, platform_1, platform_2, platform_3, platform_4, level_-1]
+      prefer_exit_tags: [to_concourse]
+      avoid_exit_tags: [to_platform]
+      instruction: "From platforms, use UP connectors to reach the concourse first; street exits are used from the concourse to leave the station."
+
   # Fallback zone when an agent's zone cannot be determined from spawn position.
   default_platform_zone: "platform_def"
 
@@ -314,21 +355,21 @@ station:
       - when:
           profiles: ["commuter"]
           level_ids: ["-1"]
-          zones: ["platform_abc"]
+          zones: ["platform_3", "platform_4"]
         memories:
           - "On this platform, Escalator B (going up) and Escalator C (going up) lead to the concourse and street exits."
           - "Escalator A goes down and does not lead toward the street exits."
       - when:
           profiles: ["commuter"]
           level_ids: ["-1"]
-          zones: ["platform_def"]
+          zones: ["platform_1", "platform_2"]
         memories:
           - "On this platform, Escalator E (going up) and Escalator F (going up) lead to the concourse and street exits."
           - "Escalator D goes down and does not lead toward the street exits."
       - when:
           profiles: ["novice"]
           level_ids: ["-1"]
-          zones: ["platform_abc", "platform_def"]
+          zones: ["platform_1", "platform_2", "platform_3", "platform_4"]
         memories:
           - "From platform level, I should follow signs to an UP escalator in my immediate surroundings to reach the concourse exits."
       - when:

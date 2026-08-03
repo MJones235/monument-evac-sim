@@ -1,0 +1,22 @@
+{
+  "_comment": "EvacuSim Studio map metadata. Maps JuPedSim XML polygon names to the exit identifiers used in agent_decisions_history.jsonl, and provides human-readable labels for named areas. Consumed by the /api/experiments/{id}/geometry endpoint.",
+  "exit_map": {
+    "L-1_esc_a_down": "escalator_a_down",
+    "L-1_esc_b_up":   "escalator_b_up",
+    "L-1_esc_c_up":   "escalator_c_up",
+    "L-1_esc_d_down": "escalator_d_down",
+    "L-1_esc_e_up":   "escalator_e_up",
+    "L-1_esc_f_up":   "escalator_f_up",
+    "platform_1":     "train_platform_1",
+    "platform_2":     "train_platform_2",
+    "platform_3":     "train_platform_3",
+    "platform_4":     "train_platform_4"
+  },
+  "labels": {
+    "platform_1": "Platform 1",
+    "platform_2": "Platform 2",
+    "platform_3": "Platform 3",
+    "platform_4": "Platform 4",
+    "concourse":  "Concourse"
+  }
+}

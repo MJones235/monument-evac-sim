@@ -1,0 +1,2233 @@
+{
+  "version": 1,
+  "agent_count": 77,
+  "agents": [
+    {
+      "id": "agent_0",
+      "name": "Agent 0",
+      "personality_type": "ISTJ",
+      "age": 65,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -65.18229036765268,
+        44.940927692834954
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for a medical appointment.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.5291316752564073
+    },
+    {
+      "id": "agent_1",
+      "name": "Agent 1",
+      "personality_type": "INTJ",
+      "age": 61,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -21.022022855942367,
+        0.44919200608583765
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for a day out in the city.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.15608170125827
+    },
+    {
+      "id": "agent_2",
+      "name": "Agent 2",
+      "personality_type": "INFJ",
+      "age": 31,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_def",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -10.715905352280743,
+        -6.844562044325176
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for work.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6665303909315046
+    },
+    {
+      "id": "agent_3",
+      "name": "Agent 3",
+      "personality_type": "ESFJ",
+      "age": 32,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_def",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -12.234841157636993,
+        40.323757090274434
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a visit to family.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8916129601858515
+    },
+    {
+      "id": "agent_4",
+      "name": "Agent 4",
+      "personality_type": "ISTJ",
+      "age": 66,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_1",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -2.5730987530775735,
+        -9.778743951715974
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for a day out in the city.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.3396040981003339
+    },
+    {
+      "id": "agent_5",
+      "name": "Agent 5",
+      "personality_type": "ISTP",
+      "age": 31,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -43.88758730646781,
+        46.94336701159687
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for school.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.4724164726724553
+    },
+    {
+      "id": "agent_6",
+      "name": "Agent 6",
+      "personality_type": "ENTP",
+      "age": 72,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -20.54384014343689,
+        -4.222455796824747
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a visit to family.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.2085605644801245
+    },
+    {
+      "id": "agent_7",
+      "name": "Agent 7",
+      "personality_type": "ENFJ",
+      "age": 52,
+      "gender": "man",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_abc",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -63.18166935897615,
+        40.42209764450431
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for school.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.3626113114711682
+    },
+    {
+      "id": "agent_8",
+      "name": "Agent 8",
+      "personality_type": "ENTP",
+      "age": 54,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_abc",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -18.046346600702982,
+        40.41287121578167
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for school.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.5750226209421827
+    },
+    {
+      "id": "agent_9",
+      "name": "Agent 9",
+      "personality_type": "INTP",
+      "age": 67,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -39.28353126834982,
+        46.49495725478078
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a medical appointment.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.8948081660841865
+    },
+    {
+      "id": "agent_10",
+      "name": "Agent 10",
+      "personality_type": "ESTJ",
+      "age": 35,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a university lecture",
+      "target": "",
+      "level_id": "-1",
+      "start_position": [
+        -20.11035454592109,
+        23.3916525448451
+      ],
+      "agent_role": "just_arrived",
+      "goal_state": "Leave the station and continue with your day (next destination: a university lecture).",
+      "purpose_memories": [
+        "I have just got off my train and stepped onto the platform.",
+        "Now that I have arrived I intend to leave the station and get on with my day \u2014 I am heading to a university lecture."
+      ],
+      "initial_goal": "Leave the station and continue with your day (next destination: a university lecture).",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6332344163557457
+    },
+    {
+      "id": "agent_11",
+      "name": "Agent 11",
+      "personality_type": "ENTP",
+      "age": 31,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_def",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 1,
+      "level_id": "-1",
+      "start_position": [
+        -6.346259019434449,
+        -8.485075758188671
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 1 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 1.",
+        "I am travelling for school.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 1 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6828001931992151
+    },
+    {
+      "id": "agent_12",
+      "name": "Agent 12",
+      "personality_type": "ISFP",
+      "age": 52,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_def",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a job interview",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -11.15359497352891,
+        -6.5439483927435305
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a job interview.",
+        "I need to get to a job interview and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7634369781950727
+    },
+    {
+      "id": "agent_13",
+      "name": "Agent 13",
+      "personality_type": "INTP",
+      "age": 61,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_def",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -10.199359413021277,
+        22.8223249372138
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for a medical appointment.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7131910237719996
+    },
+    {
+      "id": "agent_14",
+      "name": "Agent 14",
+      "personality_type": "ENFP",
+      "age": 43,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_1",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -2.6761492521347208,
+        -4.277789924806271
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a medical appointment.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.1973137987468887
+    },
+    {
+      "id": "agent_15",
+      "name": "Agent 15",
+      "personality_type": "ENFP",
+      "age": 31,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_def",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a job interview",
+      "target": 1,
+      "level_id": "-1",
+      "start_position": [
+        -8.59945517345566,
+        -0.526682359639544
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a job interview.",
+        "I need to get to a job interview and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.2048966478425165
+    },
+    {
+      "id": "agent_16",
+      "name": "Agent 16",
+      "personality_type": "ISTP",
+      "age": 33,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_1",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": "",
+      "level_id": "-1",
+      "start_position": [
+        -5.249591288987546,
+        -30.061202229032332
+      ],
+      "agent_role": "just_arrived",
+      "goal_state": "Leave the station and continue with your day (next destination: a day out in the city).",
+      "purpose_memories": [
+        "I have just got off my train and stepped onto the platform.",
+        "Now that I have arrived I intend to leave the station and get on with my day \u2014 I am heading to a day out in the city."
+      ],
+      "initial_goal": "Leave the station and continue with your day (next destination: a day out in the city).",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.7670583868763318
+    },
+    {
+      "id": "agent_17",
+      "name": "Agent 17",
+      "personality_type": "ESTJ",
+      "age": 41,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_abc",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 1,
+      "level_id": "-1",
+      "start_position": [
+        -38.3316640298502,
+        39.5902537237342
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 1 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 1.",
+        "I am travelling for a meeting in the city centre.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 1 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.3232743504259674
+    },
+    {
+      "id": "agent_18",
+      "name": "Agent 18",
+      "personality_type": "ISFJ",
+      "age": 73,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_abc",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a shopping trip in the city centre",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -39.56611261170195,
+        41.221325035961065
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a shopping trip in the city centre.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.5
+    },
+    {
+      "id": "agent_19",
+      "name": "Agent 19",
+      "personality_type": "ESFJ",
+      "age": 56,
+      "gender": "man",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -53.874851358457235,
+        46.19478395397146
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for a day out in the city.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8782609868978595
+    },
+    {
+      "id": "agent_20",
+      "name": "Agent 20",
+      "personality_type": "ENFJ",
+      "age": 51,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_1",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -0.690751438631608,
+        7.7032570896350805
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for work.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.9983254723055488
+    },
+    {
+      "id": "agent_21",
+      "name": "Agent 21",
+      "personality_type": "INTJ",
+      "age": 61,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a university lecture",
+      "target": "",
+      "level_id": "-1",
+      "start_position": [
+        -20.02862329142617,
+        8.840055298944009
+      ],
+      "agent_role": "just_arrived",
+      "goal_state": "Leave the station and continue with your day (next destination: a university lecture).",
+      "purpose_memories": [
+        "I have just got off my train and stepped onto the platform.",
+        "Now that I have arrived I intend to leave the station and get on with my day \u2014 I am heading to a university lecture."
+      ],
+      "initial_goal": "Leave the station and continue with your day (next destination: a university lecture).",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7930335611198365
+    },
+    {
+      "id": "agent_22",
+      "name": "Agent 22",
+      "personality_type": "ESFJ",
+      "age": 28,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -20.98649488098831,
+        -23.822945782564638
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a visit to family.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6626472210447996
+    },
+    {
+      "id": "agent_23",
+      "name": "Agent 23",
+      "personality_type": "ISFP",
+      "age": 50,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_def",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -2.0816862640546674,
+        25.423728845393065
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for a visit to family.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.750302378540201
+    },
+    {
+      "id": "agent_24",
+      "name": "Agent 24",
+      "personality_type": "INFP",
+      "age": 27,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": "",
+      "level_id": "-1",
+      "start_position": [
+        -37.076050210784715,
+        47.66492174279852
+      ],
+      "agent_role": "just_arrived",
+      "goal_state": "Leave the station and continue with your day (next destination: a meeting in the city centre).",
+      "purpose_memories": [
+        "I have just got off my train and stepped onto the platform.",
+        "Now that I have arrived I intend to leave the station and get on with my day \u2014 I am heading to a meeting in the city centre."
+      ],
+      "initial_goal": "Leave the station and continue with your day (next destination: a meeting in the city centre).",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.3107915507023344
+    },
+    {
+      "id": "agent_25",
+      "name": "Agent 25",
+      "personality_type": "ISTJ",
+      "age": 56,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_abc",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -18.945418194879366,
+        40.24640559808453
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for work.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8991690362059286
+    },
+    {
+      "id": "agent_26",
+      "name": "Agent 26",
+      "personality_type": "ENTP",
+      "age": 74,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_abc",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -15.442937549499653,
+        38.63361270447883
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for work.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7647968651972874
+    },
+    {
+      "id": "agent_27",
+      "name": "Agent 27",
+      "personality_type": "INFJ",
+      "age": 23,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_1",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": "",
+      "level_id": "-1",
+      "start_position": [
+        -3.490780983189076,
+        -11.63299596736017
+      ],
+      "agent_role": "just_arrived",
+      "goal_state": "Leave the station and continue with your day (next destination: a meeting in the city centre).",
+      "purpose_memories": [
+        "I have just got off my train and stepped onto the platform.",
+        "Now that I have arrived I intend to leave the station and get on with my day \u2014 I am heading to a meeting in the city centre."
+      ],
+      "initial_goal": "Leave the station and continue with your day (next destination: a meeting in the city centre).",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.4810733750542378
+    },
+    {
+      "id": "agent_28",
+      "name": "Agent 28",
+      "personality_type": "ISTP",
+      "age": 60,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_1",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a shopping trip in the city centre",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -5.3021592621814815,
+        -31.431204123157144
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for a shopping trip in the city centre.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.2947422081642115
+    },
+    {
+      "id": "agent_29",
+      "name": "Agent 29",
+      "personality_type": "ESFJ",
+      "age": 31,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_1",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -0.20403334125078398,
+        26.123510376183525
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a visit to family.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.4887158179016633
+    },
+    {
+      "id": "agent_30",
+      "name": "Agent 30",
+      "personality_type": "ENTP",
+      "age": 46,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": "",
+      "level_id": "-1",
+      "start_position": [
+        -53.319423910598694,
+        46.28239448847292
+      ],
+      "agent_role": "just_arrived",
+      "goal_state": "Leave the station and continue with your day (next destination: a medical appointment).",
+      "purpose_memories": [
+        "I have just got off my train and stepped onto the platform.",
+        "Now that I have arrived I intend to leave the station and get on with my day \u2014 I am heading to a medical appointment."
+      ],
+      "initial_goal": "Leave the station and continue with your day (next destination: a medical appointment).",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.951317850882371
+    },
+    {
+      "id": "agent_31",
+      "name": "Agent 31",
+      "personality_type": "ENFP",
+      "age": 19,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -48.68127521404659,
+        46.04127398742077
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for a medical appointment.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.527253018791803
+    },
+    {
+      "id": "agent_32",
+      "name": "Agent 32",
+      "personality_type": "ISFJ",
+      "age": 32,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_3",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a university lecture",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -20.025591989706015,
+        47.167703348659046
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for a university lecture.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.2687623109267347
+    },
+    {
+      "id": "agent_33",
+      "name": "Agent 33",
+      "personality_type": "INTP",
+      "age": 35,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_4",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -51.77041880254049,
+        36.08982379597143
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for a meeting in the city centre.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.449951550254567
+    },
+    {
+      "id": "agent_34",
+      "name": "Agent 34",
+      "personality_type": "ENTJ",
+      "age": 33,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_4",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -38.900553439666126,
+        35.45276506105222
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for a medical appointment.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 2.2476838951783886
+    },
+    {
+      "id": "agent_35",
+      "name": "Agent 35",
+      "personality_type": "ESFJ",
+      "age": 40,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a job interview",
+      "target": 1,
+      "level_id": "-1",
+      "start_position": [
+        -20.447326804436816,
+        15.58410159835654
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 1 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 1.",
+        "I am travelling for a job interview.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 1 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.1435042750289015
+    },
+    {
+      "id": "agent_36",
+      "name": "Agent 36",
+      "personality_type": "ISFJ",
+      "age": 61,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -21.287253558126483,
+        -27.094640160931785
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a day out in the city.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8318188132277105
+    },
+    {
+      "id": "agent_37",
+      "name": "Agent 37",
+      "personality_type": "INTJ",
+      "age": 33,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 2,
+      "level_id": "-1",
+      "start_position": [
+        -21.46965035886065,
+        -6.694696110528252
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 2 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 2.",
+        "I am travelling for a meeting in the city centre.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 2 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.455727414485155
+    },
+    {
+      "id": "agent_38",
+      "name": "Agent 38",
+      "personality_type": "ESFJ",
+      "age": 29,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 1,
+      "level_id": "-1",
+      "start_position": [
+        -20.860428860583017,
+        17.58502395712977
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 1 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 1.",
+        "I am travelling for a medical appointment.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 1 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.1617525045500625
+    },
+    {
+      "id": "agent_39",
+      "name": "Agent 39",
+      "personality_type": "INFJ",
+      "age": 46,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 3,
+      "level_id": "-1",
+      "start_position": [
+        -21.074426603540854,
+        14.202047536993476
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 3 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 3.",
+        "I am travelling for a meeting in the city centre.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 3 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.7044973366277352
+    },
+    {
+      "id": "agent_40",
+      "name": "Agent 40",
+      "personality_type": "INFJ",
+      "age": 66,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -21.11047250737153,
+        -17.466558392524625
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for a day out in the city.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.339104652530698
+    },
+    {
+      "id": "agent_41",
+      "name": "Agent 41",
+      "personality_type": "INFP",
+      "age": 73,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "platform_2",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a shopping trip in the city centre",
+      "target": 4,
+      "level_id": "-1",
+      "start_position": [
+        -21.05655195574313,
+        -30.123263286603517
+      ],
+      "agent_role": "waiting_for_train",
+      "goal_state": "Wait on Platform 4 and board your train when it arrives.",
+      "purpose_memories": [
+        "I am standing on the platform waiting to board my train from Platform 4.",
+        "I am travelling for a shopping trip in the city centre.",
+        "I have been waiting for this specific train and missing it would significantly disrupt my plans."
+      ],
+      "initial_goal": "Wait on Platform 4 and board your train when it arrives.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8497388987997316
+    },
+    {
+      "id": "agent_42",
+      "name": "Agent 42",
+      "personality_type": "ESTJ",
+      "age": 34,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        75.72887580241316,
+        21.435943364254513
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a day out in the city.",
+        "I need to get to a day out in the city and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.9101007439615372
+    },
+    {
+      "id": "agent_43",
+      "name": "Agent 43",
+      "personality_type": "ENTJ",
+      "age": 27,
+      "gender": "man",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        56.38573431486796,
+        37.54036863294758
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is a medical appointment.",
+        "I need to get to a medical appointment and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.5033393856013243
+    },
+    {
+      "id": "agent_44",
+      "name": "Agent 44",
+      "personality_type": "ISFJ",
+      "age": 65,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 3,
+      "level_id": "0",
+      "start_position": [
+        55.70278907294916,
+        46.9505519629579
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 3.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 3.",
+        "My reason for travelling is work.",
+        "I need to get to work and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 3.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.9618710973781033
+    },
+    {
+      "id": "agent_45",
+      "name": "Agent 45",
+      "personality_type": "ISFP",
+      "age": 21,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        60.010401462305545,
+        29.372102750787192
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is school.",
+        "I need to get to school and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7355755417099934
+    },
+    {
+      "id": "agent_46",
+      "name": "Agent 46",
+      "personality_type": "INTP",
+      "age": 43,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        80.696769994718,
+        15.503640992988108
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is a medical appointment.",
+        "I need to get to a medical appointment and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.5406699225577647
+    },
+    {
+      "id": "agent_47",
+      "name": "Agent 47",
+      "personality_type": "ISFJ",
+      "age": 57,
+      "gender": "man",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 2,
+      "level_id": "0",
+      "start_position": [
+        80.0733233469963,
+        12.672423766858534
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a meeting in the city centre.",
+        "I need to get to a meeting in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6916777724213767
+    },
+    {
+      "id": "agent_48",
+      "name": "Agent 48",
+      "personality_type": "ESTP",
+      "age": 31,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 3,
+      "level_id": "0",
+      "start_position": [
+        76.01815604986793,
+        31.532094474465822
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 3.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 3.",
+        "My reason for travelling is a visit to family.",
+        "I need to get to a visit to family and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 3.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.7416681419843973
+    },
+    {
+      "id": "agent_49",
+      "name": "Agent 49",
+      "personality_type": "ESFP",
+      "age": 47,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        84.97801061597659,
+        5.952242371788804
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is work.",
+        "I need to get to work and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.9522535351875723
+    },
+    {
+      "id": "agent_50",
+      "name": "Agent 50",
+      "personality_type": "INTJ",
+      "age": 22,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        75.00638813695375,
+        6.525343570567641
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is a visit to family.",
+        "I need to get to a visit to family and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.4842894724309903
+    },
+    {
+      "id": "agent_51",
+      "name": "Agent 51",
+      "personality_type": "ENTP",
+      "age": 74,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a university lecture",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        70.61800498762685,
+        47.62467174693746
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is a university lecture.",
+        "I need to get to a university lecture and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7306811015997419
+    },
+    {
+      "id": "agent_52",
+      "name": "Agent 52",
+      "personality_type": "ENFJ",
+      "age": 71,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        90.28874657164761,
+        42.57471843283818
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a meeting in the city centre.",
+        "I need to get to a meeting in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.4800172544796046
+    },
+    {
+      "id": "agent_53",
+      "name": "Agent 53",
+      "personality_type": "ESFP",
+      "age": 60,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        35.58316812604754,
+        18.28446937779323
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a visit to family.",
+        "I need to get to a visit to family and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 2.0962430152080405
+    },
+    {
+      "id": "agent_54",
+      "name": "Agent 54",
+      "personality_type": "INTJ",
+      "age": 65,
+      "gender": "man",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        67.60852424779353,
+        40.18554660011934
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is a visit to family.",
+        "I need to get to a visit to family and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6940175238141033
+    },
+    {
+      "id": "agent_55",
+      "name": "Agent 55",
+      "personality_type": "ENFP",
+      "age": 31,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a job interview",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        59.078680996067234,
+        30.879702689659275
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is a job interview.",
+        "I need to get to a job interview and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8843694746013169
+    },
+    {
+      "id": "agent_56",
+      "name": "Agent 56",
+      "personality_type": "ISFJ",
+      "age": 23,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 3,
+      "level_id": "0",
+      "start_position": [
+        69.88260686310728,
+        33.00672801937388
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 3.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 3.",
+        "My reason for travelling is work.",
+        "I need to get to work and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 3.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7401490373469204
+    },
+    {
+      "id": "agent_57",
+      "name": "Agent 57",
+      "personality_type": "ISTP",
+      "age": 58,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a job interview",
+      "target": 2,
+      "level_id": "0",
+      "start_position": [
+        34.034278658302036,
+        16.05308133511494
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a job interview.",
+        "I need to get to a job interview and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.8627273627868073
+    },
+    {
+      "id": "agent_58",
+      "name": "Agent 58",
+      "personality_type": "ESFJ",
+      "age": 53,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 3,
+      "level_id": "0",
+      "start_position": [
+        60.103340550305475,
+        31.869090391472277
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 3.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 3.",
+        "My reason for travelling is school.",
+        "I need to get to school and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 3.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.4227769068352307
+    },
+    {
+      "id": "agent_59",
+      "name": "Agent 59",
+      "personality_type": "ISTP",
+      "age": 52,
+      "gender": "man",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        72.87392851312721,
+        29.42921031514051
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is a meeting in the city centre.",
+        "I need to get to a meeting in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6688734313530948
+    },
+    {
+      "id": "agent_60",
+      "name": "Agent 60",
+      "personality_type": "ISTP",
+      "age": 20,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "work",
+      "target": 4,
+      "level_id": "0",
+      "start_position": [
+        43.304188997023125,
+        37.11001894852305
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 4.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 4.",
+        "My reason for travelling is work.",
+        "I need to get to work and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 4.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.6966316142746467
+    },
+    {
+      "id": "agent_61",
+      "name": "Agent 61",
+      "personality_type": "INFP",
+      "age": 61,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        67.21137729322774,
+        39.30976562457153
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is school.",
+        "I need to get to school and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8356852167613315
+    },
+    {
+      "id": "agent_62",
+      "name": "Agent 62",
+      "personality_type": "ESFJ",
+      "age": 57,
+      "gender": "man",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a shopping trip in the city centre",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        77.61840019661022,
+        9.927782401404878
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a shopping trip in the city centre.",
+        "I need to get to a shopping trip in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.4058598326379341
+    },
+    {
+      "id": "agent_63",
+      "name": "Agent 63",
+      "personality_type": "ISFP",
+      "age": 74,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a shopping trip in the city centre",
+      "target": 3,
+      "level_id": "0",
+      "start_position": [
+        69.38433539507258,
+        30.11764588090987
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 3.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 3.",
+        "My reason for travelling is a shopping trip in the city centre.",
+        "I need to get to a shopping trip in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 3.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.1316054225507368
+    },
+    {
+      "id": "agent_64",
+      "name": "Agent 64",
+      "personality_type": "ENFP",
+      "age": 68,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        65.05132987478116,
+        42.74453115339532
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a medical appointment.",
+        "I need to get to a medical appointment and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.610809354687857
+    },
+    {
+      "id": "agent_65",
+      "name": "Agent 65",
+      "personality_type": "INTJ",
+      "age": 42,
+      "gender": "man",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        57.47326839373456,
+        38.619081140228154
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a medical appointment.",
+        "I need to get to a medical appointment and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.936544103902635
+    },
+    {
+      "id": "agent_66",
+      "name": "Agent 66",
+      "personality_type": "ENFJ",
+      "age": 40,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a medical appointment",
+      "target": 2,
+      "level_id": "0",
+      "start_position": [
+        59.36877128638653,
+        26.52269088058467
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a medical appointment.",
+        "I need to get to a medical appointment and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.236478310172599
+    },
+    {
+      "id": "agent_67",
+      "name": "Agent 67",
+      "personality_type": "INFP",
+      "age": 43,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "school",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        33.22012251677156,
+        15.428778694407074
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is school.",
+        "I need to get to school and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.473199605937273
+    },
+    {
+      "id": "agent_68",
+      "name": "Agent 68",
+      "personality_type": "ESTP",
+      "age": 40,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 2,
+      "level_id": "0",
+      "start_position": [
+        86.05977358809565,
+        42.15673334787857
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a meeting in the city centre.",
+        "I need to get to a meeting in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 2.065639507605426
+    },
+    {
+      "id": "agent_69",
+      "name": "Agent 69",
+      "personality_type": "ISTJ",
+      "age": 25,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        69.80625172194958,
+        36.39553838421523
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a visit to family.",
+        "I need to get to a visit to family and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.153223853882045
+    },
+    {
+      "id": "agent_70",
+      "name": "Agent 70",
+      "personality_type": "ESFJ",
+      "age": 40,
+      "gender": "woman",
+      "risk_tolerance": "moderate",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a meeting in the city centre",
+      "target": 2,
+      "level_id": "0",
+      "start_position": [
+        59.49282551346144,
+        46.358837166380106
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a meeting in the city centre.",
+        "I need to get to a meeting in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.7218951939270655
+    },
+    {
+      "id": "agent_71",
+      "name": "Agent 71",
+      "personality_type": "INFP",
+      "age": 34,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 3,
+      "level_id": "0",
+      "start_position": [
+        35.83555372198565,
+        12.760598112824168
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 3.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 3.",
+        "My reason for travelling is a day out in the city.",
+        "I need to get to a day out in the city and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 3.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.3470940529707347
+    },
+    {
+      "id": "agent_72",
+      "name": "Agent 72",
+      "personality_type": "INFP",
+      "age": 41,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a university lecture",
+      "target": 2,
+      "level_id": "0",
+      "start_position": [
+        78.52041988019306,
+        14.04383191125171
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a university lecture.",
+        "I need to get to a university lecture and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.175044545427791
+    },
+    {
+      "id": "agent_73",
+      "name": "Agent 73",
+      "personality_type": "INTJ",
+      "age": 64,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        63.156913153856365,
+        37.78086633478774
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a visit to family.",
+        "I need to get to a visit to family and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.3076582809608757
+    },
+    {
+      "id": "agent_74",
+      "name": "Agent 74",
+      "personality_type": "ENFP",
+      "age": 43,
+      "gender": "woman",
+      "risk_tolerance": "high",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a shopping trip in the city centre",
+      "target": 2,
+      "level_id": "0",
+      "start_position": [
+        34.8724095657987,
+        9.630877426382044
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 2.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 2.",
+        "My reason for travelling is a shopping trip in the city centre.",
+        "I need to get to a shopping trip in the city centre and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 2.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.2524183560786126
+    },
+    {
+      "id": "agent_75",
+      "name": "Agent 75",
+      "personality_type": "ESTJ",
+      "age": 61,
+      "gender": "man",
+      "risk_tolerance": "high",
+      "knowledge_profile": "novice",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a visit to family",
+      "target": 1,
+      "level_id": "0",
+      "start_position": [
+        59.13211145344793,
+        47.37878574132005
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 1.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 1.",
+        "My reason for travelling is a visit to family.",
+        "I need to get to a visit to family and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 1.",
+      "decision_prompt_extra": "",
+      "walking_speed": 0.8448815661553726
+    },
+    {
+      "id": "agent_76",
+      "name": "Agent 76",
+      "personality_type": "ISTJ",
+      "age": 37,
+      "gender": "woman",
+      "risk_tolerance": "low",
+      "knowledge_profile": "commuter",
+      "initial_zone": "concourse",
+      "destination": "exit",
+      "is_injured": false,
+      "purpose": "a day out in the city",
+      "target": 3,
+      "level_id": "0",
+      "start_position": [
+        39.832418826814276,
+        18.2004148593577
+      ],
+      "agent_role": "heading_to_platform",
+      "goal_state": "Catch your train from Platform 3.",
+      "purpose_memories": [
+        "I am at the station today because I need to catch a train from Platform 3.",
+        "My reason for travelling is a day out in the city.",
+        "I need to get to a day out in the city and cannot afford to miss this train."
+      ],
+      "initial_goal": "Catch your train from Platform 3.",
+      "decision_prompt_extra": "",
+      "walking_speed": 1.499422090715906
+    }
+  ]
+}

@@ -11,23 +11,55 @@
     <poly id="jps.entrance_3" name="eldon_square" type="jupedsim.entrance" color="179,217,255" fill="1" layer="1.00" shape="27.660000,6.410000 43.060000,13.670000 47.480000,6.020000 31.580000,-1.330000 27.660000,6.410000"/>
 
     <!-- Escalator zones (1m wide rectangles) -->
-    <poly id="jps.walkable_area_4" name="L0_esc_a_down" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="28.182277,39.735252 30.367330,39.828897 30.324512,40.827980 28.139459,40.734335 28.182277,39.735252"/>
-    <poly id="jps.walkable_area_5" name="L0_esc_b_up" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="28.110143,38.004119 30.340296,37.950251 30.364443,38.949960 28.134290,39.003828 28.110143,38.004119"/>
-    <poly id="jps.walkable_area_6" name="L0_esc_c_up" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="28.147507,36.012714 30.314785,36.090116 30.279095,37.089478 28.111816,37.012077 28.147507,36.012714"/>
-    <poly id="jps.walkable_area_7" name="L0_esc_d_down" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="50.963346,17.357150 51.894097,16.991497 52.588143,18.758157 51.657392,19.123810 50.963346,17.357150"/>
-    <poly id="jps.walkable_area_8" name="L0_esc_e_up" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="53.196511,16.763555 54.136304,16.421812 54.790742,18.221517 53.850949,18.563260 53.196511,16.763555"/>
-    <poly id="jps.walkable_area_9" name="L0_esc_f_up" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="55.355091,15.991568 56.307034,15.685291 56.894142,17.510085 55.942199,17.816362 55.355091,15.991568"/>
+      <poly id="jps.walkable_area_4" name="esc.A.zone.concourse.departure" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="28.182277,39.735252 30.367330,39.828897 30.324512,40.827980 28.139459,40.734335 28.182277,39.735252"/>
+      <poly id="jps.walkable_area_5" name="esc.B.zone.concourse.arrival" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="28.110143,38.004119 30.340296,37.950251 30.364443,38.949960 28.134290,39.003828 28.110143,38.004119"/>
+      <poly id="jps.walkable_area_6" name="esc.C.zone.concourse.arrival" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="28.147507,36.012714 30.314785,36.090116 30.279095,37.089478 28.111816,37.012077 28.147507,36.012714"/>
+      <poly id="jps.walkable_area_7" name="esc.D.zone.concourse.departure" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="50.963346,17.357150 51.894097,16.991497 52.588143,18.758157 51.657392,19.123810 50.963346,17.357150"/>
+      <poly id="jps.walkable_area_8" name="esc.E.zone.concourse.arrival" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="53.196511,16.763555 54.136304,16.421812 54.790742,18.221517 53.850949,18.563260 53.196511,16.763555"/>
+      <poly id="jps.walkable_area_9" name="esc.F.zone.concourse.arrival" type="jupedsim.walkable_area" color="179,217,255" fill="1" layer="1.00" shape="55.355091,15.991568 56.307034,15.685291 56.894142,17.510085 55.942199,17.816362 55.355091,15.991568"/>
 
     <!-- Escalator corridor zones — physics enforcement (minimum speed) only, not walkable_area.
          Covers the full ~12 m corridor between the railing obstacles for each escalator run. -->
     <!-- ABC bank: horizontal corridors bounded by obstacle_4 (railing above A/B gap) and obstacle_5 (railing above B/C gap) -->
-    <poly id="jps.escalator_0" name="L0_esc_corridor_a" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="28.21,39.805 42.0,39.805 42.0,40.725 28.21,40.725"/>
-    <poly id="jps.escalator_1" name="L0_esc_corridor_b" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="28.21,37.96 42.00,37.96 42.00,38.88 28.21,38.88"/>
-    <poly id="jps.escalator_2" name="L0_esc_corridor_c" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="28.21,36.11 42.0,36.11 42.0,37.03 28.21,37.03"/>
+      <poly id="jps.escalator_0" name="esc.A.corridor.concourse" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="28.21,39.805 42.0,39.805 42.0,40.725 28.21,40.725"/>
+      <poly id="jps.escalator_1" name="esc.B.corridor.concourse" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="28.21,37.96 42.00,37.96 42.00,38.88 28.21,38.88"/>
+      <poly id="jps.escalator_2" name="esc.C.corridor.concourse" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="28.21,36.11 42.0,36.11 42.0,37.03 28.21,37.03"/>
     <!-- DEF bank: diagonal corridors in lower concourse, bounded by obstacle_6 (D/E railing) and obstacle_7 (E/F railing) -->
-    <poly id="jps.escalator_3" name="L0_esc_corridor_d" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="50.832,17.388 52.288,16.897 55.497,26.412 54.041,26.903"/>
-    <poly id="jps.escalator_4" name="L0_esc_corridor_e" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="53.060,16.650 54.234,16.254 57.444,25.769 56.269,26.165"/>
-    <poly id="jps.escalator_5" name="L0_esc_corridor_f" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="55.127,16.004 56.583,15.513 59.792,25.028 58.336,25.519"/>
+      <poly id="jps.escalator_3" name="esc.D.corridor.concourse" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="50.832,17.388 52.288,16.897 55.497,26.412 54.041,26.903"/>
+      <poly id="jps.escalator_4" name="esc.E.corridor.concourse" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="53.060,16.650 54.234,16.254 57.444,25.769 56.269,26.165"/>
+      <poly id="jps.escalator_5" name="esc.F.corridor.concourse" type="jupedsim.escalator" color="100,180,255" fill="0" layer="1.50" shape="55.127,16.004 56.583,15.513 59.792,25.028 58.336,25.519"/>
+
+    <!-- Explicit escalator endpoint metadata (no naming-convention inference). -->
+    <poly id="jps.escalator_endpoint_0" name="escalator_A_departure_concourse"
+          type="jupedsim.escalator_endpoint" role="departure"
+          endpoint_id="A_departure_concourse" transfer_zone="esc.A.zone.concourse.departure"
+          corridor="esc.A.corridor.concourse" exit_name="escalator_a_down"
+          transfer_to_zone="esc.A.zone.platform.arrival"/>
+    <poly id="jps.escalator_endpoint_1" name="escalator_B_arrival_concourse"
+          type="jupedsim.escalator_endpoint" role="arrival"
+          endpoint_id="B_arrival_concourse" transfer_zone="esc.B.zone.concourse.arrival"
+          corridor="esc.B.corridor.concourse" spawn_x="29.24" spawn_y="38.48"
+          egress_x="42.20" egress_y="38.42"/>
+    <poly id="jps.escalator_endpoint_2" name="escalator_C_arrival_concourse"
+          type="jupedsim.escalator_endpoint" role="arrival"
+          endpoint_id="C_arrival_concourse" transfer_zone="esc.C.zone.concourse.arrival"
+          corridor="esc.C.corridor.concourse" spawn_x="29.21" spawn_y="36.55"
+          egress_x="42.20" egress_y="36.57"/>
+    <poly id="jps.escalator_endpoint_3" name="escalator_D_departure_concourse"
+          type="jupedsim.escalator_endpoint" role="departure"
+          endpoint_id="D_departure_concourse" transfer_zone="esc.D.zone.concourse.departure"
+          corridor="esc.D.corridor.concourse" exit_name="escalator_d_down"
+          transfer_to_zone="esc.D.zone.platform.arrival"/>
+    <poly id="jps.escalator_endpoint_4" name="escalator_E_arrival_concourse"
+          type="jupedsim.escalator_endpoint" role="arrival"
+          endpoint_id="E_arrival_concourse" transfer_zone="esc.E.zone.concourse.arrival"
+          corridor="esc.E.corridor.concourse" spawn_x="53.99" spawn_y="17.49"
+          egress_x="56.95" egress_y="26.30"/>
+    <poly id="jps.escalator_endpoint_5" name="escalator_F_arrival_concourse"
+          type="jupedsim.escalator_endpoint" role="arrival"
+          endpoint_id="F_arrival_concourse" transfer_zone="esc.F.zone.concourse.arrival"
+          corridor="esc.F.corridor.concourse" spawn_x="56.12" spawn_y="16.75"
+          egress_x="59.20" egress_y="25.35"/>
 
     <!-- Exit threshold markers: corridor-mouth positions used for distance/visibility.
          Placed where each street-exit corridor opens into the main concourse floor.
