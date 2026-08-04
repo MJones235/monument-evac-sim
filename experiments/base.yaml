@@ -26,24 +26,28 @@ simulation:
 agents:
   count: 50  # Agents distributed across both levels
 
-  # Personality distribution (percentage)
+  # OCEAN personality dimension distributions.
+  # Each dimension is sampled independently.
+  # Levels map to anchor sentences grounded in Costa & McCrae (1992) NEO-PI-R:
+  #   N (Neuroticism): anxiety/vulnerability under threat
+  #   O (Openness):    willingness to reinterpret the situation
+  #   C (Conscientiousness): deliberation/dutifulness before acting
+  # E and A are not used in the prompt anchor — encoding extraversion as
+  # novelty-seeking or agreeableness as authority compliance would pre-load
+  # specific action tendencies.
   personalities:
-    ISTJ: 13.0
-    ISFJ: 12.0
-    INFJ: 2.0
-    INTJ: 3.0
-    ISTP: 6.0
-    ISFP: 9.0
-    INFP: 4.0
-    INTP: 3.0
-    ESTP: 6.0
-    ESFP: 9.0
-    ENFP: 8.0
-    ENTP: 3.0
-    ESTJ: 11.0
-    ESFJ: 12.0
-    ENFJ: 3.0
-    ENTJ: 2.0
+    N:
+      high:   20.0
+      medium: 50.0
+      low:    30.0
+    O:
+      high:   30.0
+      medium: 45.0
+      low:    25.0
+    C:
+      high:   35.0
+      medium: 45.0
+      low:    20.0
 
   # Risk tolerance distribution (affects evacuation speed)
   risk_tolerance:

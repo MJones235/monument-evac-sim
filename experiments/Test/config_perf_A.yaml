@@ -31,7 +31,7 @@ station:
 
 events:
   - time: 15.0
-    message: "An alarm bell is ringing throughout the station. You cannot see any smoke, fire, or sign of emergency."
+    message: "The fire alarm is ringing."
 
 systems: {}
 
