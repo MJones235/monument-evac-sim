@@ -1,11 +1,11 @@
 extends: ../base.yaml
 
 simulation:
-  max_iterations: 2400  # 18 000 × 0.05 s = 900 s = 15 min (exercise ran to 14:47)
+  max_iterations: 2400
+  decision_interval: 30.0
 
 agents:
-  count: 80  # Real study: ~111; 80 is a computationally feasible approximation
-  # snapshot_save_path: snapshots/monument_80.json
+  count: 80
   snapshot_load_path: snapshots/monument_80.json
   roles:
     heading_to_platform:
@@ -33,10 +33,8 @@ events:
   - time: 15.0
     message: "An alarm bell is ringing throughout the station. You cannot see any smoke, fire, or sign of emergency."
 
-# Clear inherited rule-based systems (firefighters/marshals) from base config.
 systems: {}
 
-# Test-specific performance overrides
 performance:
-  immediate_redecision_on_transfer: true
-  min_redecision_interval_seconds: 15.0
+  immediate_redecision_on_transfer: false
+  min_redecision_interval_seconds: 30.0

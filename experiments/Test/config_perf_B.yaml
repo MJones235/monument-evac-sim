@@ -1,0 +1,5 @@
+extends: ./config_perf_A.yaml
+
+llm:
+  reasoning_effort: low
+  max_completion_tokens: 1000

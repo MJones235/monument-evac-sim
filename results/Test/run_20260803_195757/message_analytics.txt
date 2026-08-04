@@ -1,0 +1,52 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 18
+Agents who sent messages: 17
+Total message deliveries: 129
+Average recipients per message: 7.2
+
+Messages by sender:
+  agent_3: 2 messages
+  agent_31: 1 messages
+  agent_52: 1 messages
+  agent_53: 1 messages
+  agent_49: 1 messages
+  agent_58: 1 messages
+  agent_47: 1 messages
+  agent_16: 1 messages
+  agent_35: 1 messages
+  agent_76: 1 messages
+  agent_50: 1 messages
+  agent_67: 1 messages
+  agent_73: 1 messages
+  agent_68: 1 messages
+  agent_55: 1 messages
+  agent_61: 1 messages
+  agent_65: 1 messages
+
+Messages by type:
+  directed: 17 messages (94.4%)
+  shout: 1 messages (5.6%)
+
+Targeted messages: 2 (11.1%)
+Broadcast messages: 16 (88.9%)
+
+All Messages:
+  - t=0.0s: agent_31 [directed] to 4 people: "Heading to Escalator B to reach the concourse."
+  - t=0.0s: agent_52 → agent_68 [directed] to 1 people: "Let's head to the platform escalators together."
+  - t=0.0s: agent_53 → agent_57 [directed] to 1 people: "Let’s stick together toward the platform."
+  - t=15.0s: agent_3 [shout] to 4 people: "Please follow me to Escalator B for evacuation."
+  - t=15.0s: agent_49 [directed] to 5 people: "Heading to Escalator A to reach Platform 1."
+  - t=20.0s: agent_58 [directed] to 12 people: "Excuse me, I need to get to Platform 3, please."
+  - t=30.0s: agent_3 [directed] to 10 people: "Moving to Escalator C; stay calm and follow."
+  - t=35.0s: agent_47 [directed] to 12 people: "Heading to Escalator D to reach Platform 2."
+  - t=45.0s: agent_16 [directed] to 6 people: "Heading to the concourse via Escalator F."
+  - t=45.0s: agent_35 [directed] to 7 people: "I'll wait here for the train."
+  - t=45.0s: agent_76 [directed] to 10 people: "Heading to Escalator A to reach Platform 3."
+  - t=70.0s: agent_50 [directed] to 10 people: "Heading to Escalator B to reach Platform 4."
+  - t=70.0s: agent_67 [directed] to 5 people: "Let's move toward Eldon Square to find the escalators."
+  - t=75.0s: agent_73 [directed] to 8 people: "Heading to Escalator B."
+  - t=90.0s: agent_68 [directed] to 5 people: "Heading to Escalator A to reach Platform 2."
+  - t=95.0s: agent_55 [directed] to 5 people: "Heading to Escalator A to reach Platform 4."
+  - t=100.0s: agent_61 [directed] to 9 people: "Heading to Escalator B to reach the concourse."
+  - t=105.0s: agent_65 [directed] to 15 people: "Heading to Escalator E."

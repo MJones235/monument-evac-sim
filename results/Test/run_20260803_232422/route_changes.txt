@@ -1,0 +1,14 @@
+=== ROUTE CHANGE ANALYTICS ===
+
+Total route changes: 4
+Agents who changed routes: 3
+
+Route Changes:
+  - agent_12 at t=50.0s: escalator_b_up → escalator_f_up
+    Reason: To reach Platform 2 quickly, I should move toward an up escalator since the station is underground and trains are above. Escalator F is visible and available among the up escalators.
+  - agent_15 at t=20.0s: escalator_e_up → escalator_f_up
+    Reason: Goal is to reach Platform 1; the alarm and crowd suggest moving toward an exit/escalator to surface. I'll head toward an available escalator to progress.
+  - agent_15 at t=50.0s: escalator_f_up → escalator_e_up
+    Reason: Alarm ongoing and goal is to reach Platform 1. Escalator E is a visible exit to move toward a surface route with crowds.
+  - agent_20 at t=50.0s: escalator_e_up → escalator_f_up
+    Reason: To reach Platform 2 and stay aligned with the boarding plan, move toward Escalator F now.

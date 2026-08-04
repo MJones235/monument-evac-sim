@@ -1,0 +1,24 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 4
+Agents who sent messages: 4
+Total message deliveries: 14
+Average recipients per message: 3.5
+
+Messages by sender:
+  agent_24: 1 messages
+  agent_12: 1 messages
+  agent_30: 1 messages
+  agent_21: 1 messages
+
+Messages by type:
+  directed: 4 messages (100.0%)
+
+Targeted messages: 0 (0.0%)
+Broadcast messages: 4 (100.0%)
+
+All Messages:
+  - t=0.0s: agent_24 [directed] to 4 people: "Heading to the concourse via Escalator B."
+  - t=40.0s: agent_12 [directed] to 4 people: "Heading to Escalator A."
+  - t=70.0s: agent_30 [directed] to 5 people: "Heading toward the Blackett Street exit."
+  - t=90.0s: agent_21 [directed] to 1 people: "Heading to Blackett Street exit."

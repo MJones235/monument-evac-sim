@@ -1,0 +1,20 @@
+
+=== FINANCIAL REPORT ===
+
+LLM Token Usage:
+  Prompt tokens:      217,577
+  Completion tokens:  514,587
+  Total tokens:       732,164
+  Total requests:     344
+
+Cost Breakdown (£):
+  Input cost:         £0.0087
+  Output cost:        £0.1544
+  TOTAL COST:         £0.1631
+
+Per-Agent Averages:
+  Tokens per agent:   9509
+  Cost per agent:     £0.0021
+  Requests per agent: 4.5
+
+========================================

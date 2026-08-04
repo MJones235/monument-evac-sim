@@ -1,0 +1,40 @@
+=== MESSAGING ANALYTICS ===
+
+Total messages sent: 12
+Agents who sent messages: 11
+Total message deliveries: 104
+Average recipients per message: 8.7
+
+Messages by sender:
+  agent_10: 2 messages
+  agent_71: 1 messages
+  agent_50: 1 messages
+  agent_57: 1 messages
+  agent_44: 1 messages
+  agent_55: 1 messages
+  agent_20: 1 messages
+  agent_64: 1 messages
+  agent_66: 1 messages
+  agent_21: 1 messages
+  agent_63: 1 messages
+
+Messages by type:
+  directed: 11 messages (91.7%)
+  broadcast: 1 messages (8.3%)
+
+Targeted messages: 2 (16.7%)
+Broadcast messages: 10 (83.3%)
+
+All Messages:
+  - t=20.0s: agent_71 → agent_53 [directed] to 1 people: "Heading over to coordinate a route to Platform 3."
+  - t=40.0s: agent_50 [directed] to 9 people: "Heading to Escalator A to reach Platform 4."
+  - t=45.0s: agent_10 [directed] to 5 people: "Heading to Escalator F to reach the concourse."
+  - t=45.0s: agent_57 [directed] to 3 people: "Heading toward the platform escalators to Platform 2."
+  - t=50.0s: agent_44 [directed] to 14 people: "Heading toward Escalator B to reach Platform 3."
+  - t=50.0s: agent_55 [directed] to 15 people: "I'll wait here for the train."
+  - t=55.0s: agent_20 [directed] to 6 people: "Heading to Escalator A to head down to the platforms."
+  - t=85.0s: agent_64 [directed] to 17 people: "Moving to Escalator A to reach the platforms."
+  - t=95.0s: agent_66 → agent_72 [directed] to 1 people: "Let's stick together and head to the escalators toward Platform 2."
+  - t=105.0s: agent_21  to 13 people: "Heading to Escalator B to reach the concourse."
+  - t=105.0s: agent_10 [directed] to 12 people: "Moving to Escalator F."
+  - t=110.0s: agent_63 [directed] to 8 people: "Heading to the escalator down to the platforms."

@@ -1,0 +1,18 @@
+=== ROUTE CHANGE ANALYTICS ===
+
+Total route changes: 6
+Agents who changed routes: 5
+
+Route Changes:
+  - agent_10 at t=30.0s: escalator_e_up → escalator_b_up
+    Reason: Goal is to leave the station and head to the university lecture. With the alarm but no visible danger, move toward an up escalator to reach the concourse efficiently.
+  - agent_10 at t=60.0s: escalator_b_up → escalator_f_up
+    Reason: To reach the concourse efficiently and continue to my university lecture, I’ll take an up escalator since it’s close and aligned with moving toward the concourse.
+  - agent_51 at t=90.0s: grey_street → escalator_a_down
+    Reason: Goal is to reach Platform 4. Since escalators to platforms are the correct path, move toward Escalator A to descend to the platforms.
+  - agent_48 at t=20.0s: escalator_a_down → escalator_d_down
+    Reason: Need to get to Platform 3 to catch the train; Escalator D leads down to platforms and is the closest option given the crowded concourse and alarm.
+  - agent_60 at t=70.0s: blackett_street → escalator_a_down
+    Reason: To reach Platform 4, I should head toward an escalator down to the platforms since the current visible exit is not toward the train platform and escalators are the standard route.
+  - agent_75 at t=20.0s: blackett_street → escalator_a_down
+    Reason: With an active alarm but no visible emergency, the fastest way to reach Platform 1 is down to the platforms via Escalator A.

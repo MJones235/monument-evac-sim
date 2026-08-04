@@ -1,0 +1,34 @@
+=== ROUTE CHANGE ANALYTICS ===
+
+Total route changes: 14
+Agents who changed routes: 9
+
+Route Changes:
+  - agent_10 at t=30.0s: escalator_e_up → escalator_b_up
+    Reason: Goal: leave the station and reach the university lecture. With the alarm but no fire and people moving toward up escalators, take the fastest route to the concourse via an up escalator.
+  - agent_15 at t=110.0s: escalator_b_up → escalator_c_up
+    Reason: Heading to an escalator will get me toward Platform 1 quickly, and the crowd is already moving that way with the alarm.
+  - agent_16 at t=30.0s: escalator_b_up → escalator_f_up
+    Reason: The goal is to leave the station and reach the concourse. With the alarm and crowds, I’ll take the nearest up escalator—Escalator F—to move toward an exit onto the concourse quickly.
+  - agent_16 at t=60.0s: escalator_f_up → escalator_b_up
+    Reason: To reach the concourse, move up via an available escalator as crowds head upward and there’s no visible danger.
+  - agent_16 at t=90.0s: escalator_b_up → escalator_f_up
+    Reason: Goal is to leave the station; nearest upward escalator (F) leads to the concourse, so I move toward it to exit quickly amid the crowd.
+  - agent_12 at t=20.0s: escalator_b_up → escalator_f_up
+    Reason: To reach Platform 2, I should head toward an escalator to the concourse. People are moving toward the escalators, so I'll move toward Escalator F (going up) to access the concourse.
+  - agent_12 at t=50.0s: escalator_f_up → escalator_b_up
+    Reason: To catch the Platform 2 train, I should head toward an escalator to move toward street level. The crowd is already moving toward the escalators, so joining them via the closest option keeps me coordinated and efficient.
+  - agent_12 at t=80.0s: escalator_b_up → escalator_f_up
+    Reason: Catching my train from Platform 2 requires reaching the concourse; the closest route is Escalator F going up, which is visible and unblocked in the crowded station.
+  - agent_27 at t=30.0s: escalator_b_up → escalator_e_up
+    Reason: The alarm doesn't indicate immediate danger and I need to reach the concourse to continue to the city centre, so I'll move up via the closest up escalator.
+  - agent_27 at t=60.0s: escalator_e_up → escalator_f_up
+    Reason: To reach the concourse and head to the city centre, I’ll take a nearby up escalator to ascend from Platform 1, aligning with the goal and avoiding delays in the crowded area.
+  - agent_47 at t=40.0s: escalator_a_down → escalator_d_down
+    Reason: To reach Platform 2, I should descend toward the platforms. Escalator D is down to platforms and is known, so I will move there.
+  - agent_59 at t=20.0s: escalator_a_down → escalator_d_down
+    Reason: To reach Platform 4 quickly, head toward an escalator down to the platforms where most trains are; the alarm increases urgency but no visible danger yet.
+  - agent_62 at t=30.0s: escalator_a_down → escalator_d_down
+    Reason: To catch the train on Platform 1, I should head toward a downward escalator; Escalator D is nearby and leads to the platforms.
+  - agent_76 at t=60.0s: escalator_a_down → escalator_d_down
+    Reason: To progress toward Platform 3, descend via the nearby Escalator D to move toward the platforms; the alarm requires caution but no obvious emergency yet.
