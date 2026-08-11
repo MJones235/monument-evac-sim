@@ -343,7 +343,7 @@ station:
       - "I am inside Monument station in central Newcastle."
       - "This station has multiple levels connected by escalators and stairs."
       - "To reach street level from platforms, I need to go up to the concourse first."
-      - "Wayfinding signs and nearby crowd behavior can help me navigate."
+
 
     profiles:
       novice:
@@ -483,9 +483,6 @@ systems:
 
 # Performance optimization
 performance:
-  batch_processing: true
-  agent_cooldown: 10.0
-  decision_caching: true
   max_parallel_agents: 10
   decision_timeout_seconds: 45.0
   wait_nudge_enabled: false

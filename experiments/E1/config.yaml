@@ -1,4 +1,4 @@
-extends: ../base.yaml
+extends: ../Test/config_perf_B.yaml
 
 # E1 — Fire alarm only
 # No staff intervention, no PA announcement beyond the alarm itself.
@@ -21,7 +21,7 @@ extends: ../base.yaml
 #   not their physical arrival).
 
 simulation:
-  max_iterations: 18000  # 18 000 × 0.05 s = 900 s = 15 min (exercise ran to 14:47)
+  max_iterations: 6000  # 18 000 × 0.05 s = 900 s = 15 min (exercise ran to 14:47)
 
 agents:
   count: 80  # Real study: ~111; 80 is a computationally feasible approximation
@@ -46,22 +46,12 @@ station:
       - "I am inside Monument station in central Newcastle."
       - "This station has multiple levels connected by escalators and stairs."
       - "To reach street level from platforms, I need to go up to the concourse first."
-      - "Wayfinding signs and nearby crowd behavior can help me navigate."
-      - "Station alarms often turn out to be false alarms, tests, or minor incidents."
-      - "When alarms sound, I try to assess whether the emergency appears real using visible evidence, staff guidance, and crowd behavior."
 
 events:
   # Train 124 arrives at Platform 1 as the alarm is triggered (normal trigger
   # for all five Proulx drills).  Departs on its standard 30 s schedule.
-  - time: 10.0
-    type: train_arrival
-    platforms: [1]
-    dwell_seconds: 30
-    sender_label: "Station display board"
-    message: "A train has arrived at Platform 1."
-    departure_announce: false
   - time: 15.0
-    message: "An alarm bell is ringing throughout the station. You cannot see any smoke, fire, or sign of emergency."
+    message: "The fire alarm is ringing throughout the station."
   # Fire marshals power off and block the N/S escalators (D/E/F bank) at alarm time.
   - time: 15.0
     type: block_exit

@@ -1,4 +1,4 @@
-extends: ../base.yaml
+extends: ../Test/config_perf_B.yaml
 
 # E5 — Control Room PA with fire location and differential instructions; no staff
 #
