@@ -1,0 +1,42 @@
+extends: ../base.yaml
+
+# Feature A — calibration under non-evacuation conditions.
+# Passengers arrive at runtime as a stochastic Poisson process driven by
+# station usage data (street entrances) + a train timetable (alighting bursts).
+# Runs fully LLM-free on the rule-based decision engine (Feature B): no language
+# model or embedder is built and zero LLM calls are made. The initial population
+# is empty (count: 0, snapshot cleared); agents are spawned by the
+# RuntimeSpawnController as the schedule becomes due.
+decision:
+  engine: rule_based
+  rule_weights:
+    proximity: 0.5
+    busyness: 0.3
+    familiarity: 0.2
+
+agents:
+  count: 0                  # population arrives at runtime
+  snapshot_load_path: null  # base.yaml sets monument_80.json — must clear it
+
+simulation:
+  decision_interval: 5.0    # snappier routing for runtime-spawned boarders (base is 30s)
+
+# No fire alarm / exit-blocking events during a normal-operations calibration run.
+events: []
+
+calibration:
+  enabled: true
+  seed: 7
+  spawn_jitter_m: 1.0        # base jitter disc; retries grow it for arrival bursts
+  entrance_usage_csv: data/calibration/entrance_usage.csv
+  timetable_csv: data/calibration/timetable.csv
+  # Spawn points are walkable-area interior points (entrance polys sit at the
+  # street mouth, outside the walkable floor), resolved from the Monument geometry.
+  spawn_points:
+    blackett_street: { level: "0",  xy: [97.2, 46.8] }
+    grey_street:     { level: "0",  xy: [90.8, -9.4] }
+    eldon_square:    { level: "0",  xy: [54.1, 13.0] }
+    "1": { level: "-1", xy: [-2.8, -9.5] }   # platform_1 interior
+    "2": { level: "-1", xy: [-20.7, -1.2] }  # platform_2 interior
+  entrance_dest_exits: [train_platform_1, train_platform_2]  # boarders' destinations
+  platform_exit: grey_street                                 # alighters' logical destination

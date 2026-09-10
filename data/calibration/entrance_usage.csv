@@ -1,0 +1,6 @@
+interval_start_s,interval_end_s,entrance_id,arrivals
+0,60,blackett_street,20
+60,120,blackett_street,25
+0,60,grey_street,12
+60,120,grey_street,15
+0,120,eldon_square,18
