@@ -162,7 +162,20 @@ def main():
             output_dir=output_dir,
         )
 
-        model, embedder = LLMSetup.setup_language_model(config)
+        # Feature B: when the config selects a rule-based (LLM-free) decision
+        # engine, skip language-model and embedder construction entirely and run
+        # with model=None/embedder=None. evacusim then builds no Concordia agents
+        # and makes zero LLM calls. Requires no Azure credentials.
+        decision_cfg = config.get("decision", {}) or {}
+        engine_name = str(decision_cfg.get("engine", "llm")).lower()
+        if engine_name in ("rule_based", "rule", "rules"):
+            logger.info(
+                "Rule-based decision engine selected — skipping LLM/embedder "
+                "setup (zero-LLM run)."
+            )
+            model, embedder = None, None
+        else:
+            model, embedder = LLMSetup.setup_language_model(config)
 
         results, run_id, decisions_file = run_simulation(
             config, model, embedder,

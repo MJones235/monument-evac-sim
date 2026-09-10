@@ -1,0 +1,13 @@
+extends: ../base.yaml
+
+# Feature B smoke test — run the Monument (multi-level) scenario with the
+# LLM-free rule-based decision engine. No language model or embedder is built
+# (model=None/embedder=None), no Concordia agents are created, and zero LLM
+# calls are made. Passengers route by weighting proximity, busyness, and
+# familiarity; blocked exits are handled by the engine.
+decision:
+  engine: rule_based
+  rule_weights:
+    proximity: 0.5
+    busyness: 0.3
+    familiarity: 0.2
