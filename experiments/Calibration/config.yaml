@@ -35,18 +35,34 @@ simulation:
 # No fire alarm / exit-blocking events during a normal-operations calibration run.
 events: []
 
+performance:
+  # One decision group (base default is 3). With staggered groups, runtime-spawned
+  # agents are never placed in the rotation, so a boarder waiting on the platform
+  # would never be re-evaluated when its train arrives. A single group means every
+  # active agent is reconsidered each decision cycle, so a waiting boarder boards
+  # the next train (30 s dwell > 20 s cycle).
+  decision_groups: 1
+  # Re-evaluate the moment an agent changes level, so a boarder starts looking for
+  # a train as soon as it reaches the platform (and an alighter heads out on arrival).
+  immediate_redecision_on_transfer: true
+
 calibration:
   enabled: true
   seed: 7
+  # Passengers here are regular commuters who know the station: they know the
+  # concourse down-escalators to the platforms (novices would only ever see the
+  # street exits and never descend to board). Drives knowledge_profile for every
+  # runtime-spawned agent.
+  knowledge_profile: commuter
   spawn_jitter_m: 1.0        # base jitter disc; retries grow it for arrival bursts
   entrance_usage_csv: data/calibration/entrance_usage.csv
   timetable_csv: data/calibration/timetable.csv
   # Spawn points are walkable-area interior points (entrance polys sit at the
   # street mouth, outside the walkable floor), resolved from the Monument geometry.
   spawn_points:
-    blackett_street: { level: "0",  xy: [97.2, 46.8] }
+    blackett_street: { level: "0",  xy: [65.0, 44.0] }  # concourse floor, inside the Blackett exit threshold (x<78)
     grey_street:     { level: "0",  xy: [90.8, -9.4] }
-    eldon_square:    { level: "0",  xy: [54.1, 13.0] }
+    eldon_square:    { level: "0",  xy: [34.5, 17.5] }  # eldon corridor mouth on concourse floor
     "1": { level: "-1", xy: [-2.8, -9.5] }    # platform_1 interior (through, Lower)
     "2": { level: "-1", xy: [-20.7, -1.2] }   # platform_2 interior (through, Lower)
     "3": { level: "-1", xy: [-49.9, 46.4] }   # platform_3 interior (loop, Upper)

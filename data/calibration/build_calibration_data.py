@@ -263,16 +263,38 @@ def _resolve_year_column(labels: list[str], year: str | None) -> int:
 # --------------------------------------------------------------------------- #
 
 
+def service_window(day_type: str) -> tuple[int, int]:
+    """Station open/close (seconds): first train to last train across platforms.
+
+    Passengers arrive to catch trains, so there is no reason for anyone to be in
+    the station before the first train or after the last.  We use this to clamp
+    the entrance-arrival bands (whose native windows span the whole day, e.g.
+    "Before 07:30" starts at midnight) to when trains actually run.
+    """
+    windows = SERVICE_WINDOWS[day_type].values()
+    return min(s for s, _ in windows), max(e for _, e in windows)
+
+
 def build_entrance_usage(daily_total: float, fractions: list[float],
-                         bands: list[tuple[int, int]]) -> list[dict]:
-    """One row per (entrance, band): arrivals split equally across entrances."""
+                         bands: list[tuple[int, int]], day_type: str) -> list[dict]:
+    """One row per (entrance, band): arrivals split equally across entrances.
+
+    Each band's time window is clamped to the station service window so that no
+    arrivals are scheduled before the first train or after the last — the
+    Poisson scheduler then spreads that band's arrival *count* over the clamped
+    window.  Bands that fall entirely outside service hours are dropped.
+    """
+    open_s, close_s = service_window(day_type)
     rows = []
     for entrance in ENTRANCES:
         for frac, (start_s, end_s) in zip(fractions, bands):
+            lo, hi = max(start_s, open_s), min(end_s, close_s)
+            if lo >= hi:
+                continue  # band entirely outside service hours
             arrivals = round(daily_total * frac / len(ENTRANCES))
             rows.append({
-                "interval_start_s": start_s,
-                "interval_end_s": end_s,
+                "interval_start_s": lo,
+                "interval_end_s": hi,
                 "entrance_id": entrance,
                 "arrivals": arrivals,
             })
@@ -380,7 +402,7 @@ def main() -> None:
     daily_lower = lower * day_weight
     daily_upper = upper * day_weight
 
-    entrance_rows = build_entrance_usage(daily_total, fractions, bands)
+    entrance_rows = build_entrance_usage(daily_total, fractions, bands, day_type)
     timetable_rows = build_timetable(daily_lower, daily_upper, fractions, bands, day_type)
 
     _write_csv(args.out_dir / "entrance_usage.csv",

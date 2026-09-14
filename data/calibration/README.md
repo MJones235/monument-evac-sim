@@ -60,7 +60,12 @@ so every output number is justifiable from the raw data:
    network-average timeband pattern.
 5. **Entrances** (`entrance_usage.csv`) — each band's arrivals are split
    **equally** across the three street entrances (`blackett_street`,
-   `grey_street`, `eldon_square`).
+   `grey_street`, `eldon_square`). Band windows are **clamped to the station
+   service window** (first train to last train across all platforms, e.g.
+   weekday `05:00`–`23:45`): passengers travel to catch trains, so none are
+   scheduled before the first train or after the last. The band's arrival
+   *count* is preserved, just confined to service hours (so the "before 07:30"
+   band is spread over `05:00`–`07:30`, not from midnight).
 6. **Trains** (`timetable.csv`) — train times come from the published service
    frequencies (first/last train per platform, daytime vs evening headway from
    ~18:20; Sunday starts later with a sparser early service). Alighting counts
