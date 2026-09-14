@@ -1,4 +1,6 @@
-extends: ../Test/config_perf_B.yaml
+extends: ../base.yaml
+
+# This file contains E4-specific overrides only.
 
 # E4 — Two RCIs + Station Controller PA
 #

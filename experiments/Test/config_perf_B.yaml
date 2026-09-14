@@ -1,5 +1,20 @@
 extends: ./config_perf_A.yaml
 
-llm:
-  reasoning_effort: low
-  max_completion_tokens: 1000
+# Compatibility alias: perf B LLM settings are now defined directly in
+# experiments/base.yaml.
+
+events:
+  - time: 15.0
+    message: "An alarm bell is ringing throughout the station. You cannot see any smoke, fire, or sign of emergency."
+  - time: 15.0
+    type: block_exit
+    exits:
+      - escalator_e_up
+      - escalator_f_up
+  - time: 15.0
+    type: pa_announcement
+    sender_label: "Station PA"
+    message: >-
+      Attention please. This is an emergency announcement. Please evacuate the
+      station immediately via the nearest street exit. If you are at platform level, make your way to an escalator.
+

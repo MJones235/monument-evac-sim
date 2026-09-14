@@ -1,4 +1,6 @@
-extends: ../Test/config_perf_B.yaml
+extends: ../base.yaml
+
+# This file contains E2-specific overrides only.
 
 # E2 — Two Revenue Control Inspectors (RCIs) direct the evacuation
 #

@@ -1,10 +1,12 @@
 # Configuration for Monument Station evacuation simulation (multi-level)
+#
+# This file is the single shared baseline for E1-E5.
 
 # Simulation parameters
 simulation:
   dt: 0.05  # JuPedSim timestep (seconds)
   max_iterations: 2400  # Maximum simulation steps (2400 * 0.05 = 120 seconds)
-  decision_interval: 15.0  # Time between Concordia decisions (seconds)
+  decision_interval: 30.0  # Time between Concordia decisions (seconds)
   spawn_interval: 2.0  # Time between agent spawns (seconds)
   network_path: "geometry/monument/network"  # Monument geometry
 
@@ -24,7 +26,8 @@ simulation:
 
 # Agent configuration
 agents:
-  count: 50  # Agents distributed across both levels
+  count: 80  # Default shared occupancy for E1-E5 baseline
+  snapshot_load_path: snapshots/monument_80.json
 
   # OCEAN personality dimension distributions.
   # Each dimension is sampled independently.
@@ -32,9 +35,7 @@ agents:
   #   N (Neuroticism): anxiety/vulnerability under threat
   #   O (Openness):    willingness to reinterpret the situation
   #   C (Conscientiousness): deliberation/dutifulness before acting
-  # E and A are not used in the prompt anchor — encoding extraversion as
-  # novelty-seeking or agreeableness as authority compliance would pre-load
-  # specific action tendencies.
+  # E and A are not used in the prompt anchor
   personalities:
     N:
       high:   20.0
@@ -90,7 +91,7 @@ agents:
       target: [1, 2, 3, 4]
     waiting_for_train:
       spawn_zones: ["platform_1", "platform_2", "platform_3", "platform_4"]
-      weight: 0.5
+      weight: 0.8
       goal: "Wait on Platform {target} and board your train when it arrives."
       memories:
         - "I am standing on the platform waiting to board my train from Platform {target}."
@@ -98,7 +99,7 @@ agents:
       target: [1, 2, 3, 4]
     just_arrived:
       spawn_zones: ["platform_1", "platform_2", "platform_3", "platform_4"]
-      weight: 0.5
+      weight: 0.2
       goal: "Leave the station and continue with your day (next destination: {purpose})."
       memories:
         - "I have just got off my train and stepped onto the platform."
@@ -118,7 +119,14 @@ agents:
     - "a meeting in the city centre"
 
 # Event configuration
-  # A single global event: the fire alarm is sounding
+# A single global event: the fire alarm is sounding.
+events:
+  - time: 15.0
+    message: "The fire alarm is ringing. It has been ringing for {elapsed_time}. You cannot see any evidence of a fire, like smoke or flames."
+  - time: 15.0
+    type: block_exit
+    exits: [escalator_d_down, escalator_e_up, escalator_f_up]
+
 
 # Population monitoring configuration
 # Snapshots are recorded every interval_seconds of simulation time.
@@ -167,8 +175,9 @@ test_scenarios:
 # Note: Credentials are loaded from .env file
 llm:
   temperature: 0.7
+  reasoning_effort: low
   max_retries: 3
-  max_completion_tokens: 8000
+  max_completion_tokens: 1000
   embedder: "sentence-transformers/all-mpnet-base-v2"
 
 # Output configuration
@@ -393,99 +402,20 @@ video:
   dpi: 100
   html_log: "simulation_log.html"
 
-# Fire marshal systems — present in ALL five Proulx (1991) drills.
-#
-# Setup: 4 uniformed fire fighters emerged from the staff room the moment
-# the alarm sounded.  They split 2/2 between the TOP and BOTTOM of the N/S
-# escalators (the D/E/F bank, serving Platforms 1 and 2).  They powered off
-# the escalators and physically blocked passage.  Their only verbal response
-# to passenger queries was "Please evacuate the station."
-#
-# ~4–5 minutes post-alarm the fully operational Fire Brigade arrived, checked
-# the fire location on the electronic board, and directed remaining passengers
-# to evacuate (issuing the "All Clear" once the station was empty).
-#
-# Experiment configs that add their own systems: (E2, E4) will have those
-# staff merged with these fire marshals via the extends deep-merge.
-systems:
-
-  # Two fire marshals at the TOP of the N/S escalators (concourse level 0).
-  # Positioned between escalators D and E (one) and at escalator F (other).
-  # Positions are derived at runtime from the corridor geometry
-  # (zone: "escalator_X_entrance" → midpoint of corridor's concourse-side edge + 1.5 m outward).
-  firefighter_top:
-    enabled: true
-    role_label: "Fire Marshal"
-    walking_speed: 1.5
-    spawn_positions:
-      - zone: "escalator_d_entrance_L0"   # just outside top of escalator D corridor
-        level_id: "0"
-      - zone: "escalator_f_entrance_L0"   # just outside top of escalator F corridor
-        level_id: "0"
-    phases:
-      - trigger: on_event          # activate when fire alarm fires
-        movement: hold
-        directive_radius: 10.0
-        directive_interval: 15.0
-        message: "Please evacuate the station."
-
-  # Two fire marshals at the BOTTOM of the N/S escalators (platform level -1).
-  # Positioned in front of escalator D (one) and escalator F (other).
-  # Positions are derived at runtime from the corridor geometry.
-  firefighter_bottom:
-    enabled: true
-    role_label: "Fire Marshal"
-    walking_speed: 1.5
-    spawn_positions:
-      - zone: "escalator_d_entrance_L-1"   # just outside bottom of escalator D corridor
-        level_id: "-1"
-      - zone: "escalator_f_entrance_L-1"   # just outside bottom of escalator F corridor
-        level_id: "-1"
-    phases:
-      - trigger: on_event
-        movement: hold
-        directive_radius: 10.0
-        directive_interval: 15.0
-        message: "Please evacuate the station."
-
-  # The fully operational Fire Brigade arrives ~4–5 minutes post-alarm.
-  # Modelled as a single officer who patrols the concourse and escalator
-  # area giving stronger directives after the first responders.
-  firefighter_brigade:
-    enabled: true
-    role_label: "Fire Brigade Officer"
-    walking_speed: 1.6
-    spawn_positions:
-      - position: [87.0, 0.0]   # far end of concourse near Blackett Street — out of the way until brigade arrives
-        level_id: "0"
-    phases:
-      # Phase 0: dormant at the Blackett Street end until brigade arrives (~4.5 min).
-      - trigger: on_event
-        movement: hold
-        directive_radius: 0.0
-        directive_interval: 9999.0
-        message: ""
-      # Phase 1: 4.5 min post-alarm (~t=285 s) patrol and direct firmly.
-      - trigger: after_seconds
-        trigger_after_seconds: 270
-        movement: zone_patrol
-        patrol_zones:
-          - zone: concourse
-            level_id: "0"
-          - zone: platform_1
-            level_id: "-1"
-        patrol_dwell_time: 45.0
-        directive_radius: 15.0
-        directive_interval: 10.0
-        message: >-
-          This is the Fire Brigade. You must leave the station immediately.
-          Please use the nearest street exit now.
+# Baseline has no active staff systems by default.
+# Individual experiments (e.g. E1-E4) enable scenario-specific systems.
+systems: {}
 
 # Performance optimization
 performance:
+  pace_multipliers:
+    hurrying: 1.4   # hurried walk ~1.4× normal (Weidmann 1993)
+    running: 2.2    # evacuation jog ~2.2× normal
   max_parallel_agents: 10
   decision_timeout_seconds: 45.0
   wait_nudge_enabled: false
+  immediate_redecision_on_transfer: false
+  min_redecision_interval_seconds: 30.0
 
 # Future: Spawning schedule (disabled for now)
 # agents:

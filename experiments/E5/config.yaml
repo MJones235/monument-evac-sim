@@ -1,4 +1,6 @@
-extends: ../Test/config_perf_B.yaml
+extends: ../base.yaml
+
+# This file contains E5-specific overrides only.
 
 # E5 — Control Room PA with fire location and differential instructions; no staff
 #

@@ -6,13 +6,12 @@ Reduce wall-clock runtime while preserving evacuation behavior quality.
 ## Variants
 - Baseline: experiments/Test/config.yaml
 - Variant A: experiments/Test/config_perf_A.yaml
-  - decision_interval: 30s
-  - min_redecision_interval_seconds: 30s
-  - immediate_redecision_on_transfer: false
+  - Compatibility alias for experiments/base.yaml
 - Variant B: experiments/Test/config_perf_B.yaml
-  - Variant A settings plus:
-  - llm.reasoning_effort: low
-  - llm.max_completion_tokens: 1000
+  - Compatibility alias for Variant A/base
+
+Note: Performance defaults previously split across perf_A/perf_B were moved into
+experiments/base.yaml so E1-E5 can inherit from a single, explicit baseline.
 
 ## Run Commands
 Run from monument-evacuation repo root.

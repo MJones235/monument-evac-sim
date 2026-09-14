@@ -1,40 +1,4 @@
 extends: ../base.yaml
 
-simulation:
-  max_iterations: 2400
-  decision_interval: 30.0
-
-agents:
-  count: 80
-  snapshot_load_path: snapshots/monument_80.json
-  roles:
-    heading_to_platform:
-      memories:
-        - "I am at the station today because I need to catch a train from Platform {target}."
-        - "My reason for travelling is {purpose}."
-        - "I need to get to {purpose} and cannot afford to miss this train."
-    waiting_for_train:
-      weight: 0.8
-      memories:
-        - "I am standing on the platform waiting to board my train from Platform {target}."
-        - "I am travelling for {purpose}."
-        - "I have been waiting for this specific train and missing it would significantly disrupt my plans."
-    just_arrived:
-      weight: 0.2
-
-station:
-  knowledge:
-    base_memories:
-      - "I am inside Monument station in central Newcastle."
-      - "This station has multiple levels connected by escalators and stairs."
-      - "To reach street level from platforms, I need to go up to the concourse first."
-
-events:
-  - time: 15.0
-    message: "The fire alarm is ringing."
-
-systems: {}
-
-performance:
-  immediate_redecision_on_transfer: false
-  min_redecision_interval_seconds: 30.0
+# Compatibility alias: perf A defaults are now defined directly in experiments/base.yaml.
+# Keep this file so existing scripts/commands continue to work.
