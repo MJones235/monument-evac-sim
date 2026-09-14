@@ -19,11 +19,18 @@ agents:
   snapshot_load_path: null  # base.yaml sets monument_80.json — must clear it
 
 simulation:
-  decision_interval: 5.0    # snappier routing for runtime-spawned boarders (base is 30s)
-  # A full day: start at midnight (t=0) and run 24 h.  dt=0.05 s (from base.yaml)
-  # so 24 h = 86400 s / 0.05 = 1,728,000 steps.  This is a long physics run —
-  # lower it for a quick smoke test (e.g. 72000 = 1 h).
-  max_iterations: 1728000
+  # --- Performance tuning for the 24 h calibration run (no LLM, low density) ---
+  # Physics timestep: 0.10 s (base is 0.05). Halves the step backbone and all
+  # per-step overhead; JuPedSim's speed model is stable at this dt for the low
+  # agent density here (peak ~350 concurrent).
+  dt: 0.10
+  # Re-plan routes every 20 s (base 30, Calibration was 5). Boarders/alighters
+  # walk to a fixed goal, so 5 s re-planning was needless work.
+  decision_interval: 20.0
+  # A full day: start at midnight (t=0) and run 24 h.  At dt=0.10 s,
+  # 24 h = 86400 s / 0.10 = 864,000 steps.  Lower for a quick smoke test
+  # (e.g. 36000 = 1 h).
+  max_iterations: 864000
 
 # No fire alarm / exit-blocking events during a normal-operations calibration run.
 events: []
