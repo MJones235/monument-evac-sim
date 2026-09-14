@@ -20,6 +20,10 @@ agents:
 
 simulation:
   decision_interval: 5.0    # snappier routing for runtime-spawned boarders (base is 30s)
+  # A full day: start at midnight (t=0) and run 24 h.  dt=0.05 s (from base.yaml)
+  # so 24 h = 86400 s / 0.05 = 1,728,000 steps.  This is a long physics run —
+  # lower it for a quick smoke test (e.g. 72000 = 1 h).
+  max_iterations: 1728000
 
 # No fire alarm / exit-blocking events during a normal-operations calibration run.
 events: []
@@ -36,7 +40,10 @@ calibration:
     blackett_street: { level: "0",  xy: [97.2, 46.8] }
     grey_street:     { level: "0",  xy: [90.8, -9.4] }
     eldon_square:    { level: "0",  xy: [54.1, 13.0] }
-    "1": { level: "-1", xy: [-2.8, -9.5] }   # platform_1 interior
-    "2": { level: "-1", xy: [-20.7, -1.2] }  # platform_2 interior
-  entrance_dest_exits: [train_platform_1, train_platform_2]  # boarders' destinations
+    "1": { level: "-1", xy: [-2.8, -9.5] }    # platform_1 interior (through, Lower)
+    "2": { level: "-1", xy: [-20.7, -1.2] }   # platform_2 interior (through, Lower)
+    "3": { level: "-1", xy: [-49.9, 46.4] }   # platform_3 interior (loop, Upper)
+    "4": { level: "-1", xy: [-48.7, 35.7] }   # platform_4 interior (loop, Upper)
+  # Boarders' journey destinations — any of the four platforms.
+  entrance_dest_exits: [train_platform_1, train_platform_2, train_platform_3, train_platform_4]
   platform_exit: grey_street                                 # alighters' logical destination
