@@ -327,10 +327,10 @@ station:
       instruction: "Escalators to platforms move you toward platform/train goals; street exits leave the station."
 
     - when_goal_contains_any: ["leave the station", "continue with your day", "leave via"]
-      applies_in_zones: [platform_abc, platform_def, platform_1, platform_2, platform_3, platform_4, level_-1]
-      prefer_exit_tags: [to_concourse]
+      applies_in_zones: [platform_abc, platform_def, platform_1, platform_2, platform_3, platform_4, level_-1, concourse, level_0]
+      prefer_exit_tags: [to_concourse, to_street]
       avoid_exit_tags: [to_platform]
-      instruction: "From platforms, use UP connectors to reach the concourse first; street exits are used from the concourse to leave the station."
+      instruction: "From platforms, use UP connectors to reach the concourse first; from the concourse, use street exits to leave the station. Never descend to a platform when your goal is to leave."
 
   # Fallback zone when an agent's zone cannot be determined from spawn position.
   default_platform_zone: "platform_def"
