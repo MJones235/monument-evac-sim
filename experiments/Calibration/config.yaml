@@ -69,6 +69,15 @@ calibration:
   spawn_jitter_m: 1.0        # base jitter disc; retries grow it for arrival bursts
   train_door_jitter_m: 0.3   # small spread around each door; retries expand if crowded
   train_alighting_duration_s: 12.0  # stagger alighting within the 30 s dwell
+  # Per-agent walking speed, sampled from N(mean, std) and clamped to
+  # [walking_speed_min, walking_speed_max]. The clamp exists because an
+  # unclamped normal at this std can sample non-physical (near-zero or
+  # negative) speeds; min/max are a generous literature-typical range rather
+  # than a tight fit, so they clip only the distribution's extreme tail.
+  walking_speed_mean: 0.9486
+  walking_speed_std: 0.5328
+  walking_speed_min: 0.300
+  walking_speed_max: 2.310
   entrance_usage_csv: data/calibration/entrance_usage.csv
   timetable_csv: data/calibration/timetable.csv
   # Safe walkable points inside each street-entrance overlap. These keep runtime
