@@ -40,11 +40,42 @@ from evacusim.visualization.viewer_launcher import ViewerLauncher
 logger = get_logger(__name__)
 
 
+def parse_start_time(value: str) -> float:
+    """Parse HH:MM[:SS] or seconds-since-midnight."""
+    text = value.strip()
+    try:
+        if ":" not in text:
+            seconds = float(text)
+        else:
+            parts = text.split(":")
+            if len(parts) not in (2, 3):
+                raise ValueError
+            hours, minutes = int(parts[0]), int(parts[1])
+            seconds_part = float(parts[2]) if len(parts) == 3 else 0.0
+            if hours < 0 or minutes not in range(60) or not 0 <= seconds_part < 60:
+                raise ValueError
+            seconds = hours * 3600 + minutes * 60 + seconds_part
+        if not 0 <= seconds < 86400:
+            raise ValueError
+        return seconds
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            "start time must be HH:MM[:SS] or seconds since midnight (0-86399)"
+        ) from exc
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Run a Monument Station evacuation experiment")
     parser.add_argument("config", type=Path, help="Path to experiment config YAML (e.g. experiments/E1/config.yaml)")
     parser.add_argument("--agents", type=int, default=None, help="Override agent count from config")
     parser.add_argument("--max-steps", type=int, default=None, help="Override max simulation steps")
+    parser.add_argument(
+        "--start-time",
+        type=parse_start_time,
+        default=None,
+        metavar="HH:MM[:SS]",
+        help="Start at an absolute time of day, skipping earlier arrivals/events",
+    )
     parser.add_argument("--output-dir", type=str, default=None, help="Override output directory")
     parser.add_argument("--no-viewer", action="store_true", help="Disable live GUI viewer")
     parser.add_argument("--no-spatial-viewer", action="store_true", help="Disable spatial matplotlib viewer")
@@ -161,6 +192,9 @@ def main():
             max_steps=args.max_steps,
             output_dir=output_dir,
         )
+        if args.start_time is not None:
+            config.setdefault("simulation", {})["start_time_s"] = args.start_time
+            logger.info(f"Override: simulation starts at {args.start_time:.1f}s")
 
         # Feature B: when the config selects a rule-based (LLM-free) decision
         # engine, skip language-model and embedder construction entirely and run

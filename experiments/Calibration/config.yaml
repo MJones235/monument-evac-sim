@@ -10,9 +10,10 @@ extends: ../base.yaml
 decision:
   engine: rule_based
   rule_weights:
-    proximity: 0.5
-    busyness: 0.3
-    familiarity: 0.2
+    proximity: 0.33
+    visibility: 0.33
+    busyness: 0.34
+    familiarity: 0
 
 agents:
   count: 0                  # population arrives at runtime
@@ -58,18 +59,33 @@ calibration:
   # runtime-spawned agent.
   knowledge_profile: commuter
   spawn_jitter_m: 1.0        # base jitter disc; retries grow it for arrival bursts
+  train_door_jitter_m: 0.3   # small spread around each door; retries expand if crowded
+  train_alighting_duration_s: 12.0  # stagger alighting within the 30 s dwell
   entrance_usage_csv: data/calibration/entrance_usage.csv
   timetable_csv: data/calibration/timetable.csv
-  # Spawn points are walkable-area interior points (entrance polys sit at the
-  # street mouth, outside the walkable floor), resolved from the Monument geometry.
+  # Safe walkable points inside each street-entrance overlap. These keep runtime
+  # passengers at the actual station boundary while retaining JuPedSim's 0.2 m
+  # minimum wall clearance.
   spawn_points:
-    blackett_street: { level: "0",  xy: [65.0, 44.0] }  # concourse floor, inside the Blackett exit threshold (x<78)
-    grey_street:     { level: "0",  xy: [90.8, -9.4] }
-    eldon_square:    { level: "0",  xy: [34.5, 17.5] }  # eldon corridor mouth on concourse floor
-    "1": { level: "-1", xy: [-2.8, -9.5] }    # platform_1 interior (through, Lower)
-    "2": { level: "-1", xy: [-20.7, -1.2] }   # platform_2 interior (through, Lower)
-    "3": { level: "-1", xy: [-49.9, 46.4] }   # platform_3 interior (loop, Upper)
-    "4": { level: "-1", xy: [-48.7, 35.7] }   # platform_4 interior (loop, Upper)
+    blackett_street: { level: "0",  xy: [97.73, 47.58] }
+    grey_street:     { level: "0",  xy: [90.18, -10.20] }
+    eldon_square:    { level: "0",  xy: [36.31, 8.84] }
+    "1":
+      level: "-1"
+      xy: [-2.8, -9.5]
+      door_points: [[-4.50, -29.52], [-3.39, -16.08], [-2.54, -0.22], [-1.06, 16.18]]
+    "2":
+      level: "-1"
+      xy: [-20.7, -1.2]
+      door_points: [[-21.64, -24.37], [-20.74, -11.18], [-20.54, 3.87], [-19.71, 19.17]]
+    "3":
+      level: "-1"
+      xy: [-49.9, 46.4]
+      door_points: [[-23.49, 48.09], [-35.49, 48.11], [-47.48, 47.55], [-58.85, 45.43]]
+    "4":
+      level: "-1"
+      xy: [-48.7, 35.7]
+      door_points: [[-25.37, 35.12], [-38.53, 35.03], [-51.04, 35.63], [-62.48, 36.80]]
   # Boarders' journey destinations — any of the four platforms.
   entrance_dest_exits: [train_platform_1, train_platform_2, train_platform_3, train_platform_4]
-  platform_exit: grey_street                                 # alighters' logical destination
+  platform_exit: ""  # alighters choose a street exit after reaching the concourse

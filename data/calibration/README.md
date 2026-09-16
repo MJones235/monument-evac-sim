@@ -65,7 +65,14 @@ so every output number is justifiable from the raw data:
    weekday `05:00`–`23:45`): passengers travel to catch trains, so none are
    scheduled before the first train or after the last. The band's arrival
    *count* is preserved, just confined to service hours (so the "before 07:30"
-   band is spread over `05:00`–`07:30`, not from midnight).
+   band is spread over `05:00`–`07:30`, not from midnight). At runtime, each
+   passenger's platform destination is sampled only from platforms within ten
+   minutes of starting their timetable service. For example, weekday Platform 4
+   destinations begin at `06:45`, ten minutes before its first train at `06:55`,
+   rather than accumulating from the station-wide `05:00` opening. Runtime
+   spawn coordinates are safe points within each named entrance polygon's
+   overlap with the walkable concourse, so passengers appear at the station
+   boundary rather than at an interior navigation waypoint.
 6. **Trains** (`timetable.csv`) — train times come from the published service
    frequencies (first/last train per platform, daytime vs evening headway from
    ~18:20; Sunday starts later with a sparser early service). Alighting counts
@@ -73,7 +80,13 @@ so every output number is justifiable from the raw data:
    roughly equal its boardings. `Monument Lower` boardings feed platforms 1 & 2
    (main through platforms); `Monument Upper` feeds platforms 3 & 4 (the loop).
    Each platform's daily alightings are spread over its trains, weighted by the
-   same timeband profile.
+   same timeband profile. Each arrival uses four door positions distributed
+   along the platform. Alighting starts one second after arrival and individual
+   passengers emerge at seeded random times over the following 11 seconds,
+   leaving the rest of the 30-second dwell for boarding. Alighting passengers
+   do not receive a predetermined street exit: after ascending, they choose
+   among usable concourse exits using navigable route distance, line-of-sight
+   visibility, local crowding, and familiarity.
 
 ### Realistic arrival times
 
@@ -81,8 +94,8 @@ so every output number is justifiable from the raw data:
 EvacuSim scheduler treats each band as a Poisson process and samples
 exponential inter-arrival times, so agents arrive at naturally jittered instants
 (inter-arrival gaps range from a fraction of a second to several minutes) — not
-on a fixed grid. Train alighting is an intentional burst at the train's arrival
-second.
+on a fixed grid. Train alighting is a short, reproducible multi-door stream rather
+than a simultaneous burst at one point.
 
 ## Known simplifications
 
@@ -96,7 +109,7 @@ These are the trade-offs made for a first, inspectable model:
   in the city centre), which may look surprising but is what the source says.
 - **Constant rate within a band.** Bands are the native resolution of the real
   data (e.g. a single 09:00–15:29 block), so demand is flat within each band.
-- **Equal entrance split** and **equal split between the two platforms of a
-  level.** No entrance- or platform-level weighting is applied.
+- **Equal entrance split** and **equal choice among platforms currently in
+   service.** No entrance- or platform-level weighting is applied.
 - **Representative headways.** The source gives ranges (e.g. 10–13 min); a
   single representative headway is used per platform/phase.

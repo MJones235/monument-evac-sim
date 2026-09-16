@@ -21,6 +21,17 @@ python run_experiment.py experiments/E1/config.yaml
 
 Results are written to `results/<experiment_id>/<timestamp>/`.
 
+To start at a specific time of day, skipping earlier passenger and event
+schedules, use `--start-time`:
+
+```bash
+python run_experiment.py experiments/Calibration/config.yaml \
+	--start-time 07:30 --no-viewer --no-spatial-viewer --no-video
+```
+
+`--max-steps` remains elapsed duration from that start. With Calibration's
+`dt: 0.1`, for example, `--max-steps 36000` runs one hour from 07:30 to 08:30.
+
 ## Comparing results
 
 ```bash
