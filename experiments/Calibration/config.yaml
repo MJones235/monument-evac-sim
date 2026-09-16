@@ -21,20 +21,28 @@ agents:
 
 simulation:
   # --- Performance tuning for the 24 h calibration run (no LLM, low density) ---
-  # Physics timestep: 0.15 s (base is 0.05, an earlier pass raised it to 0.10).
-  # Compared side-by-side on the same 07:30-08:30 simulated window (same seed):
-  # 0.15 is stable and ~1.8x faster wall-clock than 0.10. 0.20 was also tried
-  # and is NOT safe — JuPedSim aborted the run ("Point ... is outside of
-  # accessible area") once agents started overshooting geometry between steps
-  # at that step size, so don't push dt higher than 0.15 without re-validating.
-  dt: 0.15
+  # Physics timestep: 0.10 s (base is 0.05). Halves the step backbone and all
+  # per-step overhead; JuPedSim's speed model is stable at this dt for the low
+  # agent density here (peak ~350 concurrent).
+  #
+  # dt: 0.15 was tried (2026-09-16) for a further ~1.8x speedup and looked
+  # stable on one 1h validation run, but turned out NOT reliably stable: 2 of
+  # 3 subsequent dt=0.15 runs aborted partway through with JuPedSim's
+  # "Point ... is outside of accessible area" error (agents overshooting
+  # geometry between steps under crowding), while every dt=0.10 run — before
+  # and after that validation — completed cleanly. Do not re-raise dt without
+  # validating across several independent runs (not just one), since this
+  # failure mode is apparently probabilistic/seed-and-congestion-dependent
+  # rather than deterministic. dt=0.20 fails much faster and more obviously
+  # (aborted within ~100s on every attempt), so it's off the table regardless.
+  dt: 0.10
   # Re-plan routes every 20 s (base 30, Calibration was 5). Boarders/alighters
   # walk to a fixed goal, so 5 s re-planning was needless work.
   decision_interval: 20.0
-  # A full day: start at midnight (t=0) and run 24 h.  At dt=0.15 s,
-  # 24 h = 86400 s / 0.15 = 576,000 steps.  Lower for a quick smoke test
-  # (e.g. 24000 = 1 h).
-  max_iterations: 576000
+  # A full day: start at midnight (t=0) and run 24 h.  At dt=0.10 s,
+  # 24 h = 86400 s / 0.10 = 864,000 steps.  Lower for a quick smoke test
+  # (e.g. 36000 = 1 h).
+  max_iterations: 864000
 
 # No fire alarm / exit-blocking events during a normal-operations calibration run.
 events: []
