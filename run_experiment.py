@@ -161,6 +161,8 @@ def run_simulation(config: dict, model, embedder, experiment_id: str,
         runner.perf_timer.report(),
         runner.llm_provider,
         agent_levels,
+        exit_log=getattr(runner, "exit_log", None),
+        spawn_log=getattr(runner, "spawn_log", None),
     )
     logger.info(f"Results saved to {output_dir}")
     return results, run_id, decisions_file
