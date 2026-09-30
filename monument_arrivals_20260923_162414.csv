@@ -1,0 +1,36 @@
+poll_time,train_id,event_type,station,platform,event_time,destination,raw_last_seen
+2026-09-23T16:24:14,134,Departed,Monument,3,16:23,South Shields,Departed Monument platform 3 at 16:23
+2026-09-23T16:25:15,124,Approaching,Monument,2,16:25,St James,Approaching Monument platform 2 at 16:25
+2026-09-23T16:25:46,108,Approaching,Monument,1,16:25,South Hylton,Approaching Monument platform 1 at 16:25
+2026-09-23T16:25:46,124,Arrived,Monument,2,16:25,St James,Arrived Monument platform 2 at 16:25
+2026-09-23T16:26:16,108,Arrived,Monument,1,16:25,South Hylton,Arrived Monument platform 1 at 16:25
+2026-09-23T16:26:31,124,Departed,Monument,2,16:26,St James,Departed Monument platform 2 at 16:26
+2026-09-23T16:26:47,108,Departed,Monument,1,16:26,South Hylton,Departed Monument platform 1 at 16:26
+2026-09-23T16:29:49,101,Approaching,Monument,2,16:29,Airport,Approaching Monument platform 2 at 16:29
+2026-09-23T16:30:20,101,Arrived,Monument,2,16:30,Airport,Arrived Monument platform 2 at 16:30
+2026-09-23T16:31:06,101,Departed,Monument,2,16:30,Airport,Departed Monument platform 2 at 16:30
+2026-09-23T16:31:36,130,Approaching,Monument,1,16:31,South Shields,Approaching Monument platform 1 at 16:31
+2026-09-23T16:32:07,130,Arrived,Monument,1,16:31,South Shields,Arrived Monument platform 1 at 16:31
+2026-09-23T16:32:37,130,Departed,Monument,1,16:32,South Shields,Departed Monument platform 1 at 16:32
+2026-09-23T16:33:07,136,Approaching,Monument,4,16:32,St James,Approaching Monument platform 4 at 16:32
+2026-09-23T16:33:38,136,Arrived,Monument,4,16:33,St James,Arrived Monument platform 4 at 16:33
+2026-09-23T16:34:39,135,Approaching,Monument,3,16:34,South Shields,Approaching Monument platform 3 at 16:34
+2026-09-23T16:34:39,136,Departed,Monument,4,16:34,St James,Departed Monument platform 4 at 16:34
+2026-09-23T16:34:54,125,Approaching,Monument,2,16:34,St James,Approaching Monument platform 2 at 16:34
+2026-09-23T16:35:40,125,Arrived,Monument,2,16:35,St James,Arrived Monument platform 2 at 16:35
+2026-09-23T16:36:10,135,Departed,Monument,3,16:36,South Shields,Departed Monument platform 3 at 16:36
+2026-09-23T16:36:41,125,Departed,Monument,2,16:36,St James,Departed Monument platform 2 at 16:36
+2026-09-23T16:39:13,109,Approaching,Monument,1,16:38,South Hylton,Approaching Monument platform 1 at 16:38
+2026-09-23T16:39:44,109,Arrived,Monument,1,16:39,South Hylton,Arrived Monument platform 1 at 16:39
+2026-09-23T16:40:14,109,Departed,Monument,1,16:40,South Hylton,Departed Monument platform 1 at 16:40
+2026-09-23T16:42:31,102,Approaching,Monument,2,16:42,Airport,Approaching Monument platform 2 at 16:42
+2026-09-23T16:43:02,102,Arrived,Monument,2,16:42,Airport,Arrived Monument platform 2 at 16:42
+2026-09-23T16:43:32,102,Departed,Monument,2,16:43,Airport,Departed Monument platform 2 at 16:43
+2026-09-23T16:46:35,136,Approaching,Monument,3,16:46,South Shields,Approaching Monument platform 3 at 16:46
+2026-09-23T16:47:06,136,Arrived,Monument,3,16:46,South Shields,Arrived Monument platform 3 at 16:46
+2026-09-23T16:47:36,136,Departed,Monument,3,16:47,South Shields,Departed Monument platform 3 at 16:47
+2026-09-23T16:47:51,126,Approaching,Monument,2,16:47,St James,Approaching Monument platform 2 at 16:47
+2026-09-23T16:48:22,126,Arrived,Monument,2,16:48,St James,Arrived Monument platform 2 at 16:48
+2026-09-23T16:49:23,126,Departed,Monument,2,16:49,St James,Departed Monument platform 2 at 16:49
+2026-09-23T16:53:42,103,Approaching,Monument,2,16:53,Airport,Approaching Monument platform 2 at 16:53
+2026-09-23T16:54:12,103,Arrived,Monument,2,16:54,Airport,Arrived Monument platform 2 at 16:54

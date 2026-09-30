@@ -1,0 +1,17 @@
+extends: ../Calibration/config.yaml
+
+# Feature A test harness — identical to the Calibration experiment except the
+# train timetable is a short real-data excerpt (data/calibration/timetable_brief.csv)
+# instead of the full 24h real timetable. Street entrance arrivals still come
+# from the real entrance_usage.csv, unchanged.
+#
+# timetable_brief.csv only covers 07:01:00-07:26:00, so runs against this
+# config should pass --start-time and --max-steps to cover that window, e.g.:
+#
+#   python run_experiment.py experiments/TestCalibration/config.yaml \
+#       --start-time 07:00 --max-steps 18000 --no-viewer --no-spatial-viewer --no-video
+#
+# (dt is 0.10s, inherited from Calibration, so 30 min = 1800s = 18000 steps,
+# comfortably covering the 25-minute timetable plus alighting/walk-off time.)
+calibration:
+  timetable_csv: data/calibration/timetable_brief.csv
