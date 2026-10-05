@@ -13,16 +13,20 @@ simulation:
   # Multi-level simulation (Monument Station has 2 levels: concourse and platforms)
   multi_level: true
   levels: ["0", "-1"]  # Level 0 = concourse, Level -1 = platforms
-  # Escalator belt speed in m/s.  Agents on an escalator will never move slower
-  # than this relative to the surrounding floor (standard commercial escalator ~0.5 m/s).
-  escalator_belt_speed: 0.5
-
-  # Waypoints assigned to agents immediately after a level transfer, used to
-  # walk them clear of the escalator exit before the next LLM decision fires.
-  # Keyed by level_id (string).  Omit a level to fall back to the walkable-area
-  # representative_point() heuristic.
-  level_arrival_waypoints:
-    "0": [70.0, 35.0]   # Open concourse, near Blackett Street corridor mouth
+  # Escalators are two-lane conveyors, detached from the floor simulation
+  # (evacusim.escalators). Passengers queue on the landing, step onto the
+  # stand (right) or walk (left) lane when a step is free, ride, and step off
+  # onto the other level. Comb positions come from the jupedsim.escalator_comb
+  # records in the level files (scripts/generate_escalator_combs.py).
+  escalators:
+    defaults:
+      belt_speed: 0.5              # m/s
+      step_depth: 0.4              # m; at most one person per step per lane
+      walk_share: {up: 0.25, down: 0.40}   # fraction who walk (left lane)
+      stander_step_gap_prob: 0.5   # standers who leave a free step in front
+      walk_speed_factor: {up: 0.5, down: 0.7}   # walking pace on the incline vs floor
+      landing_search_depth: 1.5    # m of landing searched before the belt pauses
+    overrides: {}                  # e.g. escalator_f_up: {belt_speed: 0.65}
 
 # Agent configuration
 agents:
@@ -149,17 +153,17 @@ monitoring:
       description: "Agents on the concourse (level 0)"
       level: "0"
 
-    - name: escalator_bottom
-      description: "Agents at the bottom of escalators (level -1, escalator zones)"
-      level: "-1"
-      area_patterns:
-        - "L-1_esc"   # matches L-1_esc_* exit boxes and L-1_esc_corridor_* polygons
+    - name: escalator_queue
+      description: "Agents queueing for an escalator"
+      type: escalator_queue
+
+    - name: on_escalator
+      description: "Agents riding an escalator"
+      type: on_escalator
 
     - name: platform
       description: "Agents on a platform (level -1)"
       level: "-1"
-      exclude_area_patterns:
-        - "L-1_esc"
 
 # Test scenarios - disabled
 test_scenarios:

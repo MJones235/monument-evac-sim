@@ -63,19 +63,13 @@ ORIGIN_MATCH_RADIUS_M = 10.0
 # Okabe-Ito — chosen over the tab10 set used elsewhere in analysis/ because
 # tab10's green/orange pair is indistinguishable under protanopia (dE 0.7).
 # This palette passes the categorical checks on all pairs; its worst CVD pair
-# sits in the 6-8 band, which is why each platform also gets its own dash
-# pattern and marker as a secondary, non-colour encoding.
+# sits in the 6-8 band, so platform is also encoded by position: bars always
+# stack 1-4 from the bottom, in legend order, separated by white edges.
 PLATFORM_COLOURS = {
     "1": "#0072B2",  # blue
     "2": "#D55E00",  # vermillion
     "3": "#009E73",  # green
     "4": "#CC79A7",  # pink
-}
-PLATFORM_STYLES = {
-    "1": ("-", "o"),
-    "2": ((0, (5, 1.5)), "s"),
-    "3": ((0, (1, 1.2)), "^"),
-    "4": ((0, (6, 1.5, 1, 1.5)), "D"),
 }
 TOTAL_COLOUR = "#333333"
 
@@ -373,6 +367,109 @@ def _hhmm(seconds: float, _pos=None) -> str:
     return f"{total // 3600:02d}:{(total % 3600) // 60:02d}"
 
 
+def _bin_label(bin_seconds: float) -> str:
+    if bin_seconds == 60:
+        return "minute"
+    if bin_seconds >= 60:
+        return f"{bin_seconds / 60:.0f} min"
+    return f"{bin_seconds:.0f} s"
+
+
+def _origin_label(origin: str) -> str:
+    if origin in PLATFORM_COLOURS:
+        return f"Platform {origin}"
+    if origin == "entrance":
+        return "Station entrance"
+    return "Origin unknown"
+
+
+def draw_arrivals(ax, train_events: list[dict], platforms: set[str],
+                  x_lo: float, x_hi: float, bin_seconds: float,
+                  markers: bool = True) -> list[dict]:
+    """
+    Draw train arrivals on `platforms` as vertical lines; return those drawn.
+
+    Shared with the real-data plots so observed and simulated figures carry
+    identical arrival marks.
+    """
+    arrivals = [t for t in train_events
+                if t["kind"] == "arrive"
+                and t["platform"] in platforms
+                and x_lo <= t["time_s"] <= x_hi]
+    # "Dense" is about visual crowding, not a raw count: arrivals packed
+    # closer together than a bin width would overlap into a solid wall at
+    # full strength, so fall back to a soft rug instead of individual lines.
+    span = x_hi - x_lo
+    avg_spacing = span / len(arrivals) if arrivals else span
+    dense = avg_spacing < bin_seconds
+    # y in axes-fraction, x in data coords, so the marker sits at the top
+    # of the plot regardless of the y-scale (set later, from the peak).
+    top_transform = transforms.blended_transform_factory(ax.transData, ax.transAxes)
+    for train in arrivals:
+        colour = PLATFORM_COLOURS.get(train["platform"], TOTAL_COLOUR)
+        if dense:
+            ax.axvline(train["time_s"], color=colour, linewidth=1.0,
+                       alpha=0.22, zorder=1.5)
+        else:
+            ax.axvline(train["time_s"], color=colour, linestyle="--",
+                       linewidth=1.5, alpha=0.8, zorder=4)
+            if markers:
+                ax.plot(train["time_s"], 1.0, marker="v", color=colour,
+                        markersize=8, markeredgecolor="white", markeredgewidth=0.8,
+                        transform=top_transform, clip_on=False, zorder=6)
+    return arrivals
+
+
+def draw_histogram(ax, edges: list[float], series: dict[str, list[int]],
+                   bin_seconds: float, stack_origins: bool = True,
+                   total_label: str = "Total") -> None:
+    """
+    Draw binned counts as a histogram: bars stacked by origin, outlined by a
+    step line for the total. With `stack_origins` off (or no per-origin data,
+    as with real counts) the total is drawn as a filled step histogram alone.
+
+    The total outline is styled identically in both modes, so a simulated and
+    an observed figure read the same way.
+    """
+    total = series["total"]
+    x_hi = edges[-1] + bin_seconds
+    origins = [o for o in sorted(series) if o != "total" and any(series[o])]
+
+    if stack_origins and origins:
+        bottom = [0] * len(edges)
+        for origin in origins:
+            counts = series[origin]
+            ax.bar(edges, counts, width=bin_seconds, bottom=bottom, align="edge",
+                   color=PLATFORM_COLOURS.get(origin, "#888888"),
+                   edgecolor="white", linewidth=0.5, zorder=2,
+                   label=f"{_origin_label(origin)}  (n={sum(counts)})")
+            bottom = [b + c for b, c in zip(bottom, counts)]
+    else:
+        ax.fill_between(edges + [x_hi], total + [total[-1]], step="post",
+                        color=TOTAL_COLOUR, alpha=0.12, zorder=2)
+
+    ax.step(edges + [x_hi], total + [total[-1]], where="post", color=TOTAL_COLOUR,
+            linewidth=1.6, label=f"{total_label}  (n={sum(total)})", zorder=3)
+
+
+def style_time_axis(ax, x_lo: float, x_hi: float, bin_seconds: float,
+                    peak: float) -> None:
+    """Shared axis styling: clock ticks, recessive grid, legend headroom."""
+    bin_label = _bin_label(bin_seconds)
+    ax.set_xlabel("Time of day")
+    ax.set_ylabel(f"People per {bin_label}")
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(_hhmm))
+    ax.xaxis.set_major_locator(mticker.MultipleLocator(_tick_step(x_hi - x_lo)))
+    ax.set_xlim(x_lo, x_hi)
+    # Headroom so the legend does not sit on top of the tallest peak.
+    ax.set_ylim(0, max(peak, 1) * 1.35)
+    # Recessive axes and grid — the data should carry the ink.
+    ax.grid(True, axis="y", alpha=0.25, linewidth=0.7)
+    ax.set_axisbelow(True)
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+
+
 def plot_exit(exit_name: str,
               events: list[dict],
               train_events: list[dict],
@@ -390,91 +487,26 @@ def plot_exit(exit_name: str,
 
     fig, ax = plt.subplots(figsize=(12, 5.5))
 
-    # Arrivals first so the data lines are drawn on top of them.
     platforms_present = {
         origin for origin in series
         if origin not in ("total", "entrance") and any(series[origin])
     }
     if show_arrivals:
-        arrivals = [t for t in train_events
-                    if t["kind"] == "arrive"
-                    and t["platform"] in platforms_present
-                    and x_lo <= t["time_s"] <= x_hi]
-        # "Dense" is about visual crowding, not a raw count: arrivals packed
-        # closer together than a bin width would overlap into a solid wall at
-        # full strength, so fall back to a soft rug instead of individual lines.
-        span = x_hi - x_lo
-        avg_spacing = span / len(arrivals) if arrivals else span
-        dense = avg_spacing < bin_seconds
-        # y in axes-fraction, x in data coords, so the marker sits at the top
-        # of the plot regardless of the y-scale (set later, from the peak).
-        top_transform = transforms.blended_transform_factory(ax.transData, ax.transAxes)
-        for train in arrivals:
-            colour = PLATFORM_COLOURS.get(train["platform"], TOTAL_COLOUR)
-            if dense:
-                ax.axvline(train["time_s"], color=colour, linewidth=1.0,
-                           alpha=0.22, zorder=1.5)
-            else:
-                ax.axvline(train["time_s"], color=colour, linestyle="--",
-                           linewidth=1.8, alpha=0.9, zorder=2.5)
-                ax.plot(train["time_s"], 1.0, marker="v", color=colour,
-                        markersize=8, markeredgecolor="white", markeredgewidth=0.8,
-                        transform=top_transform, clip_on=False, zorder=6)
+        draw_arrivals(ax, train_events, platforms_present, x_lo, x_hi, bin_seconds)
+    draw_histogram(ax, edges, series, bin_seconds)
 
-    # Total first, as a filled band. A thick line on top of the platform lines
-    # hides them exactly when one platform accounts for the whole bin, which is
-    # the most interesting case.
-    total_counts = series["total"]
-    ax.fill_between(edges, total_counts, color=TOTAL_COLOUR, alpha=0.10, zorder=2)
-    ax.plot(edges, total_counts, color=TOTAL_COLOUR, linewidth=1.4, alpha=0.55,
-            label=f"Total  (n={sum(total_counts)})", zorder=2)
-
-    for origin in sorted(series):
-        if origin == "total" or not any(series[origin]):
-            continue
-        counts = series[origin]
-        colour = PLATFORM_COLOURS.get(origin, "#888888")
-        dashes, marker = PLATFORM_STYLES.get(origin, ("-", None))
-        if origin in PLATFORM_COLOURS:
-            label = f"Platform {origin}"
-        elif origin == "entrance":
-            label = "Station entrance"
-        else:
-            label = "Origin unknown"
-        ax.plot(edges, counts, color=colour, linestyle=dashes, linewidth=2.0,
-                marker=marker, markersize=4, markeredgewidth=0,
-                label=f"{label}  (n={sum(counts)})", zorder=3)
-
-    if bin_seconds == 60:
-        bin_label = "minute"
-    elif bin_seconds >= 60:
-        bin_label = f"{bin_seconds / 60:.0f} min"
-    else:
-        bin_label = f"{bin_seconds:.0f} s"
     ax.set_title(
-        f"{EXIT_LABELS.get(exit_name, exit_name)} — people leaving per {bin_label}\n"
-        f"by originating platform · {run_id}",
+        f"{EXIT_LABELS.get(exit_name, exit_name)} — people leaving per "
+        f"{_bin_label(bin_seconds)}\nby originating platform · {run_id}",
         fontsize=12, loc="left",
     )
-    ax.set_xlabel("Time of day")
-    ax.set_ylabel(f"People per {bin_label}")
-    ax.xaxis.set_major_formatter(mticker.FuncFormatter(_hhmm))
-    ax.xaxis.set_major_locator(mticker.MultipleLocator(_tick_step(x_hi - x_lo)))
-    ax.set_xlim(x_lo, x_hi)
-    # Headroom so the legend does not sit on top of the tallest peak.
-    peak = max(total_counts) if total_counts else 1
-    ax.set_ylim(0, peak * 1.35)
-
-    # Recessive axes and grid — the data should carry the ink.
-    ax.grid(True, axis="y", alpha=0.25, linewidth=0.7)
-    ax.set_axisbelow(True)
-    for side in ("top", "right"):
-        ax.spines[side].set_visible(False)
+    style_time_axis(ax, x_lo, x_hi, bin_seconds, max(series["total"], default=1))
 
     if show_arrivals and platforms_present:
-        ax.plot([], [], color=TOTAL_COLOUR, linestyle="--", linewidth=1.8,
-                alpha=0.9, label="Train arrival")
-    ax.legend(loc="upper left", frameon=False, fontsize=9, ncol=2)
+        ax.plot([], [], color=TOTAL_COLOUR, linestyle="--", linewidth=1.5,
+                alpha=0.8, label="Train arrival")
+    ax.legend(loc="upper left", frameon=True, facecolor="white", edgecolor="none",
+              framealpha=0.9, fontsize=9, ncol=3)
 
     fig.tight_layout()
     out_dir.mkdir(parents=True, exist_ok=True)

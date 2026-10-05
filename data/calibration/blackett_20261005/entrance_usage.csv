@@ -1,0 +1,7 @@
+interval_start_s,interval_end_s,entrance_id,arrivals
+31904,32624,blackett_street,71
+32624,36196,blackett_street,354
+31904,32624,grey_street,25
+32624,36196,grey_street,124
+31904,32624,eldon_square,25
+32624,36196,eldon_square,124

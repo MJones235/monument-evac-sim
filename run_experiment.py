@@ -163,6 +163,7 @@ def run_simulation(config: dict, model, embedder, experiment_id: str,
         agent_levels,
         exit_log=getattr(runner, "exit_log", None),
         spawn_log=getattr(runner, "spawn_log", None),
+        escalator_system=getattr(runner.jps_sim, "escalator_system", None),
     )
     logger.info(f"Results saved to {output_dir}")
     return results, run_id, decisions_file
