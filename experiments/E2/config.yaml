@@ -50,6 +50,7 @@ events:
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see
 any evidence of a fire."
+    cue: {strength: weak}
   # Fire marshals power off and block the N/S escalators (D/E/F bank) at alarm time.
   - time: 15.0
     type: block_exit
@@ -61,6 +62,7 @@ any evidence of a fire."
       Attention please. This is an emergency announcement. Please evacuate the
       station immediately via the nearest street exit. Do not wait inside the
       station.
+    cue: {strength: medium, instruction: leave_station}
 
 systems:
   rci_concourse:
@@ -81,6 +83,7 @@ systems:
         directive_radius: 12.0
         directive_interval: 10.0
         message: "Please evacuate the station immediately via the nearest exit!"
+        cue: {strength: strong, instruction: leave_station}
       # Phase 2: once at concourse → hold at concourse centre and prevent entry
       - trigger: on_reach_zone
         trigger_zone: concourse
@@ -92,6 +95,7 @@ systems:
         message: >-
           Please leave the station immediately. Do not enter or wait inside
           the station.
+        cue: {strength: strong, instruction: leave_station}
 
   rci_platforms:
     enabled: true
@@ -111,6 +115,7 @@ systems:
         directive_radius: 12.0
         directive_interval: 10.0
         message: "Please evacuate the station immediately via the nearest exit!"
+        cue: {strength: strong, instruction: leave_station}
       # Phase 2: once at concourse → return to platforms and patrol
       - trigger: on_reach_zone
         trigger_zone: concourse
@@ -127,3 +132,4 @@ systems:
         message: >-
           Please evacuate the platform immediately! Use the escalators to reach
           the concourse and leave via the nearest street exit.
+        cue: {strength: strong, instruction: leave_station}

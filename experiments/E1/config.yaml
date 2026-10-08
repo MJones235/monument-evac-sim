@@ -51,3 +51,4 @@ systems:
         message: >-
           This is the Fire Brigade. You must leave the station immediately.
           Please use the nearest street exit now.
+        cue: {strength: strong, instruction: leave_station}
