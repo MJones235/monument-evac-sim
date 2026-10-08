@@ -36,6 +36,7 @@ from evacusim.setup.output_manager import OutputManager
 from evacusim.setup.simulation_runner_factory import SimulationRunnerFactory
 from evacusim.setup.station_layout_builder import StationLayoutBuilder
 from evacusim.utils.logger import get_logger
+from evacusim.utils.seeding import seed_global_rng
 from evacusim.visualization.video_generation_helper import VideoGenerationHelper
 from evacusim.visualization.viewer_launcher import ViewerLauncher
 
@@ -208,6 +209,9 @@ def main():
             output_dir=output_dir,
             start_time_s=args.start_time,
         )
+        # Every random component's seed derives from params.seed; this covers
+        # code that still uses the random module directly.
+        seed_global_rng(params.seed)
 
         # The rule-based engine needs no language model or embedder (and no
         # Azure credentials): evacusim then builds no Concordia agents and makes
