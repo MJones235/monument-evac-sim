@@ -57,7 +57,9 @@ LANES = ("stand", "walk")
 def load_rides(run_dir: Path) -> list[dict]:
     path = run_dir / "escalator_log.csv"
     if not path.exists():
-        raise FileNotFoundError(f"No escalator_log.csv in {run_dir} — run predates the conveyor model?")
+        raise FileNotFoundError(
+            f"No escalator_log.csv in {run_dir} — run predates the conveyor model?"
+        )
     rides = []
     with path.open() as f:
         for row in csv.DictReader(f):
@@ -77,7 +79,7 @@ def load_frames(run_dir: Path, t_lo: float, t_hi: float) -> dict:
     with path.open() as f:
         for line in f:
             i = line.find('"time":')
-            t = float(line[i + 7:line.find(",", i)])
+            t = float(line[i + 7 : line.find(",", i)])
             if t < t_lo:
                 continue
             if t > t_hi:
@@ -104,9 +106,17 @@ def _recessive(ax):
         ax.spines[side].set_visible(False)
 
 
-def plot_escalator(name: str, geom: dict, rides: list[dict], frames: dict,
-                   t_lo: float, t_hi: float, run_id: str, out_dir: Path,
-                   bin_seconds: float = 60.0) -> Path:
+def plot_escalator(
+    name: str,
+    geom: dict,
+    rides: list[dict],
+    frames: dict,
+    t_lo: float,
+    t_hi: float,
+    run_id: str,
+    out_dir: Path,
+    bin_seconds: float = 60.0,
+) -> Path:
     fig, axes = plt.subplots(2, 2, figsize=(14, 9))
     (ax_st, ax_flow), (ax_queue, ax_ride) = axes
     length = geom["length_m"]
@@ -115,20 +125,30 @@ def plot_escalator(name: str, geom: dict, rides: list[dict], frames: dict,
 
     # 1. Space–time.
     tracks = frames["tracks"].get(name, {})
-    for agent_id, pts in tracks.items():
+    for pts in tracks.values():
         lane = pts[0][2]
-        ax_st.plot([p[0] for p in pts], [p[1] for p in pts], color=LANE_COLOURS[lane],
-                   linestyle=LANE_STYLE[lane], linewidth=1.0, alpha=0.7)
+        ax_st.plot(
+            [p[0] for p in pts],
+            [p[1] for p in pts],
+            color=LANE_COLOURS[lane],
+            linestyle=LANE_STYLE[lane],
+            linewidth=1.0,
+            alpha=0.7,
+        )
     pause_times = [t for t, p in frames["paused"].get(name, []) if p]
     for t in pause_times:
         ax_st.axvspan(t - 0.25, t + 0.25, color="#B00020", alpha=0.08, linewidth=0)
     for lane in LANES:
-        ax_st.plot([], [], color=LANE_COLOURS[lane], linestyle=LANE_STYLE[lane], label=f"{lane} lane")
+        ax_st.plot(
+            [], [], color=LANE_COLOURS[lane], linestyle=LANE_STYLE[lane], label=f"{lane} lane"
+        )
     if pause_times:
         ax_st.fill_between([], [], color="#B00020", alpha=0.15, label="belt paused (landing full)")
     ax_st.set_ylim(0, length)
     ax_st.set_ylabel("Distance from boarding comb (m)")
-    ax_st.set_title(f"Riders over time  ·  belt {belt} m/s, {length:.1f} m", loc="left", fontsize=10)
+    ax_st.set_title(
+        f"Riders over time  ·  belt {belt} m/s, {length:.1f} m", loc="left", fontsize=10
+    )
     ax_st.legend(loc="upper left", fontsize=8, frameon=False)
     _time_axis(ax_st, t_lo, t_hi)
     _recessive(ax_st)
@@ -144,12 +164,24 @@ def plot_escalator(name: str, geom: dict, rides: list[dict], frames: dict,
             counts[r["lane"]][idx] += 1
     width = bin_seconds * 0.42
     for k, lane in enumerate(LANES):
-        ax_flow.bar([e + bin_seconds * (0.08 + 0.46 * k) for e in edges], counts[lane], width=width,
-                    align="edge", color=LANE_COLOURS[lane], edgecolor="white", linewidth=1,
-                    label=f"{lane}  (n={sum(counts[lane])})")
+        ax_flow.bar(
+            [e + bin_seconds * (0.08 + 0.46 * k) for e in edges],
+            counts[lane],
+            width=width,
+            align="edge",
+            color=LANE_COLOURS[lane],
+            edgecolor="white",
+            linewidth=1,
+            label=f"{lane}  (n={sum(counts[lane])})",
+        )
     ceiling = belt / step * bin_seconds
-    ax_flow.axhline(ceiling, color=INK, linestyle=":", linewidth=1.2,
-                    label=f"stand-lane ceiling ({ceiling:.0f}/min, one per step)")
+    ax_flow.axhline(
+        ceiling,
+        color=INK,
+        linestyle=":",
+        linewidth=1.2,
+        label=f"stand-lane ceiling ({ceiling:.0f}/min, one per step)",
+    )
     ax_flow.set_ylim(0, max(ceiling, max(max(c) for c in counts.values())) * 1.25)
     ax_flow.set_ylabel(f"People boarding per {bin_seconds / 60:.0f} min")
     ax_flow.set_title("Boarding rate", loc="left", fontsize=10)
@@ -160,8 +192,14 @@ def plot_escalator(name: str, geom: dict, rides: list[dict], frames: dict,
     # 3. Queue length.
     q = frames["queues"].get(name, [])
     for k, lane in enumerate(LANES):
-        ax_queue.plot([p[0] for p in q], [p[1 + k] for p in q], color=LANE_COLOURS[lane],
-                      linestyle=LANE_STYLE[lane], linewidth=2, label=f"{lane} lane")
+        ax_queue.plot(
+            [p[0] for p in q],
+            [p[1 + k] for p in q],
+            color=LANE_COLOURS[lane],
+            linestyle=LANE_STYLE[lane],
+            linewidth=2,
+            label=f"{lane} lane",
+        )
     ax_queue.set_ylim(bottom=0)
     ax_queue.set_ylabel("People queueing on the landing")
     ax_queue.set_title("Queue at the boarding comb", loc="left", fontsize=10)
@@ -176,11 +214,22 @@ def plot_escalator(name: str, geom: dict, rides: list[dict], frames: dict,
         bins = [x * 2.0 for x in range(int(min(all_times) // 2), int(max(all_times) // 2) + 2)]
         for lane in LANES:
             if ride_times[lane]:
-                ax_ride.hist(ride_times[lane], bins=bins, histtype="step", linewidth=2,
-                             color=LANE_COLOURS[lane], linestyle=LANE_STYLE[lane],
-                             label=f"{lane}  (median {sorted(ride_times[lane])[len(ride_times[lane]) // 2]:.0f} s)")
-    ax_ride.axvline(length / belt, color=INK, linestyle=":", linewidth=1.2,
-                    label=f"standing ride {length / belt:.0f} s")
+                ax_ride.hist(
+                    ride_times[lane],
+                    bins=bins,
+                    histtype="step",
+                    linewidth=2,
+                    color=LANE_COLOURS[lane],
+                    linestyle=LANE_STYLE[lane],
+                    label=f"{lane}  (median {sorted(ride_times[lane])[len(ride_times[lane]) // 2]:.0f} s)",
+                )
+    ax_ride.axvline(
+        length / belt,
+        color=INK,
+        linestyle=":",
+        linewidth=1.2,
+        label=f"standing ride {length / belt:.0f} s",
+    )
     ax_ride.set_xlabel("Ride time (s)")
     ax_ride.set_ylabel("Riders")
     ax_ride.set_title("Ride time", loc="left", fontsize=10)
@@ -194,7 +243,10 @@ def plot_escalator(name: str, geom: dict, rides: list[dict], frames: dict,
         f"queue wait at the landing median {sorted(waits)[len(waits) // 2] if waits else 0:.0f} s "
         f"(max {max(waits) if waits else 0:.0f} s), "
         f"belt paused {sum(r['stall_wait_s'] for r in rides):.0f} rider-s  ·  {run_id}",
-        x=0.01, ha="left", fontsize=12)
+        x=0.01,
+        ha="left",
+        fontsize=12,
+    )
     fig.tight_layout()
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"{name}.png"
@@ -207,14 +259,17 @@ def main() -> int:
     if not MATPLOTLIB_AVAILABLE:
         print("matplotlib is required", file=sys.stderr)
         return 1
-    parser = argparse.ArgumentParser(description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument("--run", type=Path, required=True, help="Run directory")
-    parser.add_argument("--time-range", type=_parse_time_range, default=None,
-                        help="Restrict to e.g. 09:00-09:30")
+    parser.add_argument(
+        "--time-range", type=_parse_time_range, default=None, help="Restrict to e.g. 09:00-09:30"
+    )
     parser.add_argument("--bin-seconds", type=float, default=60.0)
-    parser.add_argument("--out-dir", type=Path, default=None,
-                        help="Directory for PNGs (default: <run>/figures)")
+    parser.add_argument(
+        "--out-dir", type=Path, default=None, help="Directory for PNGs (default: <run>/figures)"
+    )
     args = parser.parse_args()
 
     rides = load_rides(args.run)
@@ -229,13 +284,13 @@ def main() -> int:
 
     print(f"{len(rides)} rides, {_hhmm(t_lo)}–{_hhmm(t_hi)}")
     for name in sorted(geometry, key=lambda n: geometry[n]["letter"]):
-        mine = [r for r in rides if r["escalator"] == name
-                and t_lo <= r["board_s"] <= t_hi]
+        mine = [r for r in rides if r["escalator"] == name and t_lo <= r["board_s"] <= t_hi]
         if not mine:
             print(f"  {name}: no rides in window")
             continue
-        path = plot_escalator(name, geometry[name], mine, frames, t_lo, t_hi,
-                              args.run.name, out_dir, args.bin_seconds)
+        path = plot_escalator(
+            name, geometry[name], mine, frames, t_lo, t_hi, args.run.name, out_dir, args.bin_seconds
+        )
         lanes = {lane: sum(1 for r in mine if r["lane"] == lane) for lane in LANES}
         print(f"  {name}: {len(mine)} rides {lanes} -> {path}")
     return 0

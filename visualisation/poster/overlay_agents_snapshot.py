@@ -1,16 +1,16 @@
 import argparse
-from io import BytesIO
 import json
+from io import BytesIO
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from PIL import Image
-
 
 ROLE_COLORS = {
     "Passenger": "#2E5EAA",
@@ -115,7 +115,9 @@ def infer_role(agent_id: str, role_map: dict[str, str]) -> str:
     return "Unknown"
 
 
-def style_key_for_agent(agent_id: str, snapshot: dict, role_map: dict[str, str], color_by: str) -> str:
+def style_key_for_agent(
+    agent_id: str, snapshot: dict, role_map: dict[str, str], color_by: str
+) -> str:
     if color_by == "action":
         state = snapshot.get("agent_states", {}).get(agent_id, {})
         return state.get("action_type", "unknown")
@@ -267,7 +269,9 @@ def main() -> None:
         ys = [p[1] for p in points]
         legend_label = ACTION_LABELS.get(label, label) if args.color_by == "action" else label
         marker = ACTION_MARKERS.get(label, "o") if args.color_by == "action" else "o"
-        edge_color = ACTION_EDGE_COLORS.get(label, "#1A1A1A") if args.color_by == "action" else "#1A1A1A"
+        edge_color = (
+            ACTION_EDGE_COLORS.get(label, "#1A1A1A") if args.color_by == "action" else "#1A1A1A"
+        )
         edge_width = ACTION_EDGE_WIDTHS.get(label, 1.2) if args.color_by == "action" else 1.2
         ax.scatter(
             xs,

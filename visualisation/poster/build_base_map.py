@@ -2,10 +2,11 @@ import argparse
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Polygon
 import numpy as np
+from matplotlib.patches import Polygon
 
 
 def parse_shape(shape_str: str) -> np.ndarray:
@@ -57,7 +58,9 @@ OBSTACLES = [
 ]
 
 
-def build_base_map(output_path: Path, dpi: int = 300) -> tuple[tuple[float, float], tuple[float, float]]:
+def build_base_map(
+    output_path: Path, dpi: int = 300
+) -> tuple[tuple[float, float], tuple[float, float]]:
     """Render and save a clean level -1 base map for publication-quality figures."""
     fig, ax = plt.subplots(figsize=(8, 12), facecolor="none")
     ax.set_facecolor("none")
@@ -128,7 +131,9 @@ def build_base_map(output_path: Path, dpi: int = 300) -> tuple[tuple[float, floa
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build a clean level -1 base map image for poster graphics.")
+    parser = argparse.ArgumentParser(
+        description="Build a clean level -1 base map image for poster graphics."
+    )
     parser.add_argument(
         "--output",
         type=Path,

@@ -52,23 +52,25 @@ Additional zone detail from Article 3 narrative:
 """
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 # ---------------------------------------------------------------------------
 # Data structures
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ZoneClearance:
     """Time in seconds (post-alarm) at which a zone was fully cleared."""
-    concourse_s: Optional[float]   # time from alarm until concourse empty
-    platform_s: Optional[float]   # time from alarm until all platforms empty
-    whole_station_s: Optional[float]  # time from alarm until last person exited
+
+    concourse_s: float | None  # time from alarm until concourse empty
+    platform_s: float | None  # time from alarm until all platforms empty
+    whole_station_s: float | None  # time from alarm until last person exited
 
 
 @dataclass
 class ExperimentReference:
     """Observed outcomes for one Proulx (1991) evacuation trial."""
+
     experiment_id: str
     description: str
 
@@ -78,12 +80,12 @@ class ExperimentReference:
     # Time from alarm until half-or-more of the crowd at each location started
     # moving (seconds post-alarm).  Measured from video recording.  These are
     # the primary per-condition discriminators (Table 1).
-    time_to_move_concourse_s: Optional[float]   # crowd at open concourse area
-    time_to_move_escalator_s: Optional[float]   # crowd at bottom of N/S escalators
+    time_to_move_concourse_s: float | None  # crowd at open concourse area
+    time_to_move_escalator_s: float | None  # crowd at bottom of N/S escalators
 
     # Fraction of passengers who had *started moving toward an exit* within
     # 60 s of the alarm (0–1).  None = not reliably quantified.
-    immediate_response_rate: Optional[float]
+    immediate_response_rate: float | None
 
     # Qualitative outcome from the thesis summary.
     outcome: str
@@ -105,13 +107,13 @@ REFERENCE: dict[str, ExperimentReference] = {
             # Concourse crowd (66 people) started moving only at 8:15 min when
             # the fire brigade arrived.  Bottom-escalator crowd (45 people) moved
             # at 9:00 min when the FB told them to leave.  (Table 1; p. 115)
-            concourse_s=None,       # not cleared before exercise ended
-            platform_s=None,        # not cleared before exercise ended
-            whole_station_s=None,   # exercise terminated at 887 s; never clear
+            concourse_s=None,  # not cleared before exercise ended
+            platform_s=None,  # not cleared before exercise ended
+            whole_station_s=None,  # exercise terminated at 887 s; never clear
         ),
         # Time to start moving: 8:15 (concourse), 9:00 (bottom escalator)
-        time_to_move_concourse_s=495.0,   # 8 min 15 s
-        time_to_move_escalator_s=540.0,   # 9 min 00 s
+        time_to_move_concourse_s=495.0,  # 8 min 15 s
+        time_to_move_escalator_s=540.0,  # 9 min 00 s
         immediate_response_rate=None,  # effectively 0 — no self-initiated evac
         outcome=(
             "Complete failure. Passengers continued circulating normally. "
@@ -126,7 +128,6 @@ REFERENCE: dict[str, ExperimentReference] = {
             "This is the control condition against which E2–E5 are compared.",
         ],
     ),
-
     "E2": ExperimentReference(
         experiment_id="E2",
         description="Two Revenue Control Inspectors direct the evacuation",
@@ -134,13 +135,13 @@ REFERENCE: dict[str, ExperimentReference] = {
             # Article 3, p. 139: "3 minutes after the alarm the concourse was
             # cleared."  "The lower levels were cleared 5 minutes after the
             # alarm."  Table 1: whole station clear at 8:00 min.
-            concourse_s=180.0,        # ~3 min post-alarm
-            platform_s=300.0,         # ~5 min post-alarm (lower levels clear)
-            whole_station_s=480.0,    # 8:00 min post-alarm (table 1)
+            concourse_s=180.0,  # ~3 min post-alarm
+            platform_s=300.0,  # ~5 min post-alarm (lower levels clear)
+            whole_station_s=480.0,  # 8:00 min post-alarm (table 1)
         ),
         # Time to start moving: 2:15 (concourse crowd of 30), 3:00 (escalator crowd of 53)
-        time_to_move_concourse_s=135.0,   # 2 min 15 s
-        time_to_move_escalator_s=180.0,   # 3 min 00 s
+        time_to_move_concourse_s=135.0,  # 2 min 15 s
+        time_to_move_escalator_s=180.0,  # 3 min 00 s
         immediate_response_rate=None,
         outcome=(
             "Whole station cleared 8:00 min post-alarm. Concourse cleared ~3 min, "
@@ -155,7 +156,6 @@ REFERENCE: dict[str, ExperimentReference] = {
             "90% heard alarm; 76% still thought it was not a real emergency.",
         ],
     ),
-
     "E3": ExperimentReference(
         experiment_id="E3",
         description="Minimal non-directive PA repeated every 20 s",
@@ -164,14 +164,14 @@ REFERENCE: dict[str, ExperimentReference] = {
             # Article 3, p. 140: concourse crowd (13 people) moved at 1:15 min;
             # bottom-of-escalator crowd (48 people) waited until FB arrived at
             # ~7:40 min.
-            concourse_s=None,         # movement only; concourse not explicitly
-                                      # 'cleared' at a stated time
-            platform_s=None,          # lower levels cleared by FB ~7:40+ min
-            whole_station_s=630.0,    # 10:30 min post-alarm (Table 1)
+            concourse_s=None,  # movement only; concourse not explicitly
+            # 'cleared' at a stated time
+            platform_s=None,  # lower levels cleared by FB ~7:40+ min
+            whole_station_s=630.0,  # 10:30 min post-alarm (Table 1)
         ),
         # Time to start moving: 1:15 (concourse), 7:40 (escalator — only when FB arrived)
-        time_to_move_concourse_s=75.0,    # 1 min 15 s
-        time_to_move_escalator_s=460.0,   # 7 min 40 s (FB-initiated)
+        time_to_move_concourse_s=75.0,  # 1 min 15 s
+        time_to_move_escalator_s=460.0,  # 7 min 40 s (FB-initiated)
         immediate_response_rate=None,
         outcome=(
             "Station cleared 10:30 min post-alarm (with FB assistance). Clear "
@@ -187,7 +187,6 @@ REFERENCE: dict[str, ExperimentReference] = {
             "56% still thought it was not a real emergency.",
         ],
     ),
-
     "E4": ExperimentReference(
         experiment_id="E4",
         description="Two RCIs + zone-specific PA (platform: board train; concourse: street exit)",
@@ -195,14 +194,14 @@ REFERENCE: dict[str, ExperimentReference] = {
             # Article 3, p. 140: "Four minutes after the alarm the concourse was
             # cleared."
             # Table 1: whole station cleared 6:45 min post-alarm.
-            concourse_s=240.0,        # ~4 min post-alarm
-            platform_s=None,          # platform levels cleared by combined RCI+PA;
-                                      # exact sub-5-min time not stated separately
-            whole_station_s=405.0,    # 6:45 min post-alarm (Table 1)
+            concourse_s=240.0,  # ~4 min post-alarm
+            platform_s=None,  # platform levels cleared by combined RCI+PA;
+            # exact sub-5-min time not stated separately
+            whole_station_s=405.0,  # 6:45 min post-alarm (Table 1)
         ),
         # Time to start moving: 1:15 (concourse crowd of 20), 1:30 (escalator crowd of 15)
-        time_to_move_concourse_s=75.0,   # 1 min 15 s
-        time_to_move_escalator_s=90.0,   # 1 min 30 s
+        time_to_move_concourse_s=75.0,  # 1 min 15 s
+        time_to_move_escalator_s=90.0,  # 1 min 30 s
         immediate_response_rate=None,
         outcome=(
             "Station cleared 6:45 min post-alarm. Concourse cleared ~4 min. "
@@ -216,7 +215,6 @@ REFERENCE: dict[str, ExperimentReference] = {
             "54% still thought it was not a real emergency (lowest after E5).",
         ],
     ),
-
     "E5": ExperimentReference(
         experiment_id="E5",
         description="Rich directive PA with fire location + differential zone instructions; no staff",
@@ -224,14 +222,14 @@ REFERENCE: dict[str, ExperimentReference] = {
             # Article 3, p. 140: "This level [concourse] was cleared 3 minutes
             # after the alarm was sounded."  Table 1: station cleared 5:45 min
             # post-alarm (10:15 min for last group with pram/pushchair).
-            concourse_s=180.0,        # ~3 min post-alarm
-            platform_s=None,          # platform crowd evacuated by train immediately
-            whole_station_s=345.0,    # 5:45 min post-alarm (10:15 for last 2 groups)
+            concourse_s=180.0,  # ~3 min post-alarm
+            platform_s=None,  # platform crowd evacuated by train immediately
+            whole_station_s=345.0,  # 5:45 min post-alarm (10:15 for last 2 groups)
         ),
         # Time to start moving: 1:30 (concourse crowd of 19), 1:00 (escalator crowd of 16)
-        time_to_move_concourse_s=90.0,   # 1 min 30 s
-        time_to_move_escalator_s=60.0,   # 1 min 00 s — fastest of all conditions
-        immediate_response_rate=None,    # described as essentially immediate on PA line 2
+        time_to_move_concourse_s=90.0,  # 1 min 30 s
+        time_to_move_escalator_s=60.0,  # 1 min 00 s — fastest of all conditions
+        immediate_response_rate=None,  # described as essentially immediate on PA line 2
         outcome=(
             "Station cleared 5:45 min post-alarm (10:15 for last group). Concourse "
             "cleared ~3 min. Fastest overall evacuation. No staff required — PA "
@@ -254,7 +252,8 @@ REFERENCE: dict[str, ExperimentReference] = {
 # Metric extraction helpers
 # ---------------------------------------------------------------------------
 
-def get_clearance_times() -> dict[str, dict[str, Optional[float]]]:
+
+def get_clearance_times() -> dict[str, dict[str, float | None]]:
     """
     Return a nested dict of zone clearance times (seconds post-alarm) for all
     experiments.

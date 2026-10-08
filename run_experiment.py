@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 # (load_dotenv() inside llm_setup searches from CWD which may not be reliable
 # when called as an installed package)
 from dotenv import load_dotenv  # noqa: E402
+
 load_dotenv(Path(__file__).parent / ".env")
 
 from evacusim.config.config_loader import ConfigLoader
@@ -66,7 +67,9 @@ def parse_start_time(value: str) -> float:
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run a Monument Station evacuation experiment")
-    parser.add_argument("config", type=Path, help="Path to experiment config YAML (e.g. experiments/E1/config.yaml)")
+    parser.add_argument(
+        "config", type=Path, help="Path to experiment config YAML (e.g. experiments/E1/config.yaml)"
+    )
     parser.add_argument("--agents", type=int, default=None, help="Override agent count from config")
     parser.add_argument("--max-steps", type=int, default=None, help="Override max simulation steps")
     parser.add_argument(
@@ -78,15 +81,25 @@ def parse_args():
     )
     parser.add_argument("--output-dir", type=str, default=None, help="Override output directory")
     parser.add_argument("--no-viewer", action="store_true", help="Disable live GUI viewer")
-    parser.add_argument("--no-spatial-viewer", action="store_true", help="Disable spatial matplotlib viewer")
-    parser.add_argument("--no-video", action="store_true", help="Skip MP4 rendering after simulation")
+    parser.add_argument(
+        "--no-spatial-viewer", action="store_true", help="Disable spatial matplotlib viewer"
+    )
+    parser.add_argument(
+        "--no-video", action="store_true", help="Skip MP4 rendering after simulation"
+    )
     parser.add_argument("--video-fps", type=int, default=20)
     parser.add_argument("--video-speedup", type=float, default=1.0)
     return parser.parse_args()
 
 
-def run_simulation(config: dict, model, embedder, experiment_id: str,
-                   launch_viewer: bool = True, launch_spatial: bool = True):
+def run_simulation(
+    config: dict,
+    model,
+    embedder,
+    experiment_id: str,
+    launch_viewer: bool = True,
+    launch_spatial: bool = True,
+):
     """Orchestrate the full simulation run and return (results, run_id, decisions_file)."""
     runner = None
 
@@ -97,10 +110,8 @@ def run_simulation(config: dict, model, embedder, experiment_id: str,
     # BEFORE random passengers are spawned.  JuPedSim then enforces minimum
     # separation around their positions so no passenger can land on top of a
     # fire-marshal spawn point (fixes spawn-collision RuntimeError).
-    pre_built_systems, pre_built_agent_roles = (
-        HybridSimulationRunner.build_systems_for_pre_spawn(
-            config.get("systems", {}), jps_sim, station_layout
-        )
+    pre_built_systems, pre_built_agent_roles = HybridSimulationRunner.build_systems_for_pre_spawn(
+        config.get("systems", {}), jps_sim, station_layout
     )
 
     agents_config = AgentManager.create_and_populate_agents(jps_sim, config)
@@ -207,22 +218,25 @@ def main():
         engine_name = str(decision_cfg.get("engine", "llm")).lower()
         if engine_name in ("rule_based", "rule", "rules"):
             logger.info(
-                "Rule-based decision engine selected — skipping LLM/embedder "
-                "setup (zero-LLM run)."
+                "Rule-based decision engine selected — skipping LLM/embedder setup (zero-LLM run)."
             )
             model, embedder = None, None
         else:
             model, embedder = LLMSetup.setup_language_model(config)
 
         results, run_id, decisions_file = run_simulation(
-            config, model, embedder,
+            config,
+            model,
+            embedder,
             experiment_id=experiment_id,
             launch_viewer=not args.no_viewer,
             launch_spatial=not args.no_spatial_viewer,
         )
 
         if not args.no_video:
-            network_path = Path(config.get("simulation", {}).get("network_path", "geometry/monument/network"))
+            network_path = Path(
+                config.get("simulation", {}).get("network_path", "geometry/monument/network")
+            )
             VideoGenerationHelper.generate_simulation_video(
                 decisions_file=decisions_file,
                 run_id=run_id,
@@ -235,7 +249,7 @@ def main():
         for key, value in results.items():
             logger.info(f"  {key}: {value}")
         elapsed = time.time() - script_start
-        logger.info(f"Total time: {elapsed:.1f}s ({elapsed/60:.1f} min)")
+        logger.info(f"Total time: {elapsed:.1f}s ({elapsed / 60:.1f} min)")
         logger.info("=" * 60)
 
     except Exception as e:

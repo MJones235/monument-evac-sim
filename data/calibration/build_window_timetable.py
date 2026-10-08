@@ -91,24 +91,40 @@ def largest_remainder(values: list[float], total: int) -> list[int]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--counts", type=Path, required=True,
-                        help="Counter CSV for the observed exit")
-    parser.add_argument("--arrivals", type=Path, required=True,
-                        help="Arrivals CSV from monument-arrivals-logger.py")
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--counts", type=Path, required=True, help="Counter CSV for the observed exit"
+    )
+    parser.add_argument(
+        "--arrivals", type=Path, required=True, help="Arrivals CSV from monument-arrivals-logger.py"
+    )
     parser.add_argument("--out-dir", type=Path, required=True)
-    parser.add_argument("--other-exit-share", type=float, default=0.35,
-                        help="Each unobserved exit's footfall as a fraction of "
-                             "the observed exit's (default: 0.35)")
-    parser.add_argument("--lag-s", type=float, default=120.0,
-                        help="Typical train-arrival-to-street time (default: 120)")
-    parser.add_argument("--warmup-s", type=float, default=600.0,
-                        help="Trains replayed before the window to reach steady "
-                             "state (default: 600)")
-    parser.add_argument("--reference-timetable", type=Path,
-                        default=REPO_ROOT / "data/calibration/timetable.csv",
-                        help="All-day timetable giving the per-platform split")
+    parser.add_argument(
+        "--other-exit-share",
+        type=float,
+        default=0.35,
+        help="Each unobserved exit's footfall as a fraction of the observed exit's (default: 0.35)",
+    )
+    parser.add_argument(
+        "--lag-s",
+        type=float,
+        default=120.0,
+        help="Typical train-arrival-to-street time (default: 120)",
+    )
+    parser.add_argument(
+        "--warmup-s",
+        type=float,
+        default=600.0,
+        help="Trains replayed before the window to reach steady state (default: 600)",
+    )
+    parser.add_argument(
+        "--reference-timetable",
+        type=Path,
+        default=REPO_ROOT / "data/calibration/timetable.csv",
+        help="All-day timetable giving the per-platform split",
+    )
     args = parser.parse_args()
 
     observed_exit = exit_from_filename(args.counts)
@@ -119,15 +135,16 @@ def main() -> int:
 
     attr_lo, attr_hi = rec_start - args.lag_s, rec_end - args.lag_s
     replay_lo = attr_lo - args.warmup_s
-    trains = [t for t in load_arrivals(args.arrivals, day)
-              if replay_lo <= t["time_s"] <= rec_end]
+    trains = [t for t in load_arrivals(args.arrivals, day) if replay_lo <= t["time_s"] <= rec_end]
     if not trains:
         print("No train arrivals overlap the counting window", file=sys.stderr)
         return 1
 
-    weights = platform_weights(args.reference_timetable,
-                               math.floor(rec_start / 3600) * 3600,
-                               math.ceil(rec_end / 3600) * 3600)
+    weights = platform_weights(
+        args.reference_timetable,
+        math.floor(rec_start / 3600) * 3600,
+        math.ceil(rec_end / 3600) * 3600,
+    )
     missing = {t["platform"] for t in trains} - set(weights)
     if missing:
         print(f"No reference alighting for platform(s) {sorted(missing)}", file=sys.stderr)
@@ -137,10 +154,11 @@ def main() -> int:
     scale = total / sum(weights[t["platform"]] for t in attributed)
     attributed_ids = {id(t) for t in attributed}
     exact = [weights[t["platform"]] * scale for t in attributed]
-    rounded = dict(zip((id(t) for t in attributed), largest_remainder(exact, total)))
+    rounded = dict(zip((id(t) for t in attributed), largest_remainder(exact, total), strict=True))
     for t in trains:
-        t["alighting"] = (rounded[id(t)] if id(t) in attributed_ids
-                          else round(weights[t["platform"]] * scale))
+        t["alighting"] = (
+            rounded[id(t)] if id(t) in attributed_ids else round(weights[t["platform"]] * scale)
+        )
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     timetable_path = args.out_dir / "timetable.csv"
@@ -148,14 +166,16 @@ def main() -> int:
         writer = csv.writer(f)
         writer.writerow(["arrival_s", "platform", "alighting", "dwell_s"])
         for t in trains:
-            writer.writerow([int(round(t["time_s"])), t["platform"],
-                             t["alighting"], DEFAULT_DWELL_S])
+            writer.writerow(
+                [int(round(t["time_s"])), t["platform"], t["alighting"], DEFAULT_DWELL_S]
+            )
 
     # Arrivals per entrance mirror exits per exit; the warm-up runs at the
     # same rate so the window itself gets exactly the per-exit volume.
-    footfall = {e: (counted if e == observed_exit
-                    else round(counted * args.other_exit_share))
-                for e in STREET_EXITS}
+    footfall = {
+        e: (counted if e == observed_exit else round(counted * args.other_exit_share))
+        for e in STREET_EXITS
+    }
     warmup_start, window_start = int(replay_lo), int(rec_start)
     usage_path = args.out_dir / "entrance_usage.csv"
     with usage_path.open("w", newline="") as f:
@@ -163,21 +183,30 @@ def main() -> int:
         writer.writerow(["interval_start_s", "interval_end_s", "entrance_id", "arrivals"])
         for entrance in STREET_EXITS:
             rate = footfall[entrance] / (rec_end - rec_start)
-            writer.writerow([warmup_start, window_start, entrance,
-                             round(rate * (window_start - warmup_start))])
+            writer.writerow(
+                [warmup_start, window_start, entrance, round(rate * (window_start - warmup_start))]
+            )
             writer.writerow([window_start, int(rec_end), entrance, footfall[entrance]])
 
     # --- Summary -----------------------------------------------------------
-    print(f"Observed: {counted} people via {observed_exit} on {day}, "
-          f"{_hhmm(rec_start)}:{int(rec_start) % 60:02d}–"
-          f"{_hhmm(rec_end)}:{int(rec_end) % 60:02d}")
-    print(f"Total alighting to leave in window: {counted} x "
-          f"(1 + {n_other} x {args.other_exit_share}) = {total}")
-    print(f"Per-train weights by platform: "
-          + ", ".join(f"P{p}={w:.1f}" for p, w in sorted(weights.items())))
-    print(f"Trains replayed: {len(trains)} ({_hhmm(trains[0]['time_s'])}–"
-          f"{_hhmm(trains[-1]['time_s'])}), of which {len(attributed)} arriving "
-          f"{_hhmm(attr_lo)}–{_hhmm(attr_hi)} carry the {total}")
+    print(
+        f"Observed: {counted} people via {observed_exit} on {day}, "
+        f"{_hhmm(rec_start)}:{int(rec_start) % 60:02d}–"
+        f"{_hhmm(rec_end)}:{int(rec_end) % 60:02d}"
+    )
+    print(
+        f"Total alighting to leave in window: {counted} x "
+        f"(1 + {n_other} x {args.other_exit_share}) = {total}"
+    )
+    print(
+        "Per-train weights by platform: "
+        + ", ".join(f"P{p}={w:.1f}" for p, w in sorted(weights.items()))
+    )
+    print(
+        f"Trains replayed: {len(trains)} ({_hhmm(trains[0]['time_s'])}–"
+        f"{_hhmm(trains[-1]['time_s'])}), of which {len(attributed)} arriving "
+        f"{_hhmm(attr_lo)}–{_hhmm(attr_hi)} carry the {total}"
+    )
     per_platform: dict[str, list[int]] = defaultdict(lambda: [0, 0])
     for t in trains:
         per_platform[t["platform"]][0] += 1
@@ -185,11 +214,12 @@ def main() -> int:
     for p, (n, a) in sorted(per_platform.items()):
         print(f"  platform {p}: {n} trains, {a} alighting")
     print(f"  all replayed trains: {sum(t['alighting'] for t in trains)} alighting")
-    print("Street arrivals (boarders) in window: "
-          + ", ".join(f"{e}={n}" for e, n in footfall.items())
-          + f" (total {sum(footfall.values())})")
-    print(f"Suggested simulation.start_time_s: {int(replay_lo) // 60 * 60} "
-          f"({_hhmm(replay_lo)})")
+    print(
+        "Street arrivals (boarders) in window: "
+        + ", ".join(f"{e}={n}" for e, n in footfall.items())
+        + f" (total {sum(footfall.values())})"
+    )
+    print(f"Suggested simulation.start_time_s: {int(replay_lo) // 60 * 60} ({_hhmm(replay_lo)})")
     print(f"Wrote {timetable_path} and {usage_path}")
     return 0
 

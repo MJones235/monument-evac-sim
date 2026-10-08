@@ -16,10 +16,8 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import csv
 import sys
 from pathlib import Path
-from typing import Optional
 
 # Allow running as either `python analysis/evacuation_plots.py` or
 # `python -m analysis.evacuation_plots` from the repo root.
@@ -28,26 +26,26 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 try:
     import matplotlib.pyplot as plt
     import matplotlib.ticker as mticker
+
     MATPLOTLIB_AVAILABLE = True
 except ImportError:
     MATPLOTLIB_AVAILABLE = False
 
-from analysis.proulx_1991 import REFERENCE
 from analysis.compare_experiments import (
-    find_latest_run,
-    find_all_runs,
-    load_timeseries,
     ALARM_T,
     EXPERIMENTS,
+    find_latest_run,
+    load_timeseries,
 )
+from analysis.proulx_1991 import REFERENCE
 
 # Colours consistent across all plots (one per experiment).
 EXP_COLOURS = {
-    "E1": "#d62728",   # red
-    "E2": "#ff7f0e",   # orange
-    "E3": "#2ca02c",   # green
-    "E4": "#1f77b4",   # blue
-    "E5": "#9467bd",   # purple
+    "E1": "#d62728",  # red
+    "E2": "#ff7f0e",  # orange
+    "E3": "#2ca02c",  # green
+    "E4": "#1f77b4",  # blue
+    "E5": "#9467bd",  # purple
 }
 
 EXP_LABELS = {
@@ -61,7 +59,7 @@ EXP_LABELS = {
 # Reference clearance lines from Proulx (1991) — (exp_id, post_alarm_s, label).
 _REF_LINES = [
     ("E2", REFERENCE["E2"].clearance.whole_station_s, "E2 observed\n(~5 min)"),
-    ("E2", REFERENCE["E2"].clearance.concourse_s,     "E2 concourse\n(~3 min)"),
+    ("E2", REFERENCE["E2"].clearance.concourse_s, "E2 concourse\n(~3 min)"),
 ]
 
 
@@ -105,10 +103,11 @@ def _load_zone_curves(run_dir: Path) -> dict[str, tuple[list[float], list[float]
 # Individual experiment plot
 # ---------------------------------------------------------------------------
 
+
 def plot_single_experiment(
     exp_id: str,
     results_dir: Path,
-    output_dir: Optional[Path] = None,
+    output_dir: Path | None = None,
 ) -> None:
     """Plot the evacuation curve (fraction remaining) for one experiment."""
     if not MATPLOTLIB_AVAILABLE:
@@ -134,7 +133,7 @@ def plot_single_experiment(
     ax = axes[0]
     ax.plot(times, frac, color=EXP_COLOURS[exp_id], linewidth=2)
     ax.axhline(0.5, color="grey", linestyle="--", linewidth=0.8, label="50% threshold")
-    ax.axhline(0.1, color="grey", linestyle=":",  linewidth=0.8, label="10% threshold")
+    ax.axhline(0.1, color="grey", linestyle=":", linewidth=0.8, label="10% threshold")
     ax.set_xlabel("Time after alarm (s)")
     ax.set_ylabel("Fraction of agents still inside")
     ax.set_title("Evacuees remaining over time")
@@ -180,9 +179,10 @@ def plot_single_experiment(
 # Cross-experiment overlay
 # ---------------------------------------------------------------------------
 
+
 def plot_all_experiments(
     results_dir: Path,
-    output_dir: Optional[Path] = None,
+    output_dir: Path | None = None,
 ) -> None:
     """Overlay evacuation curves for all five experiments on one figure."""
     if not MATPLOTLIB_AVAILABLE:
@@ -205,7 +205,8 @@ def plot_all_experiments(
             continue
         any_data = True
         ax.plot(
-            times, frac,
+            times,
+            frac,
             label=f"{EXP_LABELS[exp_id]} (n={n})",
             color=EXP_COLOURS[exp_id],
             linewidth=2,
@@ -232,8 +233,16 @@ def plot_all_experiments(
     ax.grid(True, alpha=0.3)
 
     if not any_data:
-        ax.text(0.5, 0.5, "No simulation results found", transform=ax.transAxes,
-                ha="center", va="center", fontsize=14, color="grey")
+        ax.text(
+            0.5,
+            0.5,
+            "No simulation results found",
+            transform=ax.transAxes,
+            ha="center",
+            va="center",
+            fontsize=14,
+            color="grey",
+        )
 
     plt.tight_layout()
 
@@ -250,6 +259,7 @@ def plot_all_experiments(
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
 
 def main():
     parser = argparse.ArgumentParser(description="Generate evacuation plots")

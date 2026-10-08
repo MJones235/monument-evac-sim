@@ -1,0 +1,32 @@
+{
+  "sha256": {
+    "exit_log.csv": "24fd618a0cc4dc160e76dc51610872fa653a4498105e032be514d66bd8225ed7",
+    "population_timeseries.csv": "3b955d8e8f63e4495c17d7dd3ab55643a950e8a582af8f3651b1e20aab997a99",
+    "escalator_log.csv": "af88a51006a37fdb9b327f9907f06f8d36832ba68e29f3c141a96000572ec4af",
+    "agent_decisions_history.jsonl": "692276414bf831f91dc7748fe57ff65a5285175b5db340179fa7125b8304d238",
+    "route_changes.txt": "52e645393e020410b4232685d98ae42bdc7a2260dda663546834db3cad2e7a65"
+  },
+  "summary": {
+    "exits": {
+      "blackett_street": 1
+    },
+    "population_header": [
+      "sim_time_s",
+      "sim_time_min",
+      "left_station",
+      "concourse",
+      "escalator_queue",
+      "on_escalator",
+      "platform"
+    ],
+    "population_final_row": [
+      "200.0",
+      "3.333",
+      "1",
+      "4",
+      "0",
+      "0",
+      "72"
+    ]
+  }
+}

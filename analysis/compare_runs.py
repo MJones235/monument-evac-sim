@@ -34,6 +34,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import contextlib
 import csv
 import json
 import re
@@ -41,7 +42,6 @@ import statistics
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -50,44 +50,46 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # Data structures
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class RunMetrics:
     """All metrics extracted from a single simulation run directory."""
+
     label: str
     run_dir: Path
 
     # --- Performance ---
-    wall_time_s: Optional[float] = None          # TOTAL wall-clock (seconds)
-    jps_time_s: Optional[float] = None           # jupedsim_step total
-    decision_time_s: Optional[float] = None      # decision_processing total
+    wall_time_s: float | None = None  # TOTAL wall-clock (seconds)
+    jps_time_s: float | None = None  # jupedsim_step total
+    decision_time_s: float | None = None  # decision_processing total
 
     # --- LLM usage ---
-    llm_requests: Optional[int] = None
-    prompt_tokens: Optional[int] = None
-    completion_tokens: Optional[int] = None
-    total_tokens: Optional[int] = None
-    cost_gbp: Optional[float] = None
-    llm_calls_made: Optional[int] = None
-    llm_calls_skipped: Optional[int] = None
-    skip_rate_pct: Optional[float] = None
-    avg_llm_ms: Optional[float] = None
-    p50_llm_ms: Optional[float] = None
-    p90_llm_ms: Optional[float] = None
-    p99_llm_ms: Optional[float] = None
+    llm_requests: int | None = None
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None
+    total_tokens: int | None = None
+    cost_gbp: float | None = None
+    llm_calls_made: int | None = None
+    llm_calls_skipped: int | None = None
+    skip_rate_pct: float | None = None
+    avg_llm_ms: float | None = None
+    p50_llm_ms: float | None = None
+    p90_llm_ms: float | None = None
+    p99_llm_ms: float | None = None
 
     # --- Decision cadence ---
-    decision_cycles: Optional[int] = None        # total targeted cycles
-    single_agent_cycles: Optional[int] = None    # 1-agent targeted cycles (transfers)
+    decision_cycles: int | None = None  # total targeted cycles
+    single_agent_cycles: int | None = None  # 1-agent targeted cycles (transfers)
 
     # --- Behaviour ---
-    route_changes: Optional[int] = None
-    wait_events: Optional[int] = None
-    messages_sent: Optional[int] = None
-    message_deliveries: Optional[int] = None
+    route_changes: int | None = None
+    wait_events: int | None = None
+    messages_sent: int | None = None
+    message_deliveries: int | None = None
 
     # --- Actions from LLM responses ---
-    move_count: Optional[int] = None
-    wait_count: Optional[int] = None
+    move_count: int | None = None
+    wait_count: int | None = None
 
     errors: list[str] = field(default_factory=list)
 
@@ -95,6 +97,7 @@ class RunMetrics:
 # ---------------------------------------------------------------------------
 # Extraction helpers
 # ---------------------------------------------------------------------------
+
 
 def _grep(path: Path, pattern: str) -> list[str]:
     """Return all lines in *path* matching the regex *pattern*."""
@@ -104,7 +107,7 @@ def _grep(path: Path, pattern: str) -> list[str]:
     return [line for line in path.read_text(errors="replace").splitlines() if rx.search(line)]
 
 
-def _first_float(lines: list[str], pattern: str) -> Optional[float]:
+def _first_float(lines: list[str], pattern: str) -> float | None:
     """Return the first float matching *pattern* inside *lines*."""
     rx = re.compile(pattern)
     for line in lines:
@@ -117,7 +120,7 @@ def _first_float(lines: list[str], pattern: str) -> Optional[float]:
     return None
 
 
-def _first_int(lines: list[str], pattern: str) -> Optional[int]:
+def _first_int(lines: list[str], pattern: str) -> int | None:
     v = _first_float(lines, pattern)
     return int(v) if v is not None else None
 
@@ -127,10 +130,11 @@ def _extract_performance(m: RunMetrics) -> None:
     if not perf_file.exists():
         m.errors.append("performance_report.txt missing")
         return
-    lines = perf_file.read_text(errors="replace").splitlines()
     m.wall_time_s = _first_float(_grep(perf_file, r"TOTAL \(wall-clock\)"), r":\s*([\d.]+)s")
     m.jps_time_s = _first_float(_grep(perf_file, r"jupedsim_step"), r":\s*([\d.]+)s total")
-    m.decision_time_s = _first_float(_grep(perf_file, r"decision_processing"), r":\s*([\d.]+)s total")
+    m.decision_time_s = _first_float(
+        _grep(perf_file, r"decision_processing"), r":\s*([\d.]+)s total"
+    )
 
 
 def _extract_financial(m: RunMetrics) -> None:
@@ -139,11 +143,11 @@ def _extract_financial(m: RunMetrics) -> None:
         m.errors.append("financial_report.txt missing")
         return
     lines = fin_file.read_text(errors="replace").splitlines()
-    m.prompt_tokens   = _first_int(lines,   r"Prompt tokens:\s+([\d,]+)")
+    m.prompt_tokens = _first_int(lines, r"Prompt tokens:\s+([\d,]+)")
     m.completion_tokens = _first_int(lines, r"Completion tokens:\s+([\d,]+)")
-    m.total_tokens    = _first_int(lines,   r"Total tokens:\s+([\d,]+)")
-    m.llm_requests    = _first_int(lines,   r"Total requests:\s+([\d,]+)")
-    m.cost_gbp        = _first_float(lines, r"TOTAL COST:\s+£([\d.]+)")
+    m.total_tokens = _first_int(lines, r"Total tokens:\s+([\d,]+)")
+    m.llm_requests = _first_int(lines, r"Total requests:\s+([\d,]+)")
+    m.cost_gbp = _first_float(lines, r"TOTAL COST:\s+£([\d.]+)")
 
 
 def _extract_llm_logs(m: RunMetrics) -> None:
@@ -170,10 +174,8 @@ def _extract_llm_logs(m: RunMetrics) -> None:
             if inner:
                 dur = inner.get("total_duration_ms")
         if dur is not None:
-            try:
+            with contextlib.suppress(ValueError, TypeError):
                 durations.append(float(dur))
-            except (ValueError, TypeError):
-                pass
         # Action counts from response
         try:
             resp = json.loads(rec.get("response", "") or "{}")
@@ -202,37 +204,36 @@ def _extract_sim_log(m: RunMetrics) -> None:
         m.errors.append("simulation.log missing")
         return
 
-    llm_made_lines  = _grep(sim_log, r"LLM calls made:")
-    llm_skip_lines  = _grep(sim_log, r"LLM calls skipped:")
+    llm_made_lines = _grep(sim_log, r"LLM calls made:")
+    llm_skip_lines = _grep(sim_log, r"LLM calls skipped:")
     skip_rate_lines = _grep(sim_log, r"Skip rate:")
 
-    m.llm_calls_made    = _first_int(llm_made_lines,  r"LLM calls made:\s+([\d]+)")
-    m.llm_calls_skipped = _first_int(llm_skip_lines,  r"LLM calls skipped:\s+([\d]+)")
-    m.skip_rate_pct     = _first_float(skip_rate_lines, r"Skip rate:\s+([\d.]+)%")
+    m.llm_calls_made = _first_int(llm_made_lines, r"LLM calls made:\s+([\d]+)")
+    m.llm_calls_skipped = _first_int(llm_skip_lines, r"LLM calls skipped:\s+([\d]+)")
+    m.skip_rate_pct = _first_float(skip_rate_lines, r"Skip rate:\s+([\d.]+)%")
 
     targeted_lines = _grep(sim_log, r"Targeted agent decisions at t=")
     m.decision_cycles = len(targeted_lines)
-    m.single_agent_cycles = sum(
-        1 for line in targeted_lines
-        if re.search(r" for 1 agents", line)
-    )
+    m.single_agent_cycles = sum(1 for line in targeted_lines if re.search(r" for 1 agents", line))
 
 
 def _extract_behaviour(m: RunMetrics) -> None:
     route_file = m.run_dir / "route_changes.txt"
     if route_file.exists():
-        m.route_changes = _first_int(route_file.read_text(errors="replace").splitlines(),
-                                     r"Total route changes:\s+([\d]+)")
+        m.route_changes = _first_int(
+            route_file.read_text(errors="replace").splitlines(), r"Total route changes:\s+([\d]+)"
+        )
 
     wait_file = m.run_dir / "wait_behavior.txt"
     if wait_file.exists():
-        m.wait_events = _first_int(wait_file.read_text(errors="replace").splitlines(),
-                                   r"Total wait events:\s+([\d]+)")
+        m.wait_events = _first_int(
+            wait_file.read_text(errors="replace").splitlines(), r"Total wait events:\s+([\d]+)"
+        )
 
     msg_file = m.run_dir / "message_analytics.txt"
     if msg_file.exists():
         lines = msg_file.read_text(errors="replace").splitlines()
-        m.messages_sent     = _first_int(lines, r"Total messages sent:\s+([\d]+)")
+        m.messages_sent = _first_int(lines, r"Total messages sent:\s+([\d]+)")
         m.message_deliveries = _first_int(lines, r"Total message deliveries:\s+([\d]+)")
 
 
@@ -251,6 +252,7 @@ def load_run(run_dir: Path, label: str) -> RunMetrics:
 # Auto-discovery
 # ---------------------------------------------------------------------------
 
+
 def discover_runs(results_dir: Path, experiment: str, n: int) -> list[Path]:
     """Return the N most-recent run directories for *experiment*."""
     exp_dir = results_dir / experiment
@@ -268,7 +270,8 @@ def discover_runs(results_dir: Path, experiment: str, n: int) -> list[Path]:
 # Formatting helpers
 # ---------------------------------------------------------------------------
 
-def _pct_delta(val: Optional[float], base: Optional[float]) -> str:
+
+def _pct_delta(val: float | None, base: float | None) -> str:
     """Return a '±X.X%' string showing change from base to val, or '—'."""
     if val is None or base is None or base == 0:
         return "—"
@@ -276,7 +279,7 @@ def _pct_delta(val: Optional[float], base: Optional[float]) -> str:
     return f"{pct:+.1f}%"
 
 
-def _fmt(val: Optional[float | int], precision: int = 1) -> str:
+def _fmt(val: float | int | None, precision: int = 1) -> str:
     if val is None:
         return "—"
     if isinstance(val, int):
@@ -291,6 +294,7 @@ def _col_width(rows: list[str], header: str, min_width: int = 10) -> int:
 # ---------------------------------------------------------------------------
 # Output
 # ---------------------------------------------------------------------------
+
 
 def print_table(runs: list[RunMetrics], baseline_idx: int = 0) -> None:
     base = runs[baseline_idx]
@@ -330,8 +334,8 @@ def print_table(runs: list[RunMetrics], baseline_idx: int = 0) -> None:
     label_col_w = max(len("Metric"), max(len(r[1]) for r in ROWS)) + 2
 
     # Build formatted value cells
-    val_cells: list[list[str]] = []   # val_cells[run_idx][row_idx]
-    delta_cells: list[list[str]] = [] # delta_cells[run_idx][row_idx]
+    val_cells: list[list[str]] = []  # val_cells[run_idx][row_idx]
+    delta_cells: list[list[str]] = []  # delta_cells[run_idx][row_idx]
     for i, m in enumerate(runs):
         vcol = []
         dcol = []
@@ -339,10 +343,14 @@ def print_table(runs: list[RunMetrics], baseline_idx: int = 0) -> None:
             val = extractor(m)
             base_val = extractor(base)
             vcol.append(_fmt(val, precision=prec))
-            dcol.append("—" if i == baseline_idx else _pct_delta(
-                float(val) if val is not None else None,
-                float(base_val) if base_val is not None else None,
-            ))
+            dcol.append(
+                "—"
+                if i == baseline_idx
+                else _pct_delta(
+                    float(val) if val is not None else None,
+                    float(base_val) if base_val is not None else None,
+                )
+            )
         val_cells.append(vcol)
         delta_cells.append(dcol)
 
@@ -359,7 +367,8 @@ def print_table(runs: list[RunMetrics], baseline_idx: int = 0) -> None:
     # Separator
     total_w = label_col_w + 3 + sum(val_ws[i] + delta_ws[i] + 7 for i in range(len(runs)))
 
-    def sep(char="-"): print(char * total_w)
+    def sep(char="-"):
+        print(char * total_w)
 
     def header_row():
         row = " " * label_col_w + " │"
@@ -454,9 +463,7 @@ def write_csv(runs: list[RunMetrics], baseline_idx: int, csv_path: Path) -> None
             val = ext(m)
             row.append("" if val is None else val)
             base_val = ext(base)
-            if val is None or base_val is None or base_val == 0:
-                deltas.append("")
-            elif m is base:
+            if val is None or base_val is None or base_val == 0 or m is base:
                 deltas.append("")
             else:
                 deltas.append(round((float(val) - float(base_val)) / abs(float(base_val)) * 100, 2))
@@ -474,6 +481,7 @@ def write_csv(runs: list[RunMetrics], baseline_idx: int, csv_path: Path) -> None
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
         description="Compare performance and behaviour across simulation runs.",
@@ -481,31 +489,45 @@ def parse_args() -> argparse.Namespace:
         epilog=__doc__,
     )
     p.add_argument(
-        "--runs", nargs="+", type=Path, default=None,
+        "--runs",
+        nargs="+",
+        type=Path,
+        default=None,
         help="Explicit run directories to compare.",
     )
     p.add_argument(
-        "--labels", nargs="+", default=None,
+        "--labels",
+        nargs="+",
+        default=None,
         help="Labels for each run (must match --runs in count).",
     )
     p.add_argument(
-        "--experiment", default="Test",
+        "--experiment",
+        default="Test",
         help="Experiment ID to auto-discover runs from (default: Test).",
     )
     p.add_argument(
-        "--n", type=int, default=3,
+        "--n",
+        type=int,
+        default=3,
         help="Number of most-recent runs to auto-discover (default: 3).",
     )
     p.add_argument(
-        "--results-dir", type=Path, default=None,
+        "--results-dir",
+        type=Path,
+        default=None,
         help="Root results directory (default: <repo_root>/results).",
     )
     p.add_argument(
-        "--baseline", type=int, default=0,
+        "--baseline",
+        type=int,
+        default=0,
         help="Index (0-based) into --runs to treat as baseline (default: 0).",
     )
     p.add_argument(
-        "--csv", type=Path, default=None,
+        "--csv",
+        type=Path,
+        default=None,
         help="If given, also write a CSV file to this path.",
     )
     return p.parse_args()
@@ -551,7 +573,7 @@ def main() -> None:
         sys.exit(1)
 
     print(f"\nLoading {len(run_dirs)} run(s)...")
-    runs = [load_run(d, lbl) for d, lbl in zip(run_dirs, labels)]
+    runs = [load_run(d, lbl) for d, lbl in zip(run_dirs, labels, strict=True)]
 
     print_table(runs, baseline_idx=baseline_idx)
 

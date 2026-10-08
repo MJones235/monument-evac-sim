@@ -84,8 +84,8 @@ BOARDINGS_CSV = HERE / "metro-passenger-boardings-by-station.csv"
 PATRONAGE_CSV = HERE / "metro-patronage-by-timeband.csv"
 
 # Monument is recorded as two platform-level rows in the boardings data.
-MONUMENT_LOWER = "Monument Lower"   # main through platforms -> platforms 1 & 2
-MONUMENT_UPPER = "Monument Upper"   # loop platforms         -> platforms 3 & 4
+MONUMENT_LOWER = "Monument Lower"  # main through platforms -> platforms 1 & 2
+MONUMENT_UPPER = "Monument Upper"  # loop platforms         -> platforms 3 & 4
 
 # Street entrances modelled in the Monument geometry (equally used, by assumption).
 ENTRANCES = ("blackett_street", "grey_street", "eldon_square")
@@ -107,21 +107,21 @@ def hms(h: int, m: int = 0) -> int:
 # Bands are contiguous and cover the full day (00:00 -> 24:00).
 DAY_TYPE_BANDS: dict[str, list[tuple[int, int]]] = {
     "weekday": [
-        (hms(0), hms(7, 30)),     # Before 07:30
-        (hms(7, 30), hms(9)),     # 07:30 - 08:59
-        (hms(9), hms(15, 30)),    # 09:00 - 15:29
-        (hms(15, 30), hms(18)),   # 15:30 - 17:59
-        (hms(18), hms(24)),       # After 17:59
+        (hms(0), hms(7, 30)),  # Before 07:30
+        (hms(7, 30), hms(9)),  # 07:30 - 08:59
+        (hms(9), hms(15, 30)),  # 09:00 - 15:29
+        (hms(15, 30), hms(18)),  # 15:30 - 17:59
+        (hms(18), hms(24)),  # After 17:59
     ],
     "saturday": [
-        (hms(0), hms(9)),         # Before 09:00
-        (hms(9), hms(18)),        # 09:00 - 17:59
-        (hms(18), hms(24)),       # After 17:59
+        (hms(0), hms(9)),  # Before 09:00
+        (hms(9), hms(18)),  # 09:00 - 17:59
+        (hms(18), hms(24)),  # After 17:59
     ],
     "sunday": [
-        (hms(0), hms(11)),        # Before 11:00
-        (hms(11), hms(18)),       # 11:00 - 17:59
-        (hms(18), hms(24)),       # After 17:59
+        (hms(0), hms(11)),  # Before 11:00
+        (hms(11), hms(18)),  # 11:00 - 17:59
+        (hms(18), hms(24)),  # After 17:59
     ],
 }
 
@@ -134,9 +134,13 @@ DAY_TYPE_COLUMNS: dict[str, slice] = {
 }
 
 DOW_TO_TYPE = {
-    "monday": "weekday", "tuesday": "weekday", "wednesday": "weekday",
-    "thursday": "weekday", "friday": "weekday",
-    "saturday": "saturday", "sunday": "sunday",
+    "monday": "weekday",
+    "tuesday": "weekday",
+    "wednesday": "weekday",
+    "thursday": "weekday",
+    "friday": "weekday",
+    "saturday": "saturday",
+    "sunday": "sunday",
     # allow passing the day type directly
     "weekday": "weekday",
 }
@@ -148,14 +152,14 @@ DOW_TO_TYPE = {
 # are treated as exact for scheduling purposes.
 # --------------------------------------------------------------------------- #
 
-EVENING_START = hms(18, 20)      # evening frequency kicks in ~18:15-18:30 -> 18:20
-EVENING_HEADWAY = 15 * 60        # 15 min every evening on every platform
-SUNDAY_AM_END = hms(9)           # Sunday early service is sparse until ~09:00
-SUNDAY_AM_HEADWAY = 20 * 60      # "15-30 min AM, tightening" -> 20 min representative
+EVENING_START = hms(18, 20)  # evening frequency kicks in ~18:15-18:30 -> 18:20
+EVENING_HEADWAY = 15 * 60  # 15 min every evening on every platform
+SUNDAY_AM_END = hms(9)  # Sunday early service is sparse until ~09:00
+SUNDAY_AM_HEADWAY = 20 * 60  # "15-30 min AM, tightening" -> 20 min representative
 
 # Representative daytime headways (source gives 10-13 / 10-12 min ranges).
-HEADWAY_THROUGH = 12 * 60        # platforms 1 & 2 (10-13 min)
-HEADWAY_LOOP = 11 * 60           # platforms 3 & 4 (10-12 min)
+HEADWAY_THROUGH = 12 * 60  # platforms 1 & 2 (10-13 min)
+HEADWAY_LOOP = 11 * 60  # platforms 3 & 4 (10-12 min)
 
 # Per day type -> per platform: (first_train_s, last_train_s).
 SERVICE_WINDOWS: dict[str, dict[str, tuple[int, int]]] = {
@@ -180,13 +184,17 @@ SERVICE_WINDOWS: dict[str, dict[str, tuple[int, int]]] = {
 }
 
 # Daytime headway per platform (evening/Sunday-AM overrides handled separately).
-PLATFORM_DAY_HEADWAY = {"1": HEADWAY_THROUGH, "2": HEADWAY_THROUGH,
-                        "3": HEADWAY_LOOP, "4": HEADWAY_LOOP}
+PLATFORM_DAY_HEADWAY = {
+    "1": HEADWAY_THROUGH,
+    "2": HEADWAY_THROUGH,
+    "3": HEADWAY_LOOP,
+    "4": HEADWAY_LOOP,
+}
 
 # Which Monument boardings row feeds which platforms (see module docstring).
 PLATFORM_SOURCE = {"1": "lower", "2": "lower", "3": "upper", "4": "upper"}
 
-TRAIN_DWELL_S = 30               # typical Metro station dwell
+TRAIN_DWELL_S = 30  # typical Metro station dwell
 
 # --------------------------------------------------------------------------- #
 # Parsing helpers
@@ -250,7 +258,7 @@ def load_patronage(day_type: str, year: str | None) -> tuple[list[float], float,
 
 def _resolve_year_column(labels: list[str], year: str | None) -> int:
     """Index of the requested year (or the most recent) within ``labels``."""
-    clean = [l.strip() for l in labels]
+    clean = [label.strip() for label in labels]
     if year is None:
         return len(clean) - 1  # most recent = last column/row
     if year not in clean:
@@ -275,8 +283,9 @@ def service_window(day_type: str) -> tuple[int, int]:
     return min(s for s, _ in windows), max(e for _, e in windows)
 
 
-def build_entrance_usage(daily_total: float, fractions: list[float],
-                         bands: list[tuple[int, int]], day_type: str) -> list[dict]:
+def build_entrance_usage(
+    daily_total: float, fractions: list[float], bands: list[tuple[int, int]], day_type: str
+) -> list[dict]:
     """One row per (entrance, band): arrivals split equally across entrances.
 
     Each band's time window is clamped to the station service window so that no
@@ -287,17 +296,19 @@ def build_entrance_usage(daily_total: float, fractions: list[float],
     open_s, close_s = service_window(day_type)
     rows = []
     for entrance in ENTRANCES:
-        for frac, (start_s, end_s) in zip(fractions, bands):
+        for frac, (start_s, end_s) in zip(fractions, bands, strict=True):
             lo, hi = max(start_s, open_s), min(end_s, close_s)
             if lo >= hi:
                 continue  # band entirely outside service hours
             arrivals = round(daily_total * frac / len(ENTRANCES))
-            rows.append({
-                "interval_start_s": lo,
-                "interval_end_s": hi,
-                "entrance_id": entrance,
-                "arrivals": arrivals,
-            })
+            rows.append(
+                {
+                    "interval_start_s": lo,
+                    "interval_end_s": hi,
+                    "entrance_id": entrance,
+                    "arrivals": arrivals,
+                }
+            )
     return rows
 
 
@@ -328,8 +339,13 @@ def _band_of(t: int, bands: list[tuple[int, int]]) -> int:
     return len(bands) - 1  # a last train exactly at end-of-day falls in the final band
 
 
-def build_timetable(daily_lower: float, daily_upper: float, fractions: list[float],
-                    bands: list[tuple[int, int]], day_type: str) -> list[dict]:
+def build_timetable(
+    daily_lower: float,
+    daily_upper: float,
+    fractions: list[float],
+    bands: list[tuple[int, int]],
+    day_type: str,
+) -> list[dict]:
     """Train rows with alighting counts spread over each platform's trains.
 
     Each platform's daily alightings (= its share of Monument boardings, by the
@@ -350,12 +366,14 @@ def build_timetable(daily_lower: float, daily_upper: float, fractions: list[floa
             band_alight = platform_daily * fractions[band_idx]
             per_train = round(band_alight / len(band_times))
             for t in band_times:
-                rows.append({
-                    "arrival_s": t,
-                    "platform": platform,
-                    "alighting": per_train,
-                    "dwell_s": TRAIN_DWELL_S,
-                })
+                rows.append(
+                    {
+                        "arrival_s": t,
+                        "platform": platform,
+                        "alighting": per_train,
+                        "dwell_s": TRAIN_DWELL_S,
+                    }
+                )
     rows.sort(key=lambda r: (r["arrival_s"], r["platform"]))
     return rows
 
@@ -373,21 +391,30 @@ def _write_csv(path: Path, fieldnames: list[str], rows: list[dict]) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--day", default="monday",
-                        help="Day of week (monday..sunday) or day type "
-                             "(weekday/saturday/sunday). Default: monday.")
-    parser.add_argument("--year", default=None,
-                        help="Financial year e.g. 2025/26. Default: most recent.")
-    parser.add_argument("--out-dir", type=Path, default=HERE,
-                        help="Directory to write the CSVs into (default: alongside raw data).")
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--day",
+        default="monday",
+        help="Day of week (monday..sunday) or day type (weekday/saturday/sunday). Default: monday.",
+    )
+    parser.add_argument(
+        "--year", default=None, help="Financial year e.g. 2025/26. Default: most recent."
+    )
+    parser.add_argument(
+        "--out-dir",
+        type=Path,
+        default=HERE,
+        help="Directory to write the CSVs into (default: alongside raw data).",
+    )
     args = parser.parse_args()
 
     day_key = args.day.strip().lower()
     if day_key not in DOW_TO_TYPE:
-        raise SystemExit(f"Unknown day '{args.day}'. Choose one of "
-                         f"{', '.join(sorted(DOW_TO_TYPE))}.")
+        raise SystemExit(
+            f"Unknown day '{args.day}'. Choose one of {', '.join(sorted(DOW_TO_TYPE))}."
+        )
     day_type = DOW_TO_TYPE[day_key]
     bands = DAY_TYPE_BANDS[day_type]
 
@@ -405,38 +432,49 @@ def main() -> None:
     entrance_rows = build_entrance_usage(daily_total, fractions, bands, day_type)
     timetable_rows = build_timetable(daily_lower, daily_upper, fractions, bands, day_type)
 
-    _write_csv(args.out_dir / "entrance_usage.csv",
-               ["interval_start_s", "interval_end_s", "entrance_id", "arrivals"],
-               entrance_rows)
-    _write_csv(args.out_dir / "timetable.csv",
-               ["arrival_s", "platform", "alighting", "dwell_s"],
-               timetable_rows)
+    _write_csv(
+        args.out_dir / "entrance_usage.csv",
+        ["interval_start_s", "interval_end_s", "entrance_id", "arrivals"],
+        entrance_rows,
+    )
+    _write_csv(
+        args.out_dir / "timetable.csv",
+        ["arrival_s", "platform", "alighting", "dwell_s"],
+        timetable_rows,
+    )
 
     # ---- Inspectable summary -------------------------------------------------
     total_entrance = sum(r["arrivals"] for r in entrance_rows)
     total_alight = sum(r["alighting"] for r in timetable_rows)
     print(f"Day requested        : {args.day}  (day type: {day_type})")
     print(f"Boardings year       : {boardings_year}   Patronage year: {patronage_year}")
-    print(f"Monument annual board: {annual_total:,}  "
-          f"(Lower {lower:,} + Upper {upper:,})")
-    print(f"Day-type weighting   : {day_type} = {day_type_share*100:.1f}% of annual "
-          f"patronage over {DAY_TYPE_COUNT[day_type]} days/yr")
-    print(f"Daily boardings      : {daily_total:,.0f}  "
-          f"(vs flat annual/365 = {annual_total/DAYS_IN_YEAR:,.0f})")
+    print(f"Monument annual board: {annual_total:,}  (Lower {lower:,} + Upper {upper:,})")
+    print(
+        f"Day-type weighting   : {day_type} = {day_type_share * 100:.1f}% of annual "
+        f"patronage over {DAY_TYPE_COUNT[day_type]} days/yr"
+    )
+    print(
+        f"Daily boardings      : {daily_total:,.0f}  "
+        f"(vs flat annual/365 = {annual_total / DAYS_IN_YEAR:,.0f})"
+    )
     print()
     print("Within-day demand profile (band -> fraction -> entrance arrivals):")
-    for frac, (start_s, end_s) in zip(fractions, bands):
-        hh = f"{start_s//3600:02d}:{(start_s%3600)//60:02d}-{end_s//3600:02d}:{(end_s%3600)//60:02d}"
-        print(f"  {hh}  {frac*100:5.1f}%  ->  {round(daily_total*frac):>6,} arrivals")
+    for frac, (start_s, end_s) in zip(fractions, bands, strict=True):
+        hh = f"{start_s // 3600:02d}:{(start_s % 3600) // 60:02d}-{end_s // 3600:02d}:{(end_s % 3600) // 60:02d}"
+        print(f"  {hh}  {frac * 100:5.1f}%  ->  {round(daily_total * frac):>6,} arrivals")
     print()
-    print(f"entrance_usage.csv : {len(entrance_rows)} rows, "
-          f"{total_entrance:,} total arrivals across {len(ENTRANCES)} entrances")
+    print(
+        f"entrance_usage.csv : {len(entrance_rows)} rows, "
+        f"{total_entrance:,} total arrivals across {len(ENTRANCES)} entrances"
+    )
     for platform in ("1", "2", "3", "4"):
         n = sum(1 for r in timetable_rows if r["platform"] == platform)
         a = sum(r["alighting"] for r in timetable_rows if r["platform"] == platform)
         print(f"timetable.csv      : platform {platform}: {n:>3} trains, {a:,} alighting")
-    print(f"timetable.csv      : {len(timetable_rows)} trains total, "
-          f"{total_alight:,} alighting passengers")
+    print(
+        f"timetable.csv      : {len(timetable_rows)} trains total, "
+        f"{total_alight:,} alighting passengers"
+    )
 
 
 if __name__ == "__main__":

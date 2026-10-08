@@ -8,10 +8,9 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Polygon
-
 from evacusim.visualization.train_geometry import compute_train_polygons
 from evacusim.visualization.video_generation_helper import VideoGenerationHelper
+from matplotlib.patches import Polygon
 
 
 def render_preview(network_path: Path, output_path: Path, dpi: int = 180) -> None:
@@ -25,13 +24,9 @@ def render_preview(network_path: Path, output_path: Path, dpi: int = 180) -> Non
     axis.set_facecolor("#F4F7F8")
 
     for coords in level.get("walkable_areas", {}).values():
-        axis.add_patch(
-            Polygon(coords, facecolor="#DCE5E8", edgecolor="#708087", linewidth=0.8)
-        )
+        axis.add_patch(Polygon(coords, facecolor="#DCE5E8", edgecolor="#708087", linewidth=0.8))
     for name, coords in level.get("platform_areas", {}).items():
-        axis.add_patch(
-            Polygon(coords, facecolor="#AFC7D2", edgecolor="#425C66", linewidth=1.2)
-        )
+        axis.add_patch(Polygon(coords, facecolor="#AFC7D2", edgecolor="#425C66", linewidth=1.2))
         points = coords[:-1] if coords[0] == coords[-1] else coords
         axis.text(
             sum(point[0] for point in points) / len(points),
@@ -44,9 +39,7 @@ def render_preview(network_path: Path, output_path: Path, dpi: int = 180) -> Non
             weight="bold",
         )
     for coords in level.get("obstacles", []):
-        axis.add_patch(
-            Polygon(coords, facecolor="#718087", edgecolor="#455158", linewidth=0.5)
-        )
+        axis.add_patch(Polygon(coords, facecolor="#718087", edgecolor="#455158", linewidth=0.5))
 
     for exit_name, coords in trains.items():
         platform_num = exit_name.rsplit("_", 1)[-1]
@@ -89,9 +82,7 @@ def render_preview(network_path: Path, output_path: Path, dpi: int = 180) -> Non
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--network-path", type=Path, default=Path("geometry/monument/network")
-    )
+    parser.add_argument("--network-path", type=Path, default=Path("geometry/monument/network"))
     parser.add_argument(
         "--output", type=Path, default=Path("results/figures/train_layout_preview.png")
     )

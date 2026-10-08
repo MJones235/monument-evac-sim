@@ -20,9 +20,8 @@ import csv
 import json
 import statistics
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
 
 # Allow running as either `python analysis/compare_experiments.py` or
 # `python -m analysis.compare_experiments` from the repo root.
@@ -40,23 +39,25 @@ ALARM_T = 15.0
 # Data structures
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class SimMetrics:
     """Key metrics extracted from one simulation run."""
+
     experiment_id: str
     run_dir: Path
     agent_count: int
 
     # Simulation time (seconds) at which N% of agents had exited.
     # None if that fraction was never reached within the simulation window.
-    t50_s: Optional[float]
-    t90_s: Optional[float]
-    t100_s: Optional[float]
+    t50_s: float | None
+    t90_s: float | None
+    t100_s: float | None
 
     # Fraction of agents still in the station at key post-alarm times.
-    frac_remaining_60s: Optional[float]
-    frac_remaining_120s: Optional[float]
-    frac_remaining_180s: Optional[float]
+    frac_remaining_60s: float | None
+    frac_remaining_120s: float | None
+    frac_remaining_180s: float | None
 
     remaining_at_end: int
     sim_end_time_s: float
@@ -65,17 +66,18 @@ class SimMetrics:
     # Median of the first post-alarm decision timestep where action_type='move',
     # split into concourse-starting and platform-starting agents.
     # None if no agents of that type moved during the simulation.
-    tfm_concourse_median_s: Optional[float] = None
-    tfm_platform_median_s: Optional[float] = None
-    tfm_concourse_n: int = 0   # number of concourse agents that moved
-    tfm_platform_n: int = 0    # number of platform agents that moved
+    tfm_concourse_median_s: float | None = None
+    tfm_platform_median_s: float | None = None
+    tfm_concourse_n: int = 0  # number of concourse agents that moved
+    tfm_platform_n: int = 0  # number of platform agents that moved
 
 
 # ---------------------------------------------------------------------------
 # Loading helpers
 # ---------------------------------------------------------------------------
 
-def find_latest_run(results_dir: Path, experiment_id: str) -> Optional[Path]:
+
+def find_latest_run(results_dir: Path, experiment_id: str) -> Path | None:
     """Return the most recent run directory for an experiment."""
     exp_dir = results_dir / experiment_id
     if not exp_dir.exists():
@@ -110,7 +112,7 @@ def load_timeseries(run_dir: Path) -> list[dict]:
 def _extract_first_move(
     run_dir: Path,
     alarm_t: float,
-) -> tuple[Optional[float], Optional[float], int, int]:
+) -> tuple[float | None, float | None, int, int]:
     """
     Parse agent_decisions.json and return:
       (concourse_median_s, platform_median_s, concourse_n_moved, platform_n_moved)
@@ -134,7 +136,7 @@ def _extract_first_move(
     concourse_times: list[float] = []
     platform_times: list[float] = []
 
-    for agent_id, adata in decisions_map.items():
+    for adata in decisions_map.values():
         decs = adata.get("decisions", [])
         if not decs:
             continue
@@ -148,7 +150,7 @@ def _extract_first_move(
         is_concourse = "concourse" in start_zone
 
         # Find first post-alarm decision where action_type == 'move'.
-        first_move_t: Optional[float] = None
+        first_move_t: float | None = None
         for dec in decs:
             if dec["time"] <= alarm_t:
                 continue
@@ -168,7 +170,7 @@ def _extract_first_move(
     return concourse_med, platform_med, len(concourse_times), len(platform_times)
 
 
-def extract_metrics(experiment_id: str, run_dir: Path) -> Optional[SimMetrics]:
+def extract_metrics(experiment_id: str, run_dir: Path) -> SimMetrics | None:
     """Compute SimMetrics from a run directory. Returns None if data is missing."""
     rows = load_timeseries(run_dir)
     if not rows:
@@ -184,14 +186,14 @@ def extract_metrics(experiment_id: str, run_dir: Path) -> Optional[SimMetrics]:
     sim_end = times[-1]
     remaining_at_end = agent_count - left[-1]
 
-    def t_at_fraction(frac: float) -> Optional[float]:
+    def t_at_fraction(frac: float) -> float | None:
         target = frac * agent_count
-        for t, n in zip(times, left):
+        for t, n in zip(times, left, strict=True):
             if n >= target:
                 return t
         return None
 
-    def frac_remaining_at(sim_t: float) -> Optional[float]:
+    def frac_remaining_at(sim_t: float) -> float | None:
         if not times:
             return None
         nearest = min(range(len(times)), key=lambda i: abs(times[i] - sim_t))
@@ -222,14 +224,15 @@ def extract_metrics(experiment_id: str, run_dir: Path) -> Optional[SimMetrics]:
 # Formatting helpers
 # ---------------------------------------------------------------------------
 
-def _fmt_time(t: Optional[float]) -> str:
+
+def _fmt_time(t: float | None) -> str:
     if t is None:
         return "—"
     post = t - ALARM_T
     return f"{post:>5.0f}s ({post / 60:.1f} min)"
 
 
-def _fmt_pct(f: Optional[float]) -> str:
+def _fmt_pct(f: float | None) -> str:
     if f is None:
         return "—"
     return f"{f * 100:.0f}%"
@@ -239,7 +242,8 @@ def _fmt_pct(f: Optional[float]) -> str:
 # Validation checks against Proulx (1991)
 # ---------------------------------------------------------------------------
 
-def check_qualitative_ordering(metrics_by_exp: dict[str, Optional[SimMetrics]]) -> None:
+
+def check_qualitative_ordering(metrics_by_exp: dict[str, SimMetrics | None]) -> None:
     """
     Check whether the simulation reproduces Proulx (1991)'s effectiveness
     ordering: E1 (worst) < E3 < E2 < E4 < E5 (best).
@@ -270,7 +274,7 @@ def check_qualitative_ordering(metrics_by_exp: dict[str, Optional[SimMetrics]]) 
         print(f"    Expected:  {' < '.join(available)}")
 
 
-def check_e2_clearance(metrics_by_exp: dict[str, Optional[SimMetrics]]) -> None:
+def check_e2_clearance(metrics_by_exp: dict[str, SimMetrics | None]) -> None:
     """
     E2-specific validation: Proulx (1991) reports the whole station cleared
     ~5 min post-alarm.
@@ -297,6 +301,7 @@ def check_e2_clearance(metrics_by_exp: dict[str, Optional[SimMetrics]]) -> None:
 # Main
 # ---------------------------------------------------------------------------
 
+
 def main():
     parser = argparse.ArgumentParser(
         description="Compare E1–E5 simulated results against Proulx (1991)"
@@ -315,7 +320,7 @@ def main():
     args = parser.parse_args()
 
     # Collect metrics from latest run per experiment
-    metrics_by_exp: dict[str, Optional[SimMetrics]] = {}
+    metrics_by_exp: dict[str, SimMetrics | None] = {}
     for exp_id in EXPERIMENTS:
         if args.all_runs:
             runs = find_all_runs(args.results_dir, exp_id)
@@ -329,7 +334,9 @@ def main():
     print("\n" + "=" * 82)
     print("SIMULATED vs OBSERVED — Monument Station Evacuation  (Proulx 1991)")
     print("=" * 82)
-    print(f"  {'':4}  {'T50 (post-alarm)':>22}  {'T90 (post-alarm)':>22}  {'T100 (post-alarm)':>22}  {'Left@end':>8}")
+    print(
+        f"  {'':4}  {'T50 (post-alarm)':>22}  {'T90 (post-alarm)':>22}  {'T100 (post-alarm)':>22}  {'Left@end':>8}"
+    )
     print("-" * 82)
     for exp_id in EXPERIMENTS:
         m = metrics_by_exp[exp_id]
@@ -351,8 +358,16 @@ def main():
     for exp_id in EXPERIMENTS:
         ref = REFERENCE[exp_id]
         c = ref.clearance
-        mc = f"~{ref.time_to_move_concourse_s:.0f}s" if ref.time_to_move_concourse_s is not None else "—"
-        me = f"~{ref.time_to_move_escalator_s:.0f}s" if ref.time_to_move_escalator_s is not None else "—"
+        mc = (
+            f"~{ref.time_to_move_concourse_s:.0f}s"
+            if ref.time_to_move_concourse_s is not None
+            else "—"
+        )
+        me = (
+            f"~{ref.time_to_move_escalator_s:.0f}s"
+            if ref.time_to_move_escalator_s is not None
+            else "—"
+        )
         ws = f"~{c.whole_station_s:.0f}s" if c.whole_station_s is not None else "never cleared"
         print(f"  {exp_id:<4}  {mc:>16}  {me:>16}  {ws:>16}")
 
@@ -380,13 +395,13 @@ def main():
             print(f"  {exp_id:<4}  {'-- no results --':>18}")
             continue
 
-        def _fmt_tfm(t: Optional[float], n: int) -> str:
+        def _fmt_tfm(t: float | None, n: int) -> str:
             if t is None:
                 return "— (none moved)"
-            return f"{t:>4.0f}s ({t/60:.1f}min) n={n}"
+            return f"{t:>4.0f}s ({t / 60:.1f}min) n={n}"
 
-        def _fmt_ref(t: Optional[float]) -> str:
-            return f"~{t:.0f}s ({t/60:.1f}min)" if t is not None else "—"
+        def _fmt_ref(t: float | None) -> str:
+            return f"~{t:.0f}s ({t / 60:.1f}min)" if t is not None else "—"
 
         print(
             f"  {exp_id:<4}"
