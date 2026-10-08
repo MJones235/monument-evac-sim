@@ -180,7 +180,7 @@ def run_simulation(
         runner.wait_events,
         runner.decision_interval,
         runner.max_steps,
-        len(runner.concordia_agents),
+        len(runner.agents),
         runner.perf_timer.report(),
         runner.llm_provider,
         agent_levels,
