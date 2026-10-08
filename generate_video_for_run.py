@@ -42,8 +42,7 @@ def resolve_decisions_file(run_dir: Path, explicit_path: Path | None) -> Path:
         return default_path
 
     raise FileNotFoundError(
-        f"Could not find decisions file at: {default_path}. "
-        "Pass --decisions-file explicitly."
+        f"Could not find decisions file at: {default_path}. Pass --decisions-file explicitly."
     )
 
 

@@ -6,17 +6,33 @@ build-backend = "setuptools.build_meta"
 name = "monument-evacuation"
 version = "0.1.0"
 description = "Monument Station evacuation experiment series (E1–E5)"
-requires-python = ">=3.10"
+requires-python = ">=3.12"  # matches evacusim
 dependencies = [
-    "evacusim @ git+https://github.com/your-org/evacusim.git",
+    "evacusim @ git+https://github.com/MJones235/llm-evacuation-sim.git",
     "pandas>=2.0.0",
     "matplotlib>=3.7.0",
     "jupyter>=1.0.0",
 ]
 
-[tool.black]
-line-length = 100
-target-version = ["py310", "py311", "py312"]
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10", "pre-commit>=3"]
 
 [tool.ruff]
 line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# pycodestyle, pyflakes, isort, bugbear, pyupgrade, simplify.
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = [
+    "E501",  # line length is the formatter's job; long strings/comments are tolerated
+    "E402",  # scripts load .env / patch sys.path before imports (removed in the src/ restructure)
+    "SIM102",  # nested ifs are kept where each condition carries its own comment
+    "SIM108",  # ternaries are not always clearer than if/else
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "golden: full-geometry regression runs against committed snapshots (slow, ~45 s)",
+]

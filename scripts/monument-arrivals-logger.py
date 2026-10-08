@@ -47,7 +47,9 @@ LOCAL_TZ = ZoneInfo("Europe/London")
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Log Monument station arrivals via the popapp departures API.")
+    p = argparse.ArgumentParser(
+        description="Log Monument station arrivals via the popapp departures API."
+    )
     p.add_argument(
         "--start",
         type=str,
@@ -97,10 +99,7 @@ def main():
 
     end_time = start_time + dt.timedelta(minutes=args.duration_minutes)
 
-    out_path = Path(
-        args.output
-        or f"monument_arrivals_{start_time.strftime('%Y%m%d_%H%M%S')}.csv"
-    )
+    out_path = Path(args.output or f"monument_arrivals_{start_time.strftime('%Y%m%d_%H%M%S')}.csv")
 
     # (train_id, platform, event_time) keys, so each event is handled once.
     arrivals = set()
@@ -120,8 +119,15 @@ def main():
     with open(out_path, "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(
-            ["arrival_time", "train_id", "station_code", "platform",
-             "destination", "scheduled_time", "poll_time"]
+            [
+                "arrival_time",
+                "train_id",
+                "station_code",
+                "platform",
+                "destination",
+                "scheduled_time",
+                "poll_time",
+            ]
         )
         f.flush()
 
@@ -149,27 +155,43 @@ def main():
                             continue
                         arrivals.add(key)
                         scheduled = t.get("actual_scheduled_time")
-                        writer.writerow([
-                            event_time.isoformat(timespec="seconds"),
-                            t["train_id"], code, platform, t.get("destination", ""),
-                            parse_utc(scheduled).isoformat(timespec="seconds") if scheduled else "",
-                            poll_time,
-                        ])
+                        writer.writerow(
+                            [
+                                event_time.isoformat(timespec="seconds"),
+                                t["train_id"],
+                                code,
+                                platform,
+                                t.get("destination", ""),
+                                parse_utc(scheduled).isoformat(timespec="seconds")
+                                if scheduled
+                                else "",
+                                poll_time,
+                            ]
+                        )
                         f.flush()
-                        print(f"  [{poll_time}] train={t['train_id']} arrived platform {platform} "
-                              f"at {event_time:%H:%M:%S} -> {t.get('destination', '')}")
+                        print(
+                            f"  [{poll_time}] train={t['train_id']} arrived platform {platform} "
+                            f"at {event_time:%H:%M:%S} -> {t.get('destination', '')}"
+                        )
 
                     elif t["last_event"] == "DEPARTED":
                         if key in departures:
                             continue
                         departures.add(key)
                         # An arrival for this stop must precede the departure.
-                        if not any(a[0] == t["train_id"] and a[1] == platform
-                                   and a[2] <= event_time and event_time - a[2] < dt.timedelta(minutes=10)
-                                   for a in arrivals):
+                        if not any(
+                            a[0] == t["train_id"]
+                            and a[1] == platform
+                            and a[2] <= event_time
+                            and event_time - a[2] < dt.timedelta(minutes=10)
+                            for a in arrivals
+                        ):
                             missed += 1
-                            print(f"  [{poll_time}] MISSED arrival: train={t['train_id']} platform {platform} "
-                                  f"departed {event_time:%H:%M:%S} with no ARRIVED seen", file=sys.stderr)
+                            print(
+                                f"  [{poll_time}] MISSED arrival: train={t['train_id']} platform {platform} "
+                                f"departed {event_time:%H:%M:%S} with no ARRIVED seen",
+                                file=sys.stderr,
+                            )
 
             time.sleep(args.interval)
 

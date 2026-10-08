@@ -1,0 +1,36 @@
+{
+  "sha256": {
+    "exit_log.csv": "ab3d014439cb067e924076de7d619ea45a6eb0bf9fe764178917572d0407f190",
+    "population_timeseries.csv": "f66a82acfb8a663d16f7c1a7f1088c1951cfeaa242750acbb4fb58de5f7ff146",
+    "escalator_log.csv": "09faa2769df438b16c0c2ca78170fd31fd1ee429e5005d269d51fcdd9a80ded4",
+    "agent_decisions_history.jsonl": "a2e70838db63aa6f4fc626fbe13106014465bbbb0c92bc3f60096ba1ceec9d88",
+    "route_changes.txt": "edb078cbedfbb53ecf19953bc5489b03a298ccc1bb1f17c4ea1fd03a0fda9c1e",
+    "calibration_arrivals.csv": "c499c3852eb828b12de2b8c62acf27aa7330c36a4daee1522b2afd7159734da3"
+  },
+  "summary": {
+    "exits": {
+      "blackett_street": 44,
+      "eldon_square": 14,
+      "grey_street": 44,
+      "train_platform_3": 9
+    },
+    "population_header": [
+      "sim_time_s",
+      "sim_time_min",
+      "left_station",
+      "concourse",
+      "escalator_queue",
+      "on_escalator",
+      "platform"
+    ],
+    "population_final_row": [
+      "29399.9",
+      "489.998",
+      "111",
+      "71",
+      "50",
+      "9",
+      "104"
+    ]
+  }
+}
