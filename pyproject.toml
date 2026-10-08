@@ -34,5 +34,6 @@ ignore = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 markers = [
-    "golden: full-geometry regression runs against committed snapshots (slow, ~45 s)",
+    "golden: full-geometry regression runs against committed snapshots (slow, ~1 min)",
+    "integration: short full-geometry runs checking end-to-end behaviour (a few seconds each)",
 ]

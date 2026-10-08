@@ -159,6 +159,10 @@ def run_simulation(
     except KeyboardInterrupt:
         runner.cleanup()
         sys.exit(0)
+    except Exception:
+        # Keep what was simulated for diagnosis; main() then exits non-zero.
+        runner.cleanup()
+        raise
 
     agent_levels = getattr(runner.jps_sim, "agent_levels", None)
 
@@ -176,7 +180,7 @@ def run_simulation(
         runner.wait_events,
         runner.decision_interval,
         runner.max_steps,
-        len(runner.concordia_agents),
+        len(runner.agents),
         runner.perf_timer.report(),
         runner.llm_provider,
         agent_levels,

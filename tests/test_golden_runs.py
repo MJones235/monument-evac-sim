@@ -71,8 +71,9 @@ CASES = {
         "6000",
     ],
     # The LLM decision pipeline (prompts, Concordia agents, cache, schema
-    # repair) on E4: zone PA, staff and trains. evacusim's deterministic fake
-    # model stands in for the LLM, so this costs nothing and is reproducible.
+    # repair) on E4: zone PA, staff and trains, with concurrent model calls.
+    # evacusim's deterministic fake model stands in for the LLM, so this costs
+    # nothing and is reproducible.
     "llm_pipeline_e4": [
         "tests/golden/configs/llm_fake_e4.yaml",
         "--fake-llm",
@@ -104,10 +105,19 @@ def _run_case(args: list[str], output_dir: Path) -> Path:
     return run_dirs[0]
 
 
+def _canonical_bytes(path: Path) -> bytes:
+    """File contents to hash. The LLM prompt log is written in call-completion
+    order, which varies with concurrency, so its lines are sorted."""
+    data = path.read_bytes()
+    if path.name == "llm_prompt_log.jsonl":
+        data = b"".join(sorted(data.splitlines(keepends=True)))
+    return data
+
+
 def _fingerprint(run_dir: Path) -> dict:
     """Hash the behavioural outputs of a run and summarise them."""
     hashes = {
-        name: hashlib.sha256((run_dir / name).read_bytes()).hexdigest()
+        name: hashlib.sha256(_canonical_bytes(run_dir / name)).hexdigest()
         for name in FINGERPRINTED_FILES
         if (run_dir / name).exists()
     }
