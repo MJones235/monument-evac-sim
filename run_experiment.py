@@ -89,6 +89,12 @@ def parse_args():
     parser.add_argument(
         "--no-video", action="store_true", help="Skip MP4 rendering after simulation"
     )
+    parser.add_argument(
+        "--fake-llm",
+        action="store_true",
+        help="Use a deterministic fake language model (no API calls; for testing the LLM "
+        "pipeline, not for results)",
+    )
     parser.add_argument("--video-fps", type=int, default=None, help="Override video.fps")
     parser.add_argument("--video-speedup", type=float, default=None, help="Override video.speedup")
     return parser.parse_args()
@@ -216,7 +222,12 @@ def main():
         # The rule-based engine needs no language model or embedder (and no
         # Azure credentials): evacusim then builds no Concordia agents and makes
         # zero LLM calls.
-        if params.decision.engine == "llm":
+        if params.decision.engine == "llm" and args.fake_llm:
+            from evacusim.testing.fake_llm import FakeLanguageModel, fake_embedder
+
+            logger.warning("Using the fake language model: decisions are not meaningful.")
+            model, embedder = FakeLanguageModel(), fake_embedder
+        elif params.decision.engine == "llm":
             model, embedder = LLMSetup.setup_language_model(params.llm)
         else:
             logger.info("Rule-based decision engine selected — no LLM or embedder is loaded.")

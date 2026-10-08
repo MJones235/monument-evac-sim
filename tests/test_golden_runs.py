@@ -17,7 +17,7 @@ depends on Python's per-process string-hash randomisation.
 
 Usage::
 
-    pytest -m golden                      # check against snapshots (~45 s)
+    pytest -m golden                      # check against snapshots (~1 min)
     UPDATE_GOLDEN=1 pytest -m golden      # re-record after an intended change
 
 Re-record only when a behaviour change is intended, and say why in the commit.
@@ -49,6 +49,7 @@ FINGERPRINTED_FILES = (
     "agent_decisions_history.jsonl",  # per-frame agent positions
     "route_changes.txt",
     "calibration_arrivals.csv",  # calibration runs only
+    "llm_prompt_log.jsonl",  # LLM runs only: every prompt and response
 )
 
 CASES = {
@@ -68,6 +69,17 @@ CASES = {
         "08:00",
         "--max-steps",
         "6000",
+    ],
+    # The LLM decision pipeline (prompts, Concordia agents, cache, schema
+    # repair) on E4: zone PA, staff and trains. evacusim's deterministic fake
+    # model stands in for the LLM, so this costs nothing and is reproducible.
+    "llm_pipeline_e4": [
+        "tests/golden/configs/llm_fake_e4.yaml",
+        "--fake-llm",
+        "--agents",
+        "30",
+        "--max-steps",
+        "3000",
     ],
 }
 
