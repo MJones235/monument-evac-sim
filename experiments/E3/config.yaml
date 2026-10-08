@@ -20,7 +20,7 @@ extends: ../base.yaml
 # Fire Brigade physical arrival (modelled via firefighter_brigade override below):
 #   In E3 the Fire Brigade arrived specifically at the bottom of the N/S
 #   escalators (~7:40 min post-alarm) to disperse the 48-person stuck crowd.
-#   trigger_after_seconds: 445 → brigade onset 7:25 min, physically present
+#   after_seconds: 445 → brigade onset 7:25 min, physically present
 #   at the platform_def / escalator-bottom area by ~7:40 min.
 #
 # The train_arrival dwell is set to 60 s (a realistic metro dwell time that
@@ -65,7 +65,7 @@ systems:
         directive_interval: 9999.0
         message: ""
       - trigger: after_seconds
-        trigger_after_seconds: 445  # 7:25 min onset → physically present at escalator bottom by ~7:40 min
+        after_seconds: 445  # 7:25 min onset → physically present at escalator bottom by ~7:40 min
         movement: zone_patrol
         patrol_zones:
           - zone: platform_def   # Bottom of N/S escalators (Platforms 1 & 2) — 48-person stuck crowd

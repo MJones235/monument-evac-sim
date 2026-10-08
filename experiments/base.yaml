@@ -7,7 +7,6 @@ simulation:
   dt: 0.05  # JuPedSim timestep (seconds)
   max_iterations: 2400  # Maximum simulation steps (2400 * 0.05 = 120 seconds)
   decision_interval: 30.0  # Time between Concordia decisions (seconds)
-  spawn_interval: 2.0  # Time between agent spawns (seconds)
   network_path: "geometry/monument/network"  # Monument geometry
 
   # Multi-level simulation (Monument Station has 2 levels: concourse and platforms)
@@ -64,14 +63,6 @@ agents:
   age:
     min: 18
     max: 75
-
-  # Spawn zones - agents distributed across concourse/entrances and platforms
-  # Concourse/entrance agents: heading to a platform to catch a train
-  # Platform agents: 50% waiting to board, 50% just arrived and leaving
-  spawn_zones:
-    - concourse
-    - platform_abc
-    - platform_def
 
   # Distribution of static-knowledge profiles for agents
   knowledge_profiles:
@@ -165,16 +156,6 @@ monitoring:
       description: "Agents on a platform (level -1)"
       level: "-1"
 
-# Test scenarios - disabled
-test_scenarios:
-  blocked_exit:
-    enabled: false
-    description: "Disabled"
-
-  help_behavior:
-    enabled: false
-    description: "Disabled"
-
 # LLM configuration
 # Note: Credentials are loaded from .env file
 llm:
@@ -187,9 +168,6 @@ llm:
 # Output configuration
 output:
   directory: "results"
-  agent_decisions: "agent_decisions.json"
-  events: "events.json"
-  statistics: "statistics.json"
 
 station:
   # Human-readable labels for zone/level IDs — used in agent observations and memories.
@@ -249,21 +227,6 @@ station:
     platform_3: ["Platform 3"]
     platform_4: ["Platform 4"]
     concourse:  []
-
-  # UP escalators reachable from each platform zone (used for commuter valid-exits prompt).
-  platform_up_exits:
-    platform_1:
-      - escalator_e_up
-      - escalator_f_up
-    platform_2:
-      - escalator_e_up
-      - escalator_f_up
-    platform_3:
-      - escalator_b_up
-      - escalator_c_up
-    platform_4:
-      - escalator_b_up
-      - escalator_c_up
 
   # DOWN escalator zones on level 0 that lead to each platform zone.
   # Values are canonical escalator IDs (as used in the exit registry).
@@ -336,9 +299,6 @@ station:
       avoid_exit_tags: [to_platform]
       instruction: "From platforms, use UP connectors to reach the concourse first; from the concourse, use street exits to leave the station. Never descend to a platform when your goal is to leave."
 
-  # Fallback zone when an agent's zone cannot be determined from spawn position.
-  default_platform_zone: "platform_def"
-
   # Rules for assigning initial_zone from spawn coordinates.
   zone_boundaries:
     "-1":
@@ -403,8 +363,6 @@ video:
   enabled: true
   fps: 20
   speedup: 1.0
-  dpi: 100
-  html_log: "simulation_log.html"
 
 # Baseline has no active staff systems by default.
 # Individual experiments (e.g. E1-E4) enable scenario-specific systems.
@@ -420,16 +378,3 @@ performance:
   wait_nudge_enabled: false
   immediate_redecision_on_transfer: false
   min_redecision_interval_seconds: 30.0
-
-# Future: Spawning schedule (disabled for now)
-# agents:
-#   spawn_mode: "scheduled"
-#   spawn_schedule:
-#     - time: 0.0
-#       count: 20
-#       zones: ["concourse"]
-#       label: "initial_occupancy"
-#     - time: 15.0
-#       count: 15
-#       zones: ["concourse"]
-#       label: "additional_arrival"

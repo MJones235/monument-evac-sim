@@ -28,7 +28,7 @@ simulation:
 
 # Override firefighter_brigade arrival time to match Table 1 for E1:
 # concourse crowd moved at 8:15 min, escalator crowd at 9:00 min post-alarm.
-# trigger_after_seconds is measured from when the alarm fires (the on_event trigger).
+# after_seconds is measured from when the alarm fires (the on_event trigger).
 systems:
   firefighter_brigade:
     phases:
@@ -38,7 +38,7 @@ systems:
         directive_interval: 9999.0
         message: ""
       - trigger: after_seconds
-        trigger_after_seconds: 480  # 8 min post-alarm — physically arrives on concourse; directs crowd at 8:15 min
+        after_seconds: 480  # 8 min post-alarm — physically arrives on concourse; directs crowd at 8:15 min
         movement: zone_patrol
         patrol_zones:
           - zone: concourse
@@ -51,4 +51,3 @@ systems:
         message: >-
           This is the Fire Brigade. You must leave the station immediately.
           Please use the nearest street exit now.
-
