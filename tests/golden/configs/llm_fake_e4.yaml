@@ -1,0 +1,6 @@
+# Golden case: the LLM decision pipeline on E4 (zone PA, staff, trains), driven
+# by evacusim's deterministic fake model (run with --fake-llm). Decisions are
+# applied one at a time so the run is reproducible.
+extends: ../../../experiments/E4/config.yaml
+performance:
+  max_parallel_agents: 1
