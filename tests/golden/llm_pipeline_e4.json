@@ -1,15 +1,15 @@
 {
   "sha256": {
-    "exit_log.csv": "d7cf378ff1706d0933dcd1b3d044893e503ff22c33d31ab0c6ec5afcda1da23e",
-    "population_timeseries.csv": "372f4cc4be236fe011ad8b4ca69ae5b98bdf2c8a2716e7a64d094fa4b9de4f8d",
-    "escalator_log.csv": "a26d44eaf8f7329f9d92e7a115f3735ed2ad9c0c9e3608f29e18bf065bde7dd9",
-    "agent_decisions_history.jsonl": "3310df8cabc5b281648b6f858201d790cd8485be6fab8f5d825f54818c0c23a6",
+    "exit_log.csv": "678945a0c4a5e2fbbabc4282e5a9b1cb965294f5d25cfc08e7954e6b5312b845",
+    "population_timeseries.csv": "caffada560e6b02f02409452587724a5622f8957f94046aee929963000598f2f",
+    "escalator_log.csv": "63a17a0114ebeb1aa7e806659145bd26805727b6d81be0e9fda8b635e35afd7e",
+    "agent_decisions_history.jsonl": "2c67f0949b613fe93e73e98b1d95b81bd9382a0ff7a006ac6b5ef0031b616096",
     "route_changes.txt": "7df8b31f82a437155a7722f0ecb6e6dee61f7310858bb5b8a2dd7cb1c8250243",
-    "llm_prompt_log.jsonl": "9c59adf484559c50ccaeec474b655ea6de9eb35c34583304efd8b890f29cb38a"
+    "llm_prompt_log.jsonl": "5ade3dc7cbf9f6516de2ada861a6bc4797840077b5a231bff9b6bfb76973aee1"
   },
   "summary": {
     "exits": {
-      "blackett_street": 12,
+      "blackett_street": 11,
       "eldon_square": 3,
       "grey_street": 5,
       "train_platform_1": 6,
@@ -29,11 +29,11 @@
     "population_final_row": [
       "150.0",
       "2.499",
-      "39",
-      "15",
-      "1",
-      "11",
-      "14"
+      "38",
+      "18",
+      "0",
+      "6",
+      "17"
     ]
   }
 }
