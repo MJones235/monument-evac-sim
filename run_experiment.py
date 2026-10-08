@@ -26,6 +26,7 @@ from dotenv import load_dotenv  # noqa: E402
 load_dotenv(Path(__file__).parent / ".env")
 
 from evacusim.config.config_loader import ConfigLoader
+from evacusim.config.schema import RunConfig, as_dict
 from evacusim.coordination.hybrid_simulation import HybridSimulationRunner
 from evacusim.metrics.results_writer import ResultsWriter
 from evacusim.setup.agent_manager import AgentManager
@@ -35,6 +36,7 @@ from evacusim.setup.output_manager import OutputManager
 from evacusim.setup.simulation_runner_factory import SimulationRunnerFactory
 from evacusim.setup.station_layout_builder import StationLayoutBuilder
 from evacusim.utils.logger import get_logger
+from evacusim.utils.seeding import seed_global_rng
 from evacusim.visualization.video_generation_helper import VideoGenerationHelper
 from evacusim.visualization.viewer_launcher import ViewerLauncher
 
@@ -87,13 +89,13 @@ def parse_args():
     parser.add_argument(
         "--no-video", action="store_true", help="Skip MP4 rendering after simulation"
     )
-    parser.add_argument("--video-fps", type=int, default=20)
-    parser.add_argument("--video-speedup", type=float, default=1.0)
+    parser.add_argument("--video-fps", type=int, default=None, help="Override video.fps")
+    parser.add_argument("--video-speedup", type=float, default=None, help="Override video.speedup")
     return parser.parse_args()
 
 
 def run_simulation(
-    config: dict,
+    params: RunConfig,
     model,
     embedder,
     experiment_id: str,
@@ -103,19 +105,19 @@ def run_simulation(
     """Orchestrate the full simulation run and return (results, run_id, decisions_file)."""
     runner = None
 
-    jps_sim = JuPedSimSetup.create_simulation(config)
-    station_layout = StationLayoutBuilder.build_layout(jps_sim, config)
+    jps_sim = JuPedSimSetup.create_simulation(params)
+    station_layout = StationLayoutBuilder.build_layout(jps_sim, params.station)
 
     # Pre-spawn director agents (fire marshals, RCI staff, etc.) into JuPedSim
     # BEFORE random passengers are spawned.  JuPedSim then enforces minimum
     # separation around their positions so no passenger can land on top of a
     # fire-marshal spawn point (fixes spawn-collision RuntimeError).
     pre_built_systems, pre_built_agent_roles = HybridSimulationRunner.build_systems_for_pre_spawn(
-        config.get("systems", {}), jps_sim, station_layout
+        {name: as_dict(cfg) for name, cfg in params.systems.items()}, jps_sim, station_layout
     )
 
-    agents_config = AgentManager.create_and_populate_agents(jps_sim, config)
-    run_id, output_dir, decisions_file = OutputManager.setup_output_directory(config)
+    agents_config = AgentManager.create_and_populate_agents(jps_sim, params)
+    run_id, output_dir, decisions_file = OutputManager.setup_output_directory(params.output)
 
     ViewerLauncher.launch_viewers(
         decisions_file=decisions_file,
@@ -132,7 +134,7 @@ def run_simulation(
         model=model,
         embedder=embedder,
         decisions_file=decisions_file,
-        config=config,
+        params=params,
         pace_to_realtime=(launch_viewer or launch_spatial),
         pre_built_systems=pre_built_systems,
         pre_built_agent_roles=pre_built_agent_roles,
@@ -200,32 +202,28 @@ def main():
         # experiment's runs are grouped together for cross-experiment analysis.
         output_dir = args.output_dir or f"results/{experiment_id}"
 
-        config = ConfigLoader.load_and_validate(
+        params = ConfigLoader.load_run_config(
             config_path=str(args.config),
             agents=args.agents,
             max_steps=args.max_steps,
             output_dir=output_dir,
+            start_time_s=args.start_time,
         )
-        if args.start_time is not None:
-            config.setdefault("simulation", {})["start_time_s"] = args.start_time
-            logger.info(f"Override: simulation starts at {args.start_time:.1f}s")
+        # Every random component's seed derives from params.seed; this covers
+        # code that still uses the random module directly.
+        seed_global_rng(params.seed)
 
-        # Feature B: when the config selects a rule-based (LLM-free) decision
-        # engine, skip language-model and embedder construction entirely and run
-        # with model=None/embedder=None. evacusim then builds no Concordia agents
-        # and makes zero LLM calls. Requires no Azure credentials.
-        decision_cfg = config.get("decision", {}) or {}
-        engine_name = str(decision_cfg.get("engine", "llm")).lower()
-        if engine_name in ("rule_based", "rule", "rules"):
-            logger.info(
-                "Rule-based decision engine selected — skipping LLM/embedder setup (zero-LLM run)."
-            )
-            model, embedder = None, None
+        # The rule-based engine needs no language model or embedder (and no
+        # Azure credentials): evacusim then builds no Concordia agents and makes
+        # zero LLM calls.
+        if params.decision.engine == "llm":
+            model, embedder = LLMSetup.setup_language_model(params.llm)
         else:
-            model, embedder = LLMSetup.setup_language_model(config)
+            logger.info("Rule-based decision engine selected — no LLM or embedder is loaded.")
+            model, embedder = None, None
 
         results, run_id, decisions_file = run_simulation(
-            config,
+            params,
             model,
             embedder,
             experiment_id=experiment_id,
@@ -234,15 +232,12 @@ def main():
         )
 
         if not args.no_video:
-            network_path = Path(
-                config.get("simulation", {}).get("network_path", "geometry/monument/network")
-            )
             VideoGenerationHelper.generate_simulation_video(
                 decisions_file=decisions_file,
                 run_id=run_id,
-                network_path=network_path,
-                fps=args.video_fps,
-                speedup=args.video_speedup,
+                network_path=Path(params.simulation.network_path),
+                fps=args.video_fps or params.video.fps,
+                speedup=args.video_speedup or params.video.speedup,
             )
 
         logger.info("=" * 60)

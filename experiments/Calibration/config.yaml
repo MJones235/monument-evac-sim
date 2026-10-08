@@ -1,5 +1,8 @@
 extends: ../base.yaml
 
+# Master random seed (arrivals, spawn jitter, escalator lane choice, ...).
+seed: 7
+
 # Feature A — calibration under non-evacuation conditions.
 # Passengers arrive at runtime as a stochastic Poisson process driven by
 # station usage data (street entrances) + a train timetable (alighting bursts).
@@ -60,7 +63,6 @@ performance:
 
 calibration:
   enabled: true
-  seed: 7
   # Passengers here are regular commuters who know the station: they know the
   # concourse down-escalators to the platforms (novices would only ever see the
   # street exits and never descend to board). Drives knowledge_profile for every

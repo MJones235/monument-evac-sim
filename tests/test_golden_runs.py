@@ -11,9 +11,9 @@ The fingerprint has two parts:
 * ``summary``: human-readable counts (exits per street exit, final population
   row). When the hashes differ, this shows *how much* the behaviour changed.
 
-Runs are deterministic only with a fixed ``PYTHONHASHSEED``: some engine code
-iterates over sets of strings, and string hashing is randomised per process.
-Until the engine has a single run-level seed, the tests pin it here.
+Runs are deterministic given the config's ``seed``. ``PYTHONHASHSEED`` is
+deliberately *not* fixed, so each test run also checks that no behaviour
+depends on Python's per-process string-hash randomisation.
 
 Usage::
 
@@ -74,7 +74,7 @@ CASES = {
 
 def _run_case(args: list[str], output_dir: Path) -> Path:
     """Run one simulation headless and return its run directory."""
-    env = {**os.environ, "PYTHONHASHSEED": "0"}
+    env = {k: v for k, v in os.environ.items() if k != "PYTHONHASHSEED"}
     cmd = [
         sys.executable,
         "run_experiment.py",
