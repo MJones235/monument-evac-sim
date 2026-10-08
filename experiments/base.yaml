@@ -53,12 +53,6 @@ agents:
       medium: 45.0
       low:    20.0
 
-  # Risk tolerance distribution (affects evacuation speed)
-  risk_tolerance:
-    low: 30.0
-    moderate: 50.0
-    high: 20.0
-
   # Age distribution
   age:
     min: 18
