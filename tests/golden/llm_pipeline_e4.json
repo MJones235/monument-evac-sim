@@ -1,22 +1,22 @@
 {
   "sha256": {
-    "exit_log.csv": "678945a0c4a5e2fbbabc4282e5a9b1cb965294f5d25cfc08e7954e6b5312b845",
-    "population_timeseries.csv": "caffada560e6b02f02409452587724a5622f8957f94046aee929963000598f2f",
-    "escalator_log.csv": "63a17a0114ebeb1aa7e806659145bd26805727b6d81be0e9fda8b635e35afd7e",
-    "agent_decisions_history.jsonl": "2c67f0949b613fe93e73e98b1d95b81bd9382a0ff7a006ac6b5ef0031b616096",
-    "route_changes.txt": "7df8b31f82a437155a7722f0ecb6e6dee61f7310858bb5b8a2dd7cb1c8250243",
-    "decisions.csv": "e6bc4f8daf2e699b7d4681141c940a91af51c690249a13958e4737bba260d4fa",
-    "llm_prompt_log.jsonl": "5ade3dc7cbf9f6516de2ada861a6bc4797840077b5a231bff9b6bfb76973aee1"
+    "exit_log.csv": "15f5001cbbf2b1f035e1d0868c0d108c87fe773a9944bfcbafc82c317f0617b9",
+    "population_timeseries.csv": "d36f54ae0c0bc2be00ab5891a92f4eb9ef4607b0abf1ecf47c559a01fe83e235",
+    "escalator_log.csv": "0efa292b1d547fb0002b3346a2e6586bb6b30a6c38d63cca14347d132b8524a4",
+    "agent_decisions_history.jsonl": "b5bf18287aa4b0606d8925f10360e769fc0f613d4dbfc9bcdb34d125cf27613f",
+    "route_changes.txt": "aafdb99e489940889b167bde8f5a79be5efcb637d94a0b76fb9cf4e378b819da",
+    "decisions.csv": "325cbbb20b2d45c9329be9d95230ba41244efaeb2e0bbcdff1b9c7868085c39f",
+    "llm_prompt_log.jsonl": "abc69b73e418db7c48c57e36ef1307164d2c413235434c6d92a4a67be6343d07"
   },
   "summary": {
     "exits": {
-      "blackett_street": 11,
-      "eldon_square": 3,
-      "grey_street": 5,
-      "train_platform_1": 6,
-      "train_platform_2": 7,
-      "train_platform_3": 5,
-      "train_platform_4": 1
+      "blackett_street": 4,
+      "eldon_square": 1,
+      "grey_street": 2,
+      "train_platform_1": 1,
+      "train_platform_2": 1,
+      "train_platform_3": 1,
+      "train_platform_4": 2
     },
     "population_header": [
       "sim_time_s",
@@ -30,11 +30,11 @@
     "population_final_row": [
       "150.0",
       "2.499",
-      "38",
+      "12",
       "18",
       "0",
-      "6",
-      "17"
+      "1",
+      "6"
     ]
   }
 }

@@ -20,7 +20,6 @@ decision:
 
 agents:
   count: 0                  # population arrives at runtime
-  snapshot_load_path: null  # base.yaml sets monument_80.json — must clear it
 
 simulation:
   # --- Performance tuning for the 24 h calibration run (no LLM, low density) ---
@@ -49,6 +48,8 @@ simulation:
 
 # No fire alarm / exit-blocking events during a normal-operations calibration run.
 events: []
+# Normal operations: no emergency staff (base.yaml's firefighters are cleared).
+systems: {}
 
 performance:
   # One decision group (base default is 3). With staggered groups, runtime-spawned

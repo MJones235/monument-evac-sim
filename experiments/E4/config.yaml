@@ -24,11 +24,9 @@ extends: ../base.yaml
 # passengers to board immediately, and the RCI reinforcing this directive, the
 # long dwell ensures no passenger is stranded before the station clears.
 
-simulation:
-  max_iterations: 10000  # 10 000 × 0.05 s = 500 s = ~8:20 (cleared at 6:45 min)
 
 agents:
-  count: 70  # Real study: ~35 at station + 61 from train ≈ 96; 70 is a feasible approximation
+  count: 96  # ~35 in the station + 61 off the train
 
 events:
   - time: 10.0

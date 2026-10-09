@@ -33,11 +33,9 @@ extends: ../base.yaml
 # The PA given by RCI 1 upon reaching the concourse is modelled as a timed
 # event (t=40 s, approximately 25 s after the alarm — time to reach concourse).
 
-simulation:
-  max_iterations: 12000  # 12 000 × 0.05 s = 600 s = 10 min (station cleared at 8:00 min)
 
 agents:
-  count: 65  # Real study: ~83; 65 is a computationally feasible approximation
+  count: 83  # ~83 people: 30 on the concourse, 53 at the bottom of the escalators
 
 events:
   # Train 124 arrives at Platform 1 as the alarm is triggered.

@@ -22,13 +22,14 @@ extends: ../base.yaml
 #   the base-config default of 4.5 min (which represents the notification call,
 #   not their physical arrival).
 
-simulation:
-  max_iterations: 6000  # 18 000 × 0.05 s = 900 s = 15 min (exercise ran to 14:47)
 
 
 # Override firefighter_brigade arrival time to match Table 1 for E1:
 # concourse crowd moved at 8:15 min, escalator crowd at 9:00 min post-alarm.
 # after_seconds is measured from when the alarm fires (the on_event trigger).
+agents:
+  count: 111  # ~111 people present (Proulx 1991)
+
 systems:
   firefighter_brigade:
     phases:

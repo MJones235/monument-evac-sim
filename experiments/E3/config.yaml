@@ -28,8 +28,9 @@ extends: ../base.yaml
 # departs).  The minimal PA does NOT mention the train, so boarding is
 # a passenger-initiated choice, not a directed evacuation route.
 
-simulation:
-  max_iterations: 14400  # 14 400 × 0.05 s = 720 s = 12 min (cleared at 10:30 min)
+
+agents:
+  count: 61  # ~61 people (Proulx 1991)
 
 events:
   - time: 10.0

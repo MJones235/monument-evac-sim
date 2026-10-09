@@ -5,7 +5,8 @@
 # Simulation parameters
 simulation:
   dt: 0.05  # JuPedSim timestep (seconds)
-  max_iterations: 2400  # Maximum simulation steps (2400 * 0.05 = 120 seconds)
+  max_iterations: 18000  # 18 000 × 0.05 s = 15 min: the same window for every scenario
+                         # (covers every Proulx clearance time; E1's drill ran to 14:47)
   decision_interval: 30.0  # Time between Concordia decisions (seconds)
   network_path: "geometry/monument/network"  # Monument geometry
 
@@ -29,8 +30,8 @@ simulation:
 
 # Agent configuration
 agents:
-  count: 80  # Default shared occupancy for E1-E5 baseline
-  snapshot_load_path: snapshots/monument_80.json
+  count: 80  # Each scenario sets Proulx's crowd size; the population is sampled
+             # from the run's seed (reproducible), spread over the station.
 
   # OCEAN personality dimension distributions.
   # Each dimension is sampled independently.
@@ -359,9 +360,90 @@ video:
   fps: 20
   speedup: 1.0
 
-# Baseline has no active staff systems by default.
-# Individual experiments (e.g. E1-E4) enable scenario-specific systems.
-systems: {}
+# Staff present in all five drills (Proulx 1991): four firefighters who power
+# off and guard the N/S escalators, and the Fire Brigade arriving later.
+# Scenarios add their own staff (E2/E4's Revenue Control Inspectors) and
+# override the brigade's arrival time (E1, E3).
+systems:
+
+  # Two fire marshals at the TOP of the N/S escalators (concourse level 0).
+  # Positioned between escalators D and E (one) and at escalator F (other).
+  # Positions are derived at runtime from the corridor geometry
+  # (zone: "escalator_X_entrance" → midpoint of corridor's concourse-side edge + 1.5 m outward).
+  firefighter_top:
+    enabled: true
+    role_label: "Fire Marshal"
+    walking_speed: 1.5
+    spawn_positions:
+      - zone: "escalator_d_entrance_L0"   # just outside top of escalator D corridor
+        level_id: "0"
+      - zone: "escalator_f_entrance_L0"   # just outside top of escalator F corridor
+        level_id: "0"
+    phases:
+      - trigger: on_event          # activate when fire alarm fires
+        movement: hold
+        directive_radius: 10.0
+        directive_interval: 15.0
+        message: "Please evacuate the station."
+        # Minimal, and given mostly when asked: in E1 (alarm + firefighters) the
+        # crowd still did not move for ~8 min (Proulx 1991), so a weak cue.
+        cue: {strength: weak, instruction: leave_station}
+
+  # Two fire marshals at the BOTTOM of the N/S escalators (platform level -1).
+  # Positioned in front of escalator D (one) and escalator F (other).
+  # Positions are derived at runtime from the corridor geometry.
+  firefighter_bottom:
+    enabled: true
+    role_label: "Fire Marshal"
+    walking_speed: 1.5
+    spawn_positions:
+      - zone: "escalator_d_entrance_L-1"   # just outside bottom of escalator D corridor
+        level_id: "-1"
+      - zone: "escalator_f_entrance_L-1"   # just outside bottom of escalator F corridor
+        level_id: "-1"
+    phases:
+      - trigger: on_event
+        movement: hold
+        directive_radius: 10.0
+        directive_interval: 15.0
+        message: "Please evacuate the station."
+        # Minimal, and given mostly when asked: in E1 (alarm + firefighters) the
+        # crowd still did not move for ~8 min (Proulx 1991), so a weak cue.
+        cue: {strength: weak, instruction: leave_station}
+
+  # The fully operational Fire Brigade arrives ~4–5 minutes post-alarm.
+  # Modelled as a single officer who patrols the concourse and escalator
+  # area giving stronger directives after the first responders.
+  firefighter_brigade:
+    enabled: true
+    role_label: "Fire Brigade Officer"
+    walking_speed: 1.6
+    spawn_positions:
+      - position: [87.0, 0.0]   # far end of concourse near Blackett Street — out of the way until brigade arrives
+        level_id: "0"
+    phases:
+      # Phase 0: dormant at the Blackett Street end until brigade arrives (~4.5 min).
+      - trigger: on_event
+        movement: hold
+        directive_radius: 0.0
+        directive_interval: 9999.0
+        message: ""
+      # Phase 1: 4.5 min post-alarm (~t=285 s) patrol and direct firmly.
+      - trigger: after_seconds
+        after_seconds: 270
+        movement: zone_patrol
+        patrol_zones:
+          - zone: concourse
+            level_id: "0"
+          - zone: platform_1
+            level_id: "-1"
+        patrol_dwell_time: 45.0
+        directive_radius: 15.0
+        directive_interval: 10.0
+        message: >-
+          This is the Fire Brigade. You must leave the station immediately.
+          Please use the nearest street exit now.
+        cue: {strength: strong, instruction: leave_station}
 
 # Performance optimization
 performance:
