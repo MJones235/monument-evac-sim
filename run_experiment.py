@@ -272,6 +272,8 @@ def main():
         elapsed = time.time() - script_start
         logger.info(f"Total time: {elapsed:.1f}s ({elapsed / 60:.1f} min)")
         logger.info("=" * 60)
+        if results.get("interrupted"):
+            sys.exit(130)  # results were saved, but the run did not finish
 
     except KeyboardInterrupt:
         logger.warning(f"Experiment {experiment_id} interrupted")
