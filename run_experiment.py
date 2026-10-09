@@ -10,7 +10,6 @@ Usage:
 """
 
 import argparse
-import signal
 import sys
 import time
 from pathlib import Path
@@ -28,6 +27,7 @@ load_dotenv(Path(__file__).parent / ".env")
 from evacusim.config.config_loader import ConfigLoader
 from evacusim.config.schema import RunConfig, as_dict
 from evacusim.coordination.hybrid_simulation import HybridSimulationRunner
+from evacusim.metrics.manifest import finish_manifest, start_manifest
 from evacusim.metrics.results_writer import ResultsWriter
 from evacusim.setup.agent_manager import AgentManager
 from evacusim.setup.jupedsim_setup import JuPedSimSetup
@@ -104,13 +104,15 @@ def run_simulation(
     params: RunConfig,
     model,
     embedder,
-    experiment_id: str,
+    config_path: Path,
     launch_viewer: bool = True,
     launch_spatial: bool = True,
 ):
-    """Orchestrate the full simulation run and return (results, run_id, decisions_file)."""
-    runner = None
+    """Orchestrate the full simulation run and return (results, run_id, decisions_file).
 
+    The run directory gets a manifest.json (see evacusim.metrics.manifest)
+    recording what produced the run and how it ended.
+    """
     jps_sim = JuPedSimSetup.create_simulation(params)
     station_layout = StationLayoutBuilder.build_layout(jps_sim, params.station)
 
@@ -123,8 +125,54 @@ def run_simulation(
     )
 
     agents_config = AgentManager.create_and_populate_agents(jps_sim, params)
-    run_id, output_dir, decisions_file = OutputManager.setup_output_directory(params.output)
+    run_id, output_dir, decisions_file = OutputManager.setup_output_directory(
+        params.output, engine=params.decision.engine, seed=params.seed
+    )
+    manifest = start_manifest(
+        output_dir, params, config_path=config_path, study_root=Path(__file__).parent
+    )
+    try:
+        results = _run_and_save(
+            params,
+            model,
+            embedder,
+            jps_sim,
+            station_layout,
+            agents_config,
+            pre_built_systems,
+            pre_built_agent_roles,
+            run_id,
+            decisions_file,
+            launch_viewer,
+            launch_spatial,
+        )
+    except BaseException as error:
+        finish_manifest(output_dir, manifest, error=error, llm_provider=model)
+        raise
+    finish_manifest(output_dir, manifest, results=results, llm_provider=model)
+    logger.info(f"Results saved to {output_dir}")
+    return results, run_id, decisions_file
 
+
+def _run_and_save(
+    params,
+    model,
+    embedder,
+    jps_sim,
+    station_layout,
+    agents_config,
+    pre_built_systems,
+    pre_built_agent_roles,
+    run_id,
+    decisions_file,
+    launch_viewer,
+    launch_spatial,
+):
+    """Build the runner, run it, and write the final results.
+
+    Ctrl-C ends the run early; the runner stops at the end of the current step
+    and its results are saved as usual, marked as interrupted.
+    """
     ViewerLauncher.launch_viewers(
         decisions_file=decisions_file,
         run_id=run_id,
@@ -132,7 +180,6 @@ def run_simulation(
         launch_gui=launch_viewer,
         launch_spatial=launch_spatial,
     )
-
     runner = SimulationRunnerFactory.create_runner(
         jps_sim=jps_sim,
         agents_config=agents_config,
@@ -145,51 +192,15 @@ def run_simulation(
         pre_built_systems=pre_built_systems,
         pre_built_agent_roles=pre_built_agent_roles,
     )
-
-    def signal_handler(signum, frame):
-        logger.warning("Simulation interrupted — saving partial results...")
-        if runner:
-            runner.cleanup()
-        sys.exit(0)
-
-    signal.signal(signal.SIGINT, signal_handler)
-
     try:
         results = runner.run()
-    except KeyboardInterrupt:
-        runner.cleanup()
-        sys.exit(0)
     except Exception:
         # Keep what was simulated for diagnosis; main() then exits non-zero.
         runner.cleanup()
         raise
-
-    agent_levels = getattr(runner.jps_sim, "agent_levels", None)
-
-    if hasattr(runner, "decision_processor"):
-        runner.decision_processor.log_cache_summary()
-
-    ResultsWriter.save_final_results(
-        decisions_file,
-        runner.agent_decisions,
-        runner.jps_sim.get_all_agent_positions(),
-        runner.current_sim_time,
-        runner.event_manager.event_history,
-        runner.event_manager.blocked_exits,
-        runner.message_system.message_history,
-        runner.wait_events,
-        runner.decision_interval,
-        runner.max_steps,
-        len(runner.agents),
-        runner.perf_timer.report(),
-        runner.llm_provider,
-        agent_levels,
-        exit_log=getattr(runner, "exit_log", None),
-        spawn_log=getattr(runner, "spawn_log", None),
-        escalator_system=getattr(runner.jps_sim, "escalator_system", None),
-    )
-    logger.info(f"Results saved to {output_dir}")
-    return results, run_id, decisions_file
+    runner.decision_processor.log_cache_summary()
+    ResultsWriter.save_final_results(decisions_file, runner.run_record())
+    return results
 
 
 def main():
@@ -241,7 +252,7 @@ def main():
             params,
             model,
             embedder,
-            experiment_id=experiment_id,
+            config_path=args.config,
             launch_viewer=not args.no_viewer,
             launch_spatial=not args.no_spatial_viewer,
         )
@@ -262,6 +273,9 @@ def main():
         logger.info(f"Total time: {elapsed:.1f}s ({elapsed / 60:.1f} min)")
         logger.info("=" * 60)
 
+    except KeyboardInterrupt:
+        logger.warning(f"Experiment {experiment_id} interrupted")
+        sys.exit(130)
     except Exception as e:
         logger.error(f"Experiment {experiment_id} failed: {e}", exc_info=True)
         sys.exit(1)

@@ -5,6 +5,7 @@
     "escalator_log.csv": "63a17a0114ebeb1aa7e806659145bd26805727b6d81be0e9fda8b635e35afd7e",
     "agent_decisions_history.jsonl": "2c67f0949b613fe93e73e98b1d95b81bd9382a0ff7a006ac6b5ef0031b616096",
     "route_changes.txt": "7df8b31f82a437155a7722f0ecb6e6dee61f7310858bb5b8a2dd7cb1c8250243",
+    "decisions.csv": "e6bc4f8daf2e699b7d4681141c940a91af51c690249a13958e4737bba260d4fa",
     "llm_prompt_log.jsonl": "5ade3dc7cbf9f6516de2ada861a6bc4797840077b5a231bff9b6bfb76973aee1"
   },
   "summary": {

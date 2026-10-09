@@ -5,6 +5,7 @@ The physics step is made to raise part-way through a short real run.
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -56,3 +57,6 @@ def test_physics_failure_exits_non_zero_and_keeps_partial_outputs(tmp_path: Path
     (run_dir,) = tmp_path.iterdir()
     assert (run_dir / "population_timeseries.csv").exists()
     assert (run_dir / "agent_decisions.json").exists()
+    manifest = json.loads((run_dir / "manifest.json").read_text())
+    assert manifest["status"] == "failed"
+    assert "injected physics failure" in manifest["error"]
