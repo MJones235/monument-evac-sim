@@ -75,7 +75,7 @@ events:
       platform_2: {strength: strong, instruction: board_train}
       platform_3: {strength: strong, instruction: board_train}
       platform_4: {strength: strong, instruction: board_train}
-      concourse: {strength: strong, instruction: leave_station}
+      concourse: {strength: strong, instruction: leave_station, route: [blackett_street, grey_street, eldon_square]}
   - time: 40.0
     type: pa_announcement
     sender_label: "Station PA"

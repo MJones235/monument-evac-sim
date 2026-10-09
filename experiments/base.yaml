@@ -435,7 +435,7 @@ systems:
         patrol_zones:
           - zone: concourse
             level_id: "0"
-          - zone: platform_1
+          - zone: platform_2   # bottom of the N/S escalators, where the crowd waited
             level_id: "-1"
         patrol_dwell_time: 45.0
         directive_radius: 15.0
@@ -443,7 +443,7 @@ systems:
         message: >-
           This is the Fire Brigade. You must leave the station immediately.
           Please use the nearest street exit now.
-        cue: {strength: strong, instruction: leave_station}
+        cue: {strength: strong, instruction: leave_station, route: [escalator_b_up, escalator_c_up, blackett_street, grey_street, eldon_square]}
 
 # Performance optimization
 performance:

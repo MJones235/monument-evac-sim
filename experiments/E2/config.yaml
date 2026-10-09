@@ -130,4 +130,4 @@ systems:
         message: >-
           Please evacuate the platform immediately! Use the escalators to reach
           the concourse and leave via the nearest street exit.
-        cue: {strength: strong, instruction: leave_station}
+        cue: {strength: strong, instruction: leave_station, route: [escalator_b_up, escalator_c_up]}
