@@ -27,11 +27,9 @@ extends: ../base.yaml
 #
 # This is the verbatim PA wording from the real study (Galea et al., 2008).
 
-simulation:
-  max_iterations: 14400  # 14 400 × 0.05 s = 720 s = 12 min (last pram group at 10:15 min)
 
 agents:
-  count: 70  # Real study: ~35 at station + 68 from trains ≈ 103; 70 is a feasible approximation
+  count: 103  # ~35 in the station + 68 off the trains
 
 events:
   - time: 10.0

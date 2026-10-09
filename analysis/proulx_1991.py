@@ -10,7 +10,8 @@ Newcastle-upon-Tyne (Tyne & Wear Metro), each exposing real passengers to a
 different information condition:
 
   E1 — Fire alarm only (no staff, no PA)
-  E2 — Two Revenue Control Inspectors direct the evacuation on foot
+  E2 — Two Revenue Control Inspectors direct the evacuation on foot; the one
+        holding the concourse also makes a PA announcement
   E3 — Minimal PA ("Please evacuate the station immediately."), repeated every 20 s
   E4 — Two RCIs + zone-specific PA directing platform passengers to board the
         evacuation train and concourse passengers to use street exits

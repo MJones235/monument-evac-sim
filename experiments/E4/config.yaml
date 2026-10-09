@@ -24,11 +24,9 @@ extends: ../base.yaml
 # passengers to board immediately, and the RCI reinforcing this directive, the
 # long dwell ensures no passenger is stranded before the station clears.
 
-simulation:
-  max_iterations: 10000  # 10 000 × 0.05 s = 500 s = ~8:20 (cleared at 6:45 min)
 
 agents:
-  count: 70  # Real study: ~35 at station + 61 from train ≈ 96; 70 is a feasible approximation
+  count: 96  # ~35 in the station + 61 off the train
 
 events:
   - time: 10.0
@@ -77,7 +75,7 @@ events:
       platform_2: {strength: strong, instruction: board_train}
       platform_3: {strength: strong, instruction: board_train}
       platform_4: {strength: strong, instruction: board_train}
-      concourse: {strength: strong, instruction: leave_station}
+      concourse: {strength: strong, instruction: leave_station, route: [blackett_street, grey_street, eldon_square]}
   - time: 40.0
     type: pa_announcement
     sender_label: "Station PA"

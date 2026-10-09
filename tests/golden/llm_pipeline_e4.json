@@ -1,22 +1,22 @@
 {
   "sha256": {
-    "exit_log.csv": "678945a0c4a5e2fbbabc4282e5a9b1cb965294f5d25cfc08e7954e6b5312b845",
-    "population_timeseries.csv": "caffada560e6b02f02409452587724a5622f8957f94046aee929963000598f2f",
-    "escalator_log.csv": "63a17a0114ebeb1aa7e806659145bd26805727b6d81be0e9fda8b635e35afd7e",
-    "agent_decisions_history.jsonl": "2c67f0949b613fe93e73e98b1d95b81bd9382a0ff7a006ac6b5ef0031b616096",
-    "route_changes.txt": "7df8b31f82a437155a7722f0ecb6e6dee61f7310858bb5b8a2dd7cb1c8250243",
-    "decisions.csv": "e6bc4f8daf2e699b7d4681141c940a91af51c690249a13958e4737bba260d4fa",
-    "llm_prompt_log.jsonl": "5ade3dc7cbf9f6516de2ada861a6bc4797840077b5a231bff9b6bfb76973aee1"
+    "exit_log.csv": "3b67ca8346fcebb277b5235687792644a8d7af1809c81ba7a59a996ca1e1a943",
+    "population_timeseries.csv": "a483cda25f608d57b2cd334d5619a2c23660decd5ea6906482ee220ede6dddd4",
+    "escalator_log.csv": "403b8e97ccb3bdd1a10f45cbe63cb4b80dcf6aa5bdb6f9f115fd89e084820129",
+    "agent_decisions_history.jsonl": "0737d4c325133dfb3a9a64b9899d4ad1b376f11ab06542128507a748ba3bab5a",
+    "route_changes.txt": "5660d309d2dd32c661b09af4753ea387aba50077a754a776d29c5cd9d57e5d57",
+    "decisions.csv": "725650e333fcf1ebe64006d80faa2e8cc7956964ac1eab81807f242df0bcb829",
+    "llm_prompt_log.jsonl": "3aaacfa3ff0b3f529bbf329d7a546227b9d082625291b6ad3b506044f8e9179b"
   },
   "summary": {
     "exits": {
-      "blackett_street": 11,
-      "eldon_square": 3,
-      "grey_street": 5,
-      "train_platform_1": 6,
-      "train_platform_2": 7,
-      "train_platform_3": 5,
-      "train_platform_4": 1
+      "blackett_street": 5,
+      "eldon_square": 2,
+      "grey_street": 1,
+      "train_platform_1": 1,
+      "train_platform_2": 3,
+      "train_platform_3": 1,
+      "train_platform_4": 3
     },
     "population_header": [
       "sim_time_s",
@@ -30,11 +30,11 @@
     "population_final_row": [
       "150.0",
       "2.499",
-      "38",
-      "18",
-      "0",
-      "6",
-      "17"
+      "16",
+      "12",
+      "1",
+      "3",
+      "6"
     ]
   }
 }
