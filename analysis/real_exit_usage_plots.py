@@ -175,14 +175,13 @@ def _legend(ax, ncol: int = 3) -> None:
 def _arrival_legend(ax, arrivals: list[dict]) -> None:
     """Key the arrival colours — real counts have no per-platform series to."""
     for platform in sorted({t["platform"] for t in arrivals}):
-        n = sum(1 for t in arrivals if t["platform"] == platform)
         ax.plot(
             [],
             [],
             color=PLATFORM_COLOURS.get(platform, TOTAL_COLOUR),
             linestyle="--",
             linewidth=1.5,
-            label=f"Platform {platform} arrival  (n={n})",
+            label=f"Platform {platform} arrival",
         )
 
 
