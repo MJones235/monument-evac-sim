@@ -488,7 +488,7 @@ def draw_histogram(
                 edgecolor="white",
                 linewidth=0.5,
                 zorder=2,
-                label=f"{_origin_label(origin)}  (n={sum(counts)})",
+                label=_origin_label(origin),
             )
             bottom = [b + c for b, c in zip(bottom, counts, strict=True)]
     else:

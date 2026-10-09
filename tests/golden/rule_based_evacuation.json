@@ -3,7 +3,8 @@
     "exit_log.csv": "17e3615a4f1cf0ae20c3777ed1d32e5324503ec44e751c7e2b02865442b4ef4f",
     "population_timeseries.csv": "dd40cc89dfbaf8caa569161d4fdb93711abe9a9a231e3520804c861c37952722",
     "escalator_log.csv": "6d47e08b3d04535bf8cd455bdefcd26746d331109a274da6795a7c9bd0c01943",
-    "agent_decisions_history.jsonl": "1762e94ba46fcaec9d58b86d6ed0db6ab6d5c3de32d9b59f14657d03befc64b1"
+    "agent_decisions_history.jsonl": "1762e94ba46fcaec9d58b86d6ed0db6ab6d5c3de32d9b59f14657d03befc64b1",
+    "decisions.csv": "2ca606ec72bf81af2c438c7f6d94a62a01acd06b576ce23276b45774b0800bbf"
   },
   "summary": {
     "exits": {},

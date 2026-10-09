@@ -48,6 +48,7 @@ FINGERPRINTED_FILES = (
     "escalator_log.csv",
     "agent_decisions_history.jsonl",  # per-frame agent positions
     "route_changes.txt",
+    "decisions.csv",
     "calibration_arrivals.csv",  # calibration runs only
     "llm_prompt_log.jsonl",  # LLM runs only: every prompt and response
 )
