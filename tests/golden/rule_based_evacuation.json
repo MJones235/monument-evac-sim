@@ -1,15 +1,12 @@
 {
   "sha256": {
-    "exit_log.csv": "24fd618a0cc4dc160e76dc51610872fa653a4498105e032be514d66bd8225ed7",
-    "population_timeseries.csv": "17a7ceb1896c50c64425ce516ae3f58311caa15c5fe2d8115626366b4723d3ab",
-    "escalator_log.csv": "18e0e3b631a4dfe5ecf29a7987d5780d8bbbda190241bee049eebaed145b35b0",
-    "agent_decisions_history.jsonl": "813b24bf1d8b6ce7b8316c92cc27f7757b9a7cf0ec1de1ee1885155f2a7a7cc9",
-    "route_changes.txt": "306ac52f5f9ee5a8554f3044d1a38ed34d1bb8cfec959050ac6dce670cc37554"
+    "exit_log.csv": "17e3615a4f1cf0ae20c3777ed1d32e5324503ec44e751c7e2b02865442b4ef4f",
+    "population_timeseries.csv": "dd40cc89dfbaf8caa569161d4fdb93711abe9a9a231e3520804c861c37952722",
+    "escalator_log.csv": "6d47e08b3d04535bf8cd455bdefcd26746d331109a274da6795a7c9bd0c01943",
+    "agent_decisions_history.jsonl": "1762e94ba46fcaec9d58b86d6ed0db6ab6d5c3de32d9b59f14657d03befc64b1"
   },
   "summary": {
-    "exits": {
-      "blackett_street": 1
-    },
+    "exits": {},
     "population_header": [
       "sim_time_s",
       "sim_time_min",
@@ -22,11 +19,11 @@
     "population_final_row": [
       "200.0",
       "3.333",
+      "0",
+      "19",
       "1",
-      "4",
-      "0",
-      "0",
-      "72"
+      "1",
+      "57"
     ]
   }
 }

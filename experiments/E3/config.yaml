@@ -39,6 +39,7 @@ events:
     message: "A train is waiting at each platform."
   - time: 15.0
     message: "The fire alarm is sounding throughout the station. You cannot see any evidence of a fire."
+    cue: {strength: weak}
   # Fire marshals power off and block the N/S escalators (D/E/F bank) at alarm time.
   - time: 15.0
     type: block_exit
@@ -50,6 +51,7 @@ events:
     message: >-
       Please, evacuate the station immediately.
       Please, evacuate the station immediately.
+    cue: {strength: medium, instruction: leave_station}
 
 # Override firefighter_brigade arrival time to match E3 observations:
 # The Fire Brigade physically arrived at the bottom of the N/S escalators at
@@ -79,3 +81,4 @@ systems:
           This is the Fire Brigade. You must evacuate now. Escalators D, E and F
           are closed. Please use Escalator B or Escalator C to reach the concourse
           and leave the station immediately.
+        cue: {strength: strong, instruction: leave_station}
