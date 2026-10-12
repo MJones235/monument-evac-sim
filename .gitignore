@@ -11,3 +11,4 @@ build/
 .pytest_cache/
 results/
 !results/.gitkeep
+site/

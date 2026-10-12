@@ -257,10 +257,7 @@ REFERENCE: dict[str, ExperimentReference] = {
 def get_clearance_times() -> dict[str, dict[str, float | None]]:
     """
     Return a nested dict of zone clearance times (seconds post-alarm) for all
-    experiments.
-
-      clearance_times["E2"]["concourse_s"]    →  180.0
-      clearance_times["E2"]["whole_station_s"] →  480.0
+    experiments, e.g. ``clearance_times["E2"]["whole_station_s"] == 480.0``.
     """
     result = {}
     for exp_id, ref in REFERENCE.items():

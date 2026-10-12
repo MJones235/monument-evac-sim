@@ -21,6 +21,7 @@ monument = "monument_evacuation.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10", "pre-commit>=3"]
+docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.26"]
 
 [tool.ruff]
 line-length = 100

@@ -29,3 +29,14 @@ jobs:
       - run: pytest -q -m "not golden and not integration"
   # The golden-run and integration tests (pytest -m "golden or integration")
   # need the evacusim engine and full geometry; run them locally.
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # The API pages are read from the source, so nothing else need be installed.
+      - run: pip install "mkdocs-material>=9.5" "mkdocstrings[python]>=0.26"
+      - run: mkdocs build --strict
