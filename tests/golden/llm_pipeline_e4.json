@@ -1,22 +1,21 @@
 {
   "sha256": {
-    "exit_log.csv": "3b67ca8346fcebb277b5235687792644a8d7af1809c81ba7a59a996ca1e1a943",
-    "population_timeseries.csv": "a483cda25f608d57b2cd334d5619a2c23660decd5ea6906482ee220ede6dddd4",
-    "escalator_log.csv": "403b8e97ccb3bdd1a10f45cbe63cb4b80dcf6aa5bdb6f9f115fd89e084820129",
-    "frames.jsonl": "0737d4c325133dfb3a9a64b9899d4ad1b376f11ab06542128507a748ba3bab5a",
-    "route_changes.txt": "5660d309d2dd32c661b09af4753ea387aba50077a754a776d29c5cd9d57e5d57",
-    "decisions.csv": "f5dc0413dd28b12cebdaeeb2310d9b325fc99729209535ddc2ee0573ce92ae62",
-    "llm_prompt_log.jsonl": "7dd80ec5cf2030b159040654d71a8de71a6f9024c5edba0fd3c72190db6c5004"
+    "exit_log.csv": "0a7b8b22779d678489455aeabf60a41a316370dcc9119c27c974a2514d601da8",
+    "population_timeseries.csv": "ee8a3066440d1851d689d901fe3b78f2550de944f01c03f0dbe23973ad197b15",
+    "escalator_log.csv": "b3886be07b7ac41b8e01fe3ef18dcf6c4c456a1c080dab629a49f0cdfdc913b7",
+    "frames.jsonl": "91e04229d93272683c5b2e2515e23ad578315a79549b22430573a3d31f3edae9",
+    "route_changes.txt": "90676a3fe0f2963ae8bf314d4fa4b2e4cfacd0012e19d9cf7a54d963ec2cc0e8",
+    "decisions.csv": "d2a2e43cb1be8b5b0a2aa12e5fdf99b5d884bb81fb0b8e78894e1d20e85ff44d",
+    "llm_prompt_log.jsonl": "e950e92ff5ed0edf53041bfa2c93fe7bd718afd4caa215a936dabd4c221044e2"
   },
   "summary": {
     "exits": {
-      "blackett_street": 5,
-      "eldon_square": 2,
-      "grey_street": 1,
+      "blackett_street": 3,
+      "grey_street": 3,
       "train_platform_1": 1,
-      "train_platform_2": 3,
-      "train_platform_3": 1,
-      "train_platform_4": 3
+      "train_platform_2": 6,
+      "train_platform_3": 2,
+      "train_platform_4": 1
     },
     "population_header": [
       "sim_time_s",
@@ -31,10 +30,10 @@
       "150.0",
       "2.499",
       "16",
-      "12",
+      "9",
       "1",
-      "3",
-      "6"
+      "2",
+      "10"
     ]
   }
 }
