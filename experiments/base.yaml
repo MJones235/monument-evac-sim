@@ -70,6 +70,7 @@ agents:
   # goal:        template for the Concordia goal component.  Placeholders: {target}, {purpose}.
   # memories:    template strings added to starting memory.  Same placeholders.
   # target:      list of values to sample for the {target} placeholder (omit if unused).
+  # target_from_zone: agents spawned on platform_N get N as their target instead.
   roles:
     heading_to_platform:
       spawn_zones: ["concourse"]
@@ -87,6 +88,7 @@ agents:
         - "I am standing on the platform waiting to board my train from Platform {target}."
         - "I am travelling for {purpose}."
       target: [1, 2, 3, 4]
+      target_from_zone: true  # wait for the train at the platform you stand on
     just_arrived:
       spawn_zones: ["platform_1", "platform_2", "platform_3", "platform_4"]
       weight: 0.2

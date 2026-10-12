@@ -16,11 +16,10 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import json
-import statistics
 from dataclasses import dataclass
 from pathlib import Path
 
+from monument_evacuation.analysis.metrics import run_metrics
 from monument_evacuation.analysis.proulx_1991 import REFERENCE, qualitative_ordering
 from monument_evacuation.analysis.runs import (
     DEFAULT_ALARM_TIME_S,
@@ -65,80 +64,18 @@ class SimMetrics:
     remaining_at_end: int
     sim_end_time_s: float
 
-    # Time-to-first-move (post-alarm seconds) by starting zone.
-    # Median of the first post-alarm decision timestep where action_type='move',
-    # split into concourse-starting and platform-starting agents.
-    # None if no agents of that type moved during the simulation.
+    # Time to start to move (post-alarm seconds): when half of the crowd on the
+    # concourse / platform level at the alarm had set off (analysis/metrics.py).
+    # None if half of the crowd never set off.
     tfm_concourse_median_s: float | None = None
     tfm_platform_median_s: float | None = None
-    tfm_concourse_n: int = 0  # number of concourse agents that moved
-    tfm_platform_n: int = 0  # number of platform agents that moved
+    tfm_concourse_n: int = 0  # size of the concourse crowd
+    tfm_platform_n: int = 0  # size of the platform crowd
 
 
 # ---------------------------------------------------------------------------
 # Loading helpers
 # ---------------------------------------------------------------------------
-
-
-def _extract_first_move(
-    run_dir: Path,
-    alarm_t: float,
-) -> tuple[float | None, float | None, int, int]:
-    """
-    Parse agent_decisions.json and return:
-      (concourse_median_s, platform_median_s, concourse_n_moved, platform_n_moved)
-
-    Concourse agents: starting zone contains 'concourse'.
-    Platform agents: everything else (Platform 1–4, underground platform level).
-    First move: first post-alarm decision where action_type == 'move'.
-    Times are seconds post-alarm.
-    """
-    json_path = run_dir / "agent_decisions.json"
-    if not json_path.exists():
-        return None, None, 0, 0
-
-    with json_path.open() as f:
-        data = json.load(f)
-
-    decisions_map: dict = data.get("agent_decisions", data) if isinstance(data, dict) else {}
-    if not decisions_map:
-        return None, None, 0, 0
-
-    concourse_times: list[float] = []
-    platform_times: list[float] = []
-
-    for adata in decisions_map.values():
-        decs = adata.get("decisions", [])
-        if not decs:
-            continue
-
-        # Determine starting zone from first observation's "You are in" line.
-        start_zone = ""
-        for line in decs[0].get("observation", "").split("\n"):
-            if "You are in" in line:
-                start_zone = line.strip().lower()
-                break
-        is_concourse = "concourse" in start_zone
-
-        # Find first post-alarm decision where action_type == 'move'.
-        first_move_t: float | None = None
-        for dec in decs:
-            if dec["time"] <= alarm_t:
-                continue
-            action = dec.get("translated", {}).get("action_type", "")
-            if action == "move":
-                first_move_t = dec["time"] - alarm_t
-                break
-
-        if first_move_t is not None:
-            if is_concourse:
-                concourse_times.append(first_move_t)
-            else:
-                platform_times.append(first_move_t)
-
-    concourse_med = statistics.median(concourse_times) if concourse_times else None
-    platform_med = statistics.median(platform_times) if platform_times else None
-    return concourse_med, platform_med, len(concourse_times), len(platform_times)
 
 
 def extract_metrics(experiment_id: str, run_dir: Path) -> SimMetrics | None:
@@ -171,7 +108,7 @@ def extract_metrics(experiment_id: str, run_dir: Path) -> SimMetrics | None:
         return (agent_count - left[nearest]) / agent_count if agent_count else None
 
     alarm = alarm_time_s(run_dir)
-    tfm_c, tfm_p, tfm_cn, tfm_pn = _extract_first_move(run_dir, alarm)
+    moved = run_metrics(run_dir)  # time to start to move, as in compare_engines
 
     return SimMetrics(
         experiment_id=experiment_id,
@@ -185,10 +122,10 @@ def extract_metrics(experiment_id: str, run_dir: Path) -> SimMetrics | None:
         frac_remaining_180s=frac_remaining_at(alarm + 180),
         remaining_at_end=remaining_at_end,
         sim_end_time_s=sim_end,
-        tfm_concourse_median_s=tfm_c,
-        tfm_platform_median_s=tfm_p,
-        tfm_concourse_n=tfm_cn,
-        tfm_platform_n=tfm_pn,
+        tfm_concourse_median_s=moved.start_move_concourse_s,
+        tfm_platform_median_s=moved.start_move_platform_s,
+        tfm_concourse_n=moved.crowd_concourse,
+        tfm_platform_n=moved.crowd_platform,
     )
 
 
@@ -352,7 +289,7 @@ def main():
 
     # Time-to-first-move vs Proulx Table 1
     print("\n--- Time-to-first-move vs Proulx (1991) Table 1 ---")
-    print("    (median post-alarm time of first 'move' decision per starting zone)")
+    print("    (when half of the crowd at each level had set off; see analysis/metrics.py)")
     hdr = f"  {'':4}  {'Sim concourse':>18}  {'Ref concourse':>15}  {'Sim platform':>18}  {'Ref escalator':>15}"
     print(hdr)
     print("-" * len(hdr))
@@ -365,7 +302,7 @@ def main():
 
         def _fmt_tfm(t: float | None, n: int) -> str:
             if t is None:
-                return "— (none moved)"
+                return f"— (n={n}, half never moved)"
             return f"{t:>4.0f}s ({t / 60:.1f}min) n={n}"
 
         def _fmt_ref(t: float | None) -> str:

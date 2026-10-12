@@ -1,7 +1,20 @@
 # Decision engine: deterministic rules, no language model. Agents respond to the
 # warning cues annotated in each scenario (unaware -> aware -> evacuating) and
-# route by distance, crowding, familiarity and visibility. Response delays and
-# the other parameters default to the schema's (docs/parameters.md in evacusim)
-# until fitted to Proulx (1991).
+# route by distance, crowding, familiarity and visibility.
+#
+# Response delays and the social cue are fitted to Proulx (1991) Table 1 on E1,
+# E3 and E5 (monument fit experiments/fits/rule_based.yaml, 60 trials; evacusim
+# 64f1ca0, study fed69b3). Validation with fresh seeds: RMSE 107 s on E1/E3/E5,
+# 138 s on the held-out staff drills E2/E4. Report: results/fits/
+# rule_based_20261012_130636/report.md. Other parameters are the schema defaults
+# (docs/parameters.md in evacusim).
 decision:
   engine: rule_based
+  response_median_s:   # median delay (s) from a cue to evacuating, by strength
+    weak: 803.682      # the alarm; the firefighters' "Please evacuate the station"
+    medium: 402.526    # a minimal PA; seeing others leave
+    strong: 135.754    # a directive PA; staff directing people
+  response_sigma: 0.518
+  social:
+    strength: medium
+    threshold: 0.21    # share of neighbours leaving that is a cue

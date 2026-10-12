@@ -77,13 +77,40 @@ A batch file lists `scenarios`, `engines` and `seeds`. `monument batch` runs
 every combination, each in its own process. It writes logs and a `summary.json`
 to `results/batches/`.
 
+## The comparison study
+
+```bash
+monument fit experiments/fits/rule_based.yaml --jobs 12      # fit the rule engine (~1 h)
+monument batch experiments/batches/proulx_comparison.yaml --jobs 6
+monument analyse compare_engines                             # report on the latest batch
+monument log llm 30 "PA cue wording in the prompt"           # record authoring effort
+```
+
+- **Fitting.** `monument fit` searches the rule engine's response delays with
+  Optuna. It fits on E1, E3 and E5 against Proulx's times to start moving and
+  to clear the station. It then runs the best parameters on all five drills
+  with fresh seeds. The staff drills E2 and E4 are held out of the fit. Results
+  go to `results/fits/`; adopt the parameters by copying `best.yaml` into
+  `experiments/engines/rule_based.yaml`.
+- **Comparing.** `compare_engines` writes `results/comparison/<time>/report.md`
+  with four sections: fit to Proulx (including held-out error), cost and
+  runtime, authoring effort, and variability across seeds.
+- **Authoring effort.** Each engine's effort is recorded in
+  `experiments/authoring_log.csv` (committed):
+  - `monument fit` logs its searches automatically;
+  - log manual work, such as editing the prompt, cue labels or parameters,
+    with `monument log`.
+
 ## Analysis
 
 `monument analyse NAME` runs one of the scripts in
 `src/monument_evacuation/analysis/`. All of them read runs through `runs.py`.
+`metrics.py` measures a run the same way for both engines, and `proulx_fit.py`
+scores the measures against Proulx (1991).
 
 | Script | What it shows |
 |--------|---------------|
+| `compare_engines` | The study report: LLM vs rule-based on all four dimensions |
 | `compare_experiments` | Simulated E1–E5 timings against Proulx Table 1 (`proulx_1991.py`) |
 | `evacuation_plots` | People remaining over time, per scenario |
 | `compare_runs` | Two runs side by side |
@@ -94,12 +121,15 @@ to `results/batches/`.
 ## Layout
 
 ```
-experiments/        configs: base.yaml, scenarios/, engines/, calibration/, batches/
+experiments/        configs: base.yaml, scenarios/, engines/, calibration/, batches/,
+                    fits/; authoring_log.csv
 geometry/monument/  station walkable areas, exits and network
 data/               calibration inputs and logged train arrivals
 src/monument_evacuation/
   cli.py            the `monument` command
   run.py, batch.py  one run; a matrix of runs
+  fit.py            fitting an engine to Proulx
+  authoring.py      the authoring-effort log
   paths.py          where everything lives
   analysis/         reading runs, Proulx reference data, plots
 tools/              data collection and geometry helpers

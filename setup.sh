@@ -20,7 +20,7 @@ source .venv/bin/activate
 pip install -q --upgrade pip
 pip install -q -e "$EVACUSIM[dev]"
 pip install -q --no-deps -e ".[dev]"
-pip install -q pandas matplotlib   # study-only dependencies (see pyproject.toml)
+pip install -q pandas matplotlib optuna   # study-only dependencies (see pyproject.toml)
 pre-commit install
 
 [ -f .env ] || { cp .env.example .env; echo "Edit .env to use the LLM engine."; }
