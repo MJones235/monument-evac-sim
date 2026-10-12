@@ -42,8 +42,11 @@ class Job:
         return f"{self.scenario}_{self.engine}_s{self.seed}"
 
 
-def load_jobs(batch_file: Path) -> list[Job]:
-    """The jobs a batch file describes, in scenario, engine, seed order."""
+def load_jobs(batch_file: Path, engines: list[str] | None = None) -> list[Job]:
+    """The jobs a batch file describes, in scenario, engine, seed order.
+
+    ``engines`` keeps only those engines' jobs (e.g. the free rule-based half).
+    """
     spec = yaml.safe_load(batch_file.read_text()) or {}
     missing = {"scenarios", "engines", "seeds"} - set(spec)
     if missing:
@@ -51,17 +54,23 @@ def load_jobs(batch_file: Path) -> list[Job]:
     return [
         Job(scenario, engine, int(seed))
         for scenario, engine, seed in product(spec["scenarios"], spec["engines"], spec["seeds"])
+        if engines is None or engine in engines
     ]
 
 
 def run_batch(
-    batch_file: Path, *, jobs: int = 1, dry_run: bool = False, run_args: list[str] = ()
+    batch_file: Path,
+    *,
+    jobs: int = 1,
+    dry_run: bool = False,
+    run_args: list[str] = (),
+    engines: list[str] | None = None,
 ) -> int:
     """Run every job; return 0 if all succeeded, else 1.
 
     ``run_args`` are passed to every ``monument run`` (e.g. ``--max-steps``).
     """
-    todo = load_jobs(batch_file)
+    todo = load_jobs(batch_file, engines)
     if dry_run:
         for job in todo:
             print(job.name)

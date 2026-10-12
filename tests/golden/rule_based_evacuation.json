@@ -1,15 +1,13 @@
 {
   "sha256": {
-    "exit_log.csv": "1373c017ee6d60d8a2279d0e623da57668226872933233b41a2193660c34fc0a",
-    "population_timeseries.csv": "3964d001b633f160420e81bd87e9bf500eaf87e79895aac2823f384f30bb7772",
+    "exit_log.csv": "17e3615a4f1cf0ae20c3777ed1d32e5324503ec44e751c7e2b02865442b4ef4f",
+    "population_timeseries.csv": "f9d188e1af88a4f1e0ea5dd99bc9b04adbde1109fa484ab37c0d82f8f60bad0d",
     "escalator_log.csv": "c8d98429c96d69134177f799011e8ffb0dd5b7c239d438483dd11a9f488f9309",
-    "frames.jsonl": "bf03a828fdd08a038d47b46fe3a2590bef8ded9cff31b754fe43baf01ef613e4",
-    "decisions.csv": "a680c239c59f71beab1bf30af7ab899dae39120881adabefa59a427e5d52cac6"
+    "frames.jsonl": "62e8dc5154433ee0ae91985e7c7aab83fd237eb7163c6efe9978496fe0ff2802",
+    "decisions.csv": "4a94e480f6644baf8ccfc7ac68ea6d01a4799460b25eda11ea50966f4b8e3946"
   },
   "summary": {
-    "exits": {
-      "blackett_street": 1
-    },
+    "exits": {},
     "population_header": [
       "sim_time_s",
       "sim_time_min",
@@ -22,8 +20,8 @@
     "population_final_row": [
       "200.0",
       "3.333",
-      "1",
-      "13",
+      "0",
+      "14",
       "0",
       "0",
       "11"

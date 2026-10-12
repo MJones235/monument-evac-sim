@@ -85,6 +85,9 @@ def _parser() -> argparse.ArgumentParser:
     batch.add_argument("batch_file", type=Path)
     batch.add_argument("--jobs", type=int, default=1, help="runs at once")
     batch.add_argument("--dry-run", action="store_true", help="list the runs only")
+    batch.add_argument(
+        "--engine", action="append", dest="engines", help="only this engine's runs (repeatable)"
+    )
     batch.add_argument("--max-steps", type=int, help="passed to every run (quick checks)")
     batch.add_argument("--agents", type=int, help="passed to every run (quick checks)")
     batch.add_argument("--fake-llm", action="store_true", help="passed to every run")
@@ -156,7 +159,13 @@ def main(argv: list[str] | None = None) -> int:
         run_args = _passed_run_args(args)
         if args.fake_llm:
             run_args.append("--fake-llm")
-        return run_batch(args.batch_file, jobs=args.jobs, dry_run=args.dry_run, run_args=run_args)
+        return run_batch(
+            args.batch_file,
+            jobs=args.jobs,
+            dry_run=args.dry_run,
+            run_args=run_args,
+            engines=args.engines,
+        )
 
     if args.command == "fit":
         from monument_evacuation.fit import run_fit

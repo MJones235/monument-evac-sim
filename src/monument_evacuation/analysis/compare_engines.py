@@ -254,7 +254,7 @@ def _variability_section(groups, comparisons, engines) -> list[str]:
         "## 4. Variability",
         "",
         "Spread across seeds is the ± in section 1. Coefficient of variation of the "
-        "time to clear (SD / mean), and the entropy of the actions chosen after the "
+        "time to clear (SD / mean; — if a run never cleared), and the entropy of the actions chosen after the "
         "alarm (bits; higher = a more varied mix):",
         "",
         "| Scenario | "
@@ -268,7 +268,8 @@ def _variability_section(groups, comparisons, engines) -> list[str]:
         cv, ent = [], []
         for engine in engines:
             c = _find(comparisons, engine, scenario, "clearance_s")
-            cv.append(f"{c.spread / c.simulated:.2f}" if c and c.simulated else "—")
+            # Not defined when a run never cleared (its time is only a lower bound).
+            cv.append(f"{c.spread / c.simulated:.2f}" if c and c.simulated and not c.never else "—")
             runs = groups.get((engine, scenario), [])
             ent.append(
                 f"{statistics.fmean(m.action_entropy_bits for m in runs):.2f}" if runs else "—"
