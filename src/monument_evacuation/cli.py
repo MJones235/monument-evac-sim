@@ -113,6 +113,7 @@ def _parser() -> argparse.ArgumentParser:
     video.add_argument("--fps", type=int, default=20)
     video.add_argument("--speedup", type=float, default=1.0)
     video.add_argument("--network-path", type=Path, default=NETWORK)
+    video.add_argument("--title", default="Monument Station Evacuation")
 
     analyse = sub.add_parser("analyse", help="run an analysis script (monument analyse NAME -h)")
     analyse.add_argument("name", help="module in monument_evacuation.analysis")
@@ -197,6 +198,7 @@ def main(argv: list[str] | None = None) -> int:
             network_path=args.network_path,
             fps=args.fps,
             speedup=args.speedup,
+            title=args.title,
         )
         return 0
 

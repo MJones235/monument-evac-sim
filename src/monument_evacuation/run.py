@@ -106,6 +106,7 @@ def run_scenario(
                 network_path=Path(params.simulation.network_path),
                 fps=video_fps or params.video.fps,
                 speedup=video_speedup or params.video.speedup,
+                title=params.video.title,
             )
 
         logger.info("=" * 60)

@@ -7,6 +7,8 @@ requests are on [GitHub](https://github.com/MJones235/monument-evac-sim/pulls).
 
 - Documentation site (MkDocs Material): the study, the drills, how-to guides,
   metrics, calibration, results, API.
+- The video title comes from `video.title` (set in `base.yaml`);
+  `monument video --title`.
 
 ## 2026-10-12: Fitting and comparison (#12)
 

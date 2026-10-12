@@ -361,6 +361,7 @@ video:
   enabled: true
   fps: 20
   speedup: 1.0
+  title: "Monument Station Evacuation"
 
 # Staff present in all five drills (Proulx 1991): four firefighters who power
 # off and guard the N/S escalators, and the Fire Brigade arriving later.
