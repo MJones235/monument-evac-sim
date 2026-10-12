@@ -4,6 +4,8 @@ monument run E1 --engine rule_based            one run (headless)
 monument run E4 --engine llm --seed 2 --video
 monument run normal_day --start-time 07:30      a calibration day
 monument batch experiments/batches/proulx_comparison.yaml --jobs 4
+monument fit experiments/fits/rule_based.yaml --jobs 12
+monument log llm 30 "PA cue wording in the prompt"   log authoring effort
 monument video results/E1/run_...               render a finished run
 monument analyse compare_experiments ...        analysis scripts (see analysis/)
 """
@@ -51,6 +53,13 @@ def _parser() -> argparse.ArgumentParser:
     run = sub.add_parser("run", help="run one scenario")
     run.add_argument("scenario", help="scenario name (E1, normal_day, ...) or config path")
     run.add_argument("--engine", help="decision engine: llm or rule_based")
+    run.add_argument(
+        "--overlay",
+        action="append",
+        default=[],
+        metavar="YAML",
+        help="config merged on top of scenario and engine (repeatable)",
+    )
     run.add_argument("--seed", type=int, help="master random seed")
     run.add_argument("--agents", type=int, help="override agents.count")
     run.add_argument("--max-steps", type=int, help="override simulation.max_iterations")
@@ -80,6 +89,22 @@ def _parser() -> argparse.ArgumentParser:
     batch.add_argument("--agents", type=int, help="passed to every run (quick checks)")
     batch.add_argument("--fake-llm", action="store_true", help="passed to every run")
 
+    fit = sub.add_parser("fit", help="fit an engine's parameters to Proulx (1991)")
+    fit.add_argument("fit_file", type=Path)
+    fit.add_argument("--jobs", type=int, default=1, help="runs at once")
+    fit.add_argument("--trials", type=int, help="override the fit file's trial count")
+    fit.add_argument("--max-steps", type=int, help="passed to every run (quick checks)")
+    fit.add_argument("--agents", type=int, help="passed to every run (quick checks)")
+    fit.add_argument(
+        "--no-log", action="store_true", help="do not record in the authoring log (tool checks)"
+    )
+
+    log = sub.add_parser("log", help="record authoring effort (experiments/authoring_log.csv)")
+    log.add_argument("engine", choices=["llm", "rule_based"])
+    log.add_argument("minutes", type=float, help="time a person spent")
+    log.add_argument("what", help="what changed and why")
+    log.add_argument("--runs", type=int, default=0, help="simulations run for it")
+
     video = sub.add_parser("video", help="render the MP4 of a finished run")
     video.add_argument("run_dir", type=Path)
     video.add_argument("--fps", type=int, default=20)
@@ -92,6 +117,16 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _passed_run_args(args: argparse.Namespace) -> list[str]:
+    """Options of batch and fit that are passed on to every run."""
+    run_args = []
+    if args.max_steps is not None:
+        run_args += ["--max-steps", str(args.max_steps)]
+    if args.agents is not None:
+        run_args += ["--agents", str(args.agents)]
+    return run_args
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
 
@@ -101,6 +136,7 @@ def main(argv: list[str] | None = None) -> int:
         return run_scenario(
             args.scenario,
             engine=args.engine,
+            overlays=args.overlay,
             seed=args.seed,
             agents=args.agents,
             max_steps=args.max_steps,
@@ -117,14 +153,28 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "batch":
         from monument_evacuation.batch import run_batch
 
-        run_args = []
-        if args.max_steps is not None:
-            run_args += ["--max-steps", str(args.max_steps)]
-        if args.agents is not None:
-            run_args += ["--agents", str(args.agents)]
+        run_args = _passed_run_args(args)
         if args.fake_llm:
             run_args.append("--fake-llm")
         return run_batch(args.batch_file, jobs=args.jobs, dry_run=args.dry_run, run_args=run_args)
+
+    if args.command == "fit":
+        from monument_evacuation.fit import run_fit
+
+        return run_fit(
+            args.fit_file,
+            jobs=args.jobs,
+            trials=args.trials,
+            run_args=_passed_run_args(args),
+            log=not args.no_log,
+        )
+
+    if args.command == "log":
+        from monument_evacuation.authoring import LOG, log_entry
+
+        log_entry(args.engine, "manual", args.what, minutes=args.minutes, runs=args.runs)
+        print(f"logged to {LOG}")
+        return 0
 
     if args.command == "video":
         from evacusim.visualization.video_generation_helper import VideoGenerationHelper

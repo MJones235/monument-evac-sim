@@ -73,18 +73,7 @@ def run_batch(
     print(f"{len(todo)} runs, {jobs} at a time; logs in {out}")
 
     def run(job: Job) -> Job:
-        cmd = [
-            sys.executable,
-            "-m",
-            "monument_evacuation",
-            "run",
-            job.scenario,
-            "--engine",
-            job.engine,
-            "--seed",
-            str(job.seed),
-            *run_args,
-        ]
+        cmd = run_command(job.scenario, job.engine, job.seed, run_args)
         started = time.time()
         with (out / f"{job.name}.log").open("w") as log:
             job.exit_code = subprocess.run(
@@ -108,6 +97,22 @@ def run_batch(
         + (f"; failed: {failed}" if failed else "")
     )
     return 1 if failed else 0
+
+
+def run_command(scenario: str, engine: str, seed: int, run_args: list[str] = ()) -> list[str]:
+    """The command line for one ``monument run`` in a fresh Python process."""
+    return [
+        sys.executable,
+        "-m",
+        "monument_evacuation",
+        "run",
+        scenario,
+        "--engine",
+        engine,
+        "--seed",
+        str(seed),
+        *run_args,
+    ]
 
 
 def _find_run_dir(job: Job, started: float) -> str | None:

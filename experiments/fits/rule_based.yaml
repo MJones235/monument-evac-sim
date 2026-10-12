@@ -1,0 +1,28 @@
+# Fit the rule-based engine to Proulx (1991) Table 1.
+#
+#   monument fit experiments/fits/rule_based.yaml --jobs 12
+#
+# Each trial runs every training scenario with every seed, measures when the
+# concourse and escalator crowds started to move and when the station cleared,
+# and scores the root-mean-square error against Proulx (analysis/proulx_fit.py).
+# The staff drills E2 and E4 are held out: the best parameters are then run on
+# all five with fresh seeds, and the report gives training and held-out error.
+engine: rule_based
+train: [E1, E3, E5]
+held_out: [E2, E4]
+seeds: [0, 1, 2]
+validation_seeds: [100, 101, 102, 103, 104]
+trials: 60
+sampler_seed: 0
+
+# Dotted config keys to fit. Numbers: {low, high, log}; choices: {choices}.
+parameters:
+  # Median delay from a cue to evacuating, by cue strength: alarm and
+  # firefighters (weak), a minimal PA (medium), a directive PA (strong).
+  decision.response_median_s.weak: {low: 60, high: 1200, log: true}
+  decision.response_median_s.medium: {low: 10, high: 600, log: true}
+  decision.response_median_s.strong: {low: 5, high: 300, log: true}
+  decision.response_sigma: {low: 0.1, high: 1.2}
+  # Seeing neighbours leave: how many must be leaving, and how strong a cue it is.
+  decision.social.threshold: {low: 0.2, high: 1.0}
+  decision.social.strength: {choices: [weak, medium, strong]}

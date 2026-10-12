@@ -13,6 +13,7 @@ dependencies = [
     "matplotlib>=3.7.0",
     "PyYAML>=6.0",
     "python-dotenv>=1.0.0",
+    "optuna>=4.0",  # monument fit
 ]
 
 [project.scripts]

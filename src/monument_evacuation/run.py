@@ -39,6 +39,7 @@ def run_scenario(
     scenario: str,
     *,
     engine: str | None = None,
+    overlays: list[str] = (),
     seed: int | None = None,
     agents: int | None = None,
     max_steps: int | None = None,
@@ -57,6 +58,8 @@ def run_scenario(
         scenario: Scenario name (``E1``, ``normal_day``) or config path.
         engine: Decision engine overlay (``llm``, ``rule_based``); ``None`` uses
             the scenario's own (LLM by default).
+        overlays: More config files merged on top, in order (e.g. a fit
+            trial's parameters).
         seed: Overrides the master random seed.
         agents, max_steps, start_time_s, output_dir: Override the config.
         fake_llm: Use evacusim's deterministic fake model (testing only).
@@ -79,7 +82,7 @@ def run_scenario(
             max_steps=max_steps,
             output_dir=output_dir or str(RESULTS / experiment_id),
             start_time_s=start_time_s,
-            overlays=[str(engine_config(engine))] if engine else [],
+            overlays=([str(engine_config(engine))] if engine else []) + [str(o) for o in overlays],
         )
         if seed is not None:
             params = params.model_copy(update={"seed": seed})
