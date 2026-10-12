@@ -17,7 +17,7 @@ simulation:
   # (evacusim.escalators). Passengers queue on the landing, step onto the
   # stand (right) or walk (left) lane when a step is free, ride, and step off
   # onto the other level. Comb positions come from the jupedsim.escalator_comb
-  # records in the level files (scripts/generate_escalator_combs.py).
+  # records in the level files (tools/generate_escalator_combs.py).
   escalators:
     defaults:
       belt_speed: 0.5              # m/s

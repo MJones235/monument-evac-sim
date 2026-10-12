@@ -3,7 +3,7 @@
 Build calibration inputs that replay a real, observed time window.
 
 Takes a hand-collected exit count (virtual volunteer counter CSV) and the real
-train arrivals logged by ``scripts/monument-arrivals-logger.py`` over the same
+train arrivals logged by ``tools/monument_arrivals_logger.py`` over the same
 period, and writes the two CSVs a Calibration-style run consumes:
 
   * ``timetable.csv``       — the *real* train arrivals, each alighting a
@@ -98,7 +98,10 @@ def main() -> int:
         "--counts", type=Path, required=True, help="Counter CSV for the observed exit"
     )
     parser.add_argument(
-        "--arrivals", type=Path, required=True, help="Arrivals CSV from monument-arrivals-logger.py"
+        "--arrivals",
+        type=Path,
+        required=True,
+        help="Arrivals CSV from tools/monument_arrivals_logger.py",
     )
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument(

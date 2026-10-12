@@ -15,7 +15,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 INJECT_FAILURE = """
-import runpy, sys
+import sys
 from evacusim.jps.multi_level_simulation import MultiLevelJuPedSimulation
 original = MultiLevelJuPedSimulation.step
 def failing_step(self):
@@ -23,8 +23,8 @@ def failing_step(self):
         raise RuntimeError("injected physics failure")
     return original(self)
 MultiLevelJuPedSimulation.step = failing_step
-sys.argv = ["run_experiment.py", *sys.argv[1:]]
-runpy.run_path("run_experiment.py", run_name="__main__")
+from monument_evacuation.cli import main
+sys.exit(main(["run", *sys.argv[1:]]))
 """
 
 
@@ -35,16 +35,15 @@ def test_physics_failure_exits_non_zero_and_keeps_partial_outputs(tmp_path: Path
             sys.executable,
             "-c",
             INJECT_FAILURE,
-            "experiments/RuleBased/config.yaml",
+            "experiments/base.yaml",
+            "--engine",
+            "rule_based",
             "--agents",
             "10",
             "--max-steps",
             "400",
             "--output-dir",
             str(tmp_path),
-            "--no-viewer",
-            "--no-spatial-viewer",
-            "--no-video",
         ],
         cwd=REPO_ROOT,
         capture_output=True,

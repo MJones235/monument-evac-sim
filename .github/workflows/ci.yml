@@ -16,5 +16,16 @@ jobs:
       - run: pip install ruff==0.16.10
       - run: ruff check
       - run: ruff format --check
-  # The golden-run regression tests (pytest -m golden) need the evacusim engine
-  # and full geometry; run them locally before merging a refactor.
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Unit tests only: they need neither evacusim nor the station geometry.
+      - run: pip install pytest PyYAML python-dotenv && pip install --no-deps -e .
+      - run: pytest -q -m "not golden and not integration"
+  # The golden-run and integration tests (pytest -m "golden or integration")
+  # need the evacusim engine and full geometry; run them locally.

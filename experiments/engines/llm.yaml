@@ -1,0 +1,4 @@
+# Decision engine: agents decide by prompting a language model (Azure OpenAI,
+# credentials in .env). Model settings are under `llm:` in base.yaml.
+decision:
+  engine: llm
