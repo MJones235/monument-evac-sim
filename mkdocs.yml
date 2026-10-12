@@ -1,0 +1,85 @@
+site_name: Monument evacuation study
+site_description: Proulx's 1991 Monument drills, LLM vs rule-based decisions
+repo_url: https://github.com/MJones235/monument-evac-sim
+edit_uri: edit/main/docs/
+strict: true
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle: {icon: material/brightness-7, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle: {icon: material/brightness-4, name: Light mode}
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - tables
+  - toc: {permalink: true}
+  - pymdownx.details
+  - pymdownx.snippets: {base_path: ["."], check_paths: true}
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            docstring_options:
+              warn_missing_types: false
+            show_submodules: false
+            show_source: false
+            members_order: source
+            show_root_heading: false
+            show_signature_annotations: true
+            separate_signature: true
+            filters: ["!^_"]
+            heading_level: 2
+
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - The drills:
+      - scenarios/index.md
+      - E1 Alarm only: scenarios/E1.md
+      - E2 Staff: scenarios/E2.md
+      - E3 Minimal PA: scenarios/E3.md
+      - E4 Staff + PA, train: scenarios/E4.md
+      - E5 Directive PA: scenarios/E5.md
+  - How to:
+      - Run simulations: how-to/running.md
+      - Fit an engine: how-to/fitting.md
+      - Compare the engines: how-to/comparing.md
+      - Reproduce the results: how-to/reproducing.md
+      - Add a scenario or engine: how-to/extending.md
+  - Metrics: metrics.md
+  - Calibration: calibration.md
+  - Results: results.md
+  - API:
+      - cli: api/cli.md
+      - run: api/run.md
+      - batch: api/batch.md
+      - fit: api/fit.md
+      - authoring: api/authoring.md
+      - paths: api/paths.md
+      - analysis.metrics: api/analysis_metrics.md
+      - analysis.proulx_fit: api/analysis_proulx_fit.md
+      - analysis.proulx_1991: api/analysis_proulx_1991.md
+      - analysis.runs: api/analysis_runs.md
+      - analysis.compare_engines: api/analysis_compare_engines.md
+  - Changelog: changelog.md

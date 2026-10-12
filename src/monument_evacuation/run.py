@@ -61,9 +61,13 @@ def run_scenario(
         overlays: More config files merged on top, in order (e.g. a fit
             trial's parameters).
         seed: Overrides the master random seed.
-        agents, max_steps, start_time_s, output_dir: Override the config.
+        agents: Overrides ``agents.count``.
+        max_steps: Overrides ``simulation.max_iterations``.
+        start_time_s: Start at this time of day (s), skipping earlier arrivals.
+        output_dir: Overrides ``output.directory``.
         fake_llm: Use evacusim's deterministic fake model (testing only).
-        viewer, spatial_viewer: Open the live viewers.
+        viewer: Open the live GUI viewer.
+        spatial_viewer: Open the live map viewer.
         video: Render an MP4 afterwards.
     """
     load_dotenv(REPO_ROOT / ".env")
@@ -102,6 +106,7 @@ def run_scenario(
                 network_path=Path(params.simulation.network_path),
                 fps=video_fps or params.video.fps,
                 speedup=video_speedup or params.video.speedup,
+                title=params.video.title,
             )
 
         logger.info("=" * 60)

@@ -12,6 +12,17 @@ lives in [evacusim](https://github.com/MJones235/llm-evacuation-sim); this
 repository holds the station, the scenarios, the calibration data and the
 analysis.
 
+## Documentation
+
+```bash
+pip install "mkdocs-material>=9.5" "mkdocstrings[python]>=0.26"   # the docs extra
+mkdocs serve
+```
+
+The site covers the drills and how each is modelled, how to run, fit and
+compare, how every measure is defined, the calibration against real counts,
+and the current results. [CHANGELOG.md](CHANGELOG.md) lists what changed.
+
 ## The flow
 
 ```
