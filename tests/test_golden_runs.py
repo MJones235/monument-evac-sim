@@ -46,7 +46,7 @@ FINGERPRINTED_FILES = (
     "exit_log.csv",
     "population_timeseries.csv",
     "escalator_log.csv",
-    "agent_decisions_history.jsonl",  # per-frame agent positions
+    "frames.jsonl",  # per-frame agent positions
     "route_changes.txt",
     "decisions.csv",
     "calibration_arrivals.csv",  # calibration runs only
@@ -56,7 +56,9 @@ FINGERPRINTED_FILES = (
 CASES = {
     # Evacuation scenario, rule-based engine: 20 agents for 200 s (dt 0.05).
     "rule_based_evacuation": [
-        "experiments/RuleBased/config.yaml",
+        "experiments/base.yaml",
+        "--engine",
+        "rule_based",
         "--agents",
         "20",
         "--max-steps",
@@ -65,7 +67,7 @@ CASES = {
     # Normal operations at the morning peak: 08:00-08:10 (dt 0.1). Exercises
     # Poisson arrivals, timetabled trains, escalators and all street exits.
     "calibration_peak_window": [
-        "experiments/Calibration/config.yaml",
+        "normal_day",
         "--start-time",
         "08:00",
         "--max-steps",
@@ -91,13 +93,12 @@ def _run_case(args: list[str], output_dir: Path) -> Path:
     env = {k: v for k, v in os.environ.items() if k != "PYTHONHASHSEED"}
     cmd = [
         sys.executable,
-        "run_experiment.py",
+        "-m",
+        "monument_evacuation",
+        "run",
         *args,
         "--output-dir",
         str(output_dir),
-        "--no-viewer",
-        "--no-spatial-viewer",
-        "--no-video",
     ]
     proc = subprocess.run(cmd, cwd=REPO_ROOT, env=env, capture_output=True, text=True)
     assert proc.returncode == 0, f"simulation failed:\n{proc.stderr[-3000:]}"

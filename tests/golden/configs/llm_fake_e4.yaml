@@ -2,4 +2,4 @@
 # by evacusim's deterministic fake model (run with --fake-llm). Model calls run
 # concurrently (the default max_parallel_agents); decisions are applied in a
 # fixed order, so the run is still reproducible.
-extends: ../../../experiments/E4/config.yaml
+extends: ../../../experiments/scenarios/E4.yaml

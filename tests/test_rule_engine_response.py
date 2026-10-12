@@ -21,14 +21,16 @@ def _start_to_move_times(experiment: str, tmp_path: Path) -> list[float]:
     """Seconds after the alarm at which each agent began evacuating (rule engine)."""
     config = tmp_path / f"{experiment}.yaml"
     config.write_text(
-        f"extends: {REPO_ROOT / 'experiments' / experiment / 'config.yaml'}\n"
+        f"extends: {REPO_ROOT / 'experiments' / 'scenarios' / f'{experiment}.yaml'}\n"
         "decision:\n  engine: rule_based\n"
     )
     out = tmp_path / experiment
     proc = subprocess.run(
         [
             sys.executable,
-            "run_experiment.py",
+            "-m",
+            "monument_evacuation",
+            "run",
             str(config),
             "--agents",
             "40",
@@ -36,9 +38,6 @@ def _start_to_move_times(experiment: str, tmp_path: Path) -> list[float]:
             "3000",
             "--output-dir",
             str(out),
-            "--no-viewer",
-            "--no-spatial-viewer",
-            "--no-video",
         ],
         cwd=REPO_ROOT,
         capture_output=True,
@@ -71,22 +70,21 @@ def test_evacuating_people_never_head_down_to_the_platforms(tmp_path: Path) -> N
     """
     config = tmp_path / "E2.yaml"
     config.write_text(
-        f"extends: {REPO_ROOT / 'experiments' / 'E2' / 'config.yaml'}\n"
+        f"extends: {REPO_ROOT / 'experiments' / 'scenarios' / 'E2.yaml'}\n"
         "decision:\n  engine: rule_based\n"
     )
     out = tmp_path / "out"
     proc = subprocess.run(
         [
             sys.executable,
-            "run_experiment.py",
+            "-m",
+            "monument_evacuation",
+            "run",
             str(config),
             "--max-steps",
             "4000",
             "--output-dir",
             str(out),
-            "--no-viewer",
-            "--no-spatial-viewer",
-            "--no-video",
         ],
         cwd=REPO_ROOT,
         capture_output=True,

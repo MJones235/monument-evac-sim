@@ -1,4 +1,0 @@
-extends: ../base.yaml
-
-# Compatibility alias: perf A defaults are now defined directly in experiments/base.yaml.
-# Keep this file so existing scripts/commands continue to work.

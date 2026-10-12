@@ -19,12 +19,14 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 def test_staff_patrol_and_directives_reach_agents(tmp_path: Path) -> None:
     config = tmp_path / "e2_rule_based.yaml"
     config.write_text(
-        f"extends: {REPO_ROOT / 'experiments/E2/config.yaml'}\ndecision:\n  engine: rule_based\n"
+        f"extends: {REPO_ROOT / 'experiments/scenarios/E2.yaml'}\ndecision:\n  engine: rule_based\n"
     )
     proc = subprocess.run(
         [
             sys.executable,
-            "run_experiment.py",
+            "-m",
+            "monument_evacuation",
+            "run",
             str(config),
             "--agents",
             "30",
@@ -32,9 +34,6 @@ def test_staff_patrol_and_directives_reach_agents(tmp_path: Path) -> None:
             "3000",
             "--output-dir",
             str(tmp_path / "out"),
-            "--no-viewer",
-            "--no-spatial-viewer",
-            "--no-video",
         ],
         cwd=REPO_ROOT,
         capture_output=True,
@@ -48,7 +47,7 @@ def test_staff_patrol_and_directives_reach_agents(tmp_path: Path) -> None:
     cues = [c for a in decisions.values() for d in a["decisions"] for c in d.get("cue_types") or []]
     assert "staff_instruction" in cues, "no agent perceived a staff directive"
 
-    frames = [json.loads(line) for line in (run_dir / "agent_decisions_history.jsonl").open()]
+    frames = [json.loads(line) for line in (run_dir / "frames.jsonl").open()]
     path = [
         f["positions"]["rci_concourse_0"] for f in frames if "rci_concourse_0" in f["positions"]
     ]

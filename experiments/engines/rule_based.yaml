@@ -1,0 +1,7 @@
+# Decision engine: deterministic rules, no language model. Agents respond to the
+# warning cues annotated in each scenario (unaware -> aware -> evacuating) and
+# route by distance, crowding, familiarity and visibility. Response delays and
+# the other parameters default to the schema's (docs/parameters.md in evacusim)
+# until fitted to Proulx (1991).
+decision:
+  engine: rule_based

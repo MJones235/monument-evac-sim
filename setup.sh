@@ -1,42 +1,27 @@
 #!/usr/bin/env bash
-# Setup script for monument-evacuation.
-# Run once to create the virtual environment and install all dependencies.
+# Create the virtual environment and install the engine and the study.
 #
 # Usage:
-#   bash setup.sh
+#   bash setup.sh [PATH_TO_EVACUSIM]     # default: ../evacusim
 #
-# After setup, activate with:
-#   source .venv/bin/activate
-# Then run experiments with:
-#   python run_experiment.py experiments/E1/config.yaml
+# evacusim (the simulation engine) is installed editable from a local clone,
+# then this study package without re-resolving evacusim from GitHub.
+set -euo pipefail
 
-set -e
-
-echo "=== monument-evacuation setup ==="
-
-# Create venv if it doesn't exist
-if [ ! -d ".venv" ]; then
-    echo "Creating virtual environment..."
-    python3 -m venv .venv
+EVACUSIM="${1:-$(dirname "$(pwd)")/evacusim}"
+if [ ! -f "$EVACUSIM/pyproject.toml" ]; then
+    echo "evacusim not found at $EVACUSIM; clone it or pass its path:" >&2
+    echo "  git clone git@github.com:MJones235/llm-evacuation-sim.git ../evacusim" >&2
+    exit 1
 fi
 
+[ -d .venv ] || python3 -m venv .venv
 source .venv/bin/activate
+pip install -q --upgrade pip
+pip install -q -e "$EVACUSIM[dev]"
+pip install -q --no-deps -e ".[dev]"
+pip install -q pandas matplotlib   # study-only dependencies (see pyproject.toml)
+pre-commit install
 
-echo "Installing dependencies..."
-pip install --upgrade pip -q
-pip install -r requirements.txt -q
-
-echo "Installing evacusim framework (editable)..."
-pip install -e /home/michael/evacusim -q
-
-echo "Copying credentials template..."
-if [ ! -f ".env" ]; then
-    cp .env.example .env
-    echo ""
-    echo "  --> Edit .env and add your Azure OpenAI credentials before running."
-fi
-
-echo ""
-echo "=== Setup complete ==="
-echo "Activate with:  source .venv/bin/activate"
-echo "Run E1 with:    python run_experiment.py experiments/E1/config.yaml"
+[ -f .env ] || { cp .env.example .env; echo "Edit .env to use the LLM engine."; }
+echo "Done. Activate with: source .venv/bin/activate   then try: monument --help"

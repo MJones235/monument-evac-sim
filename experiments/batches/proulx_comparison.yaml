@@ -1,0 +1,5 @@
+# The comparison study: every Proulx (1991) drill under both decision engines,
+# several seeds each. Run with:  monument batch experiments/batches/proulx_comparison.yaml
+scenarios: [E1, E2, E3, E4, E5]
+engines: [rule_based, llm]
+seeds: [0, 1, 2]
