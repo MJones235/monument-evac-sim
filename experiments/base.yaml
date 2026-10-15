@@ -360,7 +360,7 @@ station:
 video:
   enabled: true
   fps: 20
-  speedup: 1.0
+  speedup: 10.0  # a 15-minute drill plays in 90 s
   title: "Monument Station Evacuation"
 
 # Staff present in all five drills (Proulx 1991): four firefighters who power
