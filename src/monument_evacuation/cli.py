@@ -111,7 +111,7 @@ def _parser() -> argparse.ArgumentParser:
     video = sub.add_parser("video", help="render the MP4 of a finished run")
     video.add_argument("run_dir", type=Path)
     video.add_argument("--fps", type=int, default=20)
-    video.add_argument("--speedup", type=float, default=1.0)
+    video.add_argument("--speedup", type=float, default=10.0, help="playback speed (1 = real time)")
     video.add_argument("--network-path", type=Path, default=NETWORK)
     video.add_argument("--title", default="Monument Station Evacuation")
 
