@@ -23,6 +23,11 @@ The site covers the drills and how each is modelled, how to run, fit and
 compare, how every measure is defined, the calibration against real counts,
 and the current results. [CHANGELOG.md](CHANGELOG.md) lists what changed.
 
+## Example outputs
+
+[examples/videos](examples/videos/README.md) has videos of all five drills
+with the fitted rule-based engine, three seeds each.
+
 ## The flow
 
 ```
